@@ -31,4 +31,4 @@ java:
   maxMethodParams: 4
   outputModelSuffix: output
   projectName: openapi
-  templateVersion: v1
+  templateVersion: v2
