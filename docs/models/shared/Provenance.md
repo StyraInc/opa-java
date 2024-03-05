@@ -1,0 +1,14 @@
+# Provenance
+
+Provenance information can be requested on individual API calls and are returned inline with the API response. To obtain provenance information on an API call, specify the `provenance=true` query parameter when executing the API call.
+
+
+## Fields
+
+| Field                                                                                     | Type                                                                                      | Required                                                                                  | Description                                                                               |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `version`                                                                                 | *String*                                                                                  | :heavy_minus_sign:                                                                        | N/A                                                                                       |
+| `buildCommit`                                                                             | *String*                                                                                  | :heavy_minus_sign:                                                                        | N/A                                                                                       |
+| `buildTimestamp`                                                                          | [OffsetDateTime](https://docs.oracle.com/javase/8/docs/api/java/time/OffsetDateTime.html) | :heavy_minus_sign:                                                                        | N/A                                                                                       |
+| `buildHost`                                                                               | *String*                                                                                  | :heavy_minus_sign:                                                                        | N/A                                                                                       |
+| `bundles`                                                                                 | Map<String, [com.styra.opa.models.shared.Revision](../../models/shared/Revision.md)>      | :heavy_minus_sign:                                                                        | N/A                                                                                       |
