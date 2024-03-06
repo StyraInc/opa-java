@@ -14,14 +14,14 @@ generation:
 java:
   version: 0.1.0
   artifactID: opa
-  companyEmail: info@mycompany.com
-  companyName: My Company
-  companyURL: www.mycompany.com
+  companyEmail: devrel@styra.com
+  companyName: Styra
+  companyURL: www.styra.com
   flattenGlobalSecurity: false
-  githubURL: github.com/owner/repo
+  githubURL: github.com/styrainc/opa-java
   groupID: com.styra
   imports:
-    option: openapi
+    option: api
     paths:
       callbacks: models/callbacks
       errors: models/errors
@@ -31,5 +31,5 @@ java:
   inputModelSuffix: input
   maxMethodParams: 4
   outputModelSuffix: output
-  projectName: openapi
+  projectName: api
   templateVersion: v2
