@@ -12,11 +12,12 @@ generation:
   auth:
     oAuth2ClientCredentialsEnabled: false
 java:
-  version: 0.0.1
+  version: 0.1.0
   artifactID: opa
   companyEmail: info@mycompany.com
   companyName: My Company
   companyURL: www.mycompany.com
+  flattenGlobalSecurity: false
   githubURL: github.com/owner/repo
   groupID: com.styra
   imports:
