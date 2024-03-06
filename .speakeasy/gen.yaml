@@ -21,7 +21,7 @@ java:
   githubURL: github.com/styrainc/opa-java
   groupID: com.styra
   imports:
-    option: api
+    option: openapi
     paths:
       callbacks: models/callbacks
       errors: models/errors
