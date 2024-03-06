@@ -3,69 +3,85 @@ id: 47e8e950-a454-4ebb-9f78-86fda7dfa0c2
 management:
   docChecksum: 51f4193538f657830431eb4a7cbb2b7c
   docVersion: 0.2.0
-  speakeasyVersion: internal
+  speakeasyVersion: 1.201.2
   generationVersion: 2.277.0
-  releaseVersion: 0.0.1
-  configChecksum: 2144d9939333fbddb344814bbcfb8b55
+  releaseVersion: 0.1.0
+  configChecksum: 3fc7d5c8be40374f4b9a2614ca64be52
+  repoURL: https://github.com/StyraInc/opa-java.git
 features:
   java:
-    core: 3.5.2
+    constsAndDefaults: 0.1.1
+    core: 3.13.3
     examples: 2.81.3
     flattening: 2.81.1
     globalServerURLs: 2.82.1
+    unions: 0.0.3
 generatedFiles:
-  - lib/src/main/java/com/styra/opa/SDKConfiguration.java
-  - lib/src/main/java/com/styra/opa/Opa.java
+  - src/main/java/com/styra/opa/SDKConfiguration.java
+  - src/main/java/com/styra/opa/models/operations/ExecutePolicyRequestBuilder.java
+  - src/main/java/com/styra/opa/models/operations/ExecutePolicyWithInputRequestBuilder.java
+  - src/main/java/com/styra/opa/models/operations/HealthRequestBuilder.java
+  - src/main/java/com/styra/opa/models/operations/SDKMethodInterfaces.java
+  - src/main/java/com/styra/opa/Opa.java
   - .gitattributes
+  - build.gradle
   - gradle/wrapper/gradle-wrapper.jar
   - gradle/wrapper/gradle-wrapper.properties
   - gradlew
   - gradlew.bat
   - settings.gradle
-  - lib/build.gradle
-  - lib/src/main/java/com/styra/opa/utils/DateTimeDeserializer.java
-  - lib/src/main/java/com/styra/opa/utils/DateTimeSerializer.java
-  - lib/src/main/java/com/styra/opa/utils/FormMetadata.java
-  - lib/src/main/java/com/styra/opa/utils/HTTPClient.java
-  - lib/src/main/java/com/styra/opa/utils/HTTPRequest.java
-  - lib/src/main/java/com/styra/opa/utils/HeaderMetadata.java
-  - lib/src/main/java/com/styra/opa/utils/JSON.java
-  - lib/src/main/java/com/styra/opa/utils/Metadata.java
-  - lib/src/main/java/com/styra/opa/utils/MultipartFormMetadata.java
-  - lib/src/main/java/com/styra/opa/utils/PathParamsMetadata.java
-  - lib/src/main/java/com/styra/opa/utils/QueryParameters.java
-  - lib/src/main/java/com/styra/opa/utils/QueryParamsMetadata.java
-  - lib/src/main/java/com/styra/opa/utils/RequestBody.java
-  - lib/src/main/java/com/styra/opa/utils/RequestMetadata.java
-  - lib/src/main/java/com/styra/opa/utils/Security.java
-  - lib/src/main/java/com/styra/opa/utils/SecurityMetadata.java
-  - lib/src/main/java/com/styra/opa/utils/SerializedBody.java
-  - lib/src/main/java/com/styra/opa/utils/SpeakeasyHTTPClient.java
-  - lib/src/main/java/com/styra/opa/utils/SpeakeasyHTTPSecurityClient.java
-  - lib/src/main/java/com/styra/opa/utils/SpeakeasyMetadata.java
-  - lib/src/main/java/com/styra/opa/utils/Types.java
-  - lib/src/main/java/com/styra/opa/utils/Utils.java
-  - lib/src/main/java/com/styra/opa/models/operations/ExecutePolicyRequest.java
-  - lib/src/main/java/com/styra/opa/models/operations/ExecutePolicyResponse.java
-  - lib/src/main/java/com/styra/opa/models/operations/ExecutePolicyWithInputRequestBody.java
-  - lib/src/main/java/com/styra/opa/models/operations/ExecutePolicyWithInputRequest.java
-  - lib/src/main/java/com/styra/opa/models/operations/ExecutePolicyWithInputResponse.java
-  - lib/src/main/java/com/styra/opa/models/operations/HealthRequest.java
-  - lib/src/main/java/com/styra/opa/models/operations/HealthResponse.java
-  - lib/src/main/java/com/styra/opa/models/shared/ServerErrorLocation.java
-  - lib/src/main/java/com/styra/opa/models/shared/ServerErrorErrors.java
-  - lib/src/main/java/com/styra/opa/models/shared/ServerError.java
-  - lib/src/main/java/com/styra/opa/models/shared/Location.java
-  - lib/src/main/java/com/styra/opa/models/shared/Errors.java
-  - lib/src/main/java/com/styra/opa/models/shared/ClientError.java
-  - lib/src/main/java/com/styra/opa/models/shared/SuccessfulPolicyEvaluation.java
-  - lib/src/main/java/com/styra/opa/models/shared/Revision.java
-  - lib/src/main/java/com/styra/opa/models/shared/Provenance.java
-  - lib/src/main/java/com/styra/opa/models/shared/Explain.java
-  - lib/src/main/java/com/styra/opa/models/shared/GzipAcceptEncoding.java
-  - lib/src/main/java/com/styra/opa/models/shared/GzipContentEncoding.java
-  - lib/src/main/java/com/styra/opa/models/shared/UnhealthyServer.java
-  - lib/src/main/java/com/styra/opa/models/shared/HealthyServer.java
+  - src/main/java/com/styra/opa/utils/BackoffStrategy.java
+  - src/main/java/com/styra/opa/utils/BigDecimalString.java
+  - src/main/java/com/styra/opa/utils/BigIntegerString.java
+  - src/main/java/com/styra/opa/utils/FormMetadata.java
+  - src/main/java/com/styra/opa/utils/HTTPClient.java
+  - src/main/java/com/styra/opa/utils/HTTPRequest.java
+  - src/main/java/com/styra/opa/utils/HeaderMetadata.java
+  - src/main/java/com/styra/opa/utils/JSON.java
+  - src/main/java/com/styra/opa/utils/LazySingletonValue.java
+  - src/main/java/com/styra/opa/utils/Metadata.java
+  - src/main/java/com/styra/opa/utils/MultipartFormMetadata.java
+  - src/main/java/com/styra/opa/utils/OneOfDeserializer.java
+  - src/main/java/com/styra/opa/utils/Options.java
+  - src/main/java/com/styra/opa/utils/PathParamsMetadata.java
+  - src/main/java/com/styra/opa/utils/QueryParameters.java
+  - src/main/java/com/styra/opa/utils/QueryParamsMetadata.java
+  - src/main/java/com/styra/opa/utils/RequestBody.java
+  - src/main/java/com/styra/opa/utils/RequestMetadata.java
+  - src/main/java/com/styra/opa/utils/Retries.java
+  - src/main/java/com/styra/opa/utils/RetryConfig.java
+  - src/main/java/com/styra/opa/utils/Security.java
+  - src/main/java/com/styra/opa/utils/SecurityMetadata.java
+  - src/main/java/com/styra/opa/utils/SerializedBody.java
+  - src/main/java/com/styra/opa/utils/SpeakeasyHTTPClient.java
+  - src/main/java/com/styra/opa/utils/SpeakeasyHTTPSecurityClient.java
+  - src/main/java/com/styra/opa/utils/SpeakeasyMetadata.java
+  - src/main/java/com/styra/opa/utils/TypedObject.java
+  - src/main/java/com/styra/opa/utils/Types.java
+  - src/main/java/com/styra/opa/utils/Utils.java
+  - src/main/java/com/styra/opa/models/errors/SDKError.java
+  - src/main/java/com/styra/opa/models/operations/ExecutePolicyRequest.java
+  - src/main/java/com/styra/opa/models/operations/ExecutePolicyResponse.java
+  - src/main/java/com/styra/opa/models/operations/ExecutePolicyWithInputRequestBody.java
+  - src/main/java/com/styra/opa/models/operations/ExecutePolicyWithInputRequest.java
+  - src/main/java/com/styra/opa/models/operations/ExecutePolicyWithInputResponse.java
+  - src/main/java/com/styra/opa/models/operations/HealthRequest.java
+  - src/main/java/com/styra/opa/models/operations/HealthResponse.java
+  - src/main/java/com/styra/opa/models/shared/ServerErrorLocation.java
+  - src/main/java/com/styra/opa/models/shared/ServerErrorErrors.java
+  - src/main/java/com/styra/opa/models/shared/ServerError.java
+  - src/main/java/com/styra/opa/models/shared/Location.java
+  - src/main/java/com/styra/opa/models/shared/Errors.java
+  - src/main/java/com/styra/opa/models/shared/ClientError.java
+  - src/main/java/com/styra/opa/models/shared/SuccessfulPolicyEvaluation.java
+  - src/main/java/com/styra/opa/models/shared/Revision.java
+  - src/main/java/com/styra/opa/models/shared/Provenance.java
+  - src/main/java/com/styra/opa/models/shared/Result.java
+  - src/main/java/com/styra/opa/models/shared/Explain.java
+  - src/main/java/com/styra/opa/models/shared/GzipAcceptEncoding.java
+  - src/main/java/com/styra/opa/models/shared/GzipContentEncoding.java
+  - src/main/java/com/styra/opa/models/shared/UnhealthyServer.java
+  - src/main/java/com/styra/opa/models/shared/HealthyServer.java
   - docs/models/operations/ExecutePolicyRequest.md
   - docs/models/operations/ExecutePolicyResponse.md
   - docs/models/operations/ExecutePolicyWithInputRequestBody.md
@@ -82,6 +98,7 @@ generatedFiles:
   - docs/models/shared/SuccessfulPolicyEvaluation.md
   - docs/models/shared/Revision.md
   - docs/models/shared/Provenance.md
+  - docs/models/shared/Result.md
   - docs/models/shared/Explain.md
   - docs/models/shared/GzipAcceptEncoding.md
   - docs/models/shared/GzipContentEncoding.md

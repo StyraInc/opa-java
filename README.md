@@ -16,7 +16,7 @@ It has been generated successfully based on your OpenAPI spec. However, it is no
 ### Gradle
 
 ```groovy
-implementation 'com.styra.opa:openapi:0.0.1'
+implementation 'com.styra.opa:openapi:0.1.0'
 ```
 <!-- End SDK Installation [installation] -->
 
@@ -28,42 +28,54 @@ implementation 'com.styra.opa:openapi:0.0.1'
 ```java
 package hello.world;
 
-import com.styra.opa.Opa;
+import com.styra.opa.models.operations.*;
 import com.styra.opa.models.operations.ExecutePolicyWithInputRequest;
 import com.styra.opa.models.operations.ExecutePolicyWithInputRequestBody;
 import com.styra.opa.models.operations.ExecutePolicyWithInputResponse;
+import com.styra.opa.models.shared.*;
 import com.styra.opa.models.shared.Explain;
 import com.styra.opa.models.shared.GzipAcceptEncoding;
 import com.styra.opa.models.shared.GzipContentEncoding;
+import com.styra.opa.opa;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.util.Optional;
+import static java.util.Map.entry;
 
 public class Application {
+
     public static void main(String[] args) {
         try {
-            Opa sdk = Opa.builder()            .build();
+            Opa sdk = Opa.builder()
+                .build();
 
-            com.styra.opa.models.operations.ExecutePolicyWithInputRequest req = new ExecutePolicyWithInputRequest(
-                "<value>",
-                new ExecutePolicyWithInputRequestBody(
-                    new java.util.HashMap<String, java.lang.Object>(
-                    ){{
-                        put("key", "<value>");
-                    }})){{
-                contentEncoding = GzipContentEncoding.GZIP;
-                acceptEncoding = GzipAcceptEncoding.GZIP;
-                pretty = false;
-                provenance = false;
-                explain = Explain.NOTES;
-                metrics = false;
-                instrument = false;
-                strictBuiltinErrors = false;
+            ExecutePolicyWithInputRequest req = ExecutePolicyWithInputRequest.builder()
+                .path("<value>")
+                .requestBody(ExecutePolicyWithInputRequestBody.builder()
+                        .input(java.util.Map.ofEntries(
+                                entry("key", "<value>")))
+                        .build())
+                .contentEncoding(GzipContentEncoding.GZIP)
+                .acceptEncoding(GzipAcceptEncoding.GZIP)
+                .pretty(false)
+                .provenance(false)
+                .explain(Explain.NOTES)
+                .metrics(false)
+                .instrument(false)
+                .strictBuiltinErrors(false)
+                .build();
 
-            }};
+            ExecutePolicyWithInputResponse res = sdk.executePolicyWithInput()
+                .request(req)
+                .call();
 
-            com.styra.opa.models.operations.ExecutePolicyWithInputResponse res = sdk.executePolicyWithInput(req);
-
-            if (res.successfulPolicyEvaluation != null) {
+            if (res.successfulPolicyEvaluation().isPresent()) {
                 // handle response
             }
+        } catch (com.styra.opa.models.errors.SDKError e) {
+            // handle exception
         } catch (Exception e) {
             // handle exception
         }
@@ -85,23 +97,187 @@ public class Application {
 <!-- Start Server Selection [server] -->
 ## Server Selection
 
-## Server Selection
-
 ### Select Server by Index
 
-You can override the default server globally using the `setServerIndex` option when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
+You can override the default server globally by passing a server index to the `serverIndex` builder method when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
 
 | # | Server | Variables |
 | - | ------ | --------- |
 | 0 | `http://localhost:8181` | None |
 
+#### Example
 
+```java
+package hello.world;
+
+import com.styra.opa.models.operations.*;
+import com.styra.opa.models.operations.ExecutePolicyRequest;
+import com.styra.opa.models.operations.ExecutePolicyResponse;
+import com.styra.opa.models.shared.*;
+import com.styra.opa.models.shared.Explain;
+import com.styra.opa.models.shared.GzipAcceptEncoding;
+import com.styra.opa.opa;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.util.Optional;
+import static java.util.Map.entry;
+
+public class Application {
+
+    public static void main(String[] args) {
+        try {
+            Opa sdk = Opa.builder()
+                .serverIndex(0)
+                .build();
+
+            ExecutePolicyRequest req = ExecutePolicyRequest.builder()
+                .path("<value>")
+                .acceptEncoding(GzipAcceptEncoding.GZIP)
+                .pretty(false)
+                .provenance(false)
+                .explain(Explain.NOTES)
+                .metrics(false)
+                .instrument(false)
+                .strictBuiltinErrors(false)
+                .build();
+
+            ExecutePolicyResponse res = sdk.executePolicy()
+                .request(req)
+                .call();
+
+            if (res.successfulPolicyEvaluation().isPresent()) {
+                // handle response
+            }
+        } catch (com.styra.opa.models.errors.SDKError e) {
+            // handle exception
+        } catch (Exception e) {
+            // handle exception
+        }
+    }
+}
+```
 
 
 ### Override Server URL Per-Client
 
-The default server can also be overridden globally using the `setServerURL` option when initializing the SDK client instance. For example:
+The default server can also be overridden globally by passing a URL to the `serverURL` builder method when initializing the SDK client instance. For example:
+```java
+package hello.world;
+
+import com.styra.opa.models.operations.*;
+import com.styra.opa.models.operations.ExecutePolicyRequest;
+import com.styra.opa.models.operations.ExecutePolicyResponse;
+import com.styra.opa.models.shared.*;
+import com.styra.opa.models.shared.Explain;
+import com.styra.opa.models.shared.GzipAcceptEncoding;
+import com.styra.opa.opa;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.util.Optional;
+import static java.util.Map.entry;
+
+public class Application {
+
+    public static void main(String[] args) {
+        try {
+            Opa sdk = Opa.builder()
+                .serverURL("http://localhost:8181")
+                .build();
+
+            ExecutePolicyRequest req = ExecutePolicyRequest.builder()
+                .path("<value>")
+                .acceptEncoding(GzipAcceptEncoding.GZIP)
+                .pretty(false)
+                .provenance(false)
+                .explain(Explain.NOTES)
+                .metrics(false)
+                .instrument(false)
+                .strictBuiltinErrors(false)
+                .build();
+
+            ExecutePolicyResponse res = sdk.executePolicy()
+                .request(req)
+                .call();
+
+            if (res.successfulPolicyEvaluation().isPresent()) {
+                // handle response
+            }
+        } catch (com.styra.opa.models.errors.SDKError e) {
+            // handle exception
+        } catch (Exception e) {
+            // handle exception
+        }
+    }
+}
+```
 <!-- End Server Selection [server] -->
+
+<!-- Start Error Handling [errors] -->
+## Error Handling
+
+Handling errors in this SDK should largely match your expectations.  All operations return a response object or raise an error.  If Error objects are specified in your OpenAPI Spec, the SDK will throw the appropriate Exception type.
+
+| Error Object          | Status Code           | Content Type          |
+| --------------------- | --------------------- | --------------------- |
+| models/errorsSDKError | 4xx-5xx               | */*                   |
+
+### Example
+
+```java
+package hello.world;
+
+import com.styra.opa.models.operations.*;
+import com.styra.opa.models.operations.ExecutePolicyRequest;
+import com.styra.opa.models.operations.ExecutePolicyResponse;
+import com.styra.opa.models.shared.*;
+import com.styra.opa.models.shared.Explain;
+import com.styra.opa.models.shared.GzipAcceptEncoding;
+import com.styra.opa.opa;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.util.Optional;
+import static java.util.Map.entry;
+
+public class Application {
+
+    public static void main(String[] args) {
+        try {
+            Opa sdk = Opa.builder()
+                .build();
+
+            ExecutePolicyRequest req = ExecutePolicyRequest.builder()
+                .path("<value>")
+                .acceptEncoding(GzipAcceptEncoding.GZIP)
+                .pretty(false)
+                .provenance(false)
+                .explain(Explain.NOTES)
+                .metrics(false)
+                .instrument(false)
+                .strictBuiltinErrors(false)
+                .build();
+
+            ExecutePolicyResponse res = sdk.executePolicy()
+                .request(req)
+                .call();
+
+            if (res.successfulPolicyEvaluation().isPresent()) {
+                // handle response
+            }
+        } catch (com.styra.opa.models.errors.SDKError e) {
+            // handle exception
+        } catch (Exception e) {
+            // handle exception
+        }
+    }
+}
+```
+<!-- End Error Handling [errors] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 
