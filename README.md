@@ -16,7 +16,7 @@ It has been generated successfully based on your OpenAPI spec. However, it is no
 ### Gradle
 
 ```groovy
-implementation 'com.styra.opa:openapi:0.1.0'
+implementation 'com.styra.opa:api:0.1.1'
 ```
 <!-- End SDK Installation [installation] -->
 
