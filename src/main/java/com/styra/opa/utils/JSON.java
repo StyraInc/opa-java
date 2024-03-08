@@ -18,6 +18,7 @@ public class JSON {
             .registerModule(new JavaTimeModule())
             .registerModule(new Jdk8Module())
             .registerModule(new JsonNullableModule())
+            .registerModule(Deserializers.STRICT_DESERIALIZERS)
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
             .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
             .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)

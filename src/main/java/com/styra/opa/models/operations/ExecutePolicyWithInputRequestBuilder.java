@@ -5,6 +5,7 @@
 package com.styra.opa.models.operations;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.styra.opa.models.errors.SDKError;
 import com.styra.opa.utils.LazySingletonValue;
 import com.styra.opa.utils.Utils;
 import java.math.BigDecimal;
@@ -12,6 +13,7 @@ import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.Optional;
+import java.util.stream.Stream;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 

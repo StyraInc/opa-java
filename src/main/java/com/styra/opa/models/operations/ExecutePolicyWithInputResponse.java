@@ -15,7 +15,7 @@ import java.net.http.HttpResponse;
 import java.util.Optional;
 
 
-public class ExecutePolicyWithInputResponse {
+public class ExecutePolicyWithInputResponse implements com.styra.opa.utils.Response {
 
     /**
      * HTTP response content type for this operation
