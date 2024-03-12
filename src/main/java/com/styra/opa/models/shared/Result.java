@@ -16,7 +16,6 @@ import java.time.OffsetDateTime;
 import java.time.LocalDate;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.styra.opa.utils.TypedObject;
 import com.styra.opa.utils.Utils.JsonShape;
 
@@ -28,7 +27,6 @@ import com.styra.opa.utils.Utils.JsonShape;
 public class Result {
 
     @com.fasterxml.jackson.annotation.JsonValue
-    @JsonSerialize(using = TypedObject.Serializer.class)
     private TypedObject value;
     
     private Result(TypedObject value) {

@@ -3,15 +3,15 @@ id: 47e8e950-a454-4ebb-9f78-86fda7dfa0c2
 management:
   docChecksum: 51f4193538f657830431eb4a7cbb2b7c
   docVersion: 0.2.0
-  speakeasyVersion: 1.201.2
-  generationVersion: 2.277.0
-  releaseVersion: 0.1.1
-  configChecksum: 9030b8f537b23d768ac9d745efce3a09
+  speakeasyVersion: 1.204.1
+  generationVersion: 2.279.1
+  releaseVersion: 0.2.0
+  configChecksum: b85f08dac8d3b739e383185fbe0586a4
   repoURL: https://github.com/StyraInc/opa-java.git
 features:
   java:
     constsAndDefaults: 0.1.1
-    core: 3.13.3
+    core: 3.14.1
     examples: 2.81.3
     flattening: 2.81.1
     globalServerURLs: 2.82.1
@@ -33,6 +33,7 @@ generatedFiles:
   - src/main/java/com/styra/opa/utils/BackoffStrategy.java
   - src/main/java/com/styra/opa/utils/BigDecimalString.java
   - src/main/java/com/styra/opa/utils/BigIntegerString.java
+  - src/main/java/com/styra/opa/utils/Deserializers.java
   - src/main/java/com/styra/opa/utils/FormMetadata.java
   - src/main/java/com/styra/opa/utils/HTTPClient.java
   - src/main/java/com/styra/opa/utils/HTTPRequest.java
@@ -48,6 +49,7 @@ generatedFiles:
   - src/main/java/com/styra/opa/utils/QueryParamsMetadata.java
   - src/main/java/com/styra/opa/utils/RequestBody.java
   - src/main/java/com/styra/opa/utils/RequestMetadata.java
+  - src/main/java/com/styra/opa/utils/Response.java
   - src/main/java/com/styra/opa/utils/Retries.java
   - src/main/java/com/styra/opa/utils/RetryConfig.java
   - src/main/java/com/styra/opa/utils/Security.java

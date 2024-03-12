@@ -16,15 +16,19 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.function.Function;
+import java.util.concurrent.Callable;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.http.NameValuePair;
@@ -543,13 +547,14 @@ public final class Utils {
         } 
     }
     
-    private static final Map<Class<?>, Function<Object, Object>> STRING_CONVERSIONS = Map.of(//
+    private static final Map<Class<?>, java.util.function.Function<Object, Object>> STRING_CONVERSIONS = Map.of(//
             BigInteger.class, o -> new BigIntegerString((BigInteger) o), //
             BigDecimal.class, o -> new BigDecimalString((BigDecimal) o));
             
-    private static final Map<Class<?>, Function<Object, Object>> STRING_INVERSE_CONVERSIONS = Map.of(//
+    private static final Map<Class<?>, java.util.function.Function<Object, Object>> STRING_INVERSE_CONVERSIONS = Map.of(//
             BigIntegerString.class, o -> ((BigIntegerString) o).value(), //
             BigDecimalString.class, o -> ((BigDecimalString) o).value());
+
 
     private static Object convertToStringShape(Object o, TypeReference<?> typeReference) {
         JavaType jt = JSON
@@ -647,7 +652,6 @@ public final class Utils {
     
     static Object convertToShapeInverse(Object o, JsonShape shape, JavaType jt) {
         if (shape == JsonShape.STRING) {
-            TypeFactory f = JSON.getMapper().getTypeFactory();
             return convertToStringShapeInverse(o, jt);
         } else {
             return o;
@@ -713,6 +717,72 @@ public final class Utils {
             return convertToShape(value, JsonShape.STRING, typeReference);
         } catch (NoSuchFieldException e) {
             return value;
+        }
+    }
+    
+    public static <T> Stream<T> stream(Callable<Optional<T>> first, Function<T, Optional<T>> next) {
+        return StreamSupport.stream(iterable(first, next).spliterator(), false);
+    }
+    
+    // need a Function method that throws
+    public interface Function<S, T> {
+        T apply(S value) throws Exception;
+    }
+    
+    private static <T> Iterable<T> iterable(Callable<Optional<T>> first, Function<T, Optional<T>> next) {
+        return new Iterable<T>() {
+
+            @Override
+            public Iterator<T> iterator() {
+                return new Iterator<T>() {
+
+                    private boolean pending = true;
+
+                    private Optional<T> nxt;
+
+                    @Override
+                    public boolean hasNext() {
+                        load();
+                        return nxt.isPresent();
+                    }
+
+                    @Override
+                    public T next() {
+                        load();
+                        if (!nxt.isPresent()) {
+                            throw new NoSuchElementException();
+                        } else {
+                            pending = true;
+                            return nxt.get();
+                        }
+                    }
+
+                    private void load() {
+                        try {
+                            if (pending) {
+                                if (nxt == null) {
+                                    nxt = first.call();
+                                } else if (nxt.isPresent()) {
+                                    nxt = next.apply(nxt.get());
+                                } 
+                                pending = false;
+                            }
+                        } catch (Exception e) {
+                            rethrow(e);
+                        }
+                    }
+                };
+            }
+        };
+    }
+    
+    private static <T> T rethrow(Throwable e) {
+        if (e instanceof RuntimeException) {
+            throw (RuntimeException) e;
+        } else if (e instanceof Error) {
+            throw (Error) e;
+        } else {
+           throw new RuntimeException(e);
         }
     }
 }
