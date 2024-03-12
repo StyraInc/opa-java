@@ -20,42 +20,42 @@ import com.styra.opa.utils.TypedObject;
 import com.styra.opa.utils.Utils.JsonShape;
 
 /**
- * Result - The base or virtual document referred to by the URL path. If the path is undefined, this key will be omitted.
+ * Input - Arbitrary JSON used within your policies by accessing `input`
  */
 
-@JsonDeserialize(using = Result._Deserializer.class)
-public class Result {
+@JsonDeserialize(using = Input._Deserializer.class)
+public class Input {
 
     @com.fasterxml.jackson.annotation.JsonValue
     private TypedObject value;
     
-    private Result(TypedObject value) {
+    private Input(TypedObject value) {
         this.value = value;
     }
 
-    public static Result of(boolean value) {
+    public static Input of(boolean value) {
         Utils.checkNotNull(value, "value");
-        return new Result(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<Boolean>(){}));
+        return new Input(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<Boolean>(){}));
     }
 
-    public static Result of(String value) {
+    public static Input of(String value) {
         Utils.checkNotNull(value, "value");
-        return new Result(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<String>(){}));
+        return new Input(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<String>(){}));
     }
 
-    public static Result of(java.util.List<java.lang.Object> value) {
+    public static Input of(java.util.List<java.lang.Object> value) {
         Utils.checkNotNull(value, "value");
-        return new Result(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<java.util.List<java.lang.Object>>(){}));
+        return new Input(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<java.util.List<java.lang.Object>>(){}));
     }
 
-    public static Result of(double value) {
+    public static Input of(double value) {
         Utils.checkNotNull(value, "value");
-        return new Result(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<Double>(){}));
+        return new Input(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<Double>(){}));
     }
 
-    public static Result of(java.util.Map<String, java.lang.Object> value) {
+    public static Input of(java.util.Map<String, java.lang.Object> value) {
         Utils.checkNotNull(value, "value");
-        return new Result(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<java.util.Map<String, java.lang.Object>>(){}));
+        return new Input(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<java.util.Map<String, java.lang.Object>>(){}));
     }
     
     /**
@@ -91,7 +91,7 @@ public class Result {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Result other = (Result) o;
+        Input other = (Input) o;
         return java.util.Objects.deepEquals(this.value.value(), other.value.value()); 
     }
     
@@ -101,10 +101,10 @@ public class Result {
     }
     
     @SuppressWarnings("serial")
-    public static final class _Deserializer extends com.styra.opa.utils.OneOfDeserializer<Result> {
+    public static final class _Deserializer extends com.styra.opa.utils.OneOfDeserializer<Input> {
 
         public _Deserializer() {
-            super(Result.class,
+            super(Input.class,
                   Utils.TypeReferenceWithShape.of(new TypeReference<Boolean>() {}, Utils.JsonShape.DEFAULT),
                   Utils.TypeReferenceWithShape.of(new TypeReference<String>() {}, Utils.JsonShape.DEFAULT),
                   Utils.TypeReferenceWithShape.of(new TypeReference<java.util.List<java.lang.Object>>() {}, Utils.JsonShape.DEFAULT),
@@ -115,7 +115,7 @@ public class Result {
     
     @Override
     public String toString() {
-        return Utils.toString(Result.class,
+        return Utils.toString(Input.class,
                 "value", value);
     }
  
