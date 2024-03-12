@@ -16,7 +16,7 @@ It has been generated successfully based on your OpenAPI spec. However, it is no
 ### Gradle
 
 ```groovy
-implementation 'com.styra.opa:api:0.2.0'
+implementation 'com.styra.opa:api:0.2.1'
 ```
 <!-- End SDK Installation [installation] -->
 
@@ -54,8 +54,7 @@ public class Application {
             ExecutePolicyWithInputRequest req = ExecutePolicyWithInputRequest.builder()
                 .path("<value>")
                 .requestBody(ExecutePolicyWithInputRequestBody.builder()
-                        .input(java.util.Map.ofEntries(
-                                entry("key", "<value>")))
+                        .input(Input.of(false))
                         .build())
                 .contentEncoding(GzipContentEncoding.GZIP)
                 .acceptEncoding(GzipAcceptEncoding.GZIP)

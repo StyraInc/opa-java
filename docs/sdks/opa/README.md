@@ -119,8 +119,7 @@ public class Application {
             ExecutePolicyWithInputRequest req = ExecutePolicyWithInputRequest.builder()
                 .path("<value>")
                 .requestBody(ExecutePolicyWithInputRequestBody.builder()
-                        .input(java.util.Map.ofEntries(
-                                entry("key", "<value>")))
+                        .input(Input.of(false))
                         .build())
                 .contentEncoding(GzipContentEncoding.GZIP)
                 .acceptEncoding(GzipAcceptEncoding.GZIP)

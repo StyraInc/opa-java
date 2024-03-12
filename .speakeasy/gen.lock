@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 47e8e950-a454-4ebb-9f78-86fda7dfa0c2
 management:
-  docChecksum: 51f4193538f657830431eb4a7cbb2b7c
+  docChecksum: 84d9628f4028269f1c229e162781733e
   docVersion: 0.2.0
-  speakeasyVersion: 1.204.1
-  generationVersion: 2.279.1
-  releaseVersion: 0.2.0
-  configChecksum: b85f08dac8d3b739e383185fbe0586a4
+  speakeasyVersion: 1.207.0
+  generationVersion: 2.280.6
+  releaseVersion: 0.2.1
+  configChecksum: 1fc72c37a53bfbf09866d4c203475754
   repoURL: https://github.com/StyraInc/opa-java.git
 features:
   java:
@@ -81,6 +81,7 @@ generatedFiles:
   - src/main/java/com/styra/opa/models/shared/Result.java
   - src/main/java/com/styra/opa/models/shared/Explain.java
   - src/main/java/com/styra/opa/models/shared/GzipAcceptEncoding.java
+  - src/main/java/com/styra/opa/models/shared/Input.java
   - src/main/java/com/styra/opa/models/shared/GzipContentEncoding.java
   - src/main/java/com/styra/opa/models/shared/UnhealthyServer.java
   - src/main/java/com/styra/opa/models/shared/HealthyServer.java
@@ -103,6 +104,7 @@ generatedFiles:
   - docs/models/shared/Result.md
   - docs/models/shared/Explain.md
   - docs/models/shared/GzipAcceptEncoding.md
+  - docs/models/shared/Input.md
   - docs/models/shared/GzipContentEncoding.md
   - docs/models/shared/UnhealthyServer.md
   - docs/models/shared/HealthyServer.md

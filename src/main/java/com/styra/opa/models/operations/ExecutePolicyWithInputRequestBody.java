@@ -23,18 +23,18 @@ public class ExecutePolicyWithInputRequestBody {
      * Arbitrary JSON used within your policies by accessing `input`
      */
     @JsonProperty("input")
-    private java.util.Map<String, java.lang.Object> input;
+    private com.styra.opa.models.shared.Input input;
 
     public ExecutePolicyWithInputRequestBody(
-            @JsonProperty("input") java.util.Map<String, java.lang.Object> input) {
-        input = Utils.emptyMapIfNull(input);
+            @JsonProperty("input") com.styra.opa.models.shared.Input input) {
+        Utils.checkNotNull(input, "input");
         this.input = input;
     }
 
     /**
      * Arbitrary JSON used within your policies by accessing `input`
      */
-    public java.util.Map<String, java.lang.Object> input() {
+    public com.styra.opa.models.shared.Input input() {
         return input;
     }
 
@@ -45,7 +45,7 @@ public class ExecutePolicyWithInputRequestBody {
     /**
      * Arbitrary JSON used within your policies by accessing `input`
      */
-    public ExecutePolicyWithInputRequestBody withInput(java.util.Map<String, java.lang.Object> input) {
+    public ExecutePolicyWithInputRequestBody withInput(com.styra.opa.models.shared.Input input) {
         Utils.checkNotNull(input, "input");
         this.input = input;
         return this;
@@ -78,7 +78,7 @@ public class ExecutePolicyWithInputRequestBody {
     
     public final static class Builder {
  
-        private java.util.Map<String, java.lang.Object> input;  
+        private com.styra.opa.models.shared.Input input;  
         
         private Builder() {
           // force use of static builder() method
@@ -87,7 +87,7 @@ public class ExecutePolicyWithInputRequestBody {
         /**
          * Arbitrary JSON used within your policies by accessing `input`
          */
-        public Builder input(java.util.Map<String, java.lang.Object> input) {
+        public Builder input(com.styra.opa.models.shared.Input input) {
             Utils.checkNotNull(input, "input");
             this.input = input;
             return this;
