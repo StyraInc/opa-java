@@ -42,7 +42,7 @@ public class Application {
                 .build();
 
             ExecutePolicyRequest req = ExecutePolicyRequest.builder()
-                .path("<value>")
+                .path("app/rbac")
                 .acceptEncoding(GzipAcceptEncoding.GZIP)
                 .pretty(false)
                 .provenance(false)
@@ -117,9 +117,13 @@ public class Application {
                 .build();
 
             ExecutePolicyWithInputRequest req = ExecutePolicyWithInputRequest.builder()
-                .path("<value>")
+                .path("app/rbac")
                 .requestBody(ExecutePolicyWithInputRequestBody.builder()
-                        .input(Input.of(false))
+                        .input(Input.of(java.util.Map.ofEntries(
+                                    entry("user", "alice"),
+                                    entry("action", "read"),
+                                    entry("object", "id123"),
+                                    entry("type", "dog"))))
                         .build())
                 .contentEncoding(GzipContentEncoding.GZIP)
                 .acceptEncoding(GzipAcceptEncoding.GZIP)
