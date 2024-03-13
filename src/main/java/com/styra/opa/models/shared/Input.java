@@ -33,6 +33,11 @@ public class Input {
         this.value = value;
     }
 
+    public static Input of(java.util.Map<String, java.lang.Object> value) {
+        Utils.checkNotNull(value, "value");
+        return new Input(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<java.util.Map<String, java.lang.Object>>(){}));
+    }
+
     public static Input of(boolean value) {
         Utils.checkNotNull(value, "value");
         return new Input(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<Boolean>(){}));
@@ -52,20 +57,15 @@ public class Input {
         Utils.checkNotNull(value, "value");
         return new Input(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<Double>(){}));
     }
-
-    public static Input of(java.util.Map<String, java.lang.Object> value) {
-        Utils.checkNotNull(value, "value");
-        return new Input(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<java.util.Map<String, java.lang.Object>>(){}));
-    }
     
     /**
      * Returns an instance of one of these types:
      * <ul>
+     * <li>{@code java.util.Map<String, java.lang.Object>}</li>
      * <li>{@code boolean}</li>
      * <li>{@code String}</li>
      * <li>{@code java.util.List<java.lang.Object>}</li>
      * <li>{@code double}</li>
-     * <li>{@code java.util.Map<String, java.lang.Object>}</li>
      * </ul>
      * 
      * <p>Use {@code instanceof} to determine what type is returned. For example:
@@ -105,11 +105,11 @@ public class Input {
 
         public _Deserializer() {
             super(Input.class,
+                  Utils.TypeReferenceWithShape.of(new TypeReference<java.util.Map<String, java.lang.Object>>() {}, Utils.JsonShape.DEFAULT),
                   Utils.TypeReferenceWithShape.of(new TypeReference<Boolean>() {}, Utils.JsonShape.DEFAULT),
                   Utils.TypeReferenceWithShape.of(new TypeReference<String>() {}, Utils.JsonShape.DEFAULT),
                   Utils.TypeReferenceWithShape.of(new TypeReference<java.util.List<java.lang.Object>>() {}, Utils.JsonShape.DEFAULT),
-                  Utils.TypeReferenceWithShape.of(new TypeReference<Double>() {}, Utils.JsonShape.DEFAULT),
-                  Utils.TypeReferenceWithShape.of(new TypeReference<java.util.Map<String, java.lang.Object>>() {}, Utils.JsonShape.DEFAULT));
+                  Utils.TypeReferenceWithShape.of(new TypeReference<Double>() {}, Utils.JsonShape.DEFAULT));
         }
     }
     

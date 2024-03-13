@@ -26,9 +26,13 @@ public class Application {
                 .build();
 
             ExecutePolicyWithInputRequest req = ExecutePolicyWithInputRequest.builder()
-                .path("<value>")
+                .path("app/rbac")
                 .requestBody(ExecutePolicyWithInputRequestBody.builder()
-                        .input(Input.of(false))
+                        .input(Input.of(java.util.Map.ofEntries(
+                                    entry("user", "alice"),
+                                    entry("action", "read"),
+                                    entry("object", "id123"),
+                                    entry("type", "dog"))))
                         .build())
                 .contentEncoding(GzipContentEncoding.GZIP)
                 .acceptEncoding(GzipAcceptEncoding.GZIP)
