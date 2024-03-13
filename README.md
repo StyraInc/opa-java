@@ -8,7 +8,7 @@
 ### Gradle
 
 ```groovy
-implementation 'com.styra.opa:api:0.2.1'
+implementation 'com.styra.opa:api:0.3.0'
 ```
 <!-- End SDK Installation [installation] -->
 
