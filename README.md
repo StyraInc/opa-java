@@ -5,10 +5,38 @@
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
-### Gradle
+### Getting started
 
+Speakeasy offers [automatic publishing](https://www.speakeasyapi.dev/docs/advanced-setup/publish-sdks) of SDK artifacts via GitHub Actions. 
+
+Once published to a repository (local or otherwise), the SDK artifact is used as below:
+
+Gradle:
 ```groovy
-implementation 'com.styra.opa:api:0.3.0'
+implementation 'com.styra.opa:api:0.4.0'
+```
+
+Maven:
+```xml
+<dependency>
+    <groupId>com.styra.opa</groupId>
+    <artifactId>api</artifactId>
+    <version>0.4.0</version>
+</dependency>
+```
+
+### How to build
+After cloning the git repository to your file system you can build the SDK artifact from source to the `build` directory by running `./gradlew build` on *nix systems or `gradlew.bat` on Windows systems.
+
+If you wish to build from source and publish the SDK artifact to your local Maven repository (on your filesystem) then use the following command (after cloning the git repo locally):
+
+On *nix:
+```bash
+./gradlew publishToMavenLocal -Pskip.signing
+```
+On Windows:
+```bash
+gradlew.bat publishToMavenLocal -Pskip.signing
 ```
 <!-- End SDK Installation [installation] -->
 
