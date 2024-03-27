@@ -13,7 +13,7 @@ Once published to a repository (local or otherwise), the SDK artifact is used as
 
 Gradle:
 ```groovy
-implementation 'com.styra.opa:api:0.4.0'
+implementation 'com.styra.opa:api:0.4.1'
 ```
 
 Maven:
@@ -21,7 +21,7 @@ Maven:
 <dependency>
     <groupId>com.styra.opa</groupId>
     <artifactId>api</artifactId>
-    <version>0.4.0</version>
+    <version>0.4.1</version>
 </dependency>
 ```
 

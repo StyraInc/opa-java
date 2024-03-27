@@ -279,7 +279,7 @@ public final class Utils {
         return sb.toString();
     }
 
-    public static Map<String, List<String>> getHeaders(Object headers) throws Exception {
+    public static Map<String, List<String>> getHeaders(Object headers, Map<String, Map<String, Map<String, Object>>> globals) throws Exception {
         if (headers == null) {
             return null;
         }
@@ -297,6 +297,10 @@ public final class Utils {
 
             Object value = field.get(headers);
             value = resolveOptionals(value);
+            value = Utils.populateGlobal(value, field.getName(), "header", globals);
+            if (value == null) {
+                continue;
+            }
             if (value == null) {
                 continue;
             }
