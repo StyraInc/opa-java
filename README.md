@@ -13,7 +13,7 @@ Once published to a repository (local or otherwise), the SDK artifact is used as
 
 Gradle:
 ```groovy
-implementation 'com.styra.opa:api:0.4.0'
+implementation 'com.styra.opa:api:0.4.2'
 ```
 
 Maven:
@@ -21,7 +21,7 @@ Maven:
 <dependency>
     <groupId>com.styra.opa</groupId>
     <artifactId>api</artifactId>
-    <version>0.4.0</version>
+    <version>0.4.2</version>
 </dependency>
 ```
 
@@ -48,6 +48,7 @@ gradlew.bat publishToMavenLocal -Pskip.signing
 ```java
 package hello.world;
 
+import com.styra.opa.Opa;
 import com.styra.opa.models.operations.*;
 import com.styra.opa.models.operations.ExecutePolicyWithInputRequest;
 import com.styra.opa.models.operations.ExecutePolicyWithInputRequestBody;
@@ -56,7 +57,6 @@ import com.styra.opa.models.shared.*;
 import com.styra.opa.models.shared.Explain;
 import com.styra.opa.models.shared.GzipAcceptEncoding;
 import com.styra.opa.models.shared.GzipContentEncoding;
-import com.styra.opa.opa;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -133,13 +133,13 @@ You can override the default server globally by passing a server index to the `s
 ```java
 package hello.world;
 
+import com.styra.opa.Opa;
 import com.styra.opa.models.operations.*;
 import com.styra.opa.models.operations.ExecutePolicyRequest;
 import com.styra.opa.models.operations.ExecutePolicyResponse;
 import com.styra.opa.models.shared.*;
 import com.styra.opa.models.shared.Explain;
 import com.styra.opa.models.shared.GzipAcceptEncoding;
-import com.styra.opa.opa;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -189,13 +189,13 @@ The default server can also be overridden globally by passing a URL to the `serv
 ```java
 package hello.world;
 
+import com.styra.opa.Opa;
 import com.styra.opa.models.operations.*;
 import com.styra.opa.models.operations.ExecutePolicyRequest;
 import com.styra.opa.models.operations.ExecutePolicyResponse;
 import com.styra.opa.models.shared.*;
 import com.styra.opa.models.shared.Explain;
 import com.styra.opa.models.shared.GzipAcceptEncoding;
-import com.styra.opa.opa;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -253,13 +253,13 @@ Handling errors in this SDK should largely match your expectations.  All operati
 ```java
 package hello.world;
 
+import com.styra.opa.Opa;
 import com.styra.opa.models.operations.*;
 import com.styra.opa.models.operations.ExecutePolicyRequest;
 import com.styra.opa.models.operations.ExecutePolicyResponse;
 import com.styra.opa.models.shared.*;
 import com.styra.opa.models.shared.Explain;
 import com.styra.opa.models.shared.GzipAcceptEncoding;
-import com.styra.opa.opa;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;

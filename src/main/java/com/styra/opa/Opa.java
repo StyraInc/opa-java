@@ -179,7 +179,7 @@ public class Opa implements
             }
         }
 
-        java.util.Map<String, java.util.List<String>> headers = com.styra.opa.utils.Utils.getHeaders(request);
+        java.util.Map<String, java.util.List<String>> headers = com.styra.opa.utils.Utils.getHeaders(request, null);
         if (headers != null) {
             for (java.util.Map.Entry<String, java.util.List<String>> header : headers.entrySet()) {
                 for (String value : header.getValue()) {
@@ -292,7 +292,7 @@ public class Opa implements
             }
         }
 
-        java.util.Map<String, java.util.List<String>> headers = com.styra.opa.utils.Utils.getHeaders(request);
+        java.util.Map<String, java.util.List<String>> headers = com.styra.opa.utils.Utils.getHeaders(request, null);
         if (headers != null) {
             for (java.util.Map.Entry<String, java.util.List<String>> header : headers.entrySet()) {
                 for (String value : header.getValue()) {

@@ -20,13 +20,13 @@ Execute a policy
 ```java
 package hello.world;
 
+import com.styra.opa.Opa;
 import com.styra.opa.models.operations.*;
 import com.styra.opa.models.operations.ExecutePolicyRequest;
 import com.styra.opa.models.operations.ExecutePolicyResponse;
 import com.styra.opa.models.shared.*;
 import com.styra.opa.models.shared.Explain;
 import com.styra.opa.models.shared.GzipAcceptEncoding;
-import com.styra.opa.opa;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -93,6 +93,7 @@ Execute a policy given an input
 ```java
 package hello.world;
 
+import com.styra.opa.Opa;
 import com.styra.opa.models.operations.*;
 import com.styra.opa.models.operations.ExecutePolicyWithInputRequest;
 import com.styra.opa.models.operations.ExecutePolicyWithInputRequestBody;
@@ -101,7 +102,6 @@ import com.styra.opa.models.shared.*;
 import com.styra.opa.models.shared.Explain;
 import com.styra.opa.models.shared.GzipAcceptEncoding;
 import com.styra.opa.models.shared.GzipContentEncoding;
-import com.styra.opa.opa;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -176,11 +176,11 @@ The health API endpoint executes a simple built-in policy query to verify that t
 ```java
 package hello.world;
 
+import com.styra.opa.Opa;
 import com.styra.opa.models.operations.*;
 import com.styra.opa.models.operations.HealthRequest;
 import com.styra.opa.models.operations.HealthResponse;
 import com.styra.opa.models.shared.*;
-import com.styra.opa.opa;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
