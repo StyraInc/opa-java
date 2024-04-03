@@ -7,21 +7,19 @@
 
 ### Getting started
 
-Speakeasy offers [automatic publishing](https://www.speakeasyapi.dev/docs/advanced-setup/publish-sdks) of SDK artifacts via GitHub Actions. 
-
-Once published to a repository (local or otherwise), the SDK artifact is used as below:
+The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'com.styra.opa:api:0.4.2'
+implementation 'com.styra.opa.sdk:api:0.4.3'
 ```
 
 Maven:
 ```xml
 <dependency>
-    <groupId>com.styra.opa</groupId>
+    <groupId>com.styra.opa.sdk</groupId>
     <artifactId>api</artifactId>
-    <version>0.4.2</version>
+    <version>0.4.3</version>
 </dependency>
 ```
 
@@ -48,15 +46,15 @@ gradlew.bat publishToMavenLocal -Pskip.signing
 ```java
 package hello.world;
 
-import com.styra.opa.Opa;
-import com.styra.opa.models.operations.*;
-import com.styra.opa.models.operations.ExecutePolicyWithInputRequest;
-import com.styra.opa.models.operations.ExecutePolicyWithInputRequestBody;
-import com.styra.opa.models.operations.ExecutePolicyWithInputResponse;
-import com.styra.opa.models.shared.*;
-import com.styra.opa.models.shared.Explain;
-import com.styra.opa.models.shared.GzipAcceptEncoding;
-import com.styra.opa.models.shared.GzipContentEncoding;
+import com.styra.opa.sdk.Opa;
+import com.styra.opa.sdk.models.operations.*;
+import com.styra.opa.sdk.models.operations.ExecutePolicyWithInputRequest;
+import com.styra.opa.sdk.models.operations.ExecutePolicyWithInputRequestBody;
+import com.styra.opa.sdk.models.operations.ExecutePolicyWithInputResponse;
+import com.styra.opa.sdk.models.shared.*;
+import com.styra.opa.sdk.models.shared.Explain;
+import com.styra.opa.sdk.models.shared.GzipAcceptEncoding;
+import com.styra.opa.sdk.models.shared.GzipContentEncoding;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -97,7 +95,7 @@ public class Application {
             if (res.successfulPolicyEvaluation().isPresent()) {
                 // handle response
             }
-        } catch (com.styra.opa.models.errors.SDKError e) {
+        } catch (com.styra.opa.sdk.models.errors.SDKError e) {
             // handle exception
         } catch (Exception e) {
             // handle exception
@@ -133,13 +131,13 @@ You can override the default server globally by passing a server index to the `s
 ```java
 package hello.world;
 
-import com.styra.opa.Opa;
-import com.styra.opa.models.operations.*;
-import com.styra.opa.models.operations.ExecutePolicyRequest;
-import com.styra.opa.models.operations.ExecutePolicyResponse;
-import com.styra.opa.models.shared.*;
-import com.styra.opa.models.shared.Explain;
-import com.styra.opa.models.shared.GzipAcceptEncoding;
+import com.styra.opa.sdk.Opa;
+import com.styra.opa.sdk.models.operations.*;
+import com.styra.opa.sdk.models.operations.ExecutePolicyRequest;
+import com.styra.opa.sdk.models.operations.ExecutePolicyResponse;
+import com.styra.opa.sdk.models.shared.*;
+import com.styra.opa.sdk.models.shared.Explain;
+import com.styra.opa.sdk.models.shared.GzipAcceptEncoding;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -173,7 +171,7 @@ public class Application {
             if (res.successfulPolicyEvaluation().isPresent()) {
                 // handle response
             }
-        } catch (com.styra.opa.models.errors.SDKError e) {
+        } catch (com.styra.opa.sdk.models.errors.SDKError e) {
             // handle exception
         } catch (Exception e) {
             // handle exception
@@ -189,13 +187,13 @@ The default server can also be overridden globally by passing a URL to the `serv
 ```java
 package hello.world;
 
-import com.styra.opa.Opa;
-import com.styra.opa.models.operations.*;
-import com.styra.opa.models.operations.ExecutePolicyRequest;
-import com.styra.opa.models.operations.ExecutePolicyResponse;
-import com.styra.opa.models.shared.*;
-import com.styra.opa.models.shared.Explain;
-import com.styra.opa.models.shared.GzipAcceptEncoding;
+import com.styra.opa.sdk.Opa;
+import com.styra.opa.sdk.models.operations.*;
+import com.styra.opa.sdk.models.operations.ExecutePolicyRequest;
+import com.styra.opa.sdk.models.operations.ExecutePolicyResponse;
+import com.styra.opa.sdk.models.shared.*;
+import com.styra.opa.sdk.models.shared.Explain;
+import com.styra.opa.sdk.models.shared.GzipAcceptEncoding;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -229,7 +227,7 @@ public class Application {
             if (res.successfulPolicyEvaluation().isPresent()) {
                 // handle response
             }
-        } catch (com.styra.opa.models.errors.SDKError e) {
+        } catch (com.styra.opa.sdk.models.errors.SDKError e) {
             // handle exception
         } catch (Exception e) {
             // handle exception
@@ -253,13 +251,13 @@ Handling errors in this SDK should largely match your expectations.  All operati
 ```java
 package hello.world;
 
-import com.styra.opa.Opa;
-import com.styra.opa.models.operations.*;
-import com.styra.opa.models.operations.ExecutePolicyRequest;
-import com.styra.opa.models.operations.ExecutePolicyResponse;
-import com.styra.opa.models.shared.*;
-import com.styra.opa.models.shared.Explain;
-import com.styra.opa.models.shared.GzipAcceptEncoding;
+import com.styra.opa.sdk.Opa;
+import com.styra.opa.sdk.models.operations.*;
+import com.styra.opa.sdk.models.operations.ExecutePolicyRequest;
+import com.styra.opa.sdk.models.operations.ExecutePolicyResponse;
+import com.styra.opa.sdk.models.shared.*;
+import com.styra.opa.sdk.models.shared.Explain;
+import com.styra.opa.sdk.models.shared.GzipAcceptEncoding;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -292,7 +290,7 @@ public class Application {
             if (res.successfulPolicyEvaluation().isPresent()) {
                 // handle response
             }
-        } catch (com.styra.opa.models.errors.SDKError e) {
+        } catch (com.styra.opa.sdk.models.errors.SDKError e) {
             // handle exception
         } catch (Exception e) {
             // handle exception

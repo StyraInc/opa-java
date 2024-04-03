@@ -12,7 +12,7 @@ generation:
   auth:
     oAuth2ClientCredentialsEnabled: false
 java:
-  version: 0.4.2
+  version: 0.4.3
   additionalDependencies: []
   artifactID: sdk
   companyEmail: devrel@styra.com
