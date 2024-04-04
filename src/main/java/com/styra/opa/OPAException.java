@@ -4,17 +4,17 @@ package com.styra.opa;
 //
 // This generic exception should be used as a parent type for any other custom
 // exceptions thrown by the high level API.
-public class PorcelainException extends Exception {
+public class OPAException extends Exception {
 
-    public PorcelainException(Throwable cause) {
+    public OPAException(Throwable cause) {
         super(cause);
     }
 
-    public PorcelainException(String message) {
+    public OPAException(String message) {
         super (message);
     }
 
-    public PorcelainException(String message, Throwable cause) {
+    public OPAException(String message, Throwable cause) {
         super(message, cause);
     }
 }

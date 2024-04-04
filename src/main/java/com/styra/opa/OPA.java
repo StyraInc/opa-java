@@ -12,8 +12,7 @@ import com.styra.opa.sdk.models.shared.Input;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-// TODO: select an appropriate name and move this into the SDK
-public class Porcelain {
+public class OPA {
 
     // Stores the state needed to communicate with OPA, such as the HTTP client
     // and configuration information. This is re-used across requests.
@@ -32,12 +31,12 @@ public class Porcelain {
 
     // Instantiates a new instance of the Speakeasy generated SDK internally
     // with default settings.
-    public Porcelain() {
+    public OPA() {
         this.sdk = Opa.builder().serverURL(sdkServerURL).build();
     }
 
 
-    public Porcelain(String opaURL) {
+    public OPA(String opaURL) {
         this.sdkServerURL = opaURL;
         this.sdk = Opa.builder().serverURL(opaURL).build();
     }
@@ -45,51 +44,51 @@ public class Porcelain {
     // Use a custom instance of the Speakeasy generated SDK. This can allow for
     // modifying configuration options that are not otherwise exposed in the
     // porcelain API.
-    public Porcelain(Opa sdk) {
+    public OPA(Opa sdk) {
         this.sdk = sdk;
     }
 
-    public boolean check(java.util.Map<String, Object> input, String path) throws PorcelainException {
+    public boolean check(java.util.Map<String, Object> input, String path) throws OPAException {
         return query(input, path);
     }
 
-    public boolean check(String input, String path) throws PorcelainException {
+    public boolean check(String input, String path) throws OPAException {
         return query(input, path);
     }
 
-    public boolean check(boolean input, String path) throws PorcelainException {
+    public boolean check(boolean input, String path) throws OPAException {
         return query(input, path);
     }
 
-    public boolean check(double input, String path) throws PorcelainException {
+    public boolean check(double input, String path) throws OPAException {
         return query(input, path);
     }
 
-    public boolean check(java.util.List<Object> input, String path) throws PorcelainException {
+    public boolean check(java.util.List<Object> input, String path) throws OPAException {
         return query(input, path);
     }
 
-    public <T> T query(java.util.Map<String, Object> input, String path) throws PorcelainException {
+    public <T> T query(java.util.Map<String, Object> input, String path) throws OPAException {
         return queryMachinery(Input.of(input), path);
     }
 
-    public <T> T query(String input, String path) throws PorcelainException {
+    public <T> T query(String input, String path) throws OPAException {
         return queryMachinery(Input.of(input), path);
     }
 
-    public <T> T query(boolean input, String path) throws PorcelainException {
+    public <T> T query(boolean input, String path) throws OPAException {
         return queryMachinery(Input.of(input), path);
     }
 
-    public <T> T query(double input, String path) throws PorcelainException {
+    public <T> T query(double input, String path) throws OPAException {
         return queryMachinery(Input.of(input), path);
     }
 
-    public <T> T query(java.util.List<Object> input, String path) throws PorcelainException {
+    public <T> T query(java.util.List<Object> input, String path) throws OPAException {
         return queryMachinery(Input.of(input), path);
     }
 
-    private <T> T queryMachinery(Input input, String path) throws PorcelainException {
+    private <T> T queryMachinery(Input input, String path) throws OPAException {
         ExecutePolicyWithInputRequest req = ExecutePolicyWithInputRequest.builder()
             .path(path)
             .requestBody(ExecutePolicyWithInputRequestBody.builder()
@@ -110,7 +109,7 @@ public class Porcelain {
                 .call();
         } catch (Exception e) {
             String msg = String.format("executing policy at '%s' with failed due to exception '%s'", path, e);
-            throw new PorcelainException(msg, e);
+            throw new OPAException(msg, e);
         }
 
         if (res.successfulPolicyEvaluation().isPresent()) {
