@@ -9,8 +9,15 @@ import com.styra.opa.sdk.models.operations.ExecutePolicyWithInputResponse;
 import com.styra.opa.sdk.models.shared.Explain;
 import com.styra.opa.sdk.models.shared.Input;
 
+import com.styra.opa.sdk.utils.HTTPClient;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import com.styra.opa.utils.OPAHTTPClient;
+
+import java.util.Map;
+
 
 public class OPA {
 
@@ -39,6 +46,19 @@ public class OPA {
     public OPA(String opaURL) {
         this.sdkServerURL = opaURL;
         this.sdk = Opa.builder().serverURL(opaURL).build();
+    }
+
+    // This constructor allows additional HTTP headers to be provided that will
+    // be included with each request. This is intended to support bearer token
+    // authorization:
+    //
+    // https://www.openpolicyagent.org/docs/latest/rest-api/#authentication
+    //
+    // TODO: this needs to be tested
+    public OPA(String opaURL, Map<String, String> headers) {
+        this.sdkServerURL = opaURL;
+        HTTPClient client = new OPAHTTPClient(headers);
+        this.sdk = Opa.builder().serverURL(opaURL).client(client).build();
     }
 
     // Use a custom instance of the Speakeasy generated SDK. This can allow for
