@@ -1,3 +1,4 @@
 LICENSE
-src/main/java/com/styra/opa/Porcelain.java
-src/main/java/com/styra/opa/PorcelainException.java
+src/main/java/com/styra/opa/OPA.java
+src/main/java/com/styra/opa/OPAException.java
+src/main/java/com/styra/opa/utils/OPAHTTPClient.java
