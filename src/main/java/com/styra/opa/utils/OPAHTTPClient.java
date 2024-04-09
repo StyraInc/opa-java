@@ -10,6 +10,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.io.InputStream;
 import java.util.Map;
+import java.util.HashMap;
 
 import com.styra.opa.sdk.utils.HTTPRequest;
 import com.styra.opa.sdk.utils.HTTPClient;
@@ -22,6 +23,10 @@ public class OPAHTTPClient implements HTTPClient {
     // but with additional headers included in every request.
     public OPAHTTPClient(Map<String, String> extraHeaders) {
         headers = extraHeaders;
+    }
+
+    public OPAHTTPClient() {
+        headers = new HashMap<String, String>();
     }
 
     @Override
