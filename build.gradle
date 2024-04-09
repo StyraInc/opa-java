@@ -26,6 +26,26 @@ dependencies {
     implementation 'org.apache.httpcomponents:httpmime:4.5.14'
     implementation 'com.jayway.jsonpath:json-path:2.9.0'
     implementation 'commons-io:commons-io:2.15.1'
+
+    // these don't seem to work
+    //testImplementation 'libs.junit.jupiter:5.8.1'
+    //testRuntimeOnly "org.junit.platform:junit-platform-launcher:5.8.1"
+
+    implementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    implementation 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    implementation 'org.testcontainers:testcontainers-bom:1.19.7'
+    implementation 'org.testcontainers:testcontainers:1.19.7'
+    testImplementation 'org.testcontainers:junit-jupiter:1.19.7'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.1'
+    testImplementation 'ch.qos.logback:logback-classic:1.3.14'
+    testImplementation 'org.assertj:assertj-core:3.25.2'
+
+
 }
 
-
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed", "standard_out", "standard_error"
+    }
+}

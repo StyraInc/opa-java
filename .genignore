@@ -2,3 +2,5 @@ LICENSE
 src/main/java/com/styra/opa/OPA.java
 src/main/java/com/styra/opa/OPAException.java
 src/main/java/com/styra/opa/utils/OPAHTTPClient.java
+src/test/java/com/styra/opa/OPATest.java
+testdata/simple/policy.rego
