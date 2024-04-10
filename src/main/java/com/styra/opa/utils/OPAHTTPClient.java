@@ -34,13 +34,11 @@ public class OPAHTTPClient implements HTTPClient {
             throws IOException, InterruptedException, URISyntaxException {
         HttpClient client = HttpClient.newHttpClient();
 
-        HTTPRequest requestBuilder = new HTTPRequest();
-
         for (String headerKey : headers.keySet()) {
-            requestBuilder = requestBuilder.addHeader(headerKey, headers.get(headerKey));
+            request.addHeader(headerKey, headers.get(headerKey));
         }
 
-        HttpRequest req =  requestBuilder.build();
+        HttpRequest req = request.build();
 
         HttpResponse<InputStream> response = client.send(req, HttpResponse.BodyHandlers.ofInputStream());
         return response;

@@ -27,12 +27,13 @@ import static java.util.Map.entry;
 class OPATest {
 
     private String address;
+    private Map headers = Map.ofEntries(entry("Authorization", "Bearer supersecret"));
 
     @Container
     public GenericContainer opac = new GenericContainer(DockerImageName.parse("openpolicyagent/opa:latest"))
         .withExposedPorts(8181)
         .withFileSystemBind("./testdata/simple", "/policy", BindMode.READ_ONLY)
-        .withCommand("run -s --bundle /policy");
+        .withCommand("run -s --authentication=token --authorization=basic --bundle /policy");
 
     @BeforeEach
     public void setUp() {
@@ -62,7 +63,7 @@ class OPATest {
 
     @Test
     public void testOPAHello() {
-        OPA opa = new OPA(address);
+        OPA opa = new OPA(address, headers);
         String result = "";
 
         try {
@@ -80,7 +81,7 @@ class OPATest {
 
     @Test
     public void testOPACheck() {
-        OPA opa = new OPA(address);
+        OPA opa = new OPA(address, headers);
         boolean result = false;
 
         try {
@@ -110,7 +111,7 @@ class OPATest {
 
     @Test
     public void testOPANumeric() {
-        OPA opa = new OPA(address);
+        OPA opa = new OPA(address, headers);
         double result = 0;
 
         try {

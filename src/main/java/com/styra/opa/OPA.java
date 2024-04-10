@@ -128,6 +128,7 @@ public class OPA {
                 .request(req)
                 .call();
         } catch (Exception e) {
+            e.printStackTrace(System.out);
             String msg = String.format("executing policy at '%s' with failed due to exception '%s'", path, e);
             throw new OPAException(msg, e);
         }
