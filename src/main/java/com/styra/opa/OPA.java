@@ -53,8 +53,6 @@ public class OPA {
     // authorization:
     //
     // https://www.openpolicyagent.org/docs/latest/rest-api/#authentication
-    //
-    // TODO: this needs to be tested
     public OPA(String opaURL, Map<String, String> headers) {
         this.sdkServerURL = opaURL;
         HTTPClient client = new OPAHTTPClient(headers);
