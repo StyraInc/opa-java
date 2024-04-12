@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"com.styra.opa"},{"l":"com.styra.opa.sdk"},{"l":"com.styra.opa.sdk.models.errors"},{"l":"com.styra.opa.sdk.models.operations"},{"l":"com.styra.opa.sdk.models.shared"},{"l":"com.styra.opa.sdk.utils"},{"l":"com.styra.opa.utils"}]
