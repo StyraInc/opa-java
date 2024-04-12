@@ -24,9 +24,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: gradle/gradle-build-action@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+      - run: pip install mkdocs
       - run: ./gradlew javadoc
+      - run: ./scripts/build_docs.sh ./build/docsite
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build/docs/javadoc
+          publish_dir: ./build/docsite

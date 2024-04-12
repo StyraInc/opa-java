@@ -5,3 +5,7 @@ src/main/java/com/styra/opa/utils/OPAHTTPClient.java
 src/test/java/com/styra/opa/OPATest.java
 testdata/simple/policy.rego
 testdata/simple/auth.rego
+docs/site/*
+docs/site/**
+scripts/*
+scripts/**
