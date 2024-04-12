@@ -8,3 +8,4 @@ Helpful links:
 * [opa-java JavaDoc](https://styrainc.github.io/opa-java/javadoc/)
 * [Speakeasy generated "models" documentation](https://styrainc.github.io/opa-java/models/)
 * [Speakeasy generated "SDKs" documentation](https://styrainc.github.io/opa-java/sdks/)
+* [OpenAPI Spec for the OPA REST API](https://github.com/StyraInc/enterprise-opa/tree/main/openapi)
