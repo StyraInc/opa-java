@@ -3,6 +3,6 @@ site_url: "https://styrainc.github.io/opa-java/"
 nav:
   - 'Home': "index.md"
   - 'GitHub': "https://github.com/StyraInc/opa-java"
-  - 'Javadoc': "../javadoc"
+  - 'Javadoc': "javadoc"
   - 'Models': "models"
   - 'SDKs': "sdks"
