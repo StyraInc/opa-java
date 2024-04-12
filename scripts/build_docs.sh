@@ -14,6 +14,7 @@ if [ $# -ne 1 ] ; then
 fi
 
 OUTPUT_DIR="$1"
+OUTPUT_DIR="$(realpath "$OUTPUT_DIR")"
 
 TEMP="$(mktemp -d)"
 trap "rm -rf '$TEMP'" EXIT
