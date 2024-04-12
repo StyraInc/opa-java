@@ -2,6 +2,8 @@
 
 name: Publish Docs
 "on":
+  # https://stackoverflow.com/a/77161850
+  pull_request:
   push:
     branches:
       - main
