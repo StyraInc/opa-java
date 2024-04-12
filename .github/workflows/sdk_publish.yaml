@@ -4,25 +4,11 @@ name: Publish
     branches:
       - main
       - charles/porcelain-api
-    paths:
-      - RELEASES.md
-      - '*/RELEASES.md'
-jobs:
-  #publish:
-  #  uses: speakeasy-api/sdk-generation-action/.github/workflows/sdk-publish.yaml@v15
-  #  with:
-  #    create_release: true
-  #  secrets:
-  #    github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
-  docs:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: gradle/gradle-build-action@v2
-      - run: ./gradlew javadoc
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build/javadoc
+jobs:
+  publish:
+    uses: speakeasy-api/sdk-generation-action/.github/workflows/sdk-publish.yaml@v15
+    with:
+      create_release: true
+    secrets:
+      github_access_token: ${{ secrets.GITHUB_TOKEN }}
