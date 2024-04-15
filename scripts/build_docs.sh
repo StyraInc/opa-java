@@ -19,7 +19,7 @@ OUTPUT_DIR="$(realpath "$OUTPUT_DIR")"
 TEMP="$(mktemp -d)"
 trap "rm -rf '$TEMP'" EXIT
 
-./gradlew javadoc
+./gradlew build javadoc
 
 cp -R ./docs/site/* "$TEMP"
 cp -R ./docs/models "$TEMP/docs/"
