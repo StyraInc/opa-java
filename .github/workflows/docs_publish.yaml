@@ -28,7 +28,6 @@ jobs:
         with:
           python-version: 3.x
       - run: pip install mkdocs
-      - run: ./gradlew javadoc
       - run: ./scripts/build_docs.sh ./build/docsite
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
