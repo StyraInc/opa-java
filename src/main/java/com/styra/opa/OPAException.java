@@ -11,7 +11,7 @@ public class OPAException extends Exception {
     }
 
     public OPAException(String message) {
-        super (message);
+        super(message);
     }
 
     public OPAException(String message, Throwable cause) {

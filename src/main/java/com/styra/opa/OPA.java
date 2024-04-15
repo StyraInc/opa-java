@@ -1,23 +1,17 @@
 package com.styra.opa;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.styra.opa.sdk.Opa;
-
 import com.styra.opa.sdk.models.operations.ExecutePolicyWithInputRequest;
 import com.styra.opa.sdk.models.operations.ExecutePolicyWithInputRequestBody;
 import com.styra.opa.sdk.models.operations.ExecutePolicyWithInputResponse;
-
 import com.styra.opa.sdk.models.shared.Explain;
 import com.styra.opa.sdk.models.shared.Input;
-
 import com.styra.opa.sdk.utils.HTTPClient;
-
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import com.styra.opa.utils.OPAHTTPClient;
 
 import java.util.Map;
-
 
 /**
  * The OPA class contains all the functionality and configuration needed to
@@ -38,12 +32,12 @@ public class OPA {
     private Opa sdk;
 
     // Values to use when generating requests.
-    private boolean policyRequestPretty = false;
-    private boolean policyRequestProvenance = false;
+    private boolean policyRequestPretty;
+    private boolean policyRequestProvenance;
     private Explain policyRequestExplain = Explain.NOTES;
-    private boolean policyRequestMetrics = false;
-    private boolean policyRequestInstrument = false;
-    private boolean policyRequestStrictBuiltinErrors = false;
+    private boolean policyRequestMetrics;
+    private boolean policyRequestInstrument;
+    private boolean policyRequestStrictBuiltinErrors;
 
     /**
      * Default OPA server URL to connect to.
@@ -59,7 +53,6 @@ public class OPA {
         this.sdk = Opa.builder().serverURL(sdkServerURL).build();
     }
 
-
     /**
      * Instantiates an OPA API wrapper with a custom OPA URL.
      *
@@ -69,7 +62,6 @@ public class OPA {
         this.sdkServerURL = opaURL;
         this.sdk = Opa.builder().serverURL(opaURL).build();
     }
-
 
     /**
      * This constructor allows instantiating the OPA wrapper with additional
@@ -197,7 +189,13 @@ public class OPA {
             res = sdk.executePolicyWithInput()
                 .request(req)
                 .call();
+
+        // Although it is preferred not to catch Exception, the generated
+        // Speakeasy SDK `throws Exception`, so we have to catch it. If the
+        // caller really cares, they can always unwrap the OPAException.
+        //CHECKSTYLE:OFF
         } catch (Exception e) {
+            //CHECKSTYLE:ON
             e.printStackTrace(System.out);
             String msg = String.format("executing policy at '%s' with failed due to exception '%s'", path, e);
             throw new OPAException(msg, e);
