@@ -138,6 +138,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <pre>public class <span class="typeNameLabel">OPAHTTPClient</span>
 extends java.lang.Object
 implements <a href="../sdk/utils/HTTPClient.html" title="interface in com.styra.opa.sdk.utils">HTTPClient</a></pre>
+<div class="block">This HTTPClient implementation also injects additional headers provided to
+ its constructor into each HTTP request that it sends. This is meant to be
+ used as the HTTP client implementation for instances of the Speakeasy
+ generated OPA SDK.</div>
 </li>
 </ul>
 </div>
@@ -159,11 +163,17 @@ implements <a href="../sdk/utils/HTTPClient.html" title="interface in com.styra.
 </tr>
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E()">OPAHTTPClient</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">If instantiated with this constructor, OPAHTTPClient will be initialized
+ with an empty list of extra headers to inject.</div>
+</td>
 </tr>
 <tr class="rowColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.util.Map)">OPAHTTPClient</a></span>&#8203;(java.util.Map&lt;java.lang.String,&#8203;java.lang.String&gt;&nbsp;extraHeaders)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Instantiates a new HTTP client suitable for use with the Speakeasy SDK,
+ but with additional headers included in every request.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -219,6 +229,12 @@ implements <a href="../sdk/utils/HTTPClient.html" title="interface in com.styra.
 <li class="blockList">
 <h4>OPAHTTPClient</h4>
 <pre>public&nbsp;OPAHTTPClient&#8203;(java.util.Map&lt;java.lang.String,&#8203;java.lang.String&gt;&nbsp;extraHeaders)</pre>
+<div class="block">Instantiates a new HTTP client suitable for use with the Speakeasy SDK,
+ but with additional headers included in every request.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>extraHeaders</code> - The extra headers to include.</dd>
+</dl>
 </li>
 </ul>
 <a id="&lt;init&gt;()">
@@ -228,6 +244,8 @@ implements <a href="../sdk/utils/HTTPClient.html" title="interface in com.styra.
 <li class="blockList">
 <h4>OPAHTTPClient</h4>
 <pre>public&nbsp;OPAHTTPClient()</pre>
+<div class="block">If instantiated with this constructor, OPAHTTPClient will be initialized
+ with an empty list of extra headers to inject.</div>
 </li>
 </ul>
 </li>
