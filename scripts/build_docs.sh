@@ -14,6 +14,9 @@ if [ $# -ne 1 ] ; then
 fi
 
 OUTPUT_DIR="$1"
+if [ ! -d "$OUTPUT_DIR" ] ; then
+	mkdir -p "$OUTPUT_DIR"
+fi
 OUTPUT_DIR="$(realpath "$OUTPUT_DIR")"
 
 TEMP="$(mktemp -d)"
