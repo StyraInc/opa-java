@@ -161,7 +161,8 @@ Try changing the policy input in `App.java`, or modifying the `main.rego` to obs
 
 
 
-*content below this lines is managed by Speakeasy's automated generation tools*
+> [!NOTE]
+> For low-level SDK usage, see the sections below.
 
 ---
 
