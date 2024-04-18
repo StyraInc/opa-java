@@ -4,8 +4,8 @@ name: Publish
     branches:
       - main
     paths:
-    - RELEASES.md
-    - '*/RELEASES.md'
+      - RELEASES.md
+      - '*/RELEASES.md'
 
 jobs:
   publish:
