@@ -4,6 +4,7 @@
 
 package com.styra.opa.models.shared;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -29,6 +30,7 @@ public class ServerError {
     @JsonProperty("errors")
     private Optional<? extends java.util.List<ServerErrorErrors>> errors;
 
+    @JsonCreator
     public ServerError(
             @JsonProperty("code") String code,
             @JsonProperty("message") String message,
@@ -39,6 +41,12 @@ public class ServerError {
         this.code = code;
         this.message = message;
         this.errors = errors;
+    }
+    
+    public ServerError(
+            String code,
+            String message) {
+        this(code, message, Optional.empty());
     }
 
     public String code() {

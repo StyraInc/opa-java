@@ -4,6 +4,7 @@
 
 package com.styra.opa.models.shared;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -25,6 +26,7 @@ public class ServerErrorLocation {
     @JsonProperty("col")
     private long col;
 
+    @JsonCreator
     public ServerErrorLocation(
             @JsonProperty("file") String file,
             @JsonProperty("row") long row,

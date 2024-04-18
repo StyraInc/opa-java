@@ -4,6 +4,7 @@
 
 package com.styra.opa.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.styra.opa.utils.LazySingletonValue;
@@ -66,6 +67,7 @@ public class ExecutePolicyRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=strict-builtin-errors")
     private Optional<? extends Boolean> strictBuiltinErrors;
 
+    @JsonCreator
     public ExecutePolicyRequest(
             String path,
             Optional<? extends com.styra.opa.models.shared.GzipAcceptEncoding> acceptEncoding,
@@ -91,6 +93,11 @@ public class ExecutePolicyRequest {
         this.metrics = metrics;
         this.instrument = instrument;
         this.strictBuiltinErrors = strictBuiltinErrors;
+    }
+    
+    public ExecutePolicyRequest(
+            String path) {
+        this(path, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**

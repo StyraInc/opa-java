@@ -4,6 +4,7 @@
 
 package com.styra.opa.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.styra.opa.utils.LazySingletonValue;
@@ -36,6 +37,7 @@ public class HealthRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=exclude-plugin")
     private Optional<? extends java.util.List<String>> excludePlugin;
 
+    @JsonCreator
     public HealthRequest(
             Optional<? extends Boolean> bundles,
             Optional<? extends Boolean> plugins,
@@ -46,6 +48,10 @@ public class HealthRequest {
         this.bundles = bundles;
         this.plugins = plugins;
         this.excludePlugin = excludePlugin;
+    }
+    
+    public HealthRequest() {
+        this(Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**

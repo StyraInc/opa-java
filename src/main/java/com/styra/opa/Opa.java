@@ -143,6 +143,10 @@ public class Opa implements
     private Opa(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
+    /**
+     * Execute a policy
+     * @return The call builder
+     */
     public com.styra.opa.models.operations.ExecutePolicyRequestBuilder executePolicy() {
         return new com.styra.opa.models.operations.ExecutePolicyRequestBuilder(this);
     }
@@ -150,8 +154,8 @@ public class Opa implements
     /**
      * Execute a policy
      * @param request The request object containing all of the parameters for the API call.
-     * @return The response from the API call.
-     * @throws Exception if the API call fails.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
      */
     public com.styra.opa.models.operations.ExecutePolicyResponse executePolicy(
             com.styra.opa.models.operations.ExecutePolicyRequest request) throws Exception {
@@ -248,6 +252,10 @@ public class Opa implements
         return res;
     }
 
+    /**
+     * Execute a policy given an input
+     * @return The call builder
+     */
     public com.styra.opa.models.operations.ExecutePolicyWithInputRequestBuilder executePolicyWithInput() {
         return new com.styra.opa.models.operations.ExecutePolicyWithInputRequestBuilder(this);
     }
@@ -255,8 +263,8 @@ public class Opa implements
     /**
      * Execute a policy given an input
      * @param request The request object containing all of the parameters for the API call.
-     * @return The response from the API call.
-     * @throws Exception if the API call fails.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
      */
     public com.styra.opa.models.operations.ExecutePolicyWithInputResponse executePolicyWithInput(
             com.styra.opa.models.operations.ExecutePolicyWithInputRequest request) throws Exception {
@@ -361,6 +369,11 @@ public class Opa implements
         return res;
     }
 
+    /**
+     * Verify the server is operational
+     * The health API endpoint executes a simple built-in policy query to verify that the server is operational. Optionally it can account for bundle activation as well (useful for “ready” checks at startup).
+     * @return The call builder
+     */
     public com.styra.opa.models.operations.HealthRequestBuilder health() {
         return new com.styra.opa.models.operations.HealthRequestBuilder(this);
     }
@@ -368,11 +381,20 @@ public class Opa implements
     /**
      * Verify the server is operational
      * The health API endpoint executes a simple built-in policy query to verify that the server is operational. Optionally it can account for bundle activation as well (useful for “ready” checks at startup).
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public com.styra.opa.models.operations.HealthResponse healthDirect() throws Exception {
+        return health(Optional.empty(), Optional.empty(), Optional.empty());
+    }
+    /**
+     * Verify the server is operational
+     * The health API endpoint executes a simple built-in policy query to verify that the server is operational. Optionally it can account for bundle activation as well (useful for “ready” checks at startup).
      * @param bundles Boolean parameter to account for bundle activation status in response. This includes any discovery bundles or bundles defined in the loaded discovery configuration.
      * @param plugins Boolean parameter to account for plugin status in response.
      * @param excludePlugin String parameter to exclude a plugin from status checks. Can be added multiple times. Does nothing if plugins is not true. This parameter is useful for special use cases where a plugin depends on the server being fully initialized before it can fully initialize itself.
-     * @return The response from the API call.
-     * @throws Exception if the API call fails.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
      */
     public com.styra.opa.models.operations.HealthResponse health(
             Optional<? extends Boolean> bundles,
