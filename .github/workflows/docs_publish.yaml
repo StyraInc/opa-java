@@ -2,12 +2,9 @@
 
 name: Publish Docs
 "on":
-  # https://stackoverflow.com/a/77161850
-  pull_request:
   push:
     branches:
       - main
-      - charles/porcelain-api
     paths:
       - RELEASES.md
       - '*/RELEASES.md'

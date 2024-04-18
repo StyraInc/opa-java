@@ -3,7 +3,6 @@ name: Publish
   push:
     branches:
       - main
-      - charles/porcelain-api
 
 jobs:
   publish:
