@@ -1,0 +1,33 @@
+# TODO: might want to fold this back into sdk_publish later
+
+name: Publish Docs
+"on":
+  push:
+    branches:
+      - main
+    paths:
+      - RELEASES.md
+      - '*/RELEASES.md'
+jobs:
+  #publish:
+  #  uses: speakeasy-api/sdk-generation-action/.github/workflows/sdk-publish.yaml@v15
+  #  with:
+  #    create_release: true
+  #  secrets:
+  #    github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: gradle/gradle-build-action@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+      - run: pip install mkdocs
+      - run: ./scripts/build_docs.sh ./build/docsite
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build/docsite

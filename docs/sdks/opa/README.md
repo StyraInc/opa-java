@@ -20,13 +20,13 @@ Execute a policy
 ```java
 package hello.world;
 
-import com.styra.opa.Opa;
-import com.styra.opa.models.operations.*;
-import com.styra.opa.models.operations.ExecutePolicyRequest;
-import com.styra.opa.models.operations.ExecutePolicyResponse;
-import com.styra.opa.models.shared.*;
-import com.styra.opa.models.shared.Explain;
-import com.styra.opa.models.shared.GzipAcceptEncoding;
+import com.styra.opa.sdk.Opa;
+import com.styra.opa.sdk.models.operations.*;
+import com.styra.opa.sdk.models.operations.ExecutePolicyRequest;
+import com.styra.opa.sdk.models.operations.ExecutePolicyResponse;
+import com.styra.opa.sdk.models.shared.*;
+import com.styra.opa.sdk.models.shared.Explain;
+import com.styra.opa.sdk.models.shared.GzipAcceptEncoding;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -59,7 +59,7 @@ public class Application {
             if (res.successfulPolicyEvaluation().isPresent()) {
                 // handle response
             }
-        } catch (com.styra.opa.models.errors.SDKError e) {
+        } catch (com.styra.opa.sdk.models.errors.SDKError e) {
             // handle exception
         } catch (Exception e) {
             // handle exception
@@ -70,14 +70,14 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                               | Type                                                                                                    | Required                                                                                                | Description                                                                                             |
-| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                               | [com.styra.opa.models.operations.ExecutePolicyRequest](../../models/operations/ExecutePolicyRequest.md) | :heavy_check_mark:                                                                                      | The request object to use for the request.                                                              |
+| Parameter                                                                                                   | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                   | [com.styra.opa.sdk.models.operations.ExecutePolicyRequest](../../models/operations/ExecutePolicyRequest.md) | :heavy_check_mark:                                                                                          | The request object to use for the request.                                                                  |
 
 
 ### Response
 
-**[Optional<? extends com.styra.opa.models.operations.ExecutePolicyResponse>](../../models/operations/ExecutePolicyResponse.md)**
+**[Optional<? extends com.styra.opa.sdk.models.operations.ExecutePolicyResponse>](../../models/operations/ExecutePolicyResponse.md)**
 ### Errors
 
 | Error Object           | Status Code            | Content Type           |
@@ -93,15 +93,15 @@ Execute a policy given an input
 ```java
 package hello.world;
 
-import com.styra.opa.Opa;
-import com.styra.opa.models.operations.*;
-import com.styra.opa.models.operations.ExecutePolicyWithInputRequest;
-import com.styra.opa.models.operations.ExecutePolicyWithInputRequestBody;
-import com.styra.opa.models.operations.ExecutePolicyWithInputResponse;
-import com.styra.opa.models.shared.*;
-import com.styra.opa.models.shared.Explain;
-import com.styra.opa.models.shared.GzipAcceptEncoding;
-import com.styra.opa.models.shared.GzipContentEncoding;
+import com.styra.opa.sdk.Opa;
+import com.styra.opa.sdk.models.operations.*;
+import com.styra.opa.sdk.models.operations.ExecutePolicyWithInputRequest;
+import com.styra.opa.sdk.models.operations.ExecutePolicyWithInputRequestBody;
+import com.styra.opa.sdk.models.operations.ExecutePolicyWithInputResponse;
+import com.styra.opa.sdk.models.shared.*;
+import com.styra.opa.sdk.models.shared.Explain;
+import com.styra.opa.sdk.models.shared.GzipAcceptEncoding;
+import com.styra.opa.sdk.models.shared.GzipContentEncoding;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -142,7 +142,7 @@ public class Application {
             if (res.successfulPolicyEvaluation().isPresent()) {
                 // handle response
             }
-        } catch (com.styra.opa.models.errors.SDKError e) {
+        } catch (com.styra.opa.sdk.models.errors.SDKError e) {
             // handle exception
         } catch (Exception e) {
             // handle exception
@@ -153,14 +153,14 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                                 | Type                                                                                                                      | Required                                                                                                                  | Description                                                                                                               |
-| ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                                 | [com.styra.opa.models.operations.ExecutePolicyWithInputRequest](../../models/operations/ExecutePolicyWithInputRequest.md) | :heavy_check_mark:                                                                                                        | The request object to use for the request.                                                                                |
+| Parameter                                                                                                                     | Type                                                                                                                          | Required                                                                                                                      | Description                                                                                                                   |
+| ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                                     | [com.styra.opa.sdk.models.operations.ExecutePolicyWithInputRequest](../../models/operations/ExecutePolicyWithInputRequest.md) | :heavy_check_mark:                                                                                                            | The request object to use for the request.                                                                                    |
 
 
 ### Response
 
-**[Optional<? extends com.styra.opa.models.operations.ExecutePolicyWithInputResponse>](../../models/operations/ExecutePolicyWithInputResponse.md)**
+**[Optional<? extends com.styra.opa.sdk.models.operations.ExecutePolicyWithInputResponse>](../../models/operations/ExecutePolicyWithInputResponse.md)**
 ### Errors
 
 | Error Object           | Status Code            | Content Type           |
@@ -176,11 +176,11 @@ The health API endpoint executes a simple built-in policy query to verify that t
 ```java
 package hello.world;
 
-import com.styra.opa.Opa;
-import com.styra.opa.models.operations.*;
-import com.styra.opa.models.operations.HealthRequest;
-import com.styra.opa.models.operations.HealthResponse;
-import com.styra.opa.models.shared.*;
+import com.styra.opa.sdk.Opa;
+import com.styra.opa.sdk.models.operations.*;
+import com.styra.opa.sdk.models.operations.HealthRequest;
+import com.styra.opa.sdk.models.operations.HealthResponse;
+import com.styra.opa.sdk.models.shared.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -205,7 +205,7 @@ public class Application {
             if (res.healthyServer().isPresent()) {
                 // handle response
             }
-        } catch (com.styra.opa.models.errors.SDKError e) {
+        } catch (com.styra.opa.sdk.models.errors.SDKError e) {
             // handle exception
         } catch (Exception e) {
             // handle exception
@@ -225,7 +225,7 @@ public class Application {
 
 ### Response
 
-**[Optional<? extends com.styra.opa.models.operations.HealthResponse>](../../models/operations/HealthResponse.md)**
+**[Optional<? extends com.styra.opa.sdk.models.operations.HealthResponse>](../../models/operations/HealthResponse.md)**
 ### Errors
 
 | Error Object           | Status Code            | Content Type           |

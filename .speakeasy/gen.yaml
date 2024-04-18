@@ -12,15 +12,15 @@ generation:
   auth:
     oAuth2ClientCredentialsEnabled: false
 java:
-  version: 0.4.2
+  version: 0.4.3
   additionalDependencies: []
-  artifactID: opa
+  artifactID: sdk
   companyEmail: devrel@styra.com
   companyName: Styra
   companyURL: www.styra.com
   flattenGlobalSecurity: false
   githubURL: github.com/styrainc/opa-java
-  groupID: com.styra
+  groupID: com.styra.opa
   imports:
     option: openapi
     paths:

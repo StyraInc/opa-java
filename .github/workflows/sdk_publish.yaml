@@ -6,6 +6,7 @@ name: Publish
     paths:
       - RELEASES.md
       - '*/RELEASES.md'
+
 jobs:
   publish:
     uses: speakeasy-api/sdk-generation-action/.github/workflows/sdk-publish.yaml@v15

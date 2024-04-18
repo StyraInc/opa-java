@@ -1,0 +1,8 @@
+site_name: OPA-Java SDK Documentation
+site_url: "https://styrainc.github.io/opa-java/"
+nav:
+  - 'Home': "index.md"
+  - 'GitHub': "https://github.com/StyraInc/opa-java"
+  - 'Javadoc': "javadoc"
+  - 'Models': "models"
+  - 'SDKs': "sdks"
