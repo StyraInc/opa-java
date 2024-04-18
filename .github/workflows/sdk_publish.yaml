@@ -3,6 +3,9 @@ name: Publish
   push:
     branches:
       - main
+    paths:
+    - RELEASES.md
+    - '*/RELEASES.md'
 
 jobs:
   publish:
