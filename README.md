@@ -10,7 +10,7 @@ This repository contains a Java SDK for a Java SDK for the [Open Policy Agent](h
 
 **To run the unit tests**, you can use `./gradlew test`.
 
-**To run the linter**, you can use `./gradlew lint checkstyleMain checkstyleTest`
+**To run the linter**, you can use `./gradlew lint`
 
 ## Usage Example
 

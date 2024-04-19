@@ -22,9 +22,7 @@ OUTPUT_DIR="$(realpath "$OUTPUT_DIR")"
 TEMP="$(mktemp -d)"
 trap "rm -rf '$TEMP'" EXIT
 
-# The -x parameters prevent some tasks from running that could prevent the docs
-# from building due to, linter issues.
-./gradlew build javadoc -x checkstyleMain -x checkstyleTest -x autoLintGradle
+./gradlew build javadoc
 
 cp -R ./docs/site/* "$TEMP"
 cp -R ./docs/models "$TEMP/docs/"
