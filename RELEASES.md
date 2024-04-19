@@ -63,3 +63,13 @@ Based on:
 - Speakeasy CLI 1.228.1 (2.292.0) https://github.com/speakeasy-api/speakeasy
 ### Generated
 - [java v0.4.2] .
+
+## 2024-04-19 00:08:53
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.260.6 (2.311.1) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [java v0.5.0] .
+### Releases
+- [Maven Central v0.5.0] https://central.sonatype.com/artifact/com.styra.opa/sdk/0.5.0 - .

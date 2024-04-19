@@ -4,6 +4,7 @@
 
 package com.styra.opa.sdk.models.shared;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -47,6 +48,7 @@ public class SuccessfulPolicyEvaluation {
     @JsonProperty("provenance")
     private Optional<? extends Provenance> provenance;
 
+    @JsonCreator
     public SuccessfulPolicyEvaluation(
             @JsonProperty("result") Optional<? extends Result> result,
             @JsonProperty("metrics") Optional<? extends java.util.Map<String, java.lang.Object>> metrics,
@@ -60,6 +62,10 @@ public class SuccessfulPolicyEvaluation {
         this.metrics = metrics;
         this.decisionId = decisionId;
         this.provenance = provenance;
+    }
+    
+    public SuccessfulPolicyEvaluation() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**

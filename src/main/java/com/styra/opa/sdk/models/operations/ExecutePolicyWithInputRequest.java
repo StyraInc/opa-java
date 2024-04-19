@@ -4,6 +4,7 @@
 
 package com.styra.opa.sdk.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.styra.opa.sdk.utils.LazySingletonValue;
@@ -78,6 +79,7 @@ public class ExecutePolicyWithInputRequest {
     @SpeakeasyMetadata("request:mediaType=application/json")
     private ExecutePolicyWithInputRequestBody requestBody;
 
+    @JsonCreator
     public ExecutePolicyWithInputRequest(
             String path,
             Optional<? extends com.styra.opa.sdk.models.shared.GzipContentEncoding> contentEncoding,
@@ -109,6 +111,12 @@ public class ExecutePolicyWithInputRequest {
         this.instrument = instrument;
         this.strictBuiltinErrors = strictBuiltinErrors;
         this.requestBody = requestBody;
+    }
+    
+    public ExecutePolicyWithInputRequest(
+            String path,
+            ExecutePolicyWithInputRequestBody requestBody) {
+        this(path, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), requestBody);
     }
 
     /**

@@ -4,6 +4,7 @@
 
 package com.styra.opa.sdk.models.shared;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -23,10 +24,15 @@ public class UnhealthyServer {
     @JsonProperty("code")
     private Optional<? extends String> code;
 
+    @JsonCreator
     public UnhealthyServer(
             @JsonProperty("code") Optional<? extends String> code) {
         Utils.checkNotNull(code, "code");
         this.code = code;
+    }
+    
+    public UnhealthyServer() {
+        this(Optional.empty());
     }
 
     public Optional<? extends String> code() {

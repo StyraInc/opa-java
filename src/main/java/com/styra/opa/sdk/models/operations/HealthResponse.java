@@ -4,6 +4,7 @@
 
 package com.styra.opa.sdk.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.styra.opa.sdk.utils.Utils;
@@ -42,6 +43,7 @@ public class HealthResponse implements com.styra.opa.sdk.utils.Response {
      */
     private Optional<? extends com.styra.opa.sdk.models.shared.UnhealthyServer> unhealthyServer;
 
+    @JsonCreator
     public HealthResponse(
             String contentType,
             int statusCode,
@@ -58,6 +60,13 @@ public class HealthResponse implements com.styra.opa.sdk.utils.Response {
         this.rawResponse = rawResponse;
         this.healthyServer = healthyServer;
         this.unhealthyServer = unhealthyServer;
+    }
+    
+    public HealthResponse(
+            String contentType,
+            int statusCode,
+            HttpResponse<InputStream> rawResponse) {
+        this(contentType, statusCode, rawResponse, Optional.empty(), Optional.empty());
     }
 
     /**

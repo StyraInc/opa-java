@@ -14,9 +14,9 @@ class SDKConfiguration {
     public int serverIdx = 0;
   	public String language = "java";
   	public String openapiDocVersion = "0.2.0";
-  	public String sdkVersion = "0.4.3";
-  	public String genVersion = "2.298.2";
-  	public String userAgent = "speakeasy-sdk/java 0.4.3 2.298.2 0.2.0 com.styra.opa.sdk";
+  	public String sdkVersion = "0.5.0";
+  	public String genVersion = "2.311.1";
+  	public String userAgent = "speakeasy-sdk/java 0.5.0 2.311.1 0.2.0 com.styra.opa.sdk";
   	
   	
     public Optional<RetryConfig> retryConfig = Optional.empty();

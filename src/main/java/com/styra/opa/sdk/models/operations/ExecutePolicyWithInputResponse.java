@@ -4,6 +4,7 @@
 
 package com.styra.opa.sdk.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.styra.opa.sdk.utils.Utils;
@@ -51,6 +52,7 @@ public class ExecutePolicyWithInputResponse implements com.styra.opa.sdk.utils.R
 
     private java.util.Map<String, java.util.List<String>> headers;
 
+    @JsonCreator
     public ExecutePolicyWithInputResponse(
             String contentType,
             int statusCode,
@@ -73,6 +75,14 @@ public class ExecutePolicyWithInputResponse implements com.styra.opa.sdk.utils.R
         this.clientError = clientError;
         this.serverError = serverError;
         this.headers = headers;
+    }
+    
+    public ExecutePolicyWithInputResponse(
+            String contentType,
+            int statusCode,
+            HttpResponse<InputStream> rawResponse,
+            java.util.Map<String, java.util.List<String>> headers) {
+        this(contentType, statusCode, rawResponse, Optional.empty(), Optional.empty(), Optional.empty(), headers);
     }
 
     /**

@@ -175,7 +175,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'com.styra.opa.sdk:api:0.4.3'
+implementation 'com.styra.opa.sdk:api:0.5.0'
 ```
 
 Maven:
@@ -183,7 +183,7 @@ Maven:
 <dependency>
     <groupId>com.styra.opa.sdk</groupId>
     <artifactId>api</artifactId>
-    <version>0.4.3</version>
+    <version>0.5.0</version>
 </dependency>
 ```
 
