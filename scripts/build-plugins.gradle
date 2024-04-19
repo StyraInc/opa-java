@@ -1,0 +1,8 @@
+plugins {
+    // NOTE: this block is managed by scripts/fix-build-gradle.sh, changes made
+    // to the plugins block by hand will be overwritten!
+    id 'java-library'
+    id 'java'
+    id "nebula.lint" version "17.8.0"
+    id 'checkstyle'
+}
