@@ -1,6 +1,7 @@
 name: Run unit tests and lint Java code
 on:
   pull_request:
+  push:
 
 jobs:
   test_and_lint:
