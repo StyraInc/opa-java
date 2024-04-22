@@ -43,11 +43,11 @@ public class OPAHTTPClient implements HTTPClient {
         headers = new HashMap<String, String>();
     }
 
-    @Override
     /**
      * This method implements compatibility with the
      * com.styra.opa.sdk.utils.HTTPClient interface.
      */
+    @Override
     public HttpResponse<InputStream> send(HTTPRequest request)
             throws IOException, InterruptedException, URISyntaxException {
         HttpClient client = HttpClient.newHttpClient();
