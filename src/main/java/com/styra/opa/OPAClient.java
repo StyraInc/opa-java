@@ -106,23 +106,23 @@ public class OPAClient {
      * @throws OPAException
      */
     public boolean check(java.util.Map<String, Object> input, String path) throws OPAException {
-        return query(input, path);
+        return evaluate(input, path);
     }
 
     public boolean check(String input, String path) throws OPAException {
-        return query(input, path);
+        return evaluate(input, path);
     }
 
     public boolean check(boolean input, String path) throws OPAException {
-        return query(input, path);
+        return evaluate(input, path);
     }
 
     public boolean check(double input, String path) throws OPAException {
-        return query(input, path);
+        return evaluate(input, path);
     }
 
     public boolean check(java.util.List<Object> input, String path) throws OPAException {
-        return query(input, path);
+        return evaluate(input, path);
     }
 
     /**
@@ -141,24 +141,24 @@ public class OPAClient {
      * com.fasterxml.jackson.databind.ObjectMapper.
      * @throws OPAException
      */
-    public <T> T query(java.util.Map<String, Object> input, String path) throws OPAException {
-        return queryMachinery(Input.of(input), path);
+    public <T> T evaluate(java.util.Map<String, Object> input, String path) throws OPAException {
+        return evaluateMachinery(Input.of(input), path);
     }
 
-    public <T> T query(String input, String path) throws OPAException {
-        return queryMachinery(Input.of(input), path);
+    public <T> T evaluate(String input, String path) throws OPAException {
+        return evaluateMachinery(Input.of(input), path);
     }
 
-    public <T> T query(boolean input, String path) throws OPAException {
-        return queryMachinery(Input.of(input), path);
+    public <T> T evaluate(boolean input, String path) throws OPAException {
+        return evaluateMachinery(Input.of(input), path);
     }
 
-    public <T> T query(double input, String path) throws OPAException {
-        return queryMachinery(Input.of(input), path);
+    public <T> T evaluate(double input, String path) throws OPAException {
+        return evaluateMachinery(Input.of(input), path);
     }
 
-    public <T> T query(java.util.List<Object> input, String path) throws OPAException {
-        return queryMachinery(Input.of(input), path);
+    public <T> T evaluate(java.util.List<Object> input, String path) throws OPAException {
+        return evaluateMachinery(Input.of(input), path);
     }
 
     /**
@@ -170,7 +170,7 @@ public class OPAClient {
      * @return
      * @throws OPAException
      */
-    private <T> T queryMachinery(Input input, String path) throws OPAException {
+    private <T> T evaluateMachinery(Input input, String path) throws OPAException {
         ExecutePolicyWithInputRequest req = ExecutePolicyWithInputRequest.builder()
             .path(path)
             .requestBody(ExecutePolicyWithInputRequestBody.builder()

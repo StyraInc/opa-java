@@ -82,7 +82,7 @@ class OPATest {
         String result = "";
 
         try {
-            result = opa.query(Map.ofEntries(
+            result = opa.evaluate(Map.ofEntries(
                 entry("user", "alice"),
                 entry("x", testNumberA)
             ), "policy/hello");
@@ -130,7 +130,7 @@ class OPATest {
         double result = 0;
 
         try {
-            result = opa.query(Map.ofEntries(
+            result = opa.evaluate(Map.ofEntries(
                 entry("user", "alice"),
                 entry("x", testNumberA)
             ), "policy/input_x_times_2");
