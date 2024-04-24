@@ -54,7 +54,7 @@ class OPATest {
 
     @Test
     public void testOPAHealth() {
-        // This test just makes sure that we can reach the OPA health endpoint
+        // This test just makes sure that we can reach the OPAClient health endpoint
         // and that it returns the expected {} value.
 
         HttpClient client = HttpClient.newHttpClient();
@@ -78,7 +78,7 @@ class OPATest {
 
     @Test
     public void testOPAHello() {
-        OPA opa = new OPA(address, headers);
+        OPAClient opa = new OPAClient(address, headers);
         String result = "";
 
         try {
@@ -96,7 +96,7 @@ class OPATest {
 
     @Test
     public void testOPACheck() {
-        OPA opa = new OPA(address, headers);
+        OPAClient opa = new OPAClient(address, headers);
         boolean result = false;
 
         try {
@@ -126,7 +126,7 @@ class OPATest {
 
     @Test
     public void testOPANumeric() {
-        OPA opa = new OPA(address, headers);
+        OPAClient opa = new OPAClient(address, headers);
         double result = 0;
 
         try {

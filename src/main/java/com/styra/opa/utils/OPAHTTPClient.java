@@ -3,7 +3,7 @@ package com.styra.opa.utils;
 // This is based on the SpeakeasyHTTPClient that was generated for the Java
 // SDK, but has been modified to allow injecting additional headers.
 
-import com.styra.opa.sdk.utils.HTTPClient;
+import com.styra.opa.openapi.utils.HTTPClient;
 
 import java.io.IOException;
 import java.io.InputStream;

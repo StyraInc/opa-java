@@ -175,15 +175,15 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'com.styra.opa.sdk:api:0.5.0'
+implementation 'com.styra.opa.openapi:api:0.5.1'
 ```
 
 Maven:
 ```xml
 <dependency>
-    <groupId>com.styra.opa.sdk</groupId>
+    <groupId>com.styra.opa.openapi</groupId>
     <artifactId>api</artifactId>
-    <version>0.5.0</version>
+    <version>0.5.1</version>
 </dependency>
 ```
 
@@ -210,15 +210,15 @@ gradlew.bat publishToMavenLocal -Pskip.signing
 ```java
 package hello.world;
 
-import com.styra.opa.sdk.Opa;
-import com.styra.opa.sdk.models.operations.*;
-import com.styra.opa.sdk.models.operations.ExecutePolicyWithInputRequest;
-import com.styra.opa.sdk.models.operations.ExecutePolicyWithInputRequestBody;
-import com.styra.opa.sdk.models.operations.ExecutePolicyWithInputResponse;
-import com.styra.opa.sdk.models.shared.*;
-import com.styra.opa.sdk.models.shared.Explain;
-import com.styra.opa.sdk.models.shared.GzipAcceptEncoding;
-import com.styra.opa.sdk.models.shared.GzipContentEncoding;
+import com.styra.opa.openapi.OpaApiClient;
+import com.styra.opa.openapi.models.operations.*;
+import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequest;
+import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequestBody;
+import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputResponse;
+import com.styra.opa.openapi.models.shared.*;
+import com.styra.opa.openapi.models.shared.Explain;
+import com.styra.opa.openapi.models.shared.GzipAcceptEncoding;
+import com.styra.opa.openapi.models.shared.GzipContentEncoding;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -230,7 +230,7 @@ public class Application {
 
     public static void main(String[] args) {
         try {
-            Opa sdk = Opa.builder()
+            OpaApiClient sdk = OpaApiClient.builder()
                 .build();
 
             ExecutePolicyWithInputRequest req = ExecutePolicyWithInputRequest.builder()
@@ -259,11 +259,11 @@ public class Application {
             if (res.successfulPolicyEvaluation().isPresent()) {
                 // handle response
             }
-        } catch (com.styra.opa.sdk.models.errors.ClientError e) {
+        } catch (com.styra.opa.openapi.models.errors.ClientError e) {
             // handle exception
-        } catch (com.styra.opa.sdk.models.errors.ServerError e) {
+        } catch (com.styra.opa.openapi.models.errors.ServerError e) {
             // handle exception
-        } catch (com.styra.opa.sdk.models.errors.SDKError e) {
+        } catch (com.styra.opa.openapi.models.errors.SDKError e) {
             // handle exception
         } catch (Exception e) {
             // handle exception
@@ -276,11 +276,11 @@ public class Application {
 <!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
 
-### [Opa SDK](docs/sdks/opa/README.md)
+### [OpaApiClient SDK](docs/sdks/opaapiclient/README.md)
 
-* [executePolicy](docs/sdks/opa/README.md#executepolicy) - Execute a policy
-* [executePolicyWithInput](docs/sdks/opa/README.md#executepolicywithinput) - Execute a policy given an input
-* [health](docs/sdks/opa/README.md#health) - Verify the server is operational
+* [executePolicy](docs/sdks/opaapiclient/README.md#executepolicy) - Execute a policy
+* [executePolicyWithInput](docs/sdks/opaapiclient/README.md#executepolicywithinput) - Execute a policy given an input
+* [health](docs/sdks/opaapiclient/README.md#health) - Verify the server is operational
 <!-- End Available Resources and Operations [operations] -->
 
 <!-- Start Server Selection [server] -->
@@ -299,13 +299,13 @@ You can override the default server globally by passing a server index to the `s
 ```java
 package hello.world;
 
-import com.styra.opa.sdk.Opa;
-import com.styra.opa.sdk.models.operations.*;
-import com.styra.opa.sdk.models.operations.ExecutePolicyRequest;
-import com.styra.opa.sdk.models.operations.ExecutePolicyResponse;
-import com.styra.opa.sdk.models.shared.*;
-import com.styra.opa.sdk.models.shared.Explain;
-import com.styra.opa.sdk.models.shared.GzipAcceptEncoding;
+import com.styra.opa.openapi.OpaApiClient;
+import com.styra.opa.openapi.models.operations.*;
+import com.styra.opa.openapi.models.operations.ExecutePolicyRequest;
+import com.styra.opa.openapi.models.operations.ExecutePolicyResponse;
+import com.styra.opa.openapi.models.shared.*;
+import com.styra.opa.openapi.models.shared.Explain;
+import com.styra.opa.openapi.models.shared.GzipAcceptEncoding;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -317,7 +317,7 @@ public class Application {
 
     public static void main(String[] args) {
         try {
-            Opa sdk = Opa.builder()
+            OpaApiClient sdk = OpaApiClient.builder()
                 .serverIndex(0)
                 .build();
 
@@ -339,11 +339,11 @@ public class Application {
             if (res.successfulPolicyEvaluation().isPresent()) {
                 // handle response
             }
-        } catch (com.styra.opa.sdk.models.errors.ClientError e) {
+        } catch (com.styra.opa.openapi.models.errors.ClientError e) {
             // handle exception
-        } catch (com.styra.opa.sdk.models.errors.ServerError e) {
+        } catch (com.styra.opa.openapi.models.errors.ServerError e) {
             // handle exception
-        } catch (com.styra.opa.sdk.models.errors.SDKError e) {
+        } catch (com.styra.opa.openapi.models.errors.SDKError e) {
             // handle exception
         } catch (Exception e) {
             // handle exception
@@ -359,13 +359,13 @@ The default server can also be overridden globally by passing a URL to the `serv
 ```java
 package hello.world;
 
-import com.styra.opa.sdk.Opa;
-import com.styra.opa.sdk.models.operations.*;
-import com.styra.opa.sdk.models.operations.ExecutePolicyRequest;
-import com.styra.opa.sdk.models.operations.ExecutePolicyResponse;
-import com.styra.opa.sdk.models.shared.*;
-import com.styra.opa.sdk.models.shared.Explain;
-import com.styra.opa.sdk.models.shared.GzipAcceptEncoding;
+import com.styra.opa.openapi.OpaApiClient;
+import com.styra.opa.openapi.models.operations.*;
+import com.styra.opa.openapi.models.operations.ExecutePolicyRequest;
+import com.styra.opa.openapi.models.operations.ExecutePolicyResponse;
+import com.styra.opa.openapi.models.shared.*;
+import com.styra.opa.openapi.models.shared.Explain;
+import com.styra.opa.openapi.models.shared.GzipAcceptEncoding;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -377,7 +377,7 @@ public class Application {
 
     public static void main(String[] args) {
         try {
-            Opa sdk = Opa.builder()
+            OpaApiClient sdk = OpaApiClient.builder()
                 .serverURL("http://localhost:8181")
                 .build();
 
@@ -399,11 +399,11 @@ public class Application {
             if (res.successfulPolicyEvaluation().isPresent()) {
                 // handle response
             }
-        } catch (com.styra.opa.sdk.models.errors.ClientError e) {
+        } catch (com.styra.opa.openapi.models.errors.ClientError e) {
             // handle exception
-        } catch (com.styra.opa.sdk.models.errors.ServerError e) {
+        } catch (com.styra.opa.openapi.models.errors.ServerError e) {
             // handle exception
-        } catch (com.styra.opa.sdk.models.errors.SDKError e) {
+        } catch (com.styra.opa.openapi.models.errors.SDKError e) {
             // handle exception
         } catch (Exception e) {
             // handle exception
@@ -418,24 +418,24 @@ public class Application {
 
 Handling errors in this SDK should largely match your expectations.  All operations return a response object or raise an error.  If Error objects are specified in your OpenAPI Spec, the SDK will throw the appropriate Exception type.
 
-| Error Object                                | Status Code                                 | Content Type                                |
-| ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| com.styra.opa.sdk.models.errors.ClientError | 400                                         | application/json                            |
-| com.styra.opa.sdk.models.errors.ServerError | 500                                         | application/json                            |
-| models/errors/SDKError                      | 4xx-5xx                                     | */*                                         |
+| Error Object                                    | Status Code                                     | Content Type                                    |
+| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
+| com.styra.opa.openapi.models.errors.ClientError | 400                                             | application/json                                |
+| com.styra.opa.openapi.models.errors.ServerError | 500                                             | application/json                                |
+| models/errors/SDKError                          | 4xx-5xx                                         | */*                                             |
 
 ### Example
 
 ```java
 package hello.world;
 
-import com.styra.opa.sdk.Opa;
-import com.styra.opa.sdk.models.operations.*;
-import com.styra.opa.sdk.models.operations.ExecutePolicyRequest;
-import com.styra.opa.sdk.models.operations.ExecutePolicyResponse;
-import com.styra.opa.sdk.models.shared.*;
-import com.styra.opa.sdk.models.shared.Explain;
-import com.styra.opa.sdk.models.shared.GzipAcceptEncoding;
+import com.styra.opa.openapi.OpaApiClient;
+import com.styra.opa.openapi.models.operations.*;
+import com.styra.opa.openapi.models.operations.ExecutePolicyRequest;
+import com.styra.opa.openapi.models.operations.ExecutePolicyResponse;
+import com.styra.opa.openapi.models.shared.*;
+import com.styra.opa.openapi.models.shared.Explain;
+import com.styra.opa.openapi.models.shared.GzipAcceptEncoding;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -447,7 +447,7 @@ public class Application {
 
     public static void main(String[] args) {
         try {
-            Opa sdk = Opa.builder()
+            OpaApiClient sdk = OpaApiClient.builder()
                 .build();
 
             ExecutePolicyRequest req = ExecutePolicyRequest.builder()
@@ -468,11 +468,11 @@ public class Application {
             if (res.successfulPolicyEvaluation().isPresent()) {
                 // handle response
             }
-        } catch (com.styra.opa.sdk.models.errors.ClientError e) {
+        } catch (com.styra.opa.openapi.models.errors.ClientError e) {
             // handle exception
-        } catch (com.styra.opa.sdk.models.errors.ServerError e) {
+        } catch (com.styra.opa.openapi.models.errors.ServerError e) {
             // handle exception
-        } catch (com.styra.opa.sdk.models.errors.SDKError e) {
+        } catch (com.styra.opa.openapi.models.errors.SDKError e) {
             // handle exception
         } catch (Exception e) {
             // handle exception
