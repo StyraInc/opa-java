@@ -5,4 +5,8 @@ plugins {
     id 'java'
     id "nebula.lint" version "17.8.0"
     id 'checkstyle'
+    id 'maven-publish'
+    id 'signing'
+    id 'cl.franciscosolis.sonatype-central-upload' version '1.0.0'
 }
+
