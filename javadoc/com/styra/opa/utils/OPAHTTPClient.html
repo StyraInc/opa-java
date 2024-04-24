@@ -132,12 +132,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="../sdk/utils/HTTPClient.html" title="interface in com.styra.opa.sdk.utils">HTTPClient</a></code></dd>
+<dd><code><a href="../openapi/utils/HTTPClient.html" title="interface in com.styra.opa.openapi.utils">HTTPClient</a></code></dd>
 </dl>
 <hr>
 <pre>public class <span class="typeNameLabel">OPAHTTPClient</span>
 extends java.lang.Object
-implements <a href="../sdk/utils/HTTPClient.html" title="interface in com.styra.opa.sdk.utils">HTTPClient</a></pre>
+implements <a href="../openapi/utils/HTTPClient.html" title="interface in com.styra.opa.openapi.utils">HTTPClient</a></pre>
 <div class="block">This HTTPClient implementation also injects additional headers provided to
  its constructor into each HTTP request that it sends. This is meant to be
  used as the HTTP client implementation for instances of the Speakeasy
@@ -195,8 +195,11 @@ implements <a href="../sdk/utils/HTTPClient.html" title="interface in com.styra.
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>java.net.http.HttpResponse&lt;java.io.InputStream&gt;</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#send(com.styra.opa.sdk.utils.HTTPRequest)">send</a></span>&#8203;(<a href="../sdk/utils/HTTPRequest.html" title="class in com.styra.opa.sdk.utils">HTTPRequest</a>&nbsp;request)</code></th>
-<td class="colLast">&nbsp;</td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#send(java.net.http.HttpRequest)">send</a></span>&#8203;(java.net.http.HttpRequest&nbsp;request)</code></th>
+<td class="colLast">
+<div class="block">This method implements compatibility with the
+ com.styra.opa.sdk.utils.HTTPClient interface.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -258,19 +261,21 @@ implements <a href="../sdk/utils/HTTPClient.html" title="interface in com.styra.
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a id="send(com.styra.opa.sdk.utils.HTTPRequest)">
+<a id="send(java.net.http.HttpRequest)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>send</h4>
-<pre class="methodSignature">public&nbsp;java.net.http.HttpResponse&lt;java.io.InputStream&gt;&nbsp;send&#8203;(<a href="../sdk/utils/HTTPRequest.html" title="class in com.styra.opa.sdk.utils">HTTPRequest</a>&nbsp;request)
+<pre class="methodSignature">public&nbsp;java.net.http.HttpResponse&lt;java.io.InputStream&gt;&nbsp;send&#8203;(java.net.http.HttpRequest&nbsp;request)
                                                      throws java.io.IOException,
                                                             java.lang.InterruptedException,
                                                             java.net.URISyntaxException</pre>
+<div class="block">This method implements compatibility with the
+ com.styra.opa.sdk.utils.HTTPClient interface.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../sdk/utils/HTTPClient.html#send(com.styra.opa.sdk.utils.HTTPRequest)">send</a></code>&nbsp;in interface&nbsp;<code><a href="../sdk/utils/HTTPClient.html" title="interface in com.styra.opa.sdk.utils">HTTPClient</a></code></dd>
+<dd><code><a href="../openapi/utils/HTTPClient.html#send(java.net.http.HttpRequest)">send</a></code>&nbsp;in interface&nbsp;<code><a href="../openapi/utils/HTTPClient.html" title="interface in com.styra.opa.openapi.utils">HTTPClient</a></code></dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code>java.io.IOException</code></dd>
 <dd><code>java.lang.InterruptedException</code></dd>
