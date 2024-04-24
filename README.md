@@ -175,7 +175,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'com.styra.opa.sdk:api:0.4.3'
+implementation 'com.styra.opa.sdk:api:0.5.0'
 ```
 
 Maven:
@@ -183,7 +183,7 @@ Maven:
 <dependency>
     <groupId>com.styra.opa.sdk</groupId>
     <artifactId>api</artifactId>
-    <version>0.4.3</version>
+    <version>0.5.0</version>
 </dependency>
 ```
 
@@ -259,6 +259,10 @@ public class Application {
             if (res.successfulPolicyEvaluation().isPresent()) {
                 // handle response
             }
+        } catch (com.styra.opa.sdk.models.errors.ClientError e) {
+            // handle exception
+        } catch (com.styra.opa.sdk.models.errors.ServerError e) {
+            // handle exception
         } catch (com.styra.opa.sdk.models.errors.SDKError e) {
             // handle exception
         } catch (Exception e) {
@@ -335,6 +339,10 @@ public class Application {
             if (res.successfulPolicyEvaluation().isPresent()) {
                 // handle response
             }
+        } catch (com.styra.opa.sdk.models.errors.ClientError e) {
+            // handle exception
+        } catch (com.styra.opa.sdk.models.errors.ServerError e) {
+            // handle exception
         } catch (com.styra.opa.sdk.models.errors.SDKError e) {
             // handle exception
         } catch (Exception e) {
@@ -391,6 +399,10 @@ public class Application {
             if (res.successfulPolicyEvaluation().isPresent()) {
                 // handle response
             }
+        } catch (com.styra.opa.sdk.models.errors.ClientError e) {
+            // handle exception
+        } catch (com.styra.opa.sdk.models.errors.ServerError e) {
+            // handle exception
         } catch (com.styra.opa.sdk.models.errors.SDKError e) {
             // handle exception
         } catch (Exception e) {
@@ -406,9 +418,11 @@ public class Application {
 
 Handling errors in this SDK should largely match your expectations.  All operations return a response object or raise an error.  If Error objects are specified in your OpenAPI Spec, the SDK will throw the appropriate Exception type.
 
-| Error Object           | Status Code            | Content Type           |
-| ---------------------- | ---------------------- | ---------------------- |
-| models/errors/SDKError | 4xx-5xx                | */*                    |
+| Error Object                                | Status Code                                 | Content Type                                |
+| ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
+| com.styra.opa.sdk.models.errors.ClientError | 400                                         | application/json                            |
+| com.styra.opa.sdk.models.errors.ServerError | 500                                         | application/json                            |
+| models/errors/SDKError                      | 4xx-5xx                                     | */*                                         |
 
 ### Example
 
@@ -454,6 +468,10 @@ public class Application {
             if (res.successfulPolicyEvaluation().isPresent()) {
                 // handle response
             }
+        } catch (com.styra.opa.sdk.models.errors.ClientError e) {
+            // handle exception
+        } catch (com.styra.opa.sdk.models.errors.ServerError e) {
+            // handle exception
         } catch (com.styra.opa.sdk.models.errors.SDKError e) {
             // handle exception
         } catch (Exception e) {

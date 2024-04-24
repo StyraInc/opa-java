@@ -4,7 +4,9 @@
 
 package com.styra.opa.sdk.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.styra.opa.sdk.utils.Utils;
 import java.io.InputStream;
@@ -39,45 +41,39 @@ public class ExecutePolicyResponse implements com.styra.opa.sdk.utils.Response {
      */
     private Optional<? extends com.styra.opa.sdk.models.shared.SuccessfulPolicyEvaluation> successfulPolicyEvaluation;
 
-    /**
-     * Bad Request
-     */
-    private Optional<? extends com.styra.opa.sdk.models.shared.ClientError> clientError;
-
-    /**
-     * Server Error
-     */
-    private Optional<? extends com.styra.opa.sdk.models.shared.ServerError> serverError;
-
     private java.util.Map<String, java.util.List<String>> headers;
 
+    @JsonCreator
     public ExecutePolicyResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
             Optional<? extends com.styra.opa.sdk.models.shared.SuccessfulPolicyEvaluation> successfulPolicyEvaluation,
-            Optional<? extends com.styra.opa.sdk.models.shared.ClientError> clientError,
-            Optional<? extends com.styra.opa.sdk.models.shared.ServerError> serverError,
             java.util.Map<String, java.util.List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
         Utils.checkNotNull(successfulPolicyEvaluation, "successfulPolicyEvaluation");
-        Utils.checkNotNull(clientError, "clientError");
-        Utils.checkNotNull(serverError, "serverError");
         headers = Utils.emptyMapIfNull(headers);
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
         this.successfulPolicyEvaluation = successfulPolicyEvaluation;
-        this.clientError = clientError;
-        this.serverError = serverError;
         this.headers = headers;
+    }
+    
+    public ExecutePolicyResponse(
+            String contentType,
+            int statusCode,
+            HttpResponse<InputStream> rawResponse,
+            java.util.Map<String, java.util.List<String>> headers) {
+        this(contentType, statusCode, rawResponse, Optional.empty(), headers);
     }
 
     /**
      * HTTP response content type for this operation
      */
+    @JsonIgnore
     public String contentType() {
         return contentType;
     }
@@ -85,6 +81,7 @@ public class ExecutePolicyResponse implements com.styra.opa.sdk.utils.Response {
     /**
      * HTTP response status code for this operation
      */
+    @JsonIgnore
     public int statusCode() {
         return statusCode;
     }
@@ -92,6 +89,7 @@ public class ExecutePolicyResponse implements com.styra.opa.sdk.utils.Response {
     /**
      * Raw HTTP response; suitable for custom response parsing
      */
+    @JsonIgnore
     public HttpResponse<InputStream> rawResponse() {
         return rawResponse;
     }
@@ -101,24 +99,12 @@ public class ExecutePolicyResponse implements com.styra.opa.sdk.utils.Response {
      * The server also returns 200 if the path refers to an undefined document. In this case, the response will not contain a result property.
      * 
      */
+    @JsonIgnore
     public Optional<? extends com.styra.opa.sdk.models.shared.SuccessfulPolicyEvaluation> successfulPolicyEvaluation() {
         return successfulPolicyEvaluation;
     }
 
-    /**
-     * Bad Request
-     */
-    public Optional<? extends com.styra.opa.sdk.models.shared.ClientError> clientError() {
-        return clientError;
-    }
-
-    /**
-     * Server Error
-     */
-    public Optional<? extends com.styra.opa.sdk.models.shared.ServerError> serverError() {
-        return serverError;
-    }
-
+    @JsonIgnore
     public java.util.Map<String, java.util.List<String>> headers() {
         return headers;
     }
@@ -176,42 +162,6 @@ public class ExecutePolicyResponse implements com.styra.opa.sdk.utils.Response {
         return this;
     }
 
-    /**
-     * Bad Request
-     */
-    public ExecutePolicyResponse withClientError(com.styra.opa.sdk.models.shared.ClientError clientError) {
-        Utils.checkNotNull(clientError, "clientError");
-        this.clientError = Optional.ofNullable(clientError);
-        return this;
-    }
-
-    /**
-     * Bad Request
-     */
-    public ExecutePolicyResponse withClientError(Optional<? extends com.styra.opa.sdk.models.shared.ClientError> clientError) {
-        Utils.checkNotNull(clientError, "clientError");
-        this.clientError = clientError;
-        return this;
-    }
-
-    /**
-     * Server Error
-     */
-    public ExecutePolicyResponse withServerError(com.styra.opa.sdk.models.shared.ServerError serverError) {
-        Utils.checkNotNull(serverError, "serverError");
-        this.serverError = Optional.ofNullable(serverError);
-        return this;
-    }
-
-    /**
-     * Server Error
-     */
-    public ExecutePolicyResponse withServerError(Optional<? extends com.styra.opa.sdk.models.shared.ServerError> serverError) {
-        Utils.checkNotNull(serverError, "serverError");
-        this.serverError = serverError;
-        return this;
-    }
-
     public ExecutePolicyResponse withHeaders(java.util.Map<String, java.util.List<String>> headers) {
         Utils.checkNotNull(headers, "headers");
         this.headers = headers;
@@ -232,8 +182,6 @@ public class ExecutePolicyResponse implements com.styra.opa.sdk.utils.Response {
             java.util.Objects.deepEquals(this.statusCode, other.statusCode) &&
             java.util.Objects.deepEquals(this.rawResponse, other.rawResponse) &&
             java.util.Objects.deepEquals(this.successfulPolicyEvaluation, other.successfulPolicyEvaluation) &&
-            java.util.Objects.deepEquals(this.clientError, other.clientError) &&
-            java.util.Objects.deepEquals(this.serverError, other.serverError) &&
             java.util.Objects.deepEquals(this.headers, other.headers);
     }
     
@@ -244,8 +192,6 @@ public class ExecutePolicyResponse implements com.styra.opa.sdk.utils.Response {
             statusCode,
             rawResponse,
             successfulPolicyEvaluation,
-            clientError,
-            serverError,
             headers);
     }
     
@@ -256,8 +202,6 @@ public class ExecutePolicyResponse implements com.styra.opa.sdk.utils.Response {
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
                 "successfulPolicyEvaluation", successfulPolicyEvaluation,
-                "clientError", clientError,
-                "serverError", serverError,
                 "headers", headers);
     }
     
@@ -270,10 +214,6 @@ public class ExecutePolicyResponse implements com.styra.opa.sdk.utils.Response {
         private HttpResponse<InputStream> rawResponse;
  
         private Optional<? extends com.styra.opa.sdk.models.shared.SuccessfulPolicyEvaluation> successfulPolicyEvaluation = Optional.empty();
- 
-        private Optional<? extends com.styra.opa.sdk.models.shared.ClientError> clientError = Optional.empty();
- 
-        private Optional<? extends com.styra.opa.sdk.models.shared.ServerError> serverError = Optional.empty();
  
         private java.util.Map<String, java.util.List<String>> headers;  
         
@@ -330,42 +270,6 @@ public class ExecutePolicyResponse implements com.styra.opa.sdk.utils.Response {
             return this;
         }
 
-        /**
-         * Bad Request
-         */
-        public Builder clientError(com.styra.opa.sdk.models.shared.ClientError clientError) {
-            Utils.checkNotNull(clientError, "clientError");
-            this.clientError = Optional.ofNullable(clientError);
-            return this;
-        }
-
-        /**
-         * Bad Request
-         */
-        public Builder clientError(Optional<? extends com.styra.opa.sdk.models.shared.ClientError> clientError) {
-            Utils.checkNotNull(clientError, "clientError");
-            this.clientError = clientError;
-            return this;
-        }
-
-        /**
-         * Server Error
-         */
-        public Builder serverError(com.styra.opa.sdk.models.shared.ServerError serverError) {
-            Utils.checkNotNull(serverError, "serverError");
-            this.serverError = Optional.ofNullable(serverError);
-            return this;
-        }
-
-        /**
-         * Server Error
-         */
-        public Builder serverError(Optional<? extends com.styra.opa.sdk.models.shared.ServerError> serverError) {
-            Utils.checkNotNull(serverError, "serverError");
-            this.serverError = serverError;
-            return this;
-        }
-
         public Builder headers(java.util.Map<String, java.util.List<String>> headers) {
             Utils.checkNotNull(headers, "headers");
             this.headers = headers;
@@ -378,8 +282,6 @@ public class ExecutePolicyResponse implements com.styra.opa.sdk.utils.Response {
                 statusCode,
                 rawResponse,
                 successfulPolicyEvaluation,
-                clientError,
-                serverError,
                 headers);
         }
     }

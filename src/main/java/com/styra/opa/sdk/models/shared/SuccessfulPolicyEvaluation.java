@@ -4,7 +4,9 @@
 
 package com.styra.opa.sdk.models.shared;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -47,6 +49,7 @@ public class SuccessfulPolicyEvaluation {
     @JsonProperty("provenance")
     private Optional<? extends Provenance> provenance;
 
+    @JsonCreator
     public SuccessfulPolicyEvaluation(
             @JsonProperty("result") Optional<? extends Result> result,
             @JsonProperty("metrics") Optional<? extends java.util.Map<String, java.lang.Object>> metrics,
@@ -61,10 +64,15 @@ public class SuccessfulPolicyEvaluation {
         this.decisionId = decisionId;
         this.provenance = provenance;
     }
+    
+    public SuccessfulPolicyEvaluation() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+    }
 
     /**
      * The base or virtual document referred to by the URL path. If the path is undefined, this key will be omitted.
      */
+    @JsonIgnore
     public Optional<? extends Result> result() {
         return result;
     }
@@ -72,6 +80,7 @@ public class SuccessfulPolicyEvaluation {
     /**
      * If query metrics are enabled, this field contains query performance metrics collected during the parse, compile, and evaluation steps.
      */
+    @JsonIgnore
     public Optional<? extends java.util.Map<String, java.lang.Object>> metrics() {
         return metrics;
     }
@@ -79,6 +88,7 @@ public class SuccessfulPolicyEvaluation {
     /**
      * If decision logging is enabled, this field contains a string that uniquely identifies the decision. The identifier will be included in the decision log event for this decision. Callers can use the identifier for correlation purposes.
      */
+    @JsonIgnore
     public Optional<? extends String> decisionId() {
         return decisionId;
     }
@@ -86,6 +96,7 @@ public class SuccessfulPolicyEvaluation {
     /**
      * Provenance information can be requested on individual API calls and are returned inline with the API response. To obtain provenance information on an API call, specify the `provenance=true` query parameter when executing the API call.
      */
+    @JsonIgnore
     public Optional<? extends Provenance> provenance() {
         return provenance;
     }

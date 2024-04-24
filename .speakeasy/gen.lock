@@ -3,20 +3,22 @@ id: 47e8e950-a454-4ebb-9f78-86fda7dfa0c2
 management:
   docChecksum: 2401c7030f847f72ab31c8f75de58a66
   docVersion: 0.2.0
-  speakeasyVersion: 1.235.2
-  generationVersion: 2.298.2
-  releaseVersion: 0.4.3
-  configChecksum: 504177004fdc1a6865a12bc3d161d1be
+  speakeasyVersion: 1.270.1
+  generationVersion: 2.312.1
+  releaseVersion: 0.5.0
+  configChecksum: 30425024c3d50352dfe3297adc6524aa
   repoURL: https://github.com/StyraInc/opa-java
 features:
   java:
     constsAndDefaults: 0.1.1
-    core: 3.16.4
+    core: 3.18.0
     examples: 2.81.3
     flattening: 2.81.1
     globalServerURLs: 2.82.1
     unions: 0.0.3
 generatedFiles:
+  - src/main/java/com/styra/opa/sdk/SecuritySource.java
+  - src/main/java/com/styra/opa/sdk/models/shared/Security.java
   - src/main/java/com/styra/opa/sdk/SDKConfiguration.java
   - src/main/java/com/styra/opa/sdk/models/operations/ExecutePolicyRequestBuilder.java
   - src/main/java/com/styra/opa/sdk/models/operations/ExecutePolicyWithInputRequestBuilder.java
@@ -38,6 +40,8 @@ generatedFiles:
   - src/main/java/com/styra/opa/sdk/utils/HTTPClient.java
   - src/main/java/com/styra/opa/sdk/utils/HTTPRequest.java
   - src/main/java/com/styra/opa/sdk/utils/HeaderMetadata.java
+  - src/main/java/com/styra/opa/sdk/utils/Hook.java
+  - src/main/java/com/styra/opa/sdk/utils/Hooks.java
   - src/main/java/com/styra/opa/sdk/utils/JSON.java
   - src/main/java/com/styra/opa/sdk/utils/LazySingletonValue.java
   - src/main/java/com/styra/opa/sdk/utils/Metadata.java
@@ -56,7 +60,6 @@ generatedFiles:
   - src/main/java/com/styra/opa/sdk/utils/SecurityMetadata.java
   - src/main/java/com/styra/opa/sdk/utils/SerializedBody.java
   - src/main/java/com/styra/opa/sdk/utils/SpeakeasyHTTPClient.java
-  - src/main/java/com/styra/opa/sdk/utils/SpeakeasyHTTPSecurityClient.java
   - src/main/java/com/styra/opa/sdk/utils/SpeakeasyMetadata.java
   - src/main/java/com/styra/opa/sdk/utils/TypedObject.java
   - src/main/java/com/styra/opa/sdk/utils/Types.java
@@ -69,12 +72,6 @@ generatedFiles:
   - src/main/java/com/styra/opa/sdk/models/operations/ExecutePolicyWithInputResponse.java
   - src/main/java/com/styra/opa/sdk/models/operations/HealthRequest.java
   - src/main/java/com/styra/opa/sdk/models/operations/HealthResponse.java
-  - src/main/java/com/styra/opa/sdk/models/shared/ServerErrorLocation.java
-  - src/main/java/com/styra/opa/sdk/models/shared/ServerErrorErrors.java
-  - src/main/java/com/styra/opa/sdk/models/shared/ServerError.java
-  - src/main/java/com/styra/opa/sdk/models/shared/Location.java
-  - src/main/java/com/styra/opa/sdk/models/shared/Errors.java
-  - src/main/java/com/styra/opa/sdk/models/shared/ClientError.java
   - src/main/java/com/styra/opa/sdk/models/shared/SuccessfulPolicyEvaluation.java
   - src/main/java/com/styra/opa/sdk/models/shared/Revision.java
   - src/main/java/com/styra/opa/sdk/models/shared/Provenance.java
@@ -83,8 +80,14 @@ generatedFiles:
   - src/main/java/com/styra/opa/sdk/models/shared/GzipAcceptEncoding.java
   - src/main/java/com/styra/opa/sdk/models/shared/Input.java
   - src/main/java/com/styra/opa/sdk/models/shared/GzipContentEncoding.java
-  - src/main/java/com/styra/opa/sdk/models/shared/UnhealthyServer.java
   - src/main/java/com/styra/opa/sdk/models/shared/HealthyServer.java
+  - src/main/java/com/styra/opa/sdk/models/errors/Location.java
+  - src/main/java/com/styra/opa/sdk/models/errors/Errors.java
+  - src/main/java/com/styra/opa/sdk/models/errors/ClientError.java
+  - src/main/java/com/styra/opa/sdk/models/errors/ServerErrorLocation.java
+  - src/main/java/com/styra/opa/sdk/models/errors/ServerErrorErrors.java
+  - src/main/java/com/styra/opa/sdk/models/errors/ServerError.java
+  - src/main/java/com/styra/opa/sdk/models/errors/UnhealthyServer.java
   - docs/models/operations/ExecutePolicyRequest.md
   - docs/models/operations/ExecutePolicyResponse.md
   - docs/models/operations/ExecutePolicyWithInputRequestBody.md
@@ -92,12 +95,6 @@ generatedFiles:
   - docs/models/operations/ExecutePolicyWithInputResponse.md
   - docs/models/operations/HealthRequest.md
   - docs/models/operations/HealthResponse.md
-  - docs/models/shared/ServerErrorLocation.md
-  - docs/models/shared/ServerErrorErrors.md
-  - docs/models/shared/ServerError.md
-  - docs/models/shared/Location.md
-  - docs/models/shared/Errors.md
-  - docs/models/shared/ClientError.md
   - docs/models/shared/SuccessfulPolicyEvaluation.md
   - docs/models/shared/Revision.md
   - docs/models/shared/Provenance.md
@@ -106,7 +103,13 @@ generatedFiles:
   - docs/models/shared/GzipAcceptEncoding.md
   - docs/models/shared/Input.md
   - docs/models/shared/GzipContentEncoding.md
-  - docs/models/shared/UnhealthyServer.md
   - docs/models/shared/HealthyServer.md
+  - docs/models/errors/Location.md
+  - docs/models/errors/Errors.md
+  - docs/models/errors/ClientError.md
+  - docs/models/errors/ServerErrorLocation.md
+  - docs/models/errors/ServerErrorErrors.md
+  - docs/models/errors/ServerError.md
+  - docs/models/errors/UnhealthyServer.md
   - docs/sdks/opa/README.md
   - USAGE.md

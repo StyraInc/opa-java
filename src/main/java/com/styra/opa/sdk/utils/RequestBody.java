@@ -6,13 +6,11 @@ package com.styra.opa.sdk.utils;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UncheckedIOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.net.http.HttpRequest.BodyPublishers;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -30,13 +28,17 @@ import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class RequestBody {
+public final class RequestBody {
     private static final Map<String, String> SERIALIZATION_METHOD_TO_CONTENT_TYPE = Map.of(
             "json", "application/json",
             "form", "application/x-www-form-urlencoded",
             "multipart", "multipart/form-data",
             "raw", "application/octet-stream",
             "string", "text/plain");
+
+    private RequestBody() {
+        // prevent instantiation
+    }
 
     public static SerializedBody serialize(Object request, String requestField, String serializationMethod, boolean nullable)
             throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException,
@@ -88,18 +90,17 @@ public class RequestBody {
         Pattern formPattern = Pattern.compile("application\\/x-www-form-urlencoded.*");
         Pattern textPattern = Pattern.compile("text\\/plain");
 
-        SerializedBody body = new SerializedBody();
+        final SerializedBody body;
 
         if (textPattern.matcher(contentType).matches()) {
-            body.contentType = contentType;
-            body.body = BodyPublishers.ofString(value.toString());
+            body = new SerializedBody(contentType, BodyPublishers.ofString(value.toString()));
         } else if (jsonPattern.matcher(contentType).matches()) {
             ObjectMapper mapper = JSON.getMapper();
-            body.contentType = contentType;
             if (value instanceof JsonNullable && !((JsonNullable<?>) value).isPresent()) {
-                body.body = BodyPublishers.noBody();
+                body = new SerializedBody(contentType, BodyPublishers.noBody());
             } else {
-                body.body = BodyPublishers.ofString(mapper.writeValueAsString(value));
+                body = new SerializedBody(contentType, 
+                        BodyPublishers.ofString(mapper.writeValueAsString(value)));
             }
         } else if (multipartPattern.matcher(contentType).matches()) {
             body = serializeMultipart(value);
@@ -107,16 +108,13 @@ public class RequestBody {
             body = serializeFormData(value);
         } else {
             if (value instanceof String) {
-                body.contentType = contentType;
-                body.body = BodyPublishers.ofString((String) value);
+                body = new SerializedBody(contentType, BodyPublishers.ofString((String) value));
             } else if (value instanceof byte[]) {
-                body.contentType = contentType;
-                body.body = BodyPublishers.ofByteArray((byte[]) value);
+                body = new SerializedBody(contentType, BodyPublishers.ofByteArray((byte[]) value));
             } else {
                 throw new RuntimeException("Unsupported content type " + contentType + " for field " + fieldName);
             }
         }
-
         return body;
     }
 
@@ -164,15 +162,14 @@ public class RequestBody {
         }
 
         HttpEntity entity = builder.build();
-
-        SerializedBody body = new SerializedBody();
-        body.contentType = builder.build().getContentType().getValue();
-
-        InputStream stream = entity.getContent();
-
-        body.body = BodyPublishers.ofInputStream(() -> stream);
-
-        return body;
+        String ct = builder.build().getContentType().getValue();
+        return new SerializedBody(ct, BodyPublishers.ofInputStream(() -> {
+            try {
+                return entity.getContent();
+            } catch (IOException e) {
+                throw new UncheckedIOException(e);
+            }
+        }));
     }
 
     private static void serializeMultipartFile(MultipartEntityBuilder builder, Object file)
@@ -341,17 +338,15 @@ public class RequestBody {
         }
 
         UrlEncodedFormEntity entity = new UrlEncodedFormEntity(params);
-
-        SerializedBody body = new SerializedBody();
-        body.contentType = entity.getContentType().getValue();
-
-        InputStream stream = entity.getContent();
-
-        body.body = BodyPublishers.ofInputStream(() -> stream);
-
-        return body;
-    }
-
-    private RequestBody() {
+        String ct = entity.getContentType().getValue();
+        // ensure that a fresh open input stream is provided every time
+        // by the BodyPublisher 
+        return new SerializedBody(ct, BodyPublishers.ofInputStream(() -> {
+            try {
+                return entity.getContent();
+            } catch (IOException e) {
+                throw new UncheckedIOException(e);
+            }
+        }));
     }
 }

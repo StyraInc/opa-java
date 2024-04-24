@@ -10,44 +10,53 @@ import java.net.http.HttpRequest.BodyPublisher;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.message.BasicNameValuePair;
 
 public class HTTPRequest {
-    private String baseURL;
-    private String method;
-    private SerializedBody body;
 
-    private List<NameValuePair> queryParams = new ArrayList<>();
-    private Map<String, List<String>> headers = new HashMap<>();
+    private final String baseURL;
+    private final String method;
+    private final List<NameValuePair> queryParams = new ArrayList<>();
+    private final Map<String, List<String>> headers = new HashMap<>();
+    private Optional<SerializedBody> body = Optional.empty(); // mutable
 
-    public HTTPRequest setMethod(String method) {
+    public HTTPRequest(String baseURL, String method) {
+        Utils.checkNotNull(baseURL, "baseURL");
+        Utils.checkNotNull(method, "method");
+        this.baseURL = baseURL;
         this.method = method;
-        return this;
     }
-
-    public HTTPRequest setURL(String url) {
-        this.baseURL = url;
-        return this;
-    }
-
-    public HTTPRequest setBody(SerializedBody body) {
+    
+    public void setBody(Optional<SerializedBody> body) {
+        Utils.checkNotNull(body, "body");
         this.body = body;
-        return this;
     }
-
+    
     public HTTPRequest addHeader(String key, String value) {
-        List<String> headerValues = this.headers.get(key);
+        List<String> headerValues = headers.get(key);
         if (headerValues == null) {
             headerValues = new ArrayList<>();
+            headers.put(key, headerValues);
         }
-
         headerValues.add(value);
-        this.headers.put(key, headerValues);
+        return this;
+    }
+    
+    public HTTPRequest addHeaders(Map<String, List<String>> map) {
+        map.forEach((key, list) -> list.forEach(v -> addHeader(key, v)));
+        return this;
+    }
+    
+    public HTTPRequest addQueryParam(String name, String value) {
+        addQueryParam(new BasicNameValuePair(name, value));
         return this;
     }
 
@@ -55,32 +64,33 @@ public class HTTPRequest {
         this.queryParams.add(param);
         return this;
     }
+    
+    public HTTPRequest addQueryParams(Collection<NameValuePair> params) {
+        params.forEach(p -> addQueryParam(p));
+        return this;
+    }
 
     public HttpRequest build() {
         HttpRequest.Builder requestBuilder = HttpRequest.newBuilder();
 
-        BodyPublisher bodyPublisher = BodyPublishers.noBody();
-        if (this.body != null) {
-            bodyPublisher = this.body.body;
-            requestBuilder.header("Content-Type", this.body.contentType);
+        final BodyPublisher bodyPublisher;
+        if (body.isPresent()) {
+            bodyPublisher = body.get().body();
+            requestBuilder.header("Content-Type", body.get().contentType());
+        } else {
+            bodyPublisher = BodyPublishers.noBody();
         }
-
-        requestBuilder.method(this.method, bodyPublisher);
+        requestBuilder.method(method, bodyPublisher);
         requestBuilder.uri(resolveURL());
 
-        for (Map.Entry<String, List<String>> entry : this.headers.entrySet()) {
-            for (String value : entry.getValue()) {
-                requestBuilder.header(entry.getKey(), value);
-            }
-        }
-
+        headers.forEach((k, list) -> list.forEach(v -> requestBuilder.header(k, v)));
         return requestBuilder.build();
     }
 
     private URI resolveURL() {
         String url = this.baseURL;
-        if (this.queryParams != null && this.queryParams.size() > 0) {
-            url += "?" + URLEncodedUtils.format(this.queryParams, StandardCharsets.UTF_8);
+        if (queryParams != null && queryParams.size() > 0) {
+            url += "?" + URLEncodedUtils.format(queryParams, StandardCharsets.UTF_8);
         }
         return URI.create(url);
     }

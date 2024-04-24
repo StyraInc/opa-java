@@ -4,7 +4,9 @@
 
 package com.styra.opa.sdk.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.styra.opa.sdk.utils.Utils;
@@ -25,6 +27,7 @@ public class ExecutePolicyWithInputRequestBody {
     @JsonProperty("input")
     private com.styra.opa.sdk.models.shared.Input input;
 
+    @JsonCreator
     public ExecutePolicyWithInputRequestBody(
             @JsonProperty("input") com.styra.opa.sdk.models.shared.Input input) {
         Utils.checkNotNull(input, "input");
@@ -34,6 +37,7 @@ public class ExecutePolicyWithInputRequestBody {
     /**
      * Arbitrary JSON used within your policies by accessing `input`
      */
+    @JsonIgnore
     public com.styra.opa.sdk.models.shared.Input input() {
         return input;
     }

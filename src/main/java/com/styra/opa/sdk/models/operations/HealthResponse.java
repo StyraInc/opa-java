@@ -4,7 +4,9 @@
 
 package com.styra.opa.sdk.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.styra.opa.sdk.utils.Utils;
 import java.io.InputStream;
@@ -37,32 +39,33 @@ public class HealthResponse implements com.styra.opa.sdk.utils.Response {
      */
     private Optional<? extends com.styra.opa.sdk.models.shared.HealthyServer> healthyServer;
 
-    /**
-     * OPA service is not healthy. If the bundles option is specified this can mean any of the configured bundles have not yet been activated. If the plugins option is specified then at least one plugin is in a non-OK state.
-     */
-    private Optional<? extends com.styra.opa.sdk.models.shared.UnhealthyServer> unhealthyServer;
-
+    @JsonCreator
     public HealthResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends com.styra.opa.sdk.models.shared.HealthyServer> healthyServer,
-            Optional<? extends com.styra.opa.sdk.models.shared.UnhealthyServer> unhealthyServer) {
+            Optional<? extends com.styra.opa.sdk.models.shared.HealthyServer> healthyServer) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
         Utils.checkNotNull(healthyServer, "healthyServer");
-        Utils.checkNotNull(unhealthyServer, "unhealthyServer");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
         this.healthyServer = healthyServer;
-        this.unhealthyServer = unhealthyServer;
+    }
+    
+    public HealthResponse(
+            String contentType,
+            int statusCode,
+            HttpResponse<InputStream> rawResponse) {
+        this(contentType, statusCode, rawResponse, Optional.empty());
     }
 
     /**
      * HTTP response content type for this operation
      */
+    @JsonIgnore
     public String contentType() {
         return contentType;
     }
@@ -70,6 +73,7 @@ public class HealthResponse implements com.styra.opa.sdk.utils.Response {
     /**
      * HTTP response status code for this operation
      */
+    @JsonIgnore
     public int statusCode() {
         return statusCode;
     }
@@ -77,6 +81,7 @@ public class HealthResponse implements com.styra.opa.sdk.utils.Response {
     /**
      * Raw HTTP response; suitable for custom response parsing
      */
+    @JsonIgnore
     public HttpResponse<InputStream> rawResponse() {
         return rawResponse;
     }
@@ -84,15 +89,9 @@ public class HealthResponse implements com.styra.opa.sdk.utils.Response {
     /**
      * OPA service is healthy. If the bundles option is specified then all configured bundles have been activated. If the plugins option is specified then all plugins are in an OK state.
      */
+    @JsonIgnore
     public Optional<? extends com.styra.opa.sdk.models.shared.HealthyServer> healthyServer() {
         return healthyServer;
-    }
-
-    /**
-     * OPA service is not healthy. If the bundles option is specified this can mean any of the configured bundles have not yet been activated. If the plugins option is specified then at least one plugin is in a non-OK state.
-     */
-    public Optional<? extends com.styra.opa.sdk.models.shared.UnhealthyServer> unhealthyServer() {
-        return unhealthyServer;
     }
 
     public final static Builder builder() {
@@ -143,24 +142,6 @@ public class HealthResponse implements com.styra.opa.sdk.utils.Response {
         this.healthyServer = healthyServer;
         return this;
     }
-
-    /**
-     * OPA service is not healthy. If the bundles option is specified this can mean any of the configured bundles have not yet been activated. If the plugins option is specified then at least one plugin is in a non-OK state.
-     */
-    public HealthResponse withUnhealthyServer(com.styra.opa.sdk.models.shared.UnhealthyServer unhealthyServer) {
-        Utils.checkNotNull(unhealthyServer, "unhealthyServer");
-        this.unhealthyServer = Optional.ofNullable(unhealthyServer);
-        return this;
-    }
-
-    /**
-     * OPA service is not healthy. If the bundles option is specified this can mean any of the configured bundles have not yet been activated. If the plugins option is specified then at least one plugin is in a non-OK state.
-     */
-    public HealthResponse withUnhealthyServer(Optional<? extends com.styra.opa.sdk.models.shared.UnhealthyServer> unhealthyServer) {
-        Utils.checkNotNull(unhealthyServer, "unhealthyServer");
-        this.unhealthyServer = unhealthyServer;
-        return this;
-    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -175,8 +156,7 @@ public class HealthResponse implements com.styra.opa.sdk.utils.Response {
             java.util.Objects.deepEquals(this.contentType, other.contentType) &&
             java.util.Objects.deepEquals(this.statusCode, other.statusCode) &&
             java.util.Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            java.util.Objects.deepEquals(this.healthyServer, other.healthyServer) &&
-            java.util.Objects.deepEquals(this.unhealthyServer, other.unhealthyServer);
+            java.util.Objects.deepEquals(this.healthyServer, other.healthyServer);
     }
     
     @Override
@@ -185,8 +165,7 @@ public class HealthResponse implements com.styra.opa.sdk.utils.Response {
             contentType,
             statusCode,
             rawResponse,
-            healthyServer,
-            unhealthyServer);
+            healthyServer);
     }
     
     @Override
@@ -195,8 +174,7 @@ public class HealthResponse implements com.styra.opa.sdk.utils.Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "healthyServer", healthyServer,
-                "unhealthyServer", unhealthyServer);
+                "healthyServer", healthyServer);
     }
     
     public final static class Builder {
@@ -207,9 +185,7 @@ public class HealthResponse implements com.styra.opa.sdk.utils.Response {
  
         private HttpResponse<InputStream> rawResponse;
  
-        private Optional<? extends com.styra.opa.sdk.models.shared.HealthyServer> healthyServer = Optional.empty();
- 
-        private Optional<? extends com.styra.opa.sdk.models.shared.UnhealthyServer> unhealthyServer = Optional.empty();  
+        private Optional<? extends com.styra.opa.sdk.models.shared.HealthyServer> healthyServer = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -259,32 +235,13 @@ public class HealthResponse implements com.styra.opa.sdk.utils.Response {
             this.healthyServer = healthyServer;
             return this;
         }
-
-        /**
-         * OPA service is not healthy. If the bundles option is specified this can mean any of the configured bundles have not yet been activated. If the plugins option is specified then at least one plugin is in a non-OK state.
-         */
-        public Builder unhealthyServer(com.styra.opa.sdk.models.shared.UnhealthyServer unhealthyServer) {
-            Utils.checkNotNull(unhealthyServer, "unhealthyServer");
-            this.unhealthyServer = Optional.ofNullable(unhealthyServer);
-            return this;
-        }
-
-        /**
-         * OPA service is not healthy. If the bundles option is specified this can mean any of the configured bundles have not yet been activated. If the plugins option is specified then at least one plugin is in a non-OK state.
-         */
-        public Builder unhealthyServer(Optional<? extends com.styra.opa.sdk.models.shared.UnhealthyServer> unhealthyServer) {
-            Utils.checkNotNull(unhealthyServer, "unhealthyServer");
-            this.unhealthyServer = unhealthyServer;
-            return this;
-        }
         
         public HealthResponse build() {
             return new HealthResponse(
                 contentType,
                 statusCode,
                 rawResponse,
-                healthyServer,
-                unhealthyServer);
+                healthyServer);
         }
     }
 }

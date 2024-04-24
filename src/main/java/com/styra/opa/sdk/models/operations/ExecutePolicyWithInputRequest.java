@@ -4,7 +4,9 @@
 
 package com.styra.opa.sdk.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.styra.opa.sdk.utils.LazySingletonValue;
 import com.styra.opa.sdk.utils.SpeakeasyMetadata;
@@ -78,6 +80,7 @@ public class ExecutePolicyWithInputRequest {
     @SpeakeasyMetadata("request:mediaType=application/json")
     private ExecutePolicyWithInputRequestBody requestBody;
 
+    @JsonCreator
     public ExecutePolicyWithInputRequest(
             String path,
             Optional<? extends com.styra.opa.sdk.models.shared.GzipContentEncoding> contentEncoding,
@@ -110,10 +113,17 @@ public class ExecutePolicyWithInputRequest {
         this.strictBuiltinErrors = strictBuiltinErrors;
         this.requestBody = requestBody;
     }
+    
+    public ExecutePolicyWithInputRequest(
+            String path,
+            ExecutePolicyWithInputRequestBody requestBody) {
+        this(path, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), requestBody);
+    }
 
     /**
      * The path separator is used to access values inside object and array documents. If the path indexes into an array, the server will attempt to convert the array index to an integer. If the path element cannot be converted to an integer, the server will respond with 404.
      */
+    @JsonIgnore
     public String path() {
         return path;
     }
@@ -121,6 +131,7 @@ public class ExecutePolicyWithInputRequest {
     /**
      * Indicates that the request body is gzip encoded
      */
+    @JsonIgnore
     public Optional<? extends com.styra.opa.sdk.models.shared.GzipContentEncoding> contentEncoding() {
         return contentEncoding;
     }
@@ -128,6 +139,7 @@ public class ExecutePolicyWithInputRequest {
     /**
      * Indicates the server should respond with a gzip encoded body. The server will send the compressed response only if its length is above `server.encoding.gzip.min_length` value. See the configuration section
      */
+    @JsonIgnore
     public Optional<? extends com.styra.opa.sdk.models.shared.GzipAcceptEncoding> acceptEncoding() {
         return acceptEncoding;
     }
@@ -135,6 +147,7 @@ public class ExecutePolicyWithInputRequest {
     /**
      * If parameter is `true`, response will formatted for humans.
      */
+    @JsonIgnore
     public Optional<? extends Boolean> pretty() {
         return pretty;
     }
@@ -142,6 +155,7 @@ public class ExecutePolicyWithInputRequest {
     /**
      * If parameter is true, response will include build/version info in addition to the result.
      */
+    @JsonIgnore
     public Optional<? extends Boolean> provenance() {
         return provenance;
     }
@@ -149,6 +163,7 @@ public class ExecutePolicyWithInputRequest {
     /**
      * Return query explanation in addition to result.
      */
+    @JsonIgnore
     public Optional<? extends com.styra.opa.sdk.models.shared.Explain> explain() {
         return explain;
     }
@@ -156,6 +171,7 @@ public class ExecutePolicyWithInputRequest {
     /**
      * Return query performance metrics in addition to result.
      */
+    @JsonIgnore
     public Optional<? extends Boolean> metrics() {
         return metrics;
     }
@@ -163,6 +179,7 @@ public class ExecutePolicyWithInputRequest {
     /**
      * Instrument query evaluation and return a superset of performance metrics in addition to result.
      */
+    @JsonIgnore
     public Optional<? extends Boolean> instrument() {
         return instrument;
     }
@@ -170,6 +187,7 @@ public class ExecutePolicyWithInputRequest {
     /**
      * Treat built-in function call errors as fatal and return an error immediately.
      */
+    @JsonIgnore
     public Optional<? extends Boolean> strictBuiltinErrors() {
         return strictBuiltinErrors;
     }
@@ -177,6 +195,7 @@ public class ExecutePolicyWithInputRequest {
     /**
      * The input document
      */
+    @JsonIgnore
     public ExecutePolicyWithInputRequestBody requestBody() {
         return requestBody;
     }

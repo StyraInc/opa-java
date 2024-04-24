@@ -10,7 +10,11 @@ import com.styra.opa.sdk.models.errors.SDKError;
 import com.styra.opa.sdk.models.operations.SDKMethodInterfaces.*;
 import com.styra.opa.sdk.utils.HTTPClient;
 import com.styra.opa.sdk.utils.HTTPRequest;
+import com.styra.opa.sdk.utils.Hook.AfterErrorContextImpl;
+import com.styra.opa.sdk.utils.Hook.AfterSuccessContextImpl;
+import com.styra.opa.sdk.utils.Hook.BeforeRequestContextImpl;
 import com.styra.opa.sdk.utils.JSON;
+import com.styra.opa.sdk.utils.Retries.NonRetryableException;
 import com.styra.opa.sdk.utils.RetryConfig;
 import com.styra.opa.sdk.utils.SerializedBody;
 import com.styra.opa.sdk.utils.SpeakeasyHTTPClient;
@@ -18,6 +22,7 @@ import com.styra.opa.sdk.utils.Utils;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
@@ -35,6 +40,8 @@ public class Opa implements
             MethodCallExecutePolicy,
             MethodCallExecutePolicyWithInput,
             MethodCallHealth {
+
+
     /**
      * SERVERS contains the list of server urls available to the SDK.
      */
@@ -113,6 +120,11 @@ public class Opa implements
             this.sdkConfiguration.retryConfig = Optional.of(retryConfig);
             return this;
         }
+        // Visible for testing, will be accessed via reflection
+        void _hooks(com.styra.opa.sdk.utils.Hooks hooks) {
+            sdkConfiguration.setHooks(hooks);    
+        }
+        
         /**
          * Builds a new instance of the SDK.
          * @return The SDK instance.
@@ -131,7 +143,7 @@ public class Opa implements
             return new Opa(sdkConfiguration);
         }
     }
-
+    
     /**
      * Get a new instance of the SDK builder to configure a new instance of the SDK.
      * @return The SDK builder instance.
@@ -142,7 +154,12 @@ public class Opa implements
 
     private Opa(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+        this.sdkConfiguration.initialize();
     }
+    /**
+     * Execute a policy
+     * @return The call builder
+     */
     public com.styra.opa.sdk.models.operations.ExecutePolicyRequestBuilder executePolicy() {
         return new com.styra.opa.sdk.models.operations.ExecutePolicyRequestBuilder(this);
     }
@@ -150,104 +167,135 @@ public class Opa implements
     /**
      * Execute a policy
      * @param request The request object containing all of the parameters for the API call.
-     * @return The response from the API call.
-     * @throws Exception if the API call fails.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
      */
     public com.styra.opa.sdk.models.operations.ExecutePolicyResponse executePolicy(
             com.styra.opa.sdk.models.operations.ExecutePolicyRequest request) throws Exception {
-
-        String baseUrl = this.sdkConfiguration.serverUrl;
-
-        String url = com.styra.opa.sdk.utils.Utils.generateURL(
+        String _baseUrl = this.sdkConfiguration.serverUrl;
+        String _url = Utils.generateURL(
                 com.styra.opa.sdk.models.operations.ExecutePolicyRequest.class,
-                baseUrl,
+                _baseUrl,
                 "/v1/data/{path}",
                 request, null);
+        
+        HTTPRequest _req = new HTTPRequest(_url, "GET");
+        _req.addHeader("Accept", "application/json")
+            .addHeader("user-agent", 
+                this.sdkConfiguration.userAgent);
 
-        HTTPRequest req = new HTTPRequest();
-        req.setMethod("GET");
-        req.setURL(url);
+        _req.addQueryParams(Utils.getQueryParams(
+                com.styra.opa.sdk.models.operations.ExecutePolicyRequest.class,
+                request, 
+                null));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
 
-        req.addHeader("Accept", "application/json");
-        req.addHeader("user-agent", this.sdkConfiguration.userAgent);
-
-        java.util.List<NameValuePair> queryParams = com.styra.opa.sdk.utils.Utils.getQueryParams(
-                com.styra.opa.sdk.models.operations.ExecutePolicyRequest.class, request, null);
-        if (queryParams != null) {
-            for (NameValuePair queryParam : queryParams) {
-                req.addQueryParam(queryParam);
+        HTTPClient _client = this.sdkConfiguration.defaultClient;
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl("executePolicy", sdkConfiguration.securitySource()),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "4XX", "500", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl("executePolicy", sdkConfiguration.securitySource()),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl("executePolicy", sdkConfiguration.securitySource()),
+                         _httpRes);
             }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(new AfterErrorContextImpl("executePolicy", sdkConfiguration.securitySource()), 
+                        Optional.empty(),
+                        Optional.of(_e));
         }
-
-        java.util.Map<String, java.util.List<String>> headers = com.styra.opa.sdk.utils.Utils.getHeaders(request, null);
-        if (headers != null) {
-            for (java.util.Map.Entry<String, java.util.List<String>> header : headers.entrySet()) {
-                for (String value : header.getValue()) {
-                    req.addHeader(header.getKey(), value);
-                }
-            }
-        }
-
-        HTTPClient client = this.sdkConfiguration.defaultClient;
-
-        HttpResponse<InputStream> httpRes = client.send(req);
-
-        String contentType = httpRes
+        String _contentType = _httpRes
             .headers()
             .firstValue("Content-Type")
             .orElse("application/octet-stream");
-        com.styra.opa.sdk.models.operations.ExecutePolicyResponse.Builder resBuilder = 
+        com.styra.opa.sdk.models.operations.ExecutePolicyResponse.Builder _resBuilder = 
             com.styra.opa.sdk.models.operations.ExecutePolicyResponse
                 .builder()
-                .contentType(contentType)
-                .statusCode(httpRes.statusCode())
-                .rawResponse(httpRes);
+                .contentType(_contentType)
+                .statusCode(_httpRes.statusCode())
+                .rawResponse(_httpRes);
 
-        com.styra.opa.sdk.models.operations.ExecutePolicyResponse res = resBuilder.build();
-
-        res.withRawResponse(httpRes);
-
-        if (httpRes.statusCode() == 200) {
-            res.withHeaders(httpRes
-                    .headers()
-                    .map()
-                    .keySet()
-                    .stream()
-                    .collect(Collectors.toMap(Function.identity(), k -> httpRes.headers().allValues(k))));
-            if (com.styra.opa.sdk.utils.Utils.matchContentType(contentType, "application/json")) {
-                ObjectMapper mapper = JSON.getMapper();
-                com.styra.opa.sdk.models.shared.SuccessfulPolicyEvaluation out = mapper.readValue(
-                    Utils.toUtf8AndClose(httpRes.body()),
+        com.styra.opa.sdk.models.operations.ExecutePolicyResponse _res = _resBuilder.build();
+        
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+            _res.withHeaders(_httpRes.headers().map());
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                ObjectMapper _mapper = JSON.getMapper();
+                com.styra.opa.sdk.models.shared.SuccessfulPolicyEvaluation _out = _mapper.readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
                     new TypeReference<com.styra.opa.sdk.models.shared.SuccessfulPolicyEvaluation>() {});
-                res.withSuccessfulPolicyEvaluation(java.util.Optional.ofNullable(out));
+                _res.withSuccessfulPolicyEvaluation(java.util.Optional.ofNullable(_out));
+                return _res;
             } else {
-                throw new SDKError(httpRes, httpRes.statusCode(), "Unknown content-type received: " + contentType, Utils.toByteArrayAndClose(httpRes.body()));
-            }
-        } else if (httpRes.statusCode() == 400) {
-            if (com.styra.opa.sdk.utils.Utils.matchContentType(contentType, "application/json")) {
-                ObjectMapper mapper = JSON.getMapper();
-                com.styra.opa.sdk.models.shared.ClientError out = mapper.readValue(
-                    Utils.toUtf8AndClose(httpRes.body()),
-                    new TypeReference<com.styra.opa.sdk.models.shared.ClientError>() {});
-                res.withClientError(java.util.Optional.ofNullable(out));
-            } else {
-                throw new SDKError(httpRes, httpRes.statusCode(), "Unknown content-type received: " + contentType, Utils.toByteArrayAndClose(httpRes.body()));
-            }
-        } else if (httpRes.statusCode() == 500) {
-            if (com.styra.opa.sdk.utils.Utils.matchContentType(contentType, "application/json")) {
-                ObjectMapper mapper = JSON.getMapper();
-                com.styra.opa.sdk.models.shared.ServerError out = mapper.readValue(
-                    Utils.toUtf8AndClose(httpRes.body()),
-                    new TypeReference<com.styra.opa.sdk.models.shared.ServerError>() {});
-                res.withServerError(java.util.Optional.ofNullable(out));
-            } else {
-                throw new SDKError(httpRes, httpRes.statusCode(), "Unknown content-type received: " + contentType, Utils.toByteArrayAndClose(httpRes.body()));
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
             }
         }
-
-        return res;
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                ObjectMapper _mapper = JSON.getMapper();
+                com.styra.opa.sdk.models.errors.ClientError _out = _mapper.readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<com.styra.opa.sdk.models.errors.ClientError>() {});
+                throw _out;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX", "5XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                ObjectMapper _mapper = JSON.getMapper();
+                com.styra.opa.sdk.models.errors.ServerError _out = _mapper.readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<com.styra.opa.sdk.models.errors.ServerError>() {});
+                throw _out;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
+            }
+        }
+        throw new SDKError(
+            _httpRes, 
+            _httpRes.statusCode(), 
+            "Unexpected status code received: " + _httpRes.statusCode(), 
+            Utils.toByteArrayAndClose(_httpRes.body()));
     }
 
+    /**
+     * Execute a policy given an input
+     * @return The call builder
+     */
     public com.styra.opa.sdk.models.operations.ExecutePolicyWithInputRequestBuilder executePolicyWithInput() {
         return new com.styra.opa.sdk.models.operations.ExecutePolicyWithInputRequestBuilder(this);
     }
@@ -255,112 +303,144 @@ public class Opa implements
     /**
      * Execute a policy given an input
      * @param request The request object containing all of the parameters for the API call.
-     * @return The response from the API call.
-     * @throws Exception if the API call fails.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
      */
     public com.styra.opa.sdk.models.operations.ExecutePolicyWithInputResponse executePolicyWithInput(
             com.styra.opa.sdk.models.operations.ExecutePolicyWithInputRequest request) throws Exception {
-
-        String baseUrl = this.sdkConfiguration.serverUrl;
-
-        String url = com.styra.opa.sdk.utils.Utils.generateURL(
+        String _baseUrl = this.sdkConfiguration.serverUrl;
+        String _url = Utils.generateURL(
                 com.styra.opa.sdk.models.operations.ExecutePolicyWithInputRequest.class,
-                baseUrl,
+                _baseUrl,
                 "/v1/data/{path}",
                 request, null);
-
-        HTTPRequest req = new HTTPRequest();
-        req.setMethod("POST");
-        req.setURL(url);
+        
+        HTTPRequest _req = new HTTPRequest(_url, "POST");
         Object _convertedRequest = Utils.convertToShape(request, Utils.JsonShape.DEFAULT,
             new TypeReference<com.styra.opa.sdk.models.operations.ExecutePolicyWithInputRequest>() {});
-        SerializedBody serializedRequestBody = com.styra.opa.sdk.utils.Utils.serializeRequestBody(
+        SerializedBody _serializedRequestBody = Utils.serializeRequestBody(
                 _convertedRequest, "requestBody", "json", false);
-        if (serializedRequestBody == null) {
+        if (_serializedRequestBody == null) {
             throw new Exception("Request body is required");
         }
-        req.setBody(serializedRequestBody);
+        _req.setBody(Optional.ofNullable(_serializedRequestBody));
+        _req.addHeader("Accept", "application/json")
+            .addHeader("user-agent", 
+                this.sdkConfiguration.userAgent);
 
-        req.addHeader("Accept", "application/json");
-        req.addHeader("user-agent", this.sdkConfiguration.userAgent);
+        _req.addQueryParams(Utils.getQueryParams(
+                com.styra.opa.sdk.models.operations.ExecutePolicyWithInputRequest.class,
+                request, 
+                null));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
 
-        java.util.List<NameValuePair> queryParams = com.styra.opa.sdk.utils.Utils.getQueryParams(
-                com.styra.opa.sdk.models.operations.ExecutePolicyWithInputRequest.class, request, null);
-        if (queryParams != null) {
-            for (NameValuePair queryParam : queryParams) {
-                req.addQueryParam(queryParam);
+        HTTPClient _client = this.sdkConfiguration.defaultClient;
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl("executePolicyWithInput", sdkConfiguration.securitySource()),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "4XX", "500", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl("executePolicyWithInput", sdkConfiguration.securitySource()),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl("executePolicyWithInput", sdkConfiguration.securitySource()),
+                         _httpRes);
             }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(new AfterErrorContextImpl("executePolicyWithInput", sdkConfiguration.securitySource()), 
+                        Optional.empty(),
+                        Optional.of(_e));
         }
-
-        java.util.Map<String, java.util.List<String>> headers = com.styra.opa.sdk.utils.Utils.getHeaders(request, null);
-        if (headers != null) {
-            for (java.util.Map.Entry<String, java.util.List<String>> header : headers.entrySet()) {
-                for (String value : header.getValue()) {
-                    req.addHeader(header.getKey(), value);
-                }
-            }
-        }
-
-        HTTPClient client = this.sdkConfiguration.defaultClient;
-
-        HttpResponse<InputStream> httpRes = client.send(req);
-
-        String contentType = httpRes
+        String _contentType = _httpRes
             .headers()
             .firstValue("Content-Type")
             .orElse("application/octet-stream");
-        com.styra.opa.sdk.models.operations.ExecutePolicyWithInputResponse.Builder resBuilder = 
+        com.styra.opa.sdk.models.operations.ExecutePolicyWithInputResponse.Builder _resBuilder = 
             com.styra.opa.sdk.models.operations.ExecutePolicyWithInputResponse
                 .builder()
-                .contentType(contentType)
-                .statusCode(httpRes.statusCode())
-                .rawResponse(httpRes);
+                .contentType(_contentType)
+                .statusCode(_httpRes.statusCode())
+                .rawResponse(_httpRes);
 
-        com.styra.opa.sdk.models.operations.ExecutePolicyWithInputResponse res = resBuilder.build();
-
-        res.withRawResponse(httpRes);
-
-        if (httpRes.statusCode() == 200) {
-            res.withHeaders(httpRes
-                    .headers()
-                    .map()
-                    .keySet()
-                    .stream()
-                    .collect(Collectors.toMap(Function.identity(), k -> httpRes.headers().allValues(k))));
-            if (com.styra.opa.sdk.utils.Utils.matchContentType(contentType, "application/json")) {
-                ObjectMapper mapper = JSON.getMapper();
-                com.styra.opa.sdk.models.shared.SuccessfulPolicyEvaluation out = mapper.readValue(
-                    Utils.toUtf8AndClose(httpRes.body()),
+        com.styra.opa.sdk.models.operations.ExecutePolicyWithInputResponse _res = _resBuilder.build();
+        
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+            _res.withHeaders(_httpRes.headers().map());
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                ObjectMapper _mapper = JSON.getMapper();
+                com.styra.opa.sdk.models.shared.SuccessfulPolicyEvaluation _out = _mapper.readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
                     new TypeReference<com.styra.opa.sdk.models.shared.SuccessfulPolicyEvaluation>() {});
-                res.withSuccessfulPolicyEvaluation(java.util.Optional.ofNullable(out));
+                _res.withSuccessfulPolicyEvaluation(java.util.Optional.ofNullable(_out));
+                return _res;
             } else {
-                throw new SDKError(httpRes, httpRes.statusCode(), "Unknown content-type received: " + contentType, Utils.toByteArrayAndClose(httpRes.body()));
-            }
-        } else if (httpRes.statusCode() == 400) {
-            if (com.styra.opa.sdk.utils.Utils.matchContentType(contentType, "application/json")) {
-                ObjectMapper mapper = JSON.getMapper();
-                com.styra.opa.sdk.models.shared.ClientError out = mapper.readValue(
-                    Utils.toUtf8AndClose(httpRes.body()),
-                    new TypeReference<com.styra.opa.sdk.models.shared.ClientError>() {});
-                res.withClientError(java.util.Optional.ofNullable(out));
-            } else {
-                throw new SDKError(httpRes, httpRes.statusCode(), "Unknown content-type received: " + contentType, Utils.toByteArrayAndClose(httpRes.body()));
-            }
-        } else if (httpRes.statusCode() == 500) {
-            if (com.styra.opa.sdk.utils.Utils.matchContentType(contentType, "application/json")) {
-                ObjectMapper mapper = JSON.getMapper();
-                com.styra.opa.sdk.models.shared.ServerError out = mapper.readValue(
-                    Utils.toUtf8AndClose(httpRes.body()),
-                    new TypeReference<com.styra.opa.sdk.models.shared.ServerError>() {});
-                res.withServerError(java.util.Optional.ofNullable(out));
-            } else {
-                throw new SDKError(httpRes, httpRes.statusCode(), "Unknown content-type received: " + contentType, Utils.toByteArrayAndClose(httpRes.body()));
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
             }
         }
-
-        return res;
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                ObjectMapper _mapper = JSON.getMapper();
+                com.styra.opa.sdk.models.errors.ClientError _out = _mapper.readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<com.styra.opa.sdk.models.errors.ClientError>() {});
+                throw _out;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX", "5XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                ObjectMapper _mapper = JSON.getMapper();
+                com.styra.opa.sdk.models.errors.ServerError _out = _mapper.readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<com.styra.opa.sdk.models.errors.ServerError>() {});
+                throw _out;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
+            }
+        }
+        throw new SDKError(
+            _httpRes, 
+            _httpRes.statusCode(), 
+            "Unexpected status code received: " + _httpRes.statusCode(), 
+            Utils.toByteArrayAndClose(_httpRes.body()));
     }
 
+    /**
+     * Verify the server is operational
+     * The health API endpoint executes a simple built-in policy query to verify that the server is operational. Optionally it can account for bundle activation as well (useful for “ready” checks at startup).
+     * @return The call builder
+     */
     public com.styra.opa.sdk.models.operations.HealthRequestBuilder health() {
         return new com.styra.opa.sdk.models.operations.HealthRequestBuilder(this);
     }
@@ -368,11 +448,20 @@ public class Opa implements
     /**
      * Verify the server is operational
      * The health API endpoint executes a simple built-in policy query to verify that the server is operational. Optionally it can account for bundle activation as well (useful for “ready” checks at startup).
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public com.styra.opa.sdk.models.operations.HealthResponse healthDirect() throws Exception {
+        return health(Optional.empty(), Optional.empty(), Optional.empty());
+    }
+    /**
+     * Verify the server is operational
+     * The health API endpoint executes a simple built-in policy query to verify that the server is operational. Optionally it can account for bundle activation as well (useful for “ready” checks at startup).
      * @param bundles Boolean parameter to account for bundle activation status in response. This includes any discovery bundles or bundles defined in the loaded discovery configuration.
      * @param plugins Boolean parameter to account for plugin status in response.
      * @param excludePlugin String parameter to exclude a plugin from status checks. Can be added multiple times. Does nothing if plugins is not true. This parameter is useful for special use cases where a plugin depends on the server being fully initialized before it can fully initialize itself.
-     * @return The response from the API call.
-     * @throws Exception if the API call fails.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
      */
     public com.styra.opa.sdk.models.operations.HealthResponse health(
             Optional<? extends Boolean> bundles,
@@ -386,72 +475,104 @@ public class Opa implements
                 .excludePlugin(excludePlugin)
                 .build();
         
-
-        String baseUrl = this.sdkConfiguration.serverUrl;
-
-        String url = com.styra.opa.sdk.utils.Utils.generateURL(
-                baseUrl,
+        String _baseUrl = this.sdkConfiguration.serverUrl;
+        String _url = Utils.generateURL(
+                _baseUrl,
                 "/health");
+        
+        HTTPRequest _req = new HTTPRequest(_url, "GET");
+        _req.addHeader("Accept", "application/json")
+            .addHeader("user-agent", 
+                this.sdkConfiguration.userAgent);
 
-        HTTPRequest req = new HTTPRequest();
-        req.setMethod("GET");
-        req.setURL(url);
+        _req.addQueryParams(Utils.getQueryParams(
+                com.styra.opa.sdk.models.operations.HealthRequest.class,
+                request, 
+                null));
 
-        req.addHeader("Accept", "application/json");
-        req.addHeader("user-agent", this.sdkConfiguration.userAgent);
-
-        java.util.List<NameValuePair> queryParams = com.styra.opa.sdk.utils.Utils.getQueryParams(
-                com.styra.opa.sdk.models.operations.HealthRequest.class, request, null);
-        if (queryParams != null) {
-            for (NameValuePair queryParam : queryParams) {
-                req.addQueryParam(queryParam);
+        HTTPClient _client = this.sdkConfiguration.defaultClient;
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl("health", sdkConfiguration.securitySource()),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX", "500", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl("health", sdkConfiguration.securitySource()),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl("health", sdkConfiguration.securitySource()),
+                         _httpRes);
             }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(new AfterErrorContextImpl("health", sdkConfiguration.securitySource()), 
+                        Optional.empty(),
+                        Optional.of(_e));
         }
-
-        HTTPClient client = this.sdkConfiguration.defaultClient;
-
-        HttpResponse<InputStream> httpRes = client.send(req);
-
-        String contentType = httpRes
+        String _contentType = _httpRes
             .headers()
             .firstValue("Content-Type")
             .orElse("application/octet-stream");
-        com.styra.opa.sdk.models.operations.HealthResponse.Builder resBuilder = 
+        com.styra.opa.sdk.models.operations.HealthResponse.Builder _resBuilder = 
             com.styra.opa.sdk.models.operations.HealthResponse
                 .builder()
-                .contentType(contentType)
-                .statusCode(httpRes.statusCode())
-                .rawResponse(httpRes);
+                .contentType(_contentType)
+                .statusCode(_httpRes.statusCode())
+                .rawResponse(_httpRes);
 
-        com.styra.opa.sdk.models.operations.HealthResponse res = resBuilder.build();
-
-        res.withRawResponse(httpRes);
-
-        if (httpRes.statusCode() == 200) {
-            if (com.styra.opa.sdk.utils.Utils.matchContentType(contentType, "application/json")) {
-                ObjectMapper mapper = JSON.getMapper();
-                com.styra.opa.sdk.models.shared.HealthyServer out = mapper.readValue(
-                    Utils.toUtf8AndClose(httpRes.body()),
+        com.styra.opa.sdk.models.operations.HealthResponse _res = _resBuilder.build();
+        
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                ObjectMapper _mapper = JSON.getMapper();
+                com.styra.opa.sdk.models.shared.HealthyServer _out = _mapper.readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
                     new TypeReference<com.styra.opa.sdk.models.shared.HealthyServer>() {});
-                res.withHealthyServer(java.util.Optional.ofNullable(out));
+                _res.withHealthyServer(java.util.Optional.ofNullable(_out));
+                return _res;
             } else {
-                throw new SDKError(httpRes, httpRes.statusCode(), "Unknown content-type received: " + contentType, Utils.toByteArrayAndClose(httpRes.body()));
-            }
-        } else if (httpRes.statusCode() == 500) {
-            if (com.styra.opa.sdk.utils.Utils.matchContentType(contentType, "application/json")) {
-                ObjectMapper mapper = JSON.getMapper();
-                com.styra.opa.sdk.models.shared.UnhealthyServer out = mapper.readValue(
-                    Utils.toUtf8AndClose(httpRes.body()),
-                    new TypeReference<com.styra.opa.sdk.models.shared.UnhealthyServer>() {});
-                res.withUnhealthyServer(java.util.Optional.ofNullable(out));
-            } else {
-                throw new SDKError(httpRes, httpRes.statusCode(), "Unknown content-type received: " + contentType, Utils.toByteArrayAndClose(httpRes.body()));
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
             }
         }
-
-        return res;
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX", "5XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                ObjectMapper _mapper = JSON.getMapper();
+                com.styra.opa.sdk.models.errors.UnhealthyServer _out = _mapper.readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<com.styra.opa.sdk.models.errors.UnhealthyServer>() {});
+                throw _out;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
+            }
+        }
+        throw new SDKError(
+            _httpRes, 
+            _httpRes.statusCode(), 
+            "Unexpected status code received: " + _httpRes.statusCode(), 
+            Utils.toByteArrayAndClose(_httpRes.body()));
     }
-
-
-
 }

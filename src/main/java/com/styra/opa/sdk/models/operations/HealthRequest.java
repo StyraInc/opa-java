@@ -4,7 +4,9 @@
 
 package com.styra.opa.sdk.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.styra.opa.sdk.utils.LazySingletonValue;
 import com.styra.opa.sdk.utils.SpeakeasyMetadata;
@@ -36,6 +38,7 @@ public class HealthRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=exclude-plugin")
     private Optional<? extends java.util.List<String>> excludePlugin;
 
+    @JsonCreator
     public HealthRequest(
             Optional<? extends Boolean> bundles,
             Optional<? extends Boolean> plugins,
@@ -47,10 +50,15 @@ public class HealthRequest {
         this.plugins = plugins;
         this.excludePlugin = excludePlugin;
     }
+    
+    public HealthRequest() {
+        this(Optional.empty(), Optional.empty(), Optional.empty());
+    }
 
     /**
      * Boolean parameter to account for bundle activation status in response. This includes any discovery bundles or bundles defined in the loaded discovery configuration.
      */
+    @JsonIgnore
     public Optional<? extends Boolean> bundles() {
         return bundles;
     }
@@ -58,6 +66,7 @@ public class HealthRequest {
     /**
      * Boolean parameter to account for plugin status in response.
      */
+    @JsonIgnore
     public Optional<? extends Boolean> plugins() {
         return plugins;
     }
@@ -65,6 +74,7 @@ public class HealthRequest {
     /**
      * String parameter to exclude a plugin from status checks. Can be added multiple times. Does nothing if plugins is not true. This parameter is useful for special use cases where a plugin depends on the server being fully initialized before it can fully initialize itself.
      */
+    @JsonIgnore
     public Optional<? extends java.util.List<String>> excludePlugin() {
         return excludePlugin;
     }

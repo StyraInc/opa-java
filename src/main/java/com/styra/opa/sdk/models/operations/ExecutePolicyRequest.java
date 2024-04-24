@@ -4,7 +4,9 @@
 
 package com.styra.opa.sdk.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.styra.opa.sdk.utils.LazySingletonValue;
 import com.styra.opa.sdk.utils.SpeakeasyMetadata;
@@ -66,6 +68,7 @@ public class ExecutePolicyRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=strict-builtin-errors")
     private Optional<? extends Boolean> strictBuiltinErrors;
 
+    @JsonCreator
     public ExecutePolicyRequest(
             String path,
             Optional<? extends com.styra.opa.sdk.models.shared.GzipAcceptEncoding> acceptEncoding,
@@ -92,10 +95,16 @@ public class ExecutePolicyRequest {
         this.instrument = instrument;
         this.strictBuiltinErrors = strictBuiltinErrors;
     }
+    
+    public ExecutePolicyRequest(
+            String path) {
+        this(path, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+    }
 
     /**
      * The path separator is used to access values inside object and array documents. If the path indexes into an array, the server will attempt to convert the array index to an integer. If the path element cannot be converted to an integer, the server will respond with 404.
      */
+    @JsonIgnore
     public String path() {
         return path;
     }
@@ -103,6 +112,7 @@ public class ExecutePolicyRequest {
     /**
      * Indicates the server should respond with a gzip encoded body. The server will send the compressed response only if its length is above `server.encoding.gzip.min_length` value. See the configuration section
      */
+    @JsonIgnore
     public Optional<? extends com.styra.opa.sdk.models.shared.GzipAcceptEncoding> acceptEncoding() {
         return acceptEncoding;
     }
@@ -110,6 +120,7 @@ public class ExecutePolicyRequest {
     /**
      * If parameter is `true`, response will formatted for humans.
      */
+    @JsonIgnore
     public Optional<? extends Boolean> pretty() {
         return pretty;
     }
@@ -117,6 +128,7 @@ public class ExecutePolicyRequest {
     /**
      * If parameter is true, response will include build/version info in addition to the result.
      */
+    @JsonIgnore
     public Optional<? extends Boolean> provenance() {
         return provenance;
     }
@@ -124,6 +136,7 @@ public class ExecutePolicyRequest {
     /**
      * Return query explanation in addition to result.
      */
+    @JsonIgnore
     public Optional<? extends com.styra.opa.sdk.models.shared.Explain> explain() {
         return explain;
     }
@@ -131,6 +144,7 @@ public class ExecutePolicyRequest {
     /**
      * Return query performance metrics in addition to result.
      */
+    @JsonIgnore
     public Optional<? extends Boolean> metrics() {
         return metrics;
     }
@@ -138,6 +152,7 @@ public class ExecutePolicyRequest {
     /**
      * Instrument query evaluation and return a superset of performance metrics in addition to result.
      */
+    @JsonIgnore
     public Optional<? extends Boolean> instrument() {
         return instrument;
     }
@@ -145,6 +160,7 @@ public class ExecutePolicyRequest {
     /**
      * Treat built-in function call errors as fatal and return an error immediately.
      */
+    @JsonIgnore
     public Optional<? extends Boolean> strictBuiltinErrors() {
         return strictBuiltinErrors;
     }

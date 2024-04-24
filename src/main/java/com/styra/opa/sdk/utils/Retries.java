@@ -36,27 +36,30 @@ public class Retries {
         this.statusCodes = statusCodes;
     }
 
-    private class NonRetryableException extends Exception {
-        private Exception exception;
-
-        public Exception exception() {
-            return exception;
-        }
+    @SuppressWarnings("serial")
+    public static final class NonRetryableException extends Exception {
+        private final Exception exception;
 
         public NonRetryableException(Exception exception) {
+            super(exception);
             this.exception = exception;
         }
+        
+        public Exception exception() {
+            return exception;
+        } 
     }
 
-    private class RetryableException extends Exception {
-        private HttpResponse<InputStream> response;
-
-        public HttpResponse<InputStream> response() {
-            return response;
-        }
+    @SuppressWarnings("serial")
+    public static final class RetryableException extends Exception {
+        private final HttpResponse<InputStream> response;
 
         public RetryableException(HttpResponse<InputStream> response) {
             this.response = response;
+        }
+        
+        public HttpResponse<InputStream> response() {
+            return response;
         }
     }
 
