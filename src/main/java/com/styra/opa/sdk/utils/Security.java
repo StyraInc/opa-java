@@ -4,17 +4,19 @@
 
 package com.styra.opa.sdk.utils;
 
+
 import java.lang.reflect.Field;
 import java.util.Base64;
 
 import org.apache.http.message.BasicNameValuePair;
 
-public class Security {
-    public static SpeakeasyHTTPSecurityClient createClient(HTTPClient client, Object security)
-            throws Exception {
-
-        SpeakeasyHTTPSecurityClient securityClient = new SpeakeasyHTTPSecurityClient(client);
-
+public final class Security {
+    
+    private Security() {
+        // prevent instantiation
+    }
+    
+    public static HTTPRequest configureSecurity(HTTPRequest request, Object security) throws Exception {
         if (security != null) {
             Field[] fields = security.getClass().getDeclaredFields();
 
@@ -31,24 +33,21 @@ public class Security {
                 }
 
                 if (securityMetadata.option) {
-                    parseSecurityOption(securityClient, value);
-                    return securityClient;
+                    parseSecurityOption(request, value);
                 } else if (securityMetadata.scheme) {
                     if ((securityMetadata.subtype != null && securityMetadata.subtype.equals("basic"))
                             && Types.getType(value.getClass()) != Types.OBJECT) {
-                        parseSecurityScheme(securityClient, securityMetadata, security);
-                        return securityClient;
+                        parseSecurityScheme(request, securityMetadata, security);
                     } else {
-                        parseSecurityScheme(securityClient, securityMetadata, value);
+                        parseSecurityScheme(request, securityMetadata, value);
                     }
                 }
             }
         }
-
-        return securityClient;
+        return request;
     }
 
-    private static void parseSecurityOption(SpeakeasyHTTPSecurityClient client, Object option)
+    private static void parseSecurityOption(HTTPRequest request, Object option)
             throws Exception {
         Field[] fields = option.getClass().getDeclaredFields();
 
@@ -65,16 +64,16 @@ public class Security {
                 continue;
             }
 
-            parseSecurityScheme(client, securityMetadata, value);
+            parseSecurityScheme(request, securityMetadata, value);
         }
     }
 
-    private static void parseSecurityScheme(SpeakeasyHTTPSecurityClient client, SecurityMetadata schemeMetadata,
+    private static void parseSecurityScheme(HTTPRequest requestBuilder, SecurityMetadata schemeMetadata,
             Object scheme) throws Exception {
 
         if (Types.getType(scheme.getClass()) == Types.OBJECT) {
             if (schemeMetadata.type.equals("http") && schemeMetadata.subtype.equals("basic")) {
-                parseBasicAuthScheme(client, scheme);
+                parseBasicAuthScheme(requestBuilder, scheme);
                 return;
             }
 
@@ -93,28 +92,28 @@ public class Security {
                     continue;
                 }
 
-                parseSecuritySchemeValue(client, schemeMetadata, securityMetadata, value);
+                parseSecuritySchemeValue(requestBuilder, schemeMetadata, securityMetadata, value);
             }
         } else {
-            parseSecuritySchemeValue(client, schemeMetadata, schemeMetadata, scheme);
+            parseSecuritySchemeValue(requestBuilder, schemeMetadata, schemeMetadata, scheme);
         }
     }
 
-    private static void parseSecuritySchemeValue(SpeakeasyHTTPSecurityClient client, SecurityMetadata schemeMetadata,
+    private static void parseSecuritySchemeValue(HTTPRequest request, SecurityMetadata schemeMetadata,
             SecurityMetadata securityMetadata,
             Object value) throws Exception {
         switch (schemeMetadata.type) {
             case "apiKey":
                 switch (schemeMetadata.subtype) {
                     case "header":
-                        client.addHeader(securityMetadata.name, Utils.valToString(value));
+                        request.addHeader(securityMetadata.name, Utils.valToString(value));
                         break;
                     case "query":
-                        client.addQueryParam(
-                                new BasicNameValuePair(securityMetadata.name, Utils.valToString(value)));
+                        request.addQueryParam(
+                                securityMetadata.name, Utils.valToString(value));
                         break;
                     case "cookie":
-                        client.addHeader("Cookie",
+                        request.addHeader("Cookie",
                                 String.format("%s=%s", securityMetadata.name, Utils.valToString(value)));
                         break;
                     default:
@@ -123,15 +122,15 @@ public class Security {
                 }
                 break;
             case "openIdConnect":
-                client.addHeader(securityMetadata.name, Utils.prefixBearer(Utils.valToString(value)));
+                request.addHeader(securityMetadata.name, Utils.prefixBearer(Utils.valToString(value)));
                 break;
             case "oauth2":
-                client.addHeader(securityMetadata.name, Utils.prefixBearer(Utils.valToString(value)));
+                request.addHeader(securityMetadata.name, Utils.prefixBearer(Utils.valToString(value)));
                 break;
             case "http":
                 switch (schemeMetadata.subtype) {
                     case "bearer":
-                        client.addHeader(securityMetadata.name, Utils.prefixBearer(Utils.valToString(value)));
+                        request.addHeader(securityMetadata.name, Utils.prefixBearer(Utils.valToString(value)));
                         break;
                     default:
                         throw new RuntimeException("Unsupported security scheme subtype for bearer");
@@ -142,7 +141,7 @@ public class Security {
         }
     }
 
-    private static void parseBasicAuthScheme(SpeakeasyHTTPSecurityClient client, Object scheme)
+    private static void parseBasicAuthScheme(HTTPRequest requestBuilder, Object scheme)
             throws IllegalAccessException {
         Field[] fields = scheme.getClass().getDeclaredFields();
 
@@ -174,10 +173,7 @@ public class Security {
             }
         }
 
-        client.addHeader("Authorization",
+        requestBuilder.addHeader("Authorization",
                 "Basic " + Base64.getEncoder().encodeToString(String.format("%s:%s", username, password).getBytes()));
-    }
-
-    private Security() {
     }
 }

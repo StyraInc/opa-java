@@ -11,6 +11,7 @@ import com.styra.opa.sdk.utils.Utils;
 /**
  * Thrown by a service call when an error response occurs. Contains details about the response.
  */
+@SuppressWarnings("serial")
 public class SDKError extends Exception {
 
     private final HttpResponse<InputStream> rawResponse;

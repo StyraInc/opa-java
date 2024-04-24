@@ -12,14 +12,11 @@ import java.net.http.HttpResponse;
 import java.io.InputStream;
 
 public class SpeakeasyHTTPClient implements HTTPClient {
+
     @Override
-    public HttpResponse<InputStream> send(HTTPRequest request)
+    public HttpResponse<InputStream> send(HttpRequest request)
             throws IOException, InterruptedException, URISyntaxException {
         HttpClient client = HttpClient.newHttpClient();
-
-        HttpRequest req = request.build();
-
-        HttpResponse<InputStream> response = client.send(req, HttpResponse.BodyHandlers.ofInputStream());
-        return response;
+        return client.send(request, HttpResponse.BodyHandlers.ofInputStream());
     }
 }

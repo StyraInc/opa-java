@@ -51,6 +51,10 @@ public class Application {
             if (res.successfulPolicyEvaluation().isPresent()) {
                 // handle response
             }
+        } catch (com.styra.opa.sdk.models.errors.ClientError e) {
+            // handle exception
+        } catch (com.styra.opa.sdk.models.errors.ServerError e) {
+            // handle exception
         } catch (com.styra.opa.sdk.models.errors.SDKError e) {
             // handle exception
         } catch (Exception e) {

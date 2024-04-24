@@ -4,7 +4,9 @@
 
 package com.styra.opa.sdk.models.shared;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.styra.opa.sdk.utils.Utils;
@@ -19,12 +21,14 @@ public class Revision {
     @JsonProperty("revision")
     private String revision;
 
+    @JsonCreator
     public Revision(
             @JsonProperty("revision") String revision) {
         Utils.checkNotNull(revision, "revision");
         this.revision = revision;
     }
 
+    @JsonIgnore
     public String revision() {
         return revision;
     }

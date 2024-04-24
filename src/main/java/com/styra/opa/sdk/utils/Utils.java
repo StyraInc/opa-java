@@ -10,6 +10,7 @@ import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.net.URLEncoder;
+import java.net.http.HttpRequest;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
@@ -20,6 +21,7 @@ import java.util.concurrent.Callable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.NoSuchElementException;
@@ -101,7 +103,7 @@ public final class Utils {
 
             Object value = params != null ? field.get(params) : null;
             value = resolveOptionals(value);
-            value = Utils.populateGlobal(value, field.getName(), "pathParam", globals);
+            value = populateGlobal(value, field.getName(), "pathParam", globals);
             if (value == null) {
                 continue;
             }
@@ -184,7 +186,7 @@ public final class Utils {
         return baseURL + templateUrl(path, pathParams);
     }
 
-    public static boolean matchContentType(String contentType, String pattern) {
+    public static boolean contentTypeMatches(String contentType, String pattern) {
         if (contentType == null || contentType.isBlank()) {
             return false;
         }
@@ -256,8 +258,8 @@ public final class Utils {
         return QueryParameters.parseQueryParams(type, params, globals);
     }
 
-    public static HTTPClient configureSecurityClient(HTTPClient client, Object security) throws Exception {
-        return Security.createClient(client, security);
+    public static HTTPRequest configureSecurity(HTTPRequest request, Object security) throws Exception {
+        return Security.configureSecurity(request, security);
     }
 
     public static String templateUrl(String url, Map<String, String> params) {
@@ -279,9 +281,9 @@ public final class Utils {
         return sb.toString();
     }
 
-    public static Map<String, List<String>> getHeaders(Object headers, Map<String, Map<String, Map<String, Object>>> globals) throws Exception {
+    public static Map<String, List<String>> getHeadersFromMetadata(Object headers, Map<String, Map<String, Map<String, Object>>> globals) throws Exception {
         if (headers == null) {
-            return null;
+            return Collections.emptyMap();
         }
 
         Map<String, List<String>> result = new HashMap<>();
@@ -297,10 +299,8 @@ public final class Utils {
 
             Object value = field.get(headers);
             value = resolveOptionals(value);
-            value = Utils.populateGlobal(value, field.getName(), "header", globals);
-            if (value == null) {
-                continue;
-            }
+            value = populateGlobal(value, field.getName(), "header", globals);
+
             if (value == null) {
                 continue;
             }
@@ -470,6 +470,12 @@ public final class Utils {
         }
         return object;
     }    
+    
+    public static void checkArgument(boolean expression, String message) {
+        if (!expression) {
+            throw new IllegalArgumentException(message);
+        }
+    } 
     
     public static <K, V> Map<K, V> emptyMapIfNull(Map<K, V> map) {
         return map == null ? java.util.Collections.emptyMap() : map; 
@@ -788,5 +794,71 @@ public final class Utils {
         } else {
            throw new RuntimeException(e);
         }
+    }
+    
+    public static boolean statusCodeMatches(int statusCode, String... expectedStatusCodes) {
+        return Arrays.stream(expectedStatusCodes)
+            .anyMatch(expected -> statusCodeMatchesOne(statusCode, expected));
+    }
+    
+    // VisibleForTesting
+    public static boolean statusCodeMatchesOne(int statusCode, String expectedStatusCode) {
+        checkNotNull(expectedStatusCode, "expectedStatusCode");
+        if (expectedStatusCode.toLowerCase(Locale.ENGLISH).equals("default")) {
+            return true;
+        }
+        if (statusCode < 100 || statusCode >= 600) {
+            throw new IllegalArgumentException("unexpected http status code: " + statusCode);
+        }
+        if (expectedStatusCode.length() != 3) {
+            return false;
+        }
+        String firstDigit = String.valueOf(statusCode / 100);
+        String firstDigitExpected = expectedStatusCode.substring(0, 1);
+        if (!firstDigit.equals(firstDigitExpected)) {
+            return false;
+        } else if (expectedStatusCode.toUpperCase(Locale.ENGLISH).endsWith("XX")) {
+            return true;
+        } else {
+            return expectedStatusCode.equals(String.valueOf(statusCode));
+        }
+    }
+    
+    /**
+     * Returns an {@link HttpRequest.Builder} which is initialized with the 
+     * state of the given {@link HttpRequest}.
+     * 
+     * @param request request to copy
+     * @return a builder initialized with values from {@code request}
+     */
+    public static HttpRequest.Builder copy(HttpRequest request) {
+        // in JDK 16+ we can use this
+        // return HttpRequest.newBuilder(request, (k, v) -> true);
+        checkNotNull(request, "request");
+
+        final HttpRequest.Builder builder = HttpRequest.newBuilder();
+        builder.uri(request.uri());
+        builder.expectContinue(request.expectContinue());
+
+        request.headers().map().forEach((name, values) ->
+                values.forEach(value -> builder.header(name, value)));
+
+        request.version().ifPresent(builder::version);
+        request.timeout().ifPresent(builder::timeout);
+        var method = request.method();
+        request.bodyPublisher().ifPresentOrElse(
+                // if body is present, set it
+                bodyPublisher -> builder.method(method, bodyPublisher),
+                // otherwise, the body is absent, special case for GET/DELETE,
+                // or else use empty body
+                () -> {
+                    switch (method) {
+                        case "GET": builder.GET();break;
+                        case "DELETE" : builder.DELETE();break;
+                        default : builder.method(method, HttpRequest.BodyPublishers.noBody());
+                    }
+                }
+        );
+        return builder;
     }
 }

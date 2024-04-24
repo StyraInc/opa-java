@@ -8,8 +8,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.http.HttpResponse;
+import java.net.http.HttpRequest;
 
 public interface HTTPClient {
-    public HttpResponse<InputStream> send(HTTPRequest request)
+    HttpResponse<InputStream> send(HttpRequest request)
             throws IOException, InterruptedException, URISyntaxException;
 }

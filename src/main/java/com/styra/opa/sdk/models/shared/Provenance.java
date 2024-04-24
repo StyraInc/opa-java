@@ -4,7 +4,9 @@
 
 package com.styra.opa.sdk.models.shared;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -45,6 +47,7 @@ public class Provenance {
     @JsonProperty("bundles")
     private Optional<? extends java.util.Map<String, Revision>> bundles;
 
+    @JsonCreator
     public Provenance(
             @JsonProperty("version") Optional<? extends String> version,
             @JsonProperty("build_commit") Optional<? extends String> buildCommit,
@@ -62,23 +65,32 @@ public class Provenance {
         this.buildHost = buildHost;
         this.bundles = bundles;
     }
+    
+    public Provenance() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+    }
 
+    @JsonIgnore
     public Optional<? extends String> version() {
         return version;
     }
 
+    @JsonIgnore
     public Optional<? extends String> buildCommit() {
         return buildCommit;
     }
 
+    @JsonIgnore
     public Optional<? extends OffsetDateTime> buildTimestamp() {
         return buildTimestamp;
     }
 
+    @JsonIgnore
     public Optional<? extends String> buildHost() {
         return buildHost;
     }
 
+    @JsonIgnore
     public Optional<? extends java.util.Map<String, Revision>> bundles() {
         return bundles;
     }
