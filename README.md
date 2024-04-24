@@ -43,7 +43,7 @@ Now we can update `app/src/main/java/org/example/App.java` to call the OPA API. 
 ```java
 package org.example;
 
-import com.styra.opa.OPA;
+import com.styra.opa.OPAClient;
 import com.styra.opa.OPAException;
 
 import java.util.Map;
@@ -62,7 +62,7 @@ public class App {
         // Create an OPA instance, this handles any state needed for inteacting
         // with OPA, and can be re-used for multiple requests if needed.
         String opaURL = "http://localhost:8181";
-        OPA opa = new OPA(opaURL);
+        OPAClient opa = new OPAClient(opaURL);
 
         // This will be the input to our policy.
         java.util.Map<String,Object> input = java.util.Map.ofEntries(
@@ -80,7 +80,7 @@ public class App {
         // Perform the request against OPA.
         try {
             allowed = opa.check(input, "policy/allow");
-            violations = opa.query(input, "policy/violations");
+            violations = opa.evaluate(input, "policy/violations");
         } catch (OPAException e ) {
             // Note that OPAException usually wraps other exception types, in
             // case you need to do more complex error handling.
