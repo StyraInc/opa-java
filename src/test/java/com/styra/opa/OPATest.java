@@ -157,4 +157,23 @@ class OPATest {
         assertEquals(Map.ofEntries(), result);
     }
 
+    @Test
+    public void testOPAEcho() {
+        OPAClient opa = new OPAClient(address, headers);
+        Map result = Map.ofEntries(entry("unit", "test"));
+        Map expect = Map.ofEntries(entry("hello", "world"), entry("foo", Map.ofEntries(entry("bar", testNumberA))));
+
+        try {
+            result = opa.evaluate("policy/echo", Map.ofEntries(
+                entry("hello", "world"),
+                entry("foo", Map.ofEntries(entry("bar", testNumberA)))
+            ));
+        } catch (OPAException e) {
+            System.out.println("exception: " + e);
+            assertNull(e);
+        }
+
+        assertEquals(expect, result);
+    }
+
 }
