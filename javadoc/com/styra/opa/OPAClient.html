@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -204,32 +204,32 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#check(boolean,java.lang.String)">check</a></span>&#8203;(boolean&nbsp;input,
-     java.lang.String&nbsp;path)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#check(java.lang.String,boolean)">check</a></span>&#8203;(java.lang.String&nbsp;path,
+     boolean&nbsp;input)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#check(double,java.lang.String)">check</a></span>&#8203;(double&nbsp;input,
-     java.lang.String&nbsp;path)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#check(java.lang.String,double)">check</a></span>&#8203;(java.lang.String&nbsp;path,
+     double&nbsp;input)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#check(java.lang.String,java.lang.String)">check</a></span>&#8203;(java.lang.String&nbsp;input,
-     java.lang.String&nbsp;path)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#check(java.lang.String,java.lang.String)">check</a></span>&#8203;(java.lang.String&nbsp;path,
+     java.lang.String&nbsp;input)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#check(java.util.List,java.lang.String)">check</a></span>&#8203;(java.util.List&lt;java.lang.Object&gt;&nbsp;input,
-     java.lang.String&nbsp;path)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#check(java.lang.String,java.util.List)">check</a></span>&#8203;(java.lang.String&nbsp;path,
+     java.util.List&lt;java.lang.Object&gt;&nbsp;input)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#check(java.util.Map,java.lang.String)">check</a></span>&#8203;(java.util.Map&lt;java.lang.String,&#8203;java.lang.Object&gt;&nbsp;input,
-     java.lang.String&nbsp;path)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#check(java.lang.String,java.util.Map)">check</a></span>&#8203;(java.lang.String&nbsp;path,
+     java.util.Map&lt;java.lang.String,&#8203;java.lang.Object&gt;&nbsp;input)</code></th>
 <td class="colLast">
 <div class="block">Perform a query with an input document against a Rego rule head by its
  path, and coerce the result to a boolean.</div>
@@ -237,32 +237,37 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(boolean,java.lang.String)">evaluate</a></span>&#8203;(boolean&nbsp;input,
-        java.lang.String&nbsp;path)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.lang.String)">evaluate</a></span>&#8203;(java.lang.String&nbsp;path)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(double,java.lang.String)">evaluate</a></span>&#8203;(double&nbsp;input,
-        java.lang.String&nbsp;path)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.lang.String,boolean)">evaluate</a></span>&#8203;(java.lang.String&nbsp;path,
+        boolean&nbsp;input)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.lang.String,java.lang.String)">evaluate</a></span>&#8203;(java.lang.String&nbsp;input,
-        java.lang.String&nbsp;path)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.lang.String,double)">evaluate</a></span>&#8203;(java.lang.String&nbsp;path,
+        double&nbsp;input)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.util.List,java.lang.String)">evaluate</a></span>&#8203;(java.util.List&lt;java.lang.Object&gt;&nbsp;input,
-        java.lang.String&nbsp;path)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.lang.String,java.lang.String)">evaluate</a></span>&#8203;(java.lang.String&nbsp;path,
+        java.lang.String&nbsp;input)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.util.Map,java.lang.String)">evaluate</a></span>&#8203;(java.util.Map&lt;java.lang.String,&#8203;java.lang.Object&gt;&nbsp;input,
-        java.lang.String&nbsp;path)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.lang.String,java.util.List)">evaluate</a></span>&#8203;(java.lang.String&nbsp;path,
+        java.util.List&lt;java.lang.Object&gt;&nbsp;input)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i10" class="altColor">
+<td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.lang.String,java.util.Map)">evaluate</a></span>&#8203;(java.lang.String&nbsp;path,
+        java.util.Map&lt;java.lang.String,&#8203;java.lang.Object&gt;&nbsp;input)</code></th>
 <td class="colLast">
 <div class="block">Perform a query with an input document against a Rego rule head by its
  path.</div>
@@ -365,14 +370,14 @@ extends java.lang.Object</pre>
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a id="check(java.util.Map,java.lang.String)">
+<a id="check(java.lang.String,java.util.Map)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>check</h4>
-<pre class="methodSignature">public&nbsp;boolean&nbsp;check&#8203;(java.util.Map&lt;java.lang.String,&#8203;java.lang.Object&gt;&nbsp;input,
-                     java.lang.String&nbsp;path)
+<pre class="methodSignature">public&nbsp;boolean&nbsp;check&#8203;(java.lang.String&nbsp;path,
+                     java.util.Map&lt;java.lang.String,&#8203;java.lang.Object&gt;&nbsp;input)
               throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
 <div class="block">Perform a query with an input document against a Rego rule head by its
  path, and coerce the result to a boolean.
@@ -397,8 +402,8 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>check</h4>
-<pre class="methodSignature">public&nbsp;boolean&nbsp;check&#8203;(java.lang.String&nbsp;input,
-                     java.lang.String&nbsp;path)
+<pre class="methodSignature">public&nbsp;boolean&nbsp;check&#8203;(java.lang.String&nbsp;path,
+                     java.lang.String&nbsp;input)
               throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
@@ -406,14 +411,14 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
-<a id="check(boolean,java.lang.String)">
+<a id="check(java.lang.String,boolean)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>check</h4>
-<pre class="methodSignature">public&nbsp;boolean&nbsp;check&#8203;(boolean&nbsp;input,
-                     java.lang.String&nbsp;path)
+<pre class="methodSignature">public&nbsp;boolean&nbsp;check&#8203;(java.lang.String&nbsp;path,
+                     boolean&nbsp;input)
               throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
@@ -421,14 +426,14 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
-<a id="check(double,java.lang.String)">
+<a id="check(java.lang.String,double)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>check</h4>
-<pre class="methodSignature">public&nbsp;boolean&nbsp;check&#8203;(double&nbsp;input,
-                     java.lang.String&nbsp;path)
+<pre class="methodSignature">public&nbsp;boolean&nbsp;check&#8203;(java.lang.String&nbsp;path,
+                     double&nbsp;input)
               throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
@@ -436,14 +441,14 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
-<a id="check(java.util.List,java.lang.String)">
+<a id="check(java.lang.String,java.util.List)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>check</h4>
-<pre class="methodSignature">public&nbsp;boolean&nbsp;check&#8203;(java.util.List&lt;java.lang.Object&gt;&nbsp;input,
-                     java.lang.String&nbsp;path)
+<pre class="methodSignature">public&nbsp;boolean&nbsp;check&#8203;(java.lang.String&nbsp;path,
+                     java.util.List&lt;java.lang.Object&gt;&nbsp;input)
               throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
@@ -451,20 +456,23 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
-<a id="evaluate(java.util.Map,java.lang.String)">
+<a id="evaluate(java.lang.String,java.util.Map)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>evaluate</h4>
-<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;evaluate&#8203;(java.util.Map&lt;java.lang.String,&#8203;java.lang.Object&gt;&nbsp;input,
-                      java.lang.String&nbsp;path)
+<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;evaluate&#8203;(java.lang.String&nbsp;path,
+                      java.util.Map&lt;java.lang.String,&#8203;java.lang.Object&gt;&nbsp;input)
                throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
 <div class="block">Perform a query with an input document against a Rego rule head by its
  path.
 
  The other overloaded variations of this method behave similar, but allow
- any valid JSON value to be used as the input document.</div>
+ any valid JSON value to be used as the input document.
+
+ If the input value is omitted, then an empty object is implicitly used
+ as the input.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>input</code> - Input document for OPA query.</dd>
@@ -486,8 +494,8 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>evaluate</h4>
-<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;evaluate&#8203;(java.lang.String&nbsp;input,
-                      java.lang.String&nbsp;path)
+<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;evaluate&#8203;(java.lang.String&nbsp;path,
+                      java.lang.String&nbsp;input)
                throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
@@ -495,14 +503,14 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
-<a id="evaluate(boolean,java.lang.String)">
+<a id="evaluate(java.lang.String,boolean)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>evaluate</h4>
-<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;evaluate&#8203;(boolean&nbsp;input,
-                      java.lang.String&nbsp;path)
+<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;evaluate&#8203;(java.lang.String&nbsp;path,
+                      boolean&nbsp;input)
                throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
@@ -510,14 +518,14 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
-<a id="evaluate(double,java.lang.String)">
+<a id="evaluate(java.lang.String,double)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>evaluate</h4>
-<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;evaluate&#8203;(double&nbsp;input,
-                      java.lang.String&nbsp;path)
+<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;evaluate&#8203;(java.lang.String&nbsp;path,
+                      double&nbsp;input)
                throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
@@ -525,14 +533,28 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
-<a id="evaluate(java.util.List,java.lang.String)">
+<a id="evaluate(java.lang.String,java.util.List)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>evaluate</h4>
+<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;evaluate&#8203;(java.lang.String&nbsp;path,
+                      java.util.List&lt;java.lang.Object&gt;&nbsp;input)
+               throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="OPAException.html" title="class in com.styra.opa">OPAException</a></code></dd>
+</dl>
+</li>
+</ul>
+<a id="evaluate(java.lang.String)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>evaluate</h4>
-<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;evaluate&#8203;(java.util.List&lt;java.lang.Object&gt;&nbsp;input,
-                      java.lang.String&nbsp;path)
+<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;evaluate&#8203;(java.lang.String&nbsp;path)
                throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
