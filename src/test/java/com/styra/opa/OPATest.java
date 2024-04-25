@@ -82,10 +82,10 @@ class OPATest {
         String result = "";
 
         try {
-            result = opa.evaluate(Map.ofEntries(
+            result = opa.evaluate("policy/hello", Map.ofEntries(
                 entry("user", "alice"),
                 entry("x", testNumberA)
-            ), "policy/hello");
+            ));
         } catch (OPAException e) {
             System.out.println("exception: " + e);
             assertNull(e);
@@ -100,10 +100,10 @@ class OPATest {
         boolean result = false;
 
         try {
-            result = opa.check(Map.ofEntries(
+            result = opa.check("policy/user_is_alice", Map.ofEntries(
                 entry("user", "alice"),
                 entry("x", testNumberA)
-            ), "policy/user_is_alice");
+            ));
         } catch (OPAException e) {
             System.out.println("exception: " + e);
             assertNull(e);
@@ -112,10 +112,10 @@ class OPATest {
         assertEquals(true, result);
 
         try {
-            result = opa.check(Map.ofEntries(
+            result = opa.check("policy/user_is_alice", Map.ofEntries(
                 entry("user", "bob"),
                 entry("x", testNumberA)
-            ), "policy/user_is_alice");
+            ));
         } catch (OPAException e) {
             System.out.println("exception: " + e);
             assertNull(e);
@@ -130,16 +130,50 @@ class OPATest {
         double result = 0;
 
         try {
-            result = opa.evaluate(Map.ofEntries(
+            result = opa.evaluate("policy/input_x_times_2", Map.ofEntries(
                 entry("user", "alice"),
                 entry("x", testNumberA)
-            ), "policy/input_x_times_2");
+            ));
         } catch (OPAException e) {
             System.out.println("exception: " + e);
             assertNull(e);
         }
 
         assertEquals(testNumberB, result);
+    }
+
+    @Test
+    public void testOPAWithoutInput() {
+        OPAClient opa = new OPAClient(address, headers);
+        Map result = Map.ofEntries(entry("unit", "test"));
+
+        try {
+            result = opa.evaluate("policy/echo");
+        } catch (OPAException e) {
+            System.out.println("exception: " + e);
+            assertNull(e);
+        }
+
+        assertEquals(Map.ofEntries(), result);
+    }
+
+    @Test
+    public void testOPAEcho() {
+        OPAClient opa = new OPAClient(address, headers);
+        Map result = Map.ofEntries(entry("unit", "test"));
+        Map expect = Map.ofEntries(entry("hello", "world"), entry("foo", Map.ofEntries(entry("bar", testNumberA))));
+
+        try {
+            result = opa.evaluate("policy/echo", Map.ofEntries(
+                entry("hello", "world"),
+                entry("foo", Map.ofEntries(entry("bar", testNumberA)))
+            ));
+        } catch (OPAException e) {
+            System.out.println("exception: " + e);
+            assertNull(e);
+        }
+
+        assertEquals(expect, result);
     }
 
 }

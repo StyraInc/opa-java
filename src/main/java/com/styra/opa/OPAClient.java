@@ -105,24 +105,24 @@ public class OPAClient {
      * @return
      * @throws OPAException
      */
-    public boolean check(java.util.Map<String, Object> input, String path) throws OPAException {
-        return evaluate(input, path);
+    public boolean check(String path, java.util.Map<String, Object> input) throws OPAException {
+        return evaluate(path, input);
     }
 
-    public boolean check(String input, String path) throws OPAException {
-        return evaluate(input, path);
+    public boolean check(String path, String input) throws OPAException {
+        return evaluate(path, input);
     }
 
-    public boolean check(boolean input, String path) throws OPAException {
-        return evaluate(input, path);
+    public boolean check(String path, boolean input) throws OPAException {
+        return evaluate(path, input);
     }
 
-    public boolean check(double input, String path) throws OPAException {
-        return evaluate(input, path);
+    public boolean check(String path, double input) throws OPAException {
+        return evaluate(path, input);
     }
 
-    public boolean check(java.util.List<Object> input, String path) throws OPAException {
-        return evaluate(input, path);
+    public boolean check(String path, java.util.List<Object> input) throws OPAException {
+        return evaluate(path, input);
     }
 
     /**
@@ -131,6 +131,10 @@ public class OPAClient {
      *
      * The other overloaded variations of this method behave similar, but allow
      * any valid JSON value to be used as the input document.
+     *
+     * If the input value is omitted, then an empty object is implicitly used
+     * as the input.
+     *
      *
      * @param input Input document for OPA query.
      * @param path Path to rule head to query, for example to access a rule
@@ -141,24 +145,28 @@ public class OPAClient {
      * com.fasterxml.jackson.databind.ObjectMapper.
      * @throws OPAException
      */
-    public <T> T evaluate(java.util.Map<String, Object> input, String path) throws OPAException {
+    public <T> T evaluate(String path, java.util.Map<String, Object> input) throws OPAException {
         return evaluateMachinery(Input.of(input), path);
     }
 
-    public <T> T evaluate(String input, String path) throws OPAException {
+    public <T> T evaluate(String path, String input) throws OPAException {
         return evaluateMachinery(Input.of(input), path);
     }
 
-    public <T> T evaluate(boolean input, String path) throws OPAException {
+    public <T> T evaluate(String path, boolean input) throws OPAException {
         return evaluateMachinery(Input.of(input), path);
     }
 
-    public <T> T evaluate(double input, String path) throws OPAException {
+    public <T> T evaluate(String path, double input) throws OPAException {
         return evaluateMachinery(Input.of(input), path);
     }
 
-    public <T> T evaluate(java.util.List<Object> input, String path) throws OPAException {
+    public <T> T evaluate(String path, java.util.List<Object> input) throws OPAException {
         return evaluateMachinery(Input.of(input), path);
+    }
+
+    public <T> T evaluate(String path) throws OPAException {
+        return evaluateMachinery(Input.of(Map.ofEntries()), path);
     }
 
     /**
