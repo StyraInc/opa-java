@@ -34,9 +34,9 @@ model {
 
 jar {
     dependsOn(":generatePomFileForMavenPublication")
-    archiveBaseName = "openapi"
+    archiveBaseName = "opa"
 
-    into("META-INF/maven/com.styra.opa/openapi") {
+    into("META-INF/maven/com.styra/opa") {
         from("$buildDir/pom.xml")
     }
 }
@@ -55,15 +55,15 @@ tasks.withType(Javadoc) {
   failOnError false
   options.addStringOption('Xdoclint:none', '-quiet')
 }
-group = "com.styra.opa"
+group = "com.styra"
 version = "0.5.6"
 
 sourcesJar {
-    archiveBaseName = "openapi"
+    archiveBaseName = "opa"
 }
 
 javadocJar {
-    archiveBaseName = "openapi"
+    archiveBaseName = "opa"
 }
 
 sonatypeCentralUpload {
@@ -74,9 +74,9 @@ sonatypeCentralUpload {
 
     // This is a list of files to upload. Ideally you would point to your jar file, source and javadoc jar (required by central)
     archives = files(
-      "$buildDir/libs/openapi-${version}.jar",
-      "$buildDir/libs/openapi-${version}-sources.jar",
-      "$buildDir/libs/openapi-${version}-javadoc.jar"
+      "$buildDir/libs/opa-${version}.jar",
+      "$buildDir/libs/opa-${version}-sources.jar",
+      "$buildDir/libs/opa-${version}-javadoc.jar"
     )
 
     // This is the pom file to upload. This is required by central
@@ -91,8 +91,8 @@ publishing {
 
     publications {
         maven(MavenPublication) {
-            groupId = 'com.styra.opa'
-            artifactId = 'openapi'
+            groupId = 'com.styra'
+            artifactId = 'opa'
             version = '0.5.6'
 
             from components.java
