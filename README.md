@@ -57,7 +57,7 @@ public class App {
     public static void main(String[] args) throws Exception {
         System.out.println(new App().getGreeting());
 
-        // Create an OPA instance, this handles any state needed for inteacting
+        // Create an OPA instance, this handles any state needed for interacting
         // with OPA, and can be re-used for multiple requests if needed.
         String opaURL = "http://localhost:8181";
         OPAClient opa = new OPAClient(opaURL);
@@ -76,8 +76,8 @@ public class App {
 
         // Perform the request against OPA.
         try {
-            allowed = opa.check(input, "policy/allow");
-            violations = opa.evaluate(input, "policy/violations");
+            allowed = opa.check("policy/allow", input);
+            violations = opa.evaluate("policy/violations", input);
         } catch (OPAException e ) {
             // Note that OPAException usually wraps other exception types, in
             // case you need to do more complex error handling.
