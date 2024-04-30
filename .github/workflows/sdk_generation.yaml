@@ -25,6 +25,7 @@ jobs:
       speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
       slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
   test1:
+    runs-on: ubuntu-latest
     steps:
       - run: |
           git status
