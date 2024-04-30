@@ -209,7 +209,7 @@ extends java.lang.Object</pre>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>java.util.Optional&lt;? extends java.lang.Boolean&gt;</code></td>
+<td class="colFirst"><code>java.util.Optional&lt;java.lang.Boolean&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#bundles()">bundles</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Boolean parameter to account for bundle activation status in response.</div>
@@ -221,7 +221,7 @@ extends java.lang.Object</pre>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code>java.util.Optional&lt;? extends java.util.List&lt;java.lang.String&gt;&gt;</code></td>
+<td class="colFirst"><code>java.util.Optional&lt;java.util.List&lt;java.lang.String&gt;&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#excludePlugin()">excludePlugin</a></span>()</code></th>
 <td class="colLast">
 <div class="block">String parameter to exclude a plugin from status checks.</div>
@@ -233,7 +233,7 @@ extends java.lang.Object</pre>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i5" class="rowColor">
-<td class="colFirst"><code>java.util.Optional&lt;? extends java.lang.Boolean&gt;</code></td>
+<td class="colFirst"><code>java.util.Optional&lt;java.lang.Boolean&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#plugins()">plugins</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Boolean parameter to account for plugin status in response.</div>
@@ -346,7 +346,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>bundles</h4>
-<pre class="methodSignature">public&nbsp;java.util.Optional&lt;? extends java.lang.Boolean&gt;&nbsp;bundles()</pre>
+<pre class="methodSignature">public&nbsp;java.util.Optional&lt;java.lang.Boolean&gt;&nbsp;bundles()</pre>
 <div class="block">Boolean parameter to account for bundle activation status in response. This includes any discovery bundles or bundles defined in the loaded discovery configuration.</div>
 </li>
 </ul>
@@ -356,7 +356,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>plugins</h4>
-<pre class="methodSignature">public&nbsp;java.util.Optional&lt;? extends java.lang.Boolean&gt;&nbsp;plugins()</pre>
+<pre class="methodSignature">public&nbsp;java.util.Optional&lt;java.lang.Boolean&gt;&nbsp;plugins()</pre>
 <div class="block">Boolean parameter to account for plugin status in response.</div>
 </li>
 </ul>
@@ -366,7 +366,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>excludePlugin</h4>
-<pre class="methodSignature">public&nbsp;java.util.Optional&lt;? extends java.util.List&lt;java.lang.String&gt;&gt;&nbsp;excludePlugin()</pre>
+<pre class="methodSignature">public&nbsp;java.util.Optional&lt;java.util.List&lt;java.lang.String&gt;&gt;&nbsp;excludePlugin()</pre>
 <div class="block">String parameter to exclude a plugin from status checks. Can be added multiple times. Does nothing if plugins is not true. This parameter is useful for special use cases where a plugin depends on the server being fully initialized before it can fully initialize itself.</div>
 </li>
 </ul>

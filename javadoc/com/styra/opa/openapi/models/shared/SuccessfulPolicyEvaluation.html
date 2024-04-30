@@ -210,7 +210,7 @@ extends java.lang.Object</pre>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>java.util.Optional&lt;? extends java.lang.String&gt;</code></td>
+<td class="colFirst"><code>java.util.Optional&lt;java.lang.String&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#decisionId()">decisionId</a></span>()</code></th>
 <td class="colLast">
 <div class="block">If decision logging is enabled, this field contains a string that uniquely identifies the decision.</div>
@@ -227,21 +227,21 @@ extends java.lang.Object</pre>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><code>java.util.Optional&lt;? extends java.util.Map&lt;java.lang.String,&#8203;java.lang.Object&gt;&gt;</code></td>
+<td class="colFirst"><code>java.util.Optional&lt;java.util.Map&lt;java.lang.String,&#8203;java.lang.Object&gt;&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#metrics()">metrics</a></span>()</code></th>
 <td class="colLast">
 <div class="block">If query metrics are enabled, this field contains query performance metrics collected during the parse, compile, and evaluation steps.</div>
 </td>
 </tr>
 <tr id="i5" class="rowColor">
-<td class="colFirst"><code>java.util.Optional&lt;? extends <a href="Provenance.html" title="class in com.styra.opa.openapi.models.shared">Provenance</a>&gt;</code></td>
+<td class="colFirst"><code>java.util.Optional&lt;<a href="Provenance.html" title="class in com.styra.opa.openapi.models.shared">Provenance</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#provenance()">provenance</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Provenance information can be requested on individual API calls and are returned inline with the API response.</div>
 </td>
 </tr>
 <tr id="i6" class="altColor">
-<td class="colFirst"><code>java.util.Optional&lt;? extends <a href="Result.html" title="class in com.styra.opa.openapi.models.shared">Result</a>&gt;</code></td>
+<td class="colFirst"><code>java.util.Optional&lt;<a href="Result.html" title="class in com.styra.opa.openapi.models.shared">Result</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#result()">result</a></span>()</code></th>
 <td class="colLast">
 <div class="block">The base or virtual document referred to by the URL path.</div>
@@ -369,7 +369,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>result</h4>
-<pre class="methodSignature">public&nbsp;java.util.Optional&lt;? extends <a href="Result.html" title="class in com.styra.opa.openapi.models.shared">Result</a>&gt;&nbsp;result()</pre>
+<pre class="methodSignature">public&nbsp;java.util.Optional&lt;<a href="Result.html" title="class in com.styra.opa.openapi.models.shared">Result</a>&gt;&nbsp;result()</pre>
 <div class="block">The base or virtual document referred to by the URL path. If the path is undefined, this key will be omitted.</div>
 </li>
 </ul>
@@ -379,7 +379,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>metrics</h4>
-<pre class="methodSignature">public&nbsp;java.util.Optional&lt;? extends java.util.Map&lt;java.lang.String,&#8203;java.lang.Object&gt;&gt;&nbsp;metrics()</pre>
+<pre class="methodSignature">public&nbsp;java.util.Optional&lt;java.util.Map&lt;java.lang.String,&#8203;java.lang.Object&gt;&gt;&nbsp;metrics()</pre>
 <div class="block">If query metrics are enabled, this field contains query performance metrics collected during the parse, compile, and evaluation steps.</div>
 </li>
 </ul>
@@ -389,7 +389,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>decisionId</h4>
-<pre class="methodSignature">public&nbsp;java.util.Optional&lt;? extends java.lang.String&gt;&nbsp;decisionId()</pre>
+<pre class="methodSignature">public&nbsp;java.util.Optional&lt;java.lang.String&gt;&nbsp;decisionId()</pre>
 <div class="block">If decision logging is enabled, this field contains a string that uniquely identifies the decision. The identifier will be included in the decision log event for this decision. Callers can use the identifier for correlation purposes.</div>
 </li>
 </ul>
@@ -399,7 +399,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>provenance</h4>
-<pre class="methodSignature">public&nbsp;java.util.Optional&lt;? extends <a href="Provenance.html" title="class in com.styra.opa.openapi.models.shared">Provenance</a>&gt;&nbsp;provenance()</pre>
+<pre class="methodSignature">public&nbsp;java.util.Optional&lt;<a href="Provenance.html" title="class in com.styra.opa.openapi.models.shared">Provenance</a>&gt;&nbsp;provenance()</pre>
 <div class="block">Provenance information can be requested on individual API calls and are returned inline with the API response. To obtain provenance information on an API call, specify the `provenance=true` query parameter when executing the API call.</div>
 </li>
 </ul>

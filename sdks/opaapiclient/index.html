@@ -117,11 +117,8 @@
 
 import com.styra.opa.openapi.OpaApiClient;
 import com.styra.opa.openapi.models.operations.*;
-import com.styra.opa.openapi.models.operations.ExecutePolicyRequest;
 import com.styra.opa.openapi.models.operations.ExecutePolicyResponse;
 import com.styra.opa.openapi.models.shared.*;
-import com.styra.opa.openapi.models.shared.Explain;
-import com.styra.opa.openapi.models.shared.GzipAcceptEncoding;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -198,12 +195,12 @@ public class Application {
 </thead>
 <tbody>
 <tr>
-<td>com.styra.opa.openapi.models.errors.ClientError</td>
+<td>models/errors/ClientError</td>
 <td>400</td>
 <td>application/json</td>
 </tr>
 <tr>
-<td>com.styra.opa.openapi.models.errors.ServerError</td>
+<td>models/errors/ServerError</td>
 <td>500</td>
 <td>application/json</td>
 </tr>
@@ -221,13 +218,8 @@ public class Application {
 
 import com.styra.opa.openapi.OpaApiClient;
 import com.styra.opa.openapi.models.operations.*;
-import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequest;
-import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequestBody;
 import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputResponse;
 import com.styra.opa.openapi.models.shared.*;
-import com.styra.opa.openapi.models.shared.Explain;
-import com.styra.opa.openapi.models.shared.GzipAcceptEncoding;
-import com.styra.opa.openapi.models.shared.GzipContentEncoding;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -245,11 +237,7 @@ public class Application {
             ExecutePolicyWithInputRequest req = ExecutePolicyWithInputRequest.builder()
                 .path(&quot;app/rbac&quot;)
                 .requestBody(ExecutePolicyWithInputRequestBody.builder()
-                        .input(Input.of(java.util.Map.ofEntries(
-                                    entry(&quot;user&quot;, &quot;alice&quot;),
-                                    entry(&quot;action&quot;, &quot;read&quot;),
-                                    entry(&quot;object&quot;, &quot;id123&quot;),
-                                    entry(&quot;type&quot;, &quot;dog&quot;))))
+                        .input(Input.of(false))
                         .build())
                 .contentEncoding(GzipContentEncoding.GZIP)
                 .acceptEncoding(GzipAcceptEncoding.GZIP)
@@ -312,12 +300,12 @@ public class Application {
 </thead>
 <tbody>
 <tr>
-<td>com.styra.opa.openapi.models.errors.ClientError</td>
+<td>models/errors/ClientError</td>
 <td>400</td>
 <td>application/json</td>
 </tr>
 <tr>
-<td>com.styra.opa.openapi.models.errors.ServerError</td>
+<td>models/errors/ServerError</td>
 <td>500</td>
 <td>application/json</td>
 </tr>
@@ -335,7 +323,6 @@ public class Application {
 
 import com.styra.opa.openapi.OpaApiClient;
 import com.styra.opa.openapi.models.operations.*;
-import com.styra.opa.openapi.models.operations.HealthRequest;
 import com.styra.opa.openapi.models.operations.HealthResponse;
 import com.styra.opa.openapi.models.shared.*;
 import java.math.BigDecimal;
@@ -416,7 +403,7 @@ public class Application {
 </thead>
 <tbody>
 <tr>
-<td>com.styra.opa.openapi.models.errors.UnhealthyServer</td>
+<td>models/errors/UnhealthyServer</td>
 <td>500</td>
 <td>application/json</td>
 </tr>

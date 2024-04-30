@@ -223,11 +223,11 @@ extends java.lang.Object</pre>
 <td class="colLast">
 <div class="block">Returns an instance of one of these types:
  
- <code>java.util.Map&lt;String, java.lang.Object&gt;</code>
  <code>boolean</code>
  <code>String</code>
- <code>java.util.List&lt;java.lang.Object&gt;</code>
  <code>double</code>
+ <code>java.util.List&lt;java.lang.Object&gt;</code>
+ <code>java.util.Map&lt;String, java.lang.Object&gt;</code>
  </div>
 </td>
 </tr>
@@ -255,15 +255,6 @@ extends java.lang.Object</pre>
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a id="of(java.util.Map)">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>of</h4>
-<pre class="methodSignature">public static&nbsp;<a href="Result.html" title="class in com.styra.opa.openapi.models.shared">Result</a>&nbsp;of&#8203;(java.util.Map&lt;java.lang.String,&#8203;java.lang.Object&gt;&nbsp;value)</pre>
-</li>
-</ul>
 <a id="of(boolean)">
 <!--   -->
 </a>
@@ -282,6 +273,15 @@ extends java.lang.Object</pre>
 <pre class="methodSignature">public static&nbsp;<a href="Result.html" title="class in com.styra.opa.openapi.models.shared">Result</a>&nbsp;of&#8203;(java.lang.String&nbsp;value)</pre>
 </li>
 </ul>
+<a id="of(double)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>of</h4>
+<pre class="methodSignature">public static&nbsp;<a href="Result.html" title="class in com.styra.opa.openapi.models.shared">Result</a>&nbsp;of&#8203;(double&nbsp;value)</pre>
+</li>
+</ul>
 <a id="of(java.util.List)">
 <!--   -->
 </a>
@@ -291,13 +291,13 @@ extends java.lang.Object</pre>
 <pre class="methodSignature">public static&nbsp;<a href="Result.html" title="class in com.styra.opa.openapi.models.shared">Result</a>&nbsp;of&#8203;(java.util.List&lt;java.lang.Object&gt;&nbsp;value)</pre>
 </li>
 </ul>
-<a id="of(double)">
+<a id="of(java.util.Map)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
-<pre class="methodSignature">public static&nbsp;<a href="Result.html" title="class in com.styra.opa.openapi.models.shared">Result</a>&nbsp;of&#8203;(double&nbsp;value)</pre>
+<pre class="methodSignature">public static&nbsp;<a href="Result.html" title="class in com.styra.opa.openapi.models.shared">Result</a>&nbsp;of&#8203;(java.util.Map&lt;java.lang.String,&#8203;java.lang.Object&gt;&nbsp;value)</pre>
 </li>
 </ul>
 <a id="value()">
@@ -309,11 +309,11 @@ extends java.lang.Object</pre>
 <pre class="methodSignature">public&nbsp;java.lang.Object&nbsp;value()</pre>
 <div class="block">Returns an instance of one of these types:
  <ul>
- <li><code>java.util.Map&lt;String, java.lang.Object&gt;</code></li>
  <li><code>boolean</code></li>
  <li><code>String</code></li>
- <li><code>java.util.List&lt;java.lang.Object&gt;</code></li>
  <li><code>double</code></li>
+ <li><code>java.util.List&lt;java.lang.Object&gt;</code></li>
+ <li><code>java.util.Map&lt;String, java.lang.Object&gt;</code></li>
  </ul>
  
  <p>Use <code>instanceof</code> to determine what type is returned. For example:
