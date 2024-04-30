@@ -71,28 +71,28 @@ public class Provenance {
     }
 
     @JsonIgnore
-    public Optional<? extends String> version() {
-        return version;
+    public Optional<String> version() {
+        return (Optional<String>) version;
     }
 
     @JsonIgnore
-    public Optional<? extends String> buildCommit() {
-        return buildCommit;
+    public Optional<String> buildCommit() {
+        return (Optional<String>) buildCommit;
     }
 
     @JsonIgnore
-    public Optional<? extends OffsetDateTime> buildTimestamp() {
-        return buildTimestamp;
+    public Optional<OffsetDateTime> buildTimestamp() {
+        return (Optional<OffsetDateTime>) buildTimestamp;
     }
 
     @JsonIgnore
-    public Optional<? extends String> buildHost() {
-        return buildHost;
+    public Optional<String> buildHost() {
+        return (Optional<String>) buildHost;
     }
 
     @JsonIgnore
-    public Optional<? extends java.util.Map<String, Revision>> bundles() {
-        return bundles;
+    public Optional<java.util.Map<String, Revision>> bundles() {
+        return (Optional<java.util.Map<String, Revision>>) bundles;
     }
 
     public final static Builder builder() {

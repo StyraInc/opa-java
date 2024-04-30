@@ -4,13 +4,8 @@ package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
 import com.styra.opa.openapi.models.operations.*;
-import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequest;
-import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequestBody;
 import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputResponse;
 import com.styra.opa.openapi.models.shared.*;
-import com.styra.opa.openapi.models.shared.Explain;
-import com.styra.opa.openapi.models.shared.GzipAcceptEncoding;
-import com.styra.opa.openapi.models.shared.GzipContentEncoding;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -28,11 +23,7 @@ public class Application {
             ExecutePolicyWithInputRequest req = ExecutePolicyWithInputRequest.builder()
                 .path("app/rbac")
                 .requestBody(ExecutePolicyWithInputRequestBody.builder()
-                        .input(Input.of(java.util.Map.ofEntries(
-                                    entry("user", "alice"),
-                                    entry("action", "read"),
-                                    entry("object", "id123"),
-                                    entry("type", "dog"))))
+                        .input(Input.of(false))
                         .build())
                 .contentEncoding(GzipContentEncoding.GZIP)
                 .acceptEncoding(GzipAcceptEncoding.GZIP)

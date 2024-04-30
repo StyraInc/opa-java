@@ -59,24 +59,24 @@ public class HealthRequest {
      * Boolean parameter to account for bundle activation status in response. This includes any discovery bundles or bundles defined in the loaded discovery configuration.
      */
     @JsonIgnore
-    public Optional<? extends Boolean> bundles() {
-        return bundles;
+    public Optional<Boolean> bundles() {
+        return (Optional<Boolean>) bundles;
     }
 
     /**
      * Boolean parameter to account for plugin status in response.
      */
     @JsonIgnore
-    public Optional<? extends Boolean> plugins() {
-        return plugins;
+    public Optional<Boolean> plugins() {
+        return (Optional<Boolean>) plugins;
     }
 
     /**
      * String parameter to exclude a plugin from status checks. Can be added multiple times. Does nothing if plugins is not true. This parameter is useful for special use cases where a plugin depends on the server being fully initialized before it can fully initialize itself.
      */
     @JsonIgnore
-    public Optional<? extends java.util.List<String>> excludePlugin() {
-        return excludePlugin;
+    public Optional<java.util.List<String>> excludePlugin() {
+        return (Optional<java.util.List<String>>) excludePlugin;
     }
 
     public final static Builder builder() {

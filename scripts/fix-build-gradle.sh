@@ -59,3 +59,5 @@ awk -v f=./scripts/build-plugins.gradle 'p==1 && $1 != "}" {next} $1 == "plugins
 # the footer file.
 awk -v f=./scripts/build-footer.gradle '$1 == "//" && $2 == "===" && $3 == "build-footer" && $4 == "===" {exit} {print($0)} END {print("// === build-footer ==="); while((getline l<f)){print(l)}}' < build.gradle.tmp1 > build.gradle.tmp2
 mv build.gradle.tmp2 build.gradle
+
+./gradlew fixGradleLint
