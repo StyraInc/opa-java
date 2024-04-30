@@ -100,8 +100,8 @@ public class ExecutePolicyResponse implements com.styra.opa.openapi.utils.Respon
      * 
      */
     @JsonIgnore
-    public Optional<? extends com.styra.opa.openapi.models.shared.SuccessfulPolicyEvaluation> successfulPolicyEvaluation() {
-        return successfulPolicyEvaluation;
+    public Optional<com.styra.opa.openapi.models.shared.SuccessfulPolicyEvaluation> successfulPolicyEvaluation() {
+        return (Optional<com.styra.opa.openapi.models.shared.SuccessfulPolicyEvaluation>) successfulPolicyEvaluation;
     }
 
     @JsonIgnore

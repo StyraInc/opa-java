@@ -1,17 +1,17 @@
 lockVersion: 2.0.0
 id: 47e8e950-a454-4ebb-9f78-86fda7dfa0c2
 management:
-  docChecksum: 2401c7030f847f72ab31c8f75de58a66
+  docChecksum: 2422daf10293e923232daf08349ae0ae
   docVersion: 0.2.0
-  speakeasyVersion: 1.274.0
-  generationVersion: 2.314.0
-  releaseVersion: 0.5.1
-  configChecksum: bf72ef2ef6cf1055e1ad9c4a65b8a63e
+  speakeasyVersion: 1.277.4
+  generationVersion: 2.318.3
+  releaseVersion: 0.6.1
+  configChecksum: 82e5316d1e078f625b578e6247444f3d
   repoURL: https://github.com/StyraInc/opa-java
 features:
   java:
     constsAndDefaults: 0.1.1
-    core: 3.18.0
+    core: 3.19.1
     examples: 2.81.3
     flattening: 2.81.1
     globalServerURLs: 2.82.1

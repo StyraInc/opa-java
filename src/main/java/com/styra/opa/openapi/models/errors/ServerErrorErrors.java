@@ -61,8 +61,8 @@ public class ServerErrorErrors {
     }
 
     @JsonIgnore
-    public Optional<? extends ServerErrorLocation> location() {
-        return location;
+    public Optional<ServerErrorLocation> location() {
+        return (Optional<ServerErrorLocation>) location;
     }
 
     public final static Builder builder() {
