@@ -26,7 +26,18 @@ jobs:
       slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
   test1:
     runs-on: ubuntu-latest
+    needs: generate
     steps:
+      - run: |
+          pwd
+          ls -lah
+          for d in * ; do
+            if [ -d "$d" ] ; then
+              echo "===== $d"
+              ls -lah "$d"
+            fi
+          done
+        name: Record CWD and Listing
       - run: |
           git status
         name: Record Git Status
