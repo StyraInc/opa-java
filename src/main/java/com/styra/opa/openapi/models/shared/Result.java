@@ -35,11 +35,6 @@ public class Result {
         this.value = value;
     }
 
-    public static Result of(java.util.Map<String, java.lang.Object> value) {
-        Utils.checkNotNull(value, "value");
-        return new Result(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<java.util.Map<String, java.lang.Object>>(){}));
-    }
-
     public static Result of(boolean value) {
         Utils.checkNotNull(value, "value");
         return new Result(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<Boolean>(){}));
@@ -50,24 +45,29 @@ public class Result {
         return new Result(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<String>(){}));
     }
 
+    public static Result of(double value) {
+        Utils.checkNotNull(value, "value");
+        return new Result(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<Double>(){}));
+    }
+
     public static Result of(java.util.List<java.lang.Object> value) {
         Utils.checkNotNull(value, "value");
         return new Result(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<java.util.List<java.lang.Object>>(){}));
     }
 
-    public static Result of(double value) {
+    public static Result of(java.util.Map<String, java.lang.Object> value) {
         Utils.checkNotNull(value, "value");
-        return new Result(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<Double>(){}));
+        return new Result(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<java.util.Map<String, java.lang.Object>>(){}));
     }
     
     /**
      * Returns an instance of one of these types:
      * <ul>
-     * <li>{@code java.util.Map<String, java.lang.Object>}</li>
      * <li>{@code boolean}</li>
      * <li>{@code String}</li>
-     * <li>{@code java.util.List<java.lang.Object>}</li>
      * <li>{@code double}</li>
+     * <li>{@code java.util.List<java.lang.Object>}</li>
+     * <li>{@code java.util.Map<String, java.lang.Object>}</li>
      * </ul>
      * 
      * <p>Use {@code instanceof} to determine what type is returned. For example:
@@ -107,11 +107,11 @@ public class Result {
 
         public _Deserializer() {
             super(Result.class,
-                  Utils.TypeReferenceWithShape.of(new TypeReference<java.util.Map<String, java.lang.Object>>() {}, Utils.JsonShape.DEFAULT),
                   Utils.TypeReferenceWithShape.of(new TypeReference<Boolean>() {}, Utils.JsonShape.DEFAULT),
                   Utils.TypeReferenceWithShape.of(new TypeReference<String>() {}, Utils.JsonShape.DEFAULT),
+                  Utils.TypeReferenceWithShape.of(new TypeReference<Double>() {}, Utils.JsonShape.DEFAULT),
                   Utils.TypeReferenceWithShape.of(new TypeReference<java.util.List<java.lang.Object>>() {}, Utils.JsonShape.DEFAULT),
-                  Utils.TypeReferenceWithShape.of(new TypeReference<Double>() {}, Utils.JsonShape.DEFAULT));
+                  Utils.TypeReferenceWithShape.of(new TypeReference<java.util.Map<String, java.lang.Object>>() {}, Utils.JsonShape.DEFAULT));
         }
     }
     

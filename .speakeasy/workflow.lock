@@ -1,0 +1,14 @@
+speakeasyVersion: 1.277.0
+sources: {}
+targets: {}
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        openapi:
+            inputs:
+                - location: https://raw.githubusercontent.com/StyraInc/enterprise-opa/main/openapi/openapi.yaml
+    targets:
+        first-target:
+            target: java
+            source: openapi
