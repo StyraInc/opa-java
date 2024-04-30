@@ -79,8 +79,8 @@ public class App {
 
         // Perform the request against OPA.
         try {
-            allowed = opa.check(input, "policy/allow");
-            violations = opa.evaluate(input, "policy/violations");
+            allowed = opa.check("policy/allow", input);
+            violations = opa.evaluate("policy/violations", input);
         } catch (OPAException e ) {
             // Note that OPAException usually wraps other exception types, in
             // case you need to do more complex error handling.
