@@ -78,6 +78,9 @@ mv build.gradle.tmp3 build.gradle
 # Automatically remove any unused deps SE may have added.
 ./gradlew fixGradleLint
 
+# Update settings.gradle to set the root project name.
+sed -i "s#rootProject.name = 'openapi'#rootProject.name = 'opa'#g" ./settings.gradle
+
 # Check for any suspicious strings that might indicate a bad group or artifact
 # ID. If this check fails, most likely the generated build.gradle has changed
 # in a way that the sed pipeline above failed to account for.
