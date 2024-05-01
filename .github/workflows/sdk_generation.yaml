@@ -39,8 +39,8 @@ jobs:
           sudo chown -R runner ./repo
       - name: Configure git
         run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
       - name: Create Test Commit
         working-directory: ./repo
         run: |
