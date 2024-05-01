@@ -47,7 +47,7 @@ jobs:
           echo "this is a test $(date)" > test.txt
           git add test.txt
           git commit -m "add test file"
-          git push origin "$(git rev-parse --abbrev-ref HEAD)"
+          git push
       - run: |
           whoami
           pwd
