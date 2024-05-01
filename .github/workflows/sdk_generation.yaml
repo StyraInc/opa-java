@@ -57,6 +57,10 @@ jobs:
           mkdir -p ./liverepo
           cd liverepo
           gh pr checkout "$ref"
+          pwd
+          ls -lah
+          echo "==="
+          ls -lah ..
           ./scripts/post-generate-hook.sh
           if [ 0 -ge "$(git diff | wc -l)" ] ; then
             echo "no changes detected after fixup, nothing to commit"
