@@ -20,19 +20,20 @@ jobs:
     #  force: ${{ github.event.inputs.force }}
     #  mode: pr
     #  speakeasy_version: latest
-    secrets:
-      github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
-      slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+    #secrets:
+    #  github_access_token: ${{ secrets.GITHUB_TOKEN }}
+    #  speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
+    #  slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+    runs-on: ubuntu-latest
     steps:
       - name: Run Generation Workflow
         uses: speakeasy-api/sdk-generation-action@v15
         with:
           speakeasy_version: latest
-          github_access_token: ${{ secrets.github_access_token }}
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
           mode: pr
           force: ${{ github.event.inputs.force }}
-          speakeasy_api_key: ${{ secrets.speakeasy_api_key }}
+          speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
       - run: |
           pwd
           ls -lah
