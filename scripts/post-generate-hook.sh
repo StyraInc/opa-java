@@ -4,7 +4,7 @@
 # complete, but before adding the "post generation fixup" commit. Any additional
 # steps that need
 
-cd "$(dirname "$0"/..)"
+cd "$(dirname "$0")/.."
 set -e
 set -u
 set -x
