@@ -34,6 +34,16 @@ jobs:
           mode: pr
           force: ${{ github.event.inputs.force }}
           speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
+      - name: Change Repo Ownership
+        run: |
+          sudo chown -R runner ./repo
+      - name: Create Test Commit
+        working-directory: ./repo
+        run: |
+          echo "this is a test $(date)" > test.txt
+          git add test.txt
+          git commit -m "add test file"
+          git push origin "$(git rev-parse --abbrev-ref HEAD)"
       - run: |
           whoami
           pwd
@@ -46,11 +56,11 @@ jobs:
           done
         name: Record CWD and Listing
       - run: |
-          sudo git status
+          git status
         name: Record Git Status
         working-directory: ./repo
       - run: |
-          sudo git log --format=oneline | head -n 10
+          git log --format=oneline | head -n 10
         name: Record Recent Commits
         working-directory: ./repo
 
