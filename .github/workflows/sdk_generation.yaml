@@ -20,9 +20,9 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - name: Tune GitHub-hosted runner network
-        uses: smorimoto/tune-github-hosted-runner-network@v1
       - uses: actions/checkout@v4
+      - uses: gradle/gradle-build-action@v2
+      - uses: smorimoto/tune-github-hosted-runner-network@v1
       - name: Run Generation Workflow
         uses: speakeasy-api/sdk-generation-action@v15
         with:
@@ -54,3 +54,5 @@ jobs:
           msg="post-generation for $ref at $(date)"
           git commit -am "$msg"
           git push origin "$ref"
+      - name: Run Tests & Lint
+        run: ./gradlew test lint checkstyleMain checkstyleTest
