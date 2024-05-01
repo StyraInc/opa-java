@@ -54,29 +54,15 @@ jobs:
           mkdir -p ./liverepo
           cd liverepo
           gh pr checkout "$(cd ../repo && git rev-parse --abbrev-ref HEAD)"
-      - run: |
-          whoami
-          pwd
-          ls -lah
-          for d in * ; do
-            if [ -d "$d" ] ; then
-              echo "===== $d"
-              ls -lah "$d"
-            fi
-          done
-        name: Record CWD and Listing
-      - run: |
-          git status
-        name: Record Git Status
-        working-directory: ./liverepo
-      - run: |
-          git log --format=oneline | head -n 10
-        name: Record Recent Commits
-        working-directory: ./liverepo
-      - name: Create Test Commit
+      - name: Fix build.gradle file
         working-directory: ./liverepo
         run: |
-          echo "this is a test $(date)" > test.txt
-          git add test.txt
-          git commit -m "add test file"
-          git push origin "$(git rev-parse --abbrev-ref HEAD)"
+          ref="$(git rev-parse --abbrev-ref HEAD)"
+          ./scripts/post-generate-hook.sh
+          if [ 0 -ge "$(git diff | wc -l)" ] ; then
+            echo "no changes detected after fixup, nothing to commit"
+            exit 0
+          fi
+          msg="post-generation for $ref at $(date)"
+          git commit -m "$msg"
+          git push origin "$ref"
