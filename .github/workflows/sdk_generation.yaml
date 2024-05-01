@@ -47,19 +47,16 @@ jobs:
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-      - name: Checkout PR
+      - name: Checkout PR and Apply Post-Generate Hook
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          cd repo
+          ref="$(git rev-parse --abbrev-ref HEAD)"
+          cd ..
           mkdir -p ./liverepo
           cd liverepo
-          gh pr checkout "$(cd ../repo && git rev-parse --abbrev-ref HEAD)"
-      - name: Fix build.gradle file
-        working-directory: ./liverepo
-        run: |
-          pwd
-          ls -lah
-          ref="$(git rev-parse --abbrev-ref HEAD)"
+          gh pr checkout "$ref"
           ./scripts/post-generate-hook.sh
           if [ 0 -ge "$(git diff | wc -l)" ] ; then
             echo "no changes detected after fixup, nothing to commit"
