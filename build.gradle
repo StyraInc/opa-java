@@ -34,7 +34,6 @@ model {
 
 jar {
     dependsOn(":generatePomFileForMavenPublication")
-    archiveBaseName = "opa"
 
     into("META-INF/maven/com.styra/opa") {
         from("$buildDir/pom.xml")
@@ -55,45 +54,23 @@ tasks.withType(Javadoc) {
   failOnError false
   options.addStringOption('Xdoclint:none', '-quiet')
 }
-group = "com.styra"
-version = "0.6.4"
-
-sourcesJar {
-    archiveBaseName = "opa"
-}
-
-javadocJar {
-    archiveBaseName = "opa"
-}
-
-sonatypeCentralUpload {
-    // This is your Sonatype generated username
-    username = System.getenv("SONATYPE_USERNAME")
-    // This is your sonatype generated password
-    password = System.getenv("SONATYPE_PASSWORD")
-
-    // This is a list of files to upload. Ideally you would point to your jar file, source and javadoc jar (required by central)
-    archives = files(
-      "$buildDir/libs/opa-${version}.jar",
-      "$buildDir/libs/opa-${version}-sources.jar",
-      "$buildDir/libs/opa-${version}-javadoc.jar"
-    )
-
-    // This is the pom file to upload. This is required by central
-    pom = file("$buildDir/pom.xml")
-
-    // This is your PGP private key. This is required to sign your files
-    signingKey = System.getenv("SONATYPE_SIGNING_KEY")
-    // This is your PGP private key passphrase to decrypt your private key
-    signingKeyPassphrase = System.getenv("SIGNING_KEY_PASSPHRASE")
-}
 publishing {
+    repositories {
+        maven {
+            name = "OSSRH"
+            url = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
+            credentials {
+                username = System.getenv("MAVEN_USERNAME")
+                password = System.getenv("MAVEN_PASSWORD")
+          }
+        }
+    }
 
     publications {
         maven(MavenPublication) {
             groupId = 'com.styra'
             artifactId = 'opa'
-            version = '0.6.4'
+            version = '0.6.5'
 
             from components.java
 
