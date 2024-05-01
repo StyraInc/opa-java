@@ -38,6 +38,13 @@ jobs:
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
+
+      # Note that this step will fail with an error if the SE automation did
+      # not determine that any changes were needed. I don't think that's a
+      # problem, but if it turns out to be, we could fix it by checking if the
+      # ref exists on the remote before we use `gh pr checkout`.
+      #
+      # -- CAD 2024-05-01
       - name: Checkout PR and Apply Post-Generate Hook
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
