@@ -9,4 +9,4 @@ set -e
 set -u
 set -x
 
-#./scripts/fix-build-gradle.sh
+./scripts/fix-build-gradle.sh
