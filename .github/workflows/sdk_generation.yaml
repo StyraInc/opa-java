@@ -35,6 +35,7 @@ jobs:
           force: ${{ github.event.inputs.force }}
           speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
       - run: |
+          whoami
           pwd
           ls -lah
           for d in * ; do
@@ -45,11 +46,11 @@ jobs:
           done
         name: Record CWD and Listing
       - run: |
-          git status
+          sudo git status
         name: Record Git Status
         working-directory: ./repo
       - run: |
-          git log --format=oneline | head -n 10
+          sudo git log --format=oneline | head -n 10
         name: Record Recent Commits
         working-directory: ./repo
 
