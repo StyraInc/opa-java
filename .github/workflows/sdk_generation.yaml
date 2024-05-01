@@ -25,6 +25,9 @@ jobs:
     #  speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
     #  slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - name: Run Generation Workflow
         uses: speakeasy-api/sdk-generation-action@v15
@@ -47,7 +50,7 @@ jobs:
           echo "this is a test $(date)" > test.txt
           git add test.txt
           git commit -m "add test file"
-          git push
+          git push origin "$(git rev-parse --abbrev-ref HEAD)"
       - run: |
           whoami
           pwd
