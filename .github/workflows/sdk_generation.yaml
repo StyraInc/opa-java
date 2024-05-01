@@ -15,19 +15,28 @@ permissions:
     - cron: 0 0 * * *
 jobs:
   generate:
-    uses: speakeasy-api/sdk-generation-action/.github/workflows/workflow-executor.yaml@v15
-    with:
-      force: ${{ github.event.inputs.force }}
-      mode: pr
-      speakeasy_version: latest
-    secrets:
-      github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
-      slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
-  test1:
-    runs-on: ubuntu-latest
-    needs: generate
+    #uses: speakeasy-api/sdk-generation-action/.github/workflows/workflow-executor.yaml@v15
+    #with:
+    #  force: ${{ github.event.inputs.force }}
+    #  mode: pr
+    #  speakeasy_version: latest
+    #secrets:
+    #  github_access_token: ${{ secrets.GITHUB_TOKEN }}
+    #  speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
+    #  slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
     steps:
+      - name: Run Generation Workflow
+        uses: speakeasy-api/sdk-generation-action@v15
+        with:
+          speakeasy_version: latest
+          github_access_token: ${{ secrets.github_access_token }}
+          mode: pr
+          force: ${{ github.event.inputs.force }}
+          speakeasy_api_key: ${{ secrets.speakeasy_api_key }}
+        secrets:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
+          slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
       - run: |
           pwd
           ls -lah
