@@ -35,3 +35,4 @@ java:
   outputModelSuffix: output
   projectName: api
   templateVersion: v2
+  ossrhURL: https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/
