@@ -13,6 +13,8 @@ set -e
 set -u
 set -x
 
+trap 'rm -f build.gradle.tmp*' EXIT
+
 # This AWK program replaces the plugins section of build.gradle with a custom
 # one, specified in the variable `f`. The variable `p` is used to track whether
 # we are still parsing the `plugins` block or not. In explanation of each of
@@ -48,7 +50,9 @@ set -x
 # door. By writing to a temp file and then overwriting the main one, we can
 # ensure that the modification process is atomic (assuming `mv` is atomic on
 # the hose filesystem).
-trap 'rm -f build.gradle.tmp1 build.gradle.tmp2' EXIT
+#
+# This does seem to be adding an extra trailing newline to after the plugins
+# block each time that it runs, presumably due to the default print($0) action.
 awk -v f=./scripts/build-plugins.gradle 'p==1 && $1 != "}" {next} $1 == "plugins" && $2 == "{" && p !=1 {p=1; while((getline l<f)){print(l)}; next} $1 == "}" && p == 1 {p=0;next} {print($0)}' < build.gradle > build.gradle.tmp1
 
 
@@ -58,6 +62,18 @@ awk -v f=./scripts/build-plugins.gradle 'p==1 && $1 != "}" {next} $1 == "plugins
 # lines that it sees unmodified. When the `END` block is run, it simply outputs
 # the footer file.
 awk -v f=./scripts/build-footer.gradle '$1 == "//" && $2 == "===" && $3 == "build-footer" && $4 == "===" {exit} {print($0)} END {print("// === build-footer ==="); while((getline l<f)){print(l)}}' < build.gradle.tmp1 > build.gradle.tmp2
-mv build.gradle.tmp2 build.gradle
 
+# Rewrite the artifact and group ID to be one level "up", so we publish
+# com.styra.opa rather than com.styra.opa.openapi.
+sed 's#into("META-INF/maven/com.styra.opa/openapi")#into("META-INF/maven/com.styra/opa")#g' < build.gradle.tmp2 | \
+	sed 's#group = "com.styra.opa"#group = "com.styra"#g' | \
+	sed "s#groupId = 'com.styra.opa'#groupId = 'com.styra'#g" | \
+	sed "s#artifactId = 'openapi'#artifactId = 'opa'#g" | \
+	sed 's#archiveBaseName = "openapi"#archiveBaseName = "opa"#g' | \
+	sed 's#libs/openapi-#libs/opa-#g' > build.gradle.tmp3
+
+# Finalize changes to build.gradle
+mv build.gradle.tmp3 build.gradle
+
+# Automatically remove any unused deps SE may have added.
 ./gradlew fixGradleLint
