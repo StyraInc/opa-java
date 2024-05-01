@@ -47,7 +47,9 @@ jobs:
       - run: |
           git status
         name: Record Git Status
+        working-directory: ./repo
       - run: |
           git log --format=oneline | head -n 10
         name: Record Recent Commits
+        working-directory: ./repo
 
