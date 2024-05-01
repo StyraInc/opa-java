@@ -8,3 +8,11 @@ targets:
     first-target:
         target: java
         source: openapi
+        use_sonatype_central: false
+        publish_java: true
+        publish:
+            java:
+                ossrhUsername: c/WMQfyj
+                ossrhPassword: $ossrh_password
+                gpgSecretKey: $java_gpg_secret_key
+                gpgPassPhrase: $java_gpg_passphrase
