@@ -29,6 +29,9 @@ jobs:
       contents: write
       pull-requests: write
     steps:
+      - name: Tune GitHub-hosted runner network
+        uses: smorimoto/tune-github-hosted-runner-network@v1
+      - uses: actions/checkout@v4
       - name: Run Generation Workflow
         uses: speakeasy-api/sdk-generation-action@v15
         with:
@@ -44,13 +47,17 @@ jobs:
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-      - name: Create Test Commit
-        working-directory: ./repo
-        run: |
-          echo "this is a test $(date)" > test.txt
-          git add test.txt
-          git commit -m "add test file"
-          git push origin "$(git rev-parse --abbrev-ref HEAD)"
+      - name: Checkout PR
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh pr checkout "$(cd ./repo && git rev-parse --abbrev-ref HEAD)"
+      #- name: Create Test Commit
+      #  working-directory: ./repo
+      #  run: |
+      #    echo "this is a test $(date)" > test.txt
+      #    git add test.txt
+      #    git commit -m "add test file"
+      #    git push origin "$(git rev-parse --abbrev-ref HEAD)"
       - run: |
           whoami
           pwd
