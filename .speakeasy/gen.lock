@@ -5,8 +5,8 @@ management:
   docVersion: 0.2.0
   speakeasyVersion: 1.277.4
   generationVersion: 2.318.3
-  releaseVersion: 0.6.6
-  configChecksum: c8fa2b0bdf2599cadb3b46766eb72ba3
+  releaseVersion: 0.6.7
+  configChecksum: cfb29ac9a83ddb66910c11ad8af72bac
   repoURL: https://github.com/StyraInc/opa-java.git
   published: true
 features:
