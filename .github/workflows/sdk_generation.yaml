@@ -55,15 +55,11 @@ jobs:
           ref="$(git rev-parse --abbrev-ref HEAD)"
           cd ..
           gh pr checkout "$ref"
-          pwd
-          ls -lah
-          echo "==="
-          ls -lah ..
           ./scripts/post-generate-hook.sh
           if [ 0 -ge "$(git diff | wc -l)" ] ; then
             echo "no changes detected after fixup, nothing to commit"
             exit 0
           fi
           msg="post-generation for $ref at $(date)"
-          git commit -m "$msg"
+          git commit -am "$msg"
           git push origin "$ref"
