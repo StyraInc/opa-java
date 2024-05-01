@@ -54,8 +54,6 @@ jobs:
           cd repo
           ref="$(git rev-parse --abbrev-ref HEAD)"
           cd ..
-          mkdir -p ./liverepo
-          cd liverepo
           gh pr checkout "$ref"
           pwd
           ls -lah
