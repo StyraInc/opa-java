@@ -1,4 +1,5 @@
 workflowVersion: 1.0.0
+speakeasyVersion: latest
 sources:
     openapi:
         inputs:
@@ -7,11 +8,11 @@ targets:
     opa:
         target: java
         source: openapi
+        use_sonatype_central: false
+        publish_java: true
         publish:
             java:
-                ossrhUsername: $OSSRH_USERNAME
-                ossrhPassword: $OSSRH_PASSWORD
-                gpgSecretKey: $JAVA_GPG_SECRET_KEY
-                gpgPassPhrase: $JAVA_GPG_PASSPHRASE
-                useSonatypeLegacy: true
-
+                ossrhUsername: c/WMQfyj
+                ossrhPassword: $ossrh_password
+                gpgSecretKey: $java_gpg_secret_key
+                gpgPassPhrase: $java_gpg_passphrase

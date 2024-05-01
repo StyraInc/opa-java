@@ -2,15 +2,10 @@
 ```java
 package hello.world;
 
-import com.styra.opa.sdk.Opa;
-import com.styra.opa.sdk.models.operations.*;
-import com.styra.opa.sdk.models.operations.ExecutePolicyWithInputRequest;
-import com.styra.opa.sdk.models.operations.ExecutePolicyWithInputRequestBody;
-import com.styra.opa.sdk.models.operations.ExecutePolicyWithInputResponse;
-import com.styra.opa.sdk.models.shared.*;
-import com.styra.opa.sdk.models.shared.Explain;
-import com.styra.opa.sdk.models.shared.GzipAcceptEncoding;
-import com.styra.opa.sdk.models.shared.GzipContentEncoding;
+import com.styra.opa.openapi.OpaApiClient;
+import com.styra.opa.openapi.models.operations.*;
+import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputResponse;
+import com.styra.opa.openapi.models.shared.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -22,17 +17,13 @@ public class Application {
 
     public static void main(String[] args) {
         try {
-            Opa sdk = Opa.builder()
+            OpaApiClient sdk = OpaApiClient.builder()
                 .build();
 
             ExecutePolicyWithInputRequest req = ExecutePolicyWithInputRequest.builder()
                 .path("app/rbac")
                 .requestBody(ExecutePolicyWithInputRequestBody.builder()
-                        .input(Input.of(java.util.Map.ofEntries(
-                                    entry("user", "alice"),
-                                    entry("action", "read"),
-                                    entry("object", "id123"),
-                                    entry("type", "dog"))))
+                        .input(Input.of(false))
                         .build())
                 .contentEncoding(GzipContentEncoding.GZIP)
                 .acceptEncoding(GzipAcceptEncoding.GZIP)
@@ -51,7 +42,11 @@ public class Application {
             if (res.successfulPolicyEvaluation().isPresent()) {
                 // handle response
             }
-        } catch (com.styra.opa.sdk.models.errors.SDKError e) {
+        } catch (com.styra.opa.openapi.models.errors.ClientError e) {
+            // handle exception
+        } catch (com.styra.opa.openapi.models.errors.ServerError e) {
+            // handle exception
+        } catch (com.styra.opa.openapi.models.errors.SDKError e) {
             // handle exception
         } catch (Exception e) {
             // handle exception

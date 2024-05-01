@@ -1,6 +1,6 @@
 configVersion: 2.0.0
 generation:
-  sdkClassName: opa
+  sdkClassName: OpaApiClient
   maintainOpenAPIOrder: true
   usageSnippets:
     optionalPropertyRendering: withExample
@@ -12,9 +12,10 @@ generation:
   auth:
     oAuth2ClientCredentialsEnabled: false
 java:
-  version: 0.4.3
+  version: 0.6.3
   additionalDependencies: []
-  artifactID: sdk
+  artifactID: openapi
+  clientServerStatusCodesAsErrors: true
   companyEmail: devrel@styra.com
   companyName: Styra
   companyURL: www.styra.com
