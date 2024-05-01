@@ -11,6 +11,7 @@ plugins {
     id 'cl.franciscosolis.sonatype-central-upload' version '1.0.0'
 }
 
+
 compileJava.options.encoding = "UTF-8"
 compileTestJava.options.encoding = "UTF-8"
 
@@ -55,7 +56,7 @@ tasks.withType(Javadoc) {
   options.addStringOption('Xdoclint:none', '-quiet')
 }
 group = "com.styra"
-version = "0.6.3"
+version = "0.6.4"
 
 sourcesJar {
     archiveBaseName = "opa"
@@ -92,7 +93,7 @@ publishing {
         maven(MavenPublication) {
             groupId = 'com.styra'
             artifactId = 'opa'
-            version = '0.6.3'
+            version = '0.6.4'
 
             from components.java
 
