@@ -57,6 +57,8 @@ jobs:
       - name: Fix build.gradle file
         working-directory: ./liverepo
         run: |
+          pwd
+          ls -lah
           ref="$(git rev-parse --abbrev-ref HEAD)"
           ./scripts/post-generate-hook.sh
           if [ 0 -ge "$(git diff | wc -l)" ] ; then
