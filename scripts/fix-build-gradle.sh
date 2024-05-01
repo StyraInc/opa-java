@@ -77,3 +77,22 @@ mv build.gradle.tmp3 build.gradle
 
 # Automatically remove any unused deps SE may have added.
 ./gradlew fixGradleLint
+
+# Check for any suspicious strings that might indicate a bad group or artifact
+# ID. If this check fails, most likely the generated build.gradle has changed
+# in a way that the sed pipeline above failed to account for.
+groupartifactlint() {
+	set +e
+	re="$1"
+	m="$(grep -E -n --context=3 "$re" build.gradle)"
+	if [ "$(echo "$m" | wc -c)" -gt 1 ] ; then
+		echo "WARNING: possible incorrect group/artifact ID rewrite, '$0' may need updated" 1>&2
+		echo "$m" 1>&2
+		exit 1
+	fi
+}
+
+set +x
+groupartifactlint 'com[.]styra[.]opa[.]openapi'
+groupartifactlint 'opa[.]openapi'
+groupartifactlint 'com[.]styra[.]opa/openapi' 
