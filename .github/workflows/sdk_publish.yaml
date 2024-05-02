@@ -8,12 +8,29 @@ name: Publish
       - '*/RELEASES.md'
 jobs:
   publish:
-    uses: speakeasy-api/sdk-generation-action/.github/workflows/sdk-publish.yaml@v15
-    secrets:
-      github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      java_gpg_passphrase: ${{ secrets.JAVA_GPG_PASSPHRASE }}
-      java_gpg_secret_key: ${{ secrets.JAVA_GPG_SECRET_KEY }}
-      ossrh_password: ${{ secrets.OSSRH_PASSWORD }}
-      ossrh_username: ${{ secrets.OSSRH_USERNAME }}
-      slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
-      speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
+    steps:
+      - name: Tune GitHub-hosted runner network
+        uses: smorimoto/tune-github-hosted-runner-network@v1
+      - uses: actions/checkout@v3
+      - name: Set up Java
+        uses: actions/setup-java@v3
+      - name: Publish to Sonatype (legacy)
+        run: |-
+          pwd
+          ./gradlew publish --no-daemon
+        if: ${{ needs.release.outputs.use_sonatype_legacy == 'true' }}
+        env:
+          MAVEN_USERNAME: ${{ secrets.ossrh_username }}
+          MAVEN_PASSWORD: ${{ secrets.ossrh_password }}
+          ORG_GRADLE_PROJECT_signingKey: ${{ secrets.java_gpg_secret_key }}
+          ORG_GRADLE_PROJECT_signingPassphrase: ${{ secrets.java_gpg_passphrase }}
+
+    #uses: speakeasy-api/sdk-generation-action/.github/workflows/sdk-publish.yaml@v15
+    #secrets:
+    #  github_access_token: ${{ secrets.GITHUB_TOKEN }}
+    #  java_gpg_passphrase: ${{ secrets.JAVA_GPG_PASSPHRASE }}
+    #  java_gpg_secret_key: ${{ secrets.JAVA_GPG_SECRET_KEY }}
+    #  ossrh_password: ${{ secrets.OSSRH_PASSWORD }}
+    #  ossrh_username: ${{ secrets.OSSRH_USERNAME }}
+    #  slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+    #  speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
