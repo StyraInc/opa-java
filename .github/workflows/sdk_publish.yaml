@@ -24,7 +24,6 @@ jobs:
         run: |-
           pwd
           ./gradlew publish --no-daemon
-        if: ${{ needs.release.outputs.use_sonatype_legacy == 'true' }}
         env:
           MAVEN_USERNAME: ${{ secrets.ossrh_username }}
           MAVEN_PASSWORD: ${{ secrets.ossrh_password }}
