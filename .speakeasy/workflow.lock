@@ -14,8 +14,8 @@ workflow:
             source: openapi
             publish:
                 java:
-                    ossrhUsername: c/WMQfyj
-                    ossrhPassword: $ossrh_password
-                    gpgSecretKey: $java_gpg_secret_key
-                    gpgPassPhrase: $java_gpg_passphrase
+                    ossrhUsername: $OSSRH_USERNAME
+                    ossrhPassword: $OSSRH_PASSWORD
+                    gpgSecretKey: $JAVA_GPG_SECRET_KEY
+                    gpgPassPhrase: $JAVA_GPG_PASSPHRASE
                     useSonatypeLegacy: true
