@@ -8,6 +8,8 @@ name: Publish
       - '*/RELEASES.md'
 jobs:
   publish:
+    name: Publish Java SDK
+    runs-on: ubuntu-latest
     steps:
       - name: Tune GitHub-hosted runner network
         uses: smorimoto/tune-github-hosted-runner-network@v1
