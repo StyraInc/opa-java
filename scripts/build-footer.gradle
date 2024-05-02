@@ -2,6 +2,14 @@
 // scripts/fix-build-gradle.sh and should not be managed by hand, as changes
 // will be overwritten.
 
+sourcesJar {
+    archiveBaseName = "opa"
+}
+
+javadocJar {
+    archiveBaseName = "opa"
+}
+
 tasks.withType(Javadoc) {
   autoLintGradle.enabled = false
   failOnError false
