@@ -173,3 +173,13 @@ Based on:
 - [java v0.6.14] .
 ### Releases
 - [Maven Central v0.6.14] https://central.sonatype.com/artifact/com.styra.opa/openapi/0.6.14 - .
+
+## 2024-05-02 15:37:17
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.277.8 (2.319.10) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [java v0.6.15] .
+### Releases
+- [Maven Central v0.6.15] https://central.sonatype.com/artifact/com.styra.opa/openapi/0.6.15 - .
