@@ -8,7 +8,6 @@ targets:
     opa:
         target: java
         source: openapi
-        use_sonatype_central: false
         publish_java: true
         publish:
             java:
