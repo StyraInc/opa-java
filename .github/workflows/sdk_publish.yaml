@@ -23,7 +23,7 @@ jobs:
       - name: Publish to Sonatype (legacy)
         run: |-
           pwd
-          ./gradlew publish --no-daemon
+          ./gradlew publish -x autoLintGradle --no-daemon
         env:
           MAVEN_USERNAME: ${{ secrets.ossrh_username }}
           MAVEN_PASSWORD: ${{ secrets.ossrh_password }}
