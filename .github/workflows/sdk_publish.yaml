@@ -29,13 +29,40 @@ jobs:
           MAVEN_PASSWORD: ${{ secrets.ossrh_password }}
           ORG_GRADLE_PROJECT_signingKey: ${{ secrets.java_gpg_secret_key }}
           ORG_GRADLE_PROJECT_signingPassphrase: ${{ secrets.java_gpg_passphrase }}
+      - uses: ravsamhq/notify-slack-action@v2
+        if: always() && env.SLACK_WEBHOOK_URL != ''
+        with:
+          status: ${{ job.status }}
+          token: ${{ secrets.github_access_token }}
+          notify_when: "failure"
+          notification_title: "Failed to Publish Maven Central Release"
+          message_format: "{emoji} *{workflow}* {status_message} in <{repo_url}|{repo}>"
+          footer: "Linked Repo <{repo_url}|{repo}> | <{run_url}|View Run>"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
-    #uses: speakeasy-api/sdk-generation-action/.github/workflows/sdk-publish.yaml@v15
-    #secrets:
-    #  github_access_token: ${{ secrets.GITHUB_TOKEN }}
-    #  java_gpg_passphrase: ${{ secrets.JAVA_GPG_PASSPHRASE }}
-    #  java_gpg_secret_key: ${{ secrets.JAVA_GPG_SECRET_KEY }}
-    #  ossrh_password: ${{ secrets.OSSRH_PASSWORD }}
-    #  ossrh_username: ${{ secrets.OSSRH_USERNAME }}
-    #  slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
-    #  speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
+  release:
+    name: Create Github Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Tune GitHub-hosted runner network
+        uses: smorimoto/tune-github-hosted-runner-network@v1
+      - id: release
+        uses: speakeasy-api/sdk-generation-action@v15
+        with:
+          github_access_token: ${{ secrets.github_access_token }}
+          action: "release"
+          speakeasy_api_key: ${{ secrets.speakeasy_api_key }}
+          speakeasy_server_url: ${{ inputs.speakeasy_server_url }}
+      - uses: ravsamhq/notify-slack-action@v2
+        if: always() && env.SLACK_WEBHOOK_URL != ''
+        with:
+          status: ${{ job.status }}
+          token: ${{ secrets.github_access_token }}
+          notify_when: "failure"
+          notification_title: "Failed to create Github Release"
+          message_format: "{emoji} *{workflow}* {status_message} in <{repo_url}|{repo}>"
+          footer: "Linked Repo <{repo_url}|{repo}> | <{run_url}|View Run>"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
