@@ -175,7 +175,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'com.styra.opa.openapi:api:0.6.8'
+implementation 'com.styra.opa.openapi:api:0.6.9'
 ```
 
 Maven:
@@ -183,7 +183,7 @@ Maven:
 <dependency>
     <groupId>com.styra.opa.openapi</groupId>
     <artifactId>api</artifactId>
-    <version>0.6.8</version>
+    <version>0.6.9</version>
 </dependency>
 ```
 
@@ -219,6 +219,7 @@ import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 import static java.util.Map.entry;
 
 public class Application {
@@ -233,14 +234,6 @@ public class Application {
                 .requestBody(ExecutePolicyWithInputRequestBody.builder()
                         .input(Input.of(false))
                         .build())
-                .contentEncoding(GzipContentEncoding.GZIP)
-                .acceptEncoding(GzipAcceptEncoding.GZIP)
-                .pretty(false)
-                .provenance(false)
-                .explain(Explain.NOTES)
-                .metrics(false)
-                .instrument(false)
-                .strictBuiltinErrors(false)
                 .build();
 
             ExecutePolicyWithInputResponse res = sdk.executePolicyWithInput()
@@ -299,6 +292,7 @@ import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 import static java.util.Map.entry;
 
 public class Application {
@@ -311,13 +305,6 @@ public class Application {
 
             ExecutePolicyRequest req = ExecutePolicyRequest.builder()
                 .path("app/rbac")
-                .acceptEncoding(GzipAcceptEncoding.GZIP)
-                .pretty(false)
-                .provenance(false)
-                .explain(Explain.NOTES)
-                .metrics(false)
-                .instrument(false)
-                .strictBuiltinErrors(false)
                 .build();
 
             ExecutePolicyResponse res = sdk.executePolicy()
@@ -356,6 +343,7 @@ import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 import static java.util.Map.entry;
 
 public class Application {
@@ -368,13 +356,6 @@ public class Application {
 
             ExecutePolicyRequest req = ExecutePolicyRequest.builder()
                 .path("app/rbac")
-                .acceptEncoding(GzipAcceptEncoding.GZIP)
-                .pretty(false)
-                .provenance(false)
-                .explain(Explain.NOTES)
-                .metrics(false)
-                .instrument(false)
-                .strictBuiltinErrors(false)
                 .build();
 
             ExecutePolicyResponse res = sdk.executePolicy()
@@ -423,6 +404,7 @@ import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 import static java.util.Map.entry;
 
 public class Application {
@@ -434,13 +416,6 @@ public class Application {
 
             ExecutePolicyRequest req = ExecutePolicyRequest.builder()
                 .path("app/rbac")
-                .acceptEncoding(GzipAcceptEncoding.GZIP)
-                .pretty(false)
-                .provenance(false)
-                .explain(Explain.NOTES)
-                .metrics(false)
-                .instrument(false)
-                .strictBuiltinErrors(false)
                 .build();
 
             ExecutePolicyResponse res = sdk.executePolicy()

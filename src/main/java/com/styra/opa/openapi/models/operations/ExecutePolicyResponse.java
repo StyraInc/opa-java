@@ -99,6 +99,7 @@ public class ExecutePolicyResponse implements com.styra.opa.openapi.utils.Respon
      * The server also returns 200 if the path refers to an undefined document. In this case, the response will not contain a result property.
      * 
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<com.styra.opa.openapi.models.shared.SuccessfulPolicyEvaluation> successfulPolicyEvaluation() {
         return (Optional<com.styra.opa.openapi.models.shared.SuccessfulPolicyEvaluation>) successfulPolicyEvaluation;

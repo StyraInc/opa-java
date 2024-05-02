@@ -89,6 +89,7 @@ public class HealthResponse implements com.styra.opa.openapi.utils.Response {
     /**
      * OPA service is healthy. If the bundles option is specified then all configured bundles have been activated. If the plugins option is specified then all plugins are in an OK state.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<com.styra.opa.openapi.models.shared.HealthyServer> healthyServer() {
         return (Optional<com.styra.opa.openapi.models.shared.HealthyServer>) healthyServer;

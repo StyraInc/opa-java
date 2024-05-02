@@ -70,26 +70,31 @@ public class Provenance {
         this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
+    @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<String> version() {
         return (Optional<String>) version;
     }
 
+    @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<String> buildCommit() {
         return (Optional<String>) buildCommit;
     }
 
+    @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<OffsetDateTime> buildTimestamp() {
         return (Optional<OffsetDateTime>) buildTimestamp;
     }
 
+    @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<String> buildHost() {
         return (Optional<String>) buildHost;
     }
 
+    @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<java.util.Map<String, Revision>> bundles() {
         return (Optional<java.util.Map<String, Revision>>) bundles;
