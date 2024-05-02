@@ -60,6 +60,7 @@ public class ServerErrorErrors {
         return message;
     }
 
+    @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<ServerErrorLocation> location() {
         return (Optional<ServerErrorLocation>) location;

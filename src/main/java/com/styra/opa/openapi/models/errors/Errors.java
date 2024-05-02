@@ -60,6 +60,7 @@ public class Errors {
         return message;
     }
 
+    @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<Location> location() {
         return (Optional<Location>) location;

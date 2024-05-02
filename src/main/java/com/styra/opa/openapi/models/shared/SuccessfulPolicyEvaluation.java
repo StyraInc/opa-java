@@ -72,6 +72,7 @@ public class SuccessfulPolicyEvaluation {
     /**
      * The base or virtual document referred to by the URL path. If the path is undefined, this key will be omitted.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<Result> result() {
         return (Optional<Result>) result;
@@ -80,6 +81,7 @@ public class SuccessfulPolicyEvaluation {
     /**
      * If query metrics are enabled, this field contains query performance metrics collected during the parse, compile, and evaluation steps.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<java.util.Map<String, java.lang.Object>> metrics() {
         return (Optional<java.util.Map<String, java.lang.Object>>) metrics;
@@ -88,6 +90,7 @@ public class SuccessfulPolicyEvaluation {
     /**
      * If decision logging is enabled, this field contains a string that uniquely identifies the decision. The identifier will be included in the decision log event for this decision. Callers can use the identifier for correlation purposes.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<String> decisionId() {
         return (Optional<String>) decisionId;
@@ -96,6 +99,7 @@ public class SuccessfulPolicyEvaluation {
     /**
      * Provenance information can be requested on individual API calls and are returned inline with the API response. To obtain provenance information on an API call, specify the `provenance=true` query parameter when executing the API call.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<Provenance> provenance() {
         return (Optional<Provenance>) provenance;
