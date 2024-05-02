@@ -7,6 +7,5 @@ plugins {
     id 'checkstyle'
     id 'maven-publish'
     id 'signing'
-    id 'cl.franciscosolis.sonatype-central-upload' version '1.0.0'
 }
 
