@@ -70,7 +70,7 @@ publishing {
         maven(MavenPublication) {
             groupId = 'com.styra'
             artifactId = 'opa'
-            version = '0.6.12'
+            version = '0.6.13'
 
             from components.java
 
