@@ -49,6 +49,8 @@ jobs:
         uses: smorimoto/tune-github-hosted-runner-network@v1
       - id: release
         uses: speakeasy-api/sdk-generation-action@v15
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           github_access_token: ${{ secrets.github_access_token }}
           action: "release"
