@@ -1,7 +1,7 @@
 # OPA Java SDK
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Maven Central Version](https://img.shields.io/maven-central/v/com.styra/opa?label=Maven%20Central&logo=apache-maven&color=%2324b6e0)](https://mvnrepository.com/artifact/com.styra/opa)
+[![Maven Central Version](https://img.shields.io/maven-central/v/com.styra/opa?label=Maven%20Central&logo=apache-maven&color=%2324b6e0)](https://central.sonatype.com/artifact/com.styra/opa)
 
 > [!IMPORTANT]
 > The documentation for this SDK lives at https://docs.styra.com/sdk, with reference documentation available at https://styrainc.github.io/opa-java
