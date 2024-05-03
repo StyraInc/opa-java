@@ -175,7 +175,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'com.styra.opa.openapi:api:0.6.17'
+implementation 'com.styra.opa.openapi:api:0.6.18'
 ```
 
 Maven:
@@ -183,7 +183,7 @@ Maven:
 <dependency>
     <groupId>com.styra.opa.openapi</groupId>
     <artifactId>api</artifactId>
-    <version>0.6.17</version>
+    <version>0.6.18</version>
 </dependency>
 ```
 
@@ -212,7 +212,6 @@ package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
 import com.styra.opa.openapi.models.operations.*;
-import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputResponse;
 import com.styra.opa.openapi.models.shared.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -224,7 +223,7 @@ import static java.util.Map.entry;
 
 public class Application {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         try {
             OpaApiClient sdk = OpaApiClient.builder()
                 .build();
@@ -245,12 +244,16 @@ public class Application {
             }
         } catch (com.styra.opa.openapi.models.errors.ClientError e) {
             // handle exception
+            throw e;
         } catch (com.styra.opa.openapi.models.errors.ServerError e) {
             // handle exception
+            throw e;
         } catch (com.styra.opa.openapi.models.errors.SDKError e) {
             // handle exception
+            throw e;
         } catch (Exception e) {
             // handle exception
+            throw e;
         }
     }
 }
@@ -285,7 +288,6 @@ package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
 import com.styra.opa.openapi.models.operations.*;
-import com.styra.opa.openapi.models.operations.ExecutePolicyResponse;
 import com.styra.opa.openapi.models.shared.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -297,7 +299,7 @@ import static java.util.Map.entry;
 
 public class Application {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         try {
             OpaApiClient sdk = OpaApiClient.builder()
                 .serverIndex(0)
@@ -316,12 +318,16 @@ public class Application {
             }
         } catch (com.styra.opa.openapi.models.errors.ClientError e) {
             // handle exception
+            throw e;
         } catch (com.styra.opa.openapi.models.errors.ServerError e) {
             // handle exception
+            throw e;
         } catch (com.styra.opa.openapi.models.errors.SDKError e) {
             // handle exception
+            throw e;
         } catch (Exception e) {
             // handle exception
+            throw e;
         }
     }
 }
@@ -336,7 +342,6 @@ package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
 import com.styra.opa.openapi.models.operations.*;
-import com.styra.opa.openapi.models.operations.ExecutePolicyResponse;
 import com.styra.opa.openapi.models.shared.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -348,7 +353,7 @@ import static java.util.Map.entry;
 
 public class Application {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         try {
             OpaApiClient sdk = OpaApiClient.builder()
                 .serverURL("http://localhost:8181")
@@ -367,12 +372,16 @@ public class Application {
             }
         } catch (com.styra.opa.openapi.models.errors.ClientError e) {
             // handle exception
+            throw e;
         } catch (com.styra.opa.openapi.models.errors.ServerError e) {
             // handle exception
+            throw e;
         } catch (com.styra.opa.openapi.models.errors.SDKError e) {
             // handle exception
+            throw e;
         } catch (Exception e) {
             // handle exception
+            throw e;
         }
     }
 }
@@ -397,7 +406,6 @@ package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
 import com.styra.opa.openapi.models.operations.*;
-import com.styra.opa.openapi.models.operations.ExecutePolicyResponse;
 import com.styra.opa.openapi.models.shared.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -409,7 +417,7 @@ import static java.util.Map.entry;
 
 public class Application {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         try {
             OpaApiClient sdk = OpaApiClient.builder()
                 .build();
@@ -427,12 +435,16 @@ public class Application {
             }
         } catch (com.styra.opa.openapi.models.errors.ClientError e) {
             // handle exception
+            throw e;
         } catch (com.styra.opa.openapi.models.errors.ServerError e) {
             // handle exception
+            throw e;
         } catch (com.styra.opa.openapi.models.errors.SDKError e) {
             // handle exception
+            throw e;
         } catch (Exception e) {
             // handle exception
+            throw e;
         }
     }
 }
