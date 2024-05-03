@@ -10,23 +10,7 @@ You can use the Styra OPA SDK to connect to [Open Policy Agent](https://www.open
 
 ## SDK Installation
 
-If you are using Maven, add the following to your `pom.xml` dependencies list:
-
-```xml
-<dependency>
-    <groupId>com.styra</groupId>
-    <artifactId>opa</artifactId>
-    <version>0.5.1</version>
-</dependency>
-```
-
-If you are using Gradle, add the following to your build.gradle dependencies list:
-
-```groovy
-dependencies {
-    implementation 'com.styra:opa:0.5.1'
-}
-```
+This package is published on Maven Central as [`com.styra/opa`](https://central.sonatype.com/artifact/com.styra/opa/overview). The Maven Central page includes up-to-date instructions to add it as a dependency to your Java project, tailored for a variety of build systems including Maven and Gradle.
 
 If you wish to build from source and publish the SDK artifact to your local Maven repository (on your filesystem) then use the following command (after cloning the git repo locally):
 
