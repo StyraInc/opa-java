@@ -1,8 +1,15 @@
 site_name: OPA-Java SDK Documentation
 site_url: "https://styrainc.github.io/opa-java/"
+markdown_extensions:
+  - admonition
 nav:
   - 'Home': "index.md"
   - 'GitHub': "https://github.com/StyraInc/opa-java"
   - 'Javadoc': "javadoc"
   - 'Models': "models"
   - 'SDKs': "sdks"
+  - 'Maintenance':
+    - "Procedure: Add a Documentation Page": "maintenance/procedure-add-doc.md"
+    - "Procedure: Modify Styra-Managed Code": "maintenance/procedure-change-managed.md"
+    - "Procedure: Regenerate Speakeasy-Managed Code": "maintenance/procedure-change-speakeasy.md"
+    - "Procedure: Release": "maintenance/procedure-release.md"
