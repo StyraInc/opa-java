@@ -1,0 +1,35 @@
+speakeasyVersion: 1.279.0
+sources:
+    openapi:
+        sourceNamespace: openapi
+        sourceRevisionDigest: sha256:e9a8897d8484c13df78da2573ec76789729f15fde263b7a6be93210230aaf64f
+        sourceBlobDigest: sha256:9470fe04b19a63f05effd414c2ba3386671c775f5c1fd1754e8e8c37605a2093
+        tags:
+            - latest
+targets:
+    opa:
+        source: openapi
+        sourceNamespace: openapi
+        sourceRevisionDigest: sha256:e9a8897d8484c13df78da2573ec76789729f15fde263b7a6be93210230aaf64f
+        sourceBlobDigest: sha256:9470fe04b19a63f05effd414c2ba3386671c775f5c1fd1754e8e8c37605a2093
+        outLocation: /github/workspace/repo
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        openapi:
+            inputs:
+                - location: https://raw.githubusercontent.com/StyraInc/enterprise-opa/main/openapi/openapi.yaml
+            registry:
+                location: registry.speakeasyapi.dev/styra/styra/openapi
+    targets:
+        opa:
+            target: java
+            source: openapi
+            publish:
+                java:
+                    ossrhUsername: $OSSRH_USERNAME
+                    ossrhPassword: $OSSRH_PASSWORD
+                    gpgSecretKey: $JAVA_GPG_SECRET_KEY
+                    gpgPassPhrase: $JAVA_GPG_PASSPHRASE
+                    useSonatypeLegacy: true

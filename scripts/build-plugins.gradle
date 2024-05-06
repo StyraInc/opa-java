@@ -5,4 +5,7 @@ plugins {
     id 'java'
     id "nebula.lint" version "17.8.0"
     id 'checkstyle'
+    id 'maven-publish'
+    id 'signing'
 }
+

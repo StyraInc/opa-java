@@ -12,7 +12,7 @@ generation:
   auth:
     oAuth2ClientCredentialsEnabled: false
 java:
-  version: 0.5.1
+  version: 0.6.18
   additionalDependencies: []
   artifactID: openapi
   clientServerStatusCodesAsErrors: true
@@ -32,6 +32,7 @@ java:
       webhooks: models/webhooks
   inputModelSuffix: input
   maxMethodParams: 4
+  ossrhURL: https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/
   outputModelSuffix: output
   projectName: api
   templateVersion: v2

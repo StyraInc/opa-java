@@ -22,34 +22,24 @@ package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
 import com.styra.opa.openapi.models.operations.*;
-import com.styra.opa.openapi.models.operations.ExecutePolicyRequest;
-import com.styra.opa.openapi.models.operations.ExecutePolicyResponse;
 import com.styra.opa.openapi.models.shared.*;
-import com.styra.opa.openapi.models.shared.Explain;
-import com.styra.opa.openapi.models.shared.GzipAcceptEncoding;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 import static java.util.Map.entry;
 
 public class Application {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         try {
             OpaApiClient sdk = OpaApiClient.builder()
                 .build();
 
             ExecutePolicyRequest req = ExecutePolicyRequest.builder()
                 .path("app/rbac")
-                .acceptEncoding(GzipAcceptEncoding.GZIP)
-                .pretty(false)
-                .provenance(false)
-                .explain(Explain.NOTES)
-                .metrics(false)
-                .instrument(false)
-                .strictBuiltinErrors(false)
                 .build();
 
             ExecutePolicyResponse res = sdk.executePolicy()
@@ -61,12 +51,16 @@ public class Application {
             }
         } catch (com.styra.opa.openapi.models.errors.ClientError e) {
             // handle exception
+            throw e;
         } catch (com.styra.opa.openapi.models.errors.ServerError e) {
             // handle exception
+            throw e;
         } catch (com.styra.opa.openapi.models.errors.SDKError e) {
             // handle exception
+            throw e;
         } catch (Exception e) {
             // handle exception
+            throw e;
         }
     }
 }
@@ -84,11 +78,11 @@ public class Application {
 **[Optional<? extends com.styra.opa.openapi.models.operations.ExecutePolicyResponse>](../../models/operations/ExecutePolicyResponse.md)**
 ### Errors
 
-| Error Object                                    | Status Code                                     | Content Type                                    |
-| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
-| com.styra.opa.openapi.models.errors.ClientError | 400                                             | application/json                                |
-| com.styra.opa.openapi.models.errors.ServerError | 500                                             | application/json                                |
-| models/errors/SDKError                          | 4xx-5xx                                         | */*                                             |
+| Error Object              | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| models/errors/ClientError | 400                       | application/json          |
+| models/errors/ServerError | 500                       | application/json          |
+| models/errors/SDKError    | 4xx-5xx                   | */*                       |
 
 ## executePolicyWithInput
 
@@ -101,23 +95,18 @@ package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
 import com.styra.opa.openapi.models.operations.*;
-import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequest;
-import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequestBody;
-import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputResponse;
 import com.styra.opa.openapi.models.shared.*;
-import com.styra.opa.openapi.models.shared.Explain;
-import com.styra.opa.openapi.models.shared.GzipAcceptEncoding;
-import com.styra.opa.openapi.models.shared.GzipContentEncoding;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 import static java.util.Map.entry;
 
 public class Application {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         try {
             OpaApiClient sdk = OpaApiClient.builder()
                 .build();
@@ -125,20 +114,8 @@ public class Application {
             ExecutePolicyWithInputRequest req = ExecutePolicyWithInputRequest.builder()
                 .path("app/rbac")
                 .requestBody(ExecutePolicyWithInputRequestBody.builder()
-                        .input(Input.of(java.util.Map.ofEntries(
-                                    entry("user", "alice"),
-                                    entry("action", "read"),
-                                    entry("object", "id123"),
-                                    entry("type", "dog"))))
+                        .input(Input.of(false))
                         .build())
-                .contentEncoding(GzipContentEncoding.GZIP)
-                .acceptEncoding(GzipAcceptEncoding.GZIP)
-                .pretty(false)
-                .provenance(false)
-                .explain(Explain.NOTES)
-                .metrics(false)
-                .instrument(false)
-                .strictBuiltinErrors(false)
                 .build();
 
             ExecutePolicyWithInputResponse res = sdk.executePolicyWithInput()
@@ -150,12 +127,16 @@ public class Application {
             }
         } catch (com.styra.opa.openapi.models.errors.ClientError e) {
             // handle exception
+            throw e;
         } catch (com.styra.opa.openapi.models.errors.ServerError e) {
             // handle exception
+            throw e;
         } catch (com.styra.opa.openapi.models.errors.SDKError e) {
             // handle exception
+            throw e;
         } catch (Exception e) {
             // handle exception
+            throw e;
         }
     }
 }
@@ -173,11 +154,11 @@ public class Application {
 **[Optional<? extends com.styra.opa.openapi.models.operations.ExecutePolicyWithInputResponse>](../../models/operations/ExecutePolicyWithInputResponse.md)**
 ### Errors
 
-| Error Object                                    | Status Code                                     | Content Type                                    |
-| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
-| com.styra.opa.openapi.models.errors.ClientError | 400                                             | application/json                                |
-| com.styra.opa.openapi.models.errors.ServerError | 500                                             | application/json                                |
-| models/errors/SDKError                          | 4xx-5xx                                         | */*                                             |
+| Error Object              | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| models/errors/ClientError | 400                       | application/json          |
+| models/errors/ServerError | 500                       | application/json          |
+| models/errors/SDKError    | 4xx-5xx                   | */*                       |
 
 ## health
 
@@ -190,19 +171,18 @@ package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
 import com.styra.opa.openapi.models.operations.*;
-import com.styra.opa.openapi.models.operations.HealthRequest;
-import com.styra.opa.openapi.models.operations.HealthResponse;
 import com.styra.opa.openapi.models.shared.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
 import static java.util.Map.entry;
 
 public class Application {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         try {
             OpaApiClient sdk = OpaApiClient.builder()
                 .build();
@@ -219,10 +199,13 @@ public class Application {
             }
         } catch (com.styra.opa.openapi.models.errors.UnhealthyServer e) {
             // handle exception
+            throw e;
         } catch (com.styra.opa.openapi.models.errors.SDKError e) {
             // handle exception
+            throw e;
         } catch (Exception e) {
             // handle exception
+            throw e;
         }
     }
 }
@@ -242,7 +225,7 @@ public class Application {
 **[Optional<? extends com.styra.opa.openapi.models.operations.HealthResponse>](../../models/operations/HealthResponse.md)**
 ### Errors
 
-| Error Object                                        | Status Code                                         | Content Type                                        |
-| --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
-| com.styra.opa.openapi.models.errors.UnhealthyServer | 500                                                 | application/json                                    |
-| models/errors/SDKError                              | 4xx-5xx                                             | */*                                                 |
+| Error Object                  | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| models/errors/UnhealthyServer | 500                           | application/json              |
+| models/errors/SDKError        | 4xx-5xx                       | */*                           |

@@ -60,9 +60,10 @@ public class Errors {
         return message;
     }
 
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<? extends Location> location() {
-        return location;
+    public Optional<Location> location() {
+        return (Optional<Location>) location;
     }
 
     public final static Builder builder() {

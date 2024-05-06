@@ -15,12 +15,51 @@ permissions:
     - cron: 0 0 * * *
 jobs:
   generate:
-    uses: speakeasy-api/sdk-generation-action/.github/workflows/workflow-executor.yaml@v15
-    with:
-      force: ${{ github.event.inputs.force }}
-      mode: pr
-      speakeasy_version: latest
-    secrets:
-      github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
-      slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: gradle/gradle-build-action@v2
+      - uses: smorimoto/tune-github-hosted-runner-network@v1
+      - name: Run Generation Workflow
+        uses: speakeasy-api/sdk-generation-action@v15
+        with:
+          speakeasy_version: latest
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          mode: pr
+          force: ${{ github.event.inputs.force }}
+          speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
+      - name: Change Repo Ownership
+        run: |
+          sudo chown -R runner ./repo
+      - name: Configure git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      # Note that this step will fail with an error if the SE automation did
+      # not determine that any changes were needed. I don't think that's a
+      # problem, but if it turns out to be, we could fix it by checking if the
+      # ref exists on the remote before we use `gh pr checkout`.
+      #
+      # -- CAD 2024-05-01
+      - name: Checkout PR and Apply Post-Generate Hook
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd repo
+          ref="$(git rev-parse --abbrev-ref HEAD)"
+          cd ..
+          gh pr checkout "$ref"
+          ./scripts/post-generate-hook.sh
+          if [ 0 -ge "$(git diff | wc -l)" ] ; then
+            echo "no changes detected after fixup, nothing to commit"
+            exit 0
+          fi
+          msg="post-generation for $ref at $(date)"
+          git commit -am "$msg"
+          git push origin "$ref"
+      - name: Run Tests & Lint
+        run: ./gradlew test lint checkstyleMain checkstyleTest

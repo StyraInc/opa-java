@@ -63,3 +63,153 @@ Based on:
 - Speakeasy CLI 1.228.1 (2.292.0) https://github.com/speakeasy-api/speakeasy
 ### Generated
 - [java v0.4.2] .
+
+## 2024-05-01 18:15:47
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.277.4 (2.318.3) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [java v0.6.4] .
+### Releases
+- [Maven Central v0.6.4] https://central.sonatype.com/artifact/com.styra.opa/openapi/0.6.4 - .
+
+## 2024-05-01 18:23:29
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.277.4 (2.318.3) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [java v0.6.5] .
+### Releases
+- [Maven Central v0.6.5] https://central.sonatype.com/artifact/com.styra.opa/openapi/0.6.5 - .
+
+## 2024-05-01 18:33:27
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.277.4 (2.318.3) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [java v0.6.6] .
+### Releases
+- [Maven Central v0.6.6] https://central.sonatype.com/artifact/com.styra.opa/openapi/0.6.6 - .
+
+## 2024-05-01 19:01:12
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.277.4 (2.318.3) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [java v0.6.7] .
+### Releases
+- [Maven Central v0.6.7] https://central.sonatype.com/artifact/com.styra.opa/openapi/0.6.7 - .
+
+## 2024-05-01 21:22:43
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.277.4 (2.318.3) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [java v0.6.8] .
+### Releases
+- [Maven Central v0.6.8] https://central.sonatype.com/artifact/com.styra.opa/openapi/0.6.8 - .
+
+## 2024-05-02 14:49:24
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.277.8 (2.319.10) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [java v0.6.9] .
+### Releases
+- [Maven Central v0.6.9] https://central.sonatype.com/artifact/com.styra.opa/openapi/0.6.9 - .
+
+## 2024-05-02 14:56:00
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.277.8 (2.319.10) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [java v0.6.10] .
+### Releases
+- [Maven Central v0.6.10] https://central.sonatype.com/artifact/com.styra.opa/openapi/0.6.10 - .
+
+## 2024-05-02 15:01:04
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.277.8 (2.319.10) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [java v0.6.11] .
+### Releases
+- [Maven Central v0.6.11] https://central.sonatype.com/artifact/com.styra.opa/openapi/0.6.11 - .
+
+## 2024-05-02 15:17:37
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.277.8 (2.319.10) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [java v0.6.12] .
+### Releases
+- [Maven Central v0.6.12] https://central.sonatype.com/artifact/com.styra.opa/openapi/0.6.12 - .
+
+## 2024-05-02 15:30:59
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.277.8 (2.319.10) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [java v0.6.13] .
+### Releases
+- [Maven Central v0.6.13] https://central.sonatype.com/artifact/com.styra.opa/openapi/0.6.13 - .
+
+## 2024-05-02 15:34:03
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.277.8 (2.319.10) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [java v0.6.14] .
+### Releases
+- [Maven Central v0.6.14] https://central.sonatype.com/artifact/com.styra.opa/openapi/0.6.14 - .
+
+## 2024-05-02 15:37:17
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.277.8 (2.319.10) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [java v0.6.15] .
+### Releases
+- [Maven Central v0.6.15] https://central.sonatype.com/artifact/com.styra.opa/openapi/0.6.15 - .
+
+## 2024-05-02 15:41:16
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.277.8 (2.319.10) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [java v0.6.16] .
+### Releases
+- [Maven Central v0.6.16] https://central.sonatype.com/artifact/com.styra.opa/openapi/0.6.16 - .
+
+## 2024-05-02 15:45:48
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.277.8 (2.319.10) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [java v0.6.17] .
+### Releases
+- [Maven Central v0.6.17] https://central.sonatype.com/artifact/com.styra.opa/openapi/0.6.17 - .
+
+## 2024-05-03 16:42:15
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.279.0 (2.322.5) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [java v0.6.18] .
+### Releases
+- [Maven Central v0.6.18] https://central.sonatype.com/artifact/com.styra.opa/openapi/0.6.18 - .

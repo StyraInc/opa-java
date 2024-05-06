@@ -4,7 +4,16 @@ sources:
     openapi:
         inputs:
             - location: https://raw.githubusercontent.com/StyraInc/enterprise-opa/main/openapi/openapi.yaml
+        registry:
+            location: registry.speakeasyapi.dev/styra/styra/openapi
 targets:
-    first-target:
+    opa:
         target: java
         source: openapi
+        publish:
+            java:
+                ossrhUsername: $OSSRH_USERNAME
+                ossrhPassword: $OSSRH_PASSWORD
+                gpgSecretKey: $JAVA_GPG_SECRET_KEY
+                gpgPassPhrase: $JAVA_GPG_PASSPHRASE
+                useSonatypeLegacy: true

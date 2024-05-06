@@ -131,65 +131,73 @@ public class ExecutePolicyWithInputRequest {
     /**
      * Indicates that the request body is gzip encoded
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<? extends com.styra.opa.openapi.models.shared.GzipContentEncoding> contentEncoding() {
-        return contentEncoding;
+    public Optional<com.styra.opa.openapi.models.shared.GzipContentEncoding> contentEncoding() {
+        return (Optional<com.styra.opa.openapi.models.shared.GzipContentEncoding>) contentEncoding;
     }
 
     /**
      * Indicates the server should respond with a gzip encoded body. The server will send the compressed response only if its length is above `server.encoding.gzip.min_length` value. See the configuration section
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<? extends com.styra.opa.openapi.models.shared.GzipAcceptEncoding> acceptEncoding() {
-        return acceptEncoding;
+    public Optional<com.styra.opa.openapi.models.shared.GzipAcceptEncoding> acceptEncoding() {
+        return (Optional<com.styra.opa.openapi.models.shared.GzipAcceptEncoding>) acceptEncoding;
     }
 
     /**
      * If parameter is `true`, response will formatted for humans.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<? extends Boolean> pretty() {
-        return pretty;
+    public Optional<Boolean> pretty() {
+        return (Optional<Boolean>) pretty;
     }
 
     /**
      * If parameter is true, response will include build/version info in addition to the result.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<? extends Boolean> provenance() {
-        return provenance;
+    public Optional<Boolean> provenance() {
+        return (Optional<Boolean>) provenance;
     }
 
     /**
      * Return query explanation in addition to result.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<? extends com.styra.opa.openapi.models.shared.Explain> explain() {
-        return explain;
+    public Optional<com.styra.opa.openapi.models.shared.Explain> explain() {
+        return (Optional<com.styra.opa.openapi.models.shared.Explain>) explain;
     }
 
     /**
      * Return query performance metrics in addition to result.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<? extends Boolean> metrics() {
-        return metrics;
+    public Optional<Boolean> metrics() {
+        return (Optional<Boolean>) metrics;
     }
 
     /**
      * Instrument query evaluation and return a superset of performance metrics in addition to result.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<? extends Boolean> instrument() {
-        return instrument;
+    public Optional<Boolean> instrument() {
+        return (Optional<Boolean>) instrument;
     }
 
     /**
      * Treat built-in function call errors as fatal and return an error immediately.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<? extends Boolean> strictBuiltinErrors() {
-        return strictBuiltinErrors;
+    public Optional<Boolean> strictBuiltinErrors() {
+        return (Optional<Boolean>) strictBuiltinErrors;
     }
 
     /**

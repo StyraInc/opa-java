@@ -6,19 +6,111 @@ plugins {
     id 'java'
     id "nebula.lint" version "17.8.0"
     id 'checkstyle'
+    id 'maven-publish'
+    id 'signing'
 }
 
+
 compileJava.options.encoding = "UTF-8"
+compileJava.options.compilerArgs += '-Xlint:unchecked'
 compileTestJava.options.encoding = "UTF-8"
 
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
 }
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+    withSourcesJar()
+    withJavadocJar()
+}
+
+model {
+    tasks.generatePomFileForMavenPublication {
+        destination = file("$buildDir/pom.xml")
+    }
+}
+
+jar {
+    dependsOn(":generatePomFileForMavenPublication")
+
+    into("META-INF/maven/com.styra/opa") {
+        from("$buildDir/pom.xml")
+    }
+}
+
+javadoc {
+    options.encoding = "UTF-8"
+
+    if(JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
+    options.addStringOption('Xdoclint:none', '-quiet')
+}
+
 
 tasks.withType(Javadoc) {
   failOnError false
   options.addStringOption('Xdoclint:none', '-quiet')
+}
+publishing {
+    repositories {
+        maven {
+            name = "OSSRH"
+            url = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
+            credentials {
+                username = System.getenv("MAVEN_USERNAME")
+                password = System.getenv("MAVEN_PASSWORD")
+          }
+        }
+    }
+
+    publications {
+        maven(MavenPublication) {
+            groupId = 'com.styra'
+            artifactId = 'opa'
+            version = '0.6.18'
+
+            from components.java
+
+            pom {
+                name = 'Styra Java SDK'
+                description = 'SDK enabling Java developers to easily integrate with the Styra API.'
+                url = 'https://github.com/styrainc/opa-java'
+                scm {
+                    url = 'github.com/styrainc/opa-java'
+                    connection = 'scm:git:ssh://git@github.com/styrainc/opa-java.git'
+                }
+                licenses {
+                    license {
+                        name = 'The MIT License (MIT)'
+                        url = 'https://mit-license.org/'
+                    }
+                }
+                developers {
+                    developer {
+                        name = 'Styra'
+                        organization = 'Styra'
+                        email = 'devrel@styra.com'
+                    }
+                }
+                organization {
+                    name = 'Styra'
+                    url = 'www.styra.com'
+                }
+            }
+        }
+    }
+}
+
+if (!project.hasProperty('skip.signing')) {
+    signing {
+        def signingKey = findProperty("signingKey")
+        def signingPassphrase = findProperty("signingPassphrase")
+        useInMemoryPgpKeys(signingKey, signingPassphrase)
+        sign publishing.publications.maven
+    }
 }
 
 dependencies {
@@ -36,6 +128,14 @@ dependencies {
 // NOTE: lines in build.gradle below this comment are managed by
 // scripts/fix-build-gradle.sh and should not be managed by hand, as changes
 // will be overwritten.
+
+sourcesJar {
+    archiveBaseName = "opa"
+}
+
+javadocJar {
+    archiveBaseName = "opa"
+}
 
 tasks.withType(Javadoc) {
   autoLintGradle.enabled = false
