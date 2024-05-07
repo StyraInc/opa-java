@@ -1,6 +1,6 @@
-# Procedure: Regenerate Speakeasy-Manged Code
+# Regenerate Speakeasy-Manged Code
 
-Speakeasy-managed portions of the `opa-java` SDK are normally kept upt to date by [SDK generation workflow](https://github.com/StyraInc/opa-java/blob/main/.github/workflows/sdk_generation.yaml). Usually, no additional actions are required beyond merging the PRs this workflow creates automatically. For more information, see [*Procedure: Release*](./procedure-release.md).
+Speakeasy-managed portions of the `opa-java` SDK are normally kept upt to date by [SDK generation workflow](https://github.com/StyraInc/opa-java/blob/main/.github/workflows/sdk_generation.yaml). Usually, no additional actions are required beyond merging the PRs this workflow creates automatically. For more information, see [*Releases*](./releases.md).
 
 If you need to re-generate the Speakeasy portions of the code manually, you can use the following shell commands:
 
@@ -33,3 +33,17 @@ The script [`scripts/fix-build-gradle.sh`](https://github.com/StyraInc/opa-java/
 
 As a safety feature for the potentially messy process of changing the group and artifact IDs, the `fix-build-gradle.sh` script will also attempt to lint for suspicious strings that may indicate an incorrectly rewritten group or artifact ID. In this situation, it will print the warning `WARNING: possible incorrect group/artifact ID rewrite`. If this occurs, `fix-build-gradle.sh` needs manual intervention to update it, as the Speakeasy generation of `build.gradle` has presumably changed.
 
+### Historical Note on Group/Artifact IDs
+
+It is necessary to change the group and artifact IDs because of how Speakeasy generates code. The artifact and group IDs that are used as the "root" for code generation are specified in [`gen.yaml`](https://www.speakeasyapi.dev/docs/gen-reference) (`java.groupID`, `java.artifactID`). This results in an impedance mismatch, because in `opa-java`, the Speakeasy-generated code resides one level further down the package hierarchy than the human-authored high level API. It is not possible to simply set the "true" group and artifact IDs in `gen.yaml` because then the generated code would end up in the wrong place, have the wrong `package` statements, the wrong imports, etc.
+
+When the repo is used without an artifact repository, none of this is a problem so far. Gradle is perfectly happy to build the Java code anyway even though the top level package is "wrong". This breaks down when publishing to, for example, Maven Central, since that metadata is an important part of making the package available correctly.
+
+The workaround we settled on was allowing Speakeasy to generate everything, then simply correct the group and artifact IDs in the Gradle build files, which is the only place where that setting has an impact on being able to build and publish the library.
+
+## Further Reading
+
+* [Speakeasy Workflow File](https://www.speakeasyapi.dev/docs/workflow-file-reference) - reference for `.speakeasy/workflow.yaml`
+* [gen.yaml Reference](https://www.speakeasyapi.dev/docs/gen-reference) - reference for `.speakeasy/gen.yaml`
+* [run](https://www.speakeasyapi.dev/docs/speakeasy-cli/run) - docs for `speakeasy run` command
+* [Publishing Workflow](https://www.speakeasyapi.dev/docs/workflow-reference/publishing-reference) - info about publishing packages using Speakeasy's tooling

@@ -1,4 +1,4 @@
-# Procedure: Add a Documentation Page
+# Add a Documentation Page
 
 Documentation for `opa-java` is managed using [MkDocs](https://www.mkdocs.org/). You can build the docs into a folder `out` using the command [`./scripts/build_docs.sh`](https://github.com/StyraInc/opa-java/blob/main/scripts/build_docs.sh), or you can serve an ephemeral, local version of the docs using [`./scripts/serve_docs.sh`](https://github.com/StyraInc/opa-java/blob/main/scripts/serve_docs.sh).
 
@@ -12,6 +12,7 @@ Generally speaking, the MkDocs site should only contain information that would b
 
 1. Add your document to [`docs/site/docs/`](https://github.com/StyraInc/opa-java/tree/main/docs/site/docs).
 2. Update [`docs/site/mkdocs.yml`](https://github.com/StyraInc/opa-java/blob/main/docs/site/mkdocs.yml) so that your document will be presented in the navigation bar.
+3. Update [`docs/site/docs/index.md`](https://github.com/StyraInc/opa-java/blob/main/docs/site/docs/index.md) to include a link to your new document.
 3. Use `scripts/build_doc.sh` or `scripts/serve_docs.sh` to ensure your docs changes render as you intended.
 4. Create a PR with your changes. Your changes will automatically be published by the [docs publishing workflow](https://github.com/StyraInc/opa-java/blob/main/.github/workflows/docs_publish.yaml).
 

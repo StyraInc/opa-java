@@ -1,4 +1,4 @@
-# Procedure: Release
+#  Releases
 
 !!! note
 
