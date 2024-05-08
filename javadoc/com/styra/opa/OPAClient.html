@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10,"i27":10,"i28":10,"i29":10,"i30":10,"i31":10,"i32":10,"i33":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -216,17 +216,23 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#check(java.lang.String,java.lang.Object)">check</a></span>&#8203;(java.lang.String&nbsp;path,
+     java.lang.Object&nbsp;input)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#check(java.lang.String,java.lang.String)">check</a></span>&#8203;(java.lang.String&nbsp;path,
      java.lang.String&nbsp;input)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#check(java.lang.String,java.util.List)">check</a></span>&#8203;(java.lang.String&nbsp;path,
      java.util.List&lt;java.lang.Object&gt;&nbsp;input)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#check(java.lang.String,java.util.Map)">check</a></span>&#8203;(java.lang.String&nbsp;path,
      java.util.Map&lt;java.lang.String,&#8203;java.lang.Object&gt;&nbsp;input)</code></th>
@@ -235,39 +241,189 @@ extends java.lang.Object</pre>
  path, and coerce the result to a boolean.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.lang.String)">evaluate</a></span>&#8203;(java.lang.String&nbsp;path)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.lang.String,boolean)">evaluate</a></span>&#8203;(java.lang.String&nbsp;path,
         boolean&nbsp;input)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
+<td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.lang.String,boolean,com.fasterxml.jackson.core.type.TypeReference)">evaluate</a></span>&#8203;(java.lang.String&nbsp;path,
+        boolean&nbsp;input,
+        com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;toValueType)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i9" class="rowColor">
+<td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.lang.String,boolean,com.fasterxml.jackson.databind.JavaType)">evaluate</a></span>&#8203;(java.lang.String&nbsp;path,
+        boolean&nbsp;input,
+        com.fasterxml.jackson.databind.JavaType&nbsp;toValueType)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i10" class="altColor">
+<td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.lang.String,boolean,java.lang.Class)">evaluate</a></span>&#8203;(java.lang.String&nbsp;path,
+        boolean&nbsp;input,
+        java.lang.Class&lt;T&gt;&nbsp;toValueType)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.lang.String,double)">evaluate</a></span>&#8203;(java.lang.String&nbsp;path,
         double&nbsp;input)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i12" class="altColor">
+<td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.lang.String,double,com.fasterxml.jackson.core.type.TypeReference)">evaluate</a></span>&#8203;(java.lang.String&nbsp;path,
+        double&nbsp;input,
+        com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;toValueType)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i13" class="rowColor">
+<td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.lang.String,double,com.fasterxml.jackson.databind.JavaType)">evaluate</a></span>&#8203;(java.lang.String&nbsp;path,
+        double&nbsp;input,
+        com.fasterxml.jackson.databind.JavaType&nbsp;toValueType)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i14" class="altColor">
+<td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.lang.String,double,java.lang.Class)">evaluate</a></span>&#8203;(java.lang.String&nbsp;path,
+        double&nbsp;input,
+        java.lang.Class&lt;T&gt;&nbsp;toValueType)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i15" class="rowColor">
+<td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.lang.String,com.fasterxml.jackson.core.type.TypeReference)">evaluate</a></span>&#8203;(java.lang.String&nbsp;path,
+        com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;toValueType)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i16" class="altColor">
+<td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.lang.String,com.fasterxml.jackson.databind.JavaType)">evaluate</a></span>&#8203;(java.lang.String&nbsp;path,
+        com.fasterxml.jackson.databind.JavaType&nbsp;toValueType)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i17" class="rowColor">
+<td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.lang.String,java.lang.Class)">evaluate</a></span>&#8203;(java.lang.String&nbsp;path,
+        java.lang.Class&lt;T&gt;&nbsp;toValueType)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i18" class="altColor">
+<td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.lang.String,java.lang.Object)">evaluate</a></span>&#8203;(java.lang.String&nbsp;path,
+        java.lang.Object&nbsp;input)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i19" class="rowColor">
+<td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.lang.String,java.lang.Object,com.fasterxml.jackson.core.type.TypeReference)">evaluate</a></span>&#8203;(java.lang.String&nbsp;path,
+        java.lang.Object&nbsp;input,
+        com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;toValueType)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i20" class="altColor">
+<td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.lang.String,java.lang.Object,com.fasterxml.jackson.databind.JavaType)">evaluate</a></span>&#8203;(java.lang.String&nbsp;path,
+        java.lang.Object&nbsp;input,
+        com.fasterxml.jackson.databind.JavaType&nbsp;toValueType)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i21" class="rowColor">
+<td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.lang.String,java.lang.Object,java.lang.Class)">evaluate</a></span>&#8203;(java.lang.String&nbsp;path,
+        java.lang.Object&nbsp;input,
+        java.lang.Class&lt;T&gt;&nbsp;toValueType)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i22" class="altColor">
 <td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.lang.String,java.lang.String)">evaluate</a></span>&#8203;(java.lang.String&nbsp;path,
         java.lang.String&nbsp;input)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i23" class="rowColor">
+<td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.lang.String,java.lang.String,com.fasterxml.jackson.core.type.TypeReference)">evaluate</a></span>&#8203;(java.lang.String&nbsp;path,
+        java.lang.String&nbsp;input,
+        com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;toValueType)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i24" class="altColor">
+<td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.lang.String,java.lang.String,com.fasterxml.jackson.databind.JavaType)">evaluate</a></span>&#8203;(java.lang.String&nbsp;path,
+        java.lang.String&nbsp;input,
+        com.fasterxml.jackson.databind.JavaType&nbsp;toValueType)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i25" class="rowColor">
+<td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.lang.String,java.lang.String,java.lang.Class)">evaluate</a></span>&#8203;(java.lang.String&nbsp;path,
+        java.lang.String&nbsp;input,
+        java.lang.Class&lt;T&gt;&nbsp;toValueType)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i26" class="altColor">
 <td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.lang.String,java.util.List)">evaluate</a></span>&#8203;(java.lang.String&nbsp;path,
         java.util.List&lt;java.lang.Object&gt;&nbsp;input)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i27" class="rowColor">
+<td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.lang.String,java.util.List,com.fasterxml.jackson.core.type.TypeReference)">evaluate</a></span>&#8203;(java.lang.String&nbsp;path,
+        java.util.List&lt;java.lang.Object&gt;&nbsp;input,
+        com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;toValueType)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i28" class="altColor">
+<td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.lang.String,java.util.List,com.fasterxml.jackson.databind.JavaType)">evaluate</a></span>&#8203;(java.lang.String&nbsp;path,
+        java.util.List&lt;java.lang.Object&gt;&nbsp;input,
+        com.fasterxml.jackson.databind.JavaType&nbsp;toValueType)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i29" class="rowColor">
+<td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.lang.String,java.util.List,java.lang.Class)">evaluate</a></span>&#8203;(java.lang.String&nbsp;path,
+        java.util.List&lt;java.lang.Object&gt;&nbsp;input,
+        java.lang.Class&lt;T&gt;&nbsp;toValueType)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i30" class="altColor">
 <td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.lang.String,java.util.Map)">evaluate</a></span>&#8203;(java.lang.String&nbsp;path,
         java.util.Map&lt;java.lang.String,&#8203;java.lang.Object&gt;&nbsp;input)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i31" class="rowColor">
+<td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.lang.String,java.util.Map,com.fasterxml.jackson.core.type.TypeReference)">evaluate</a></span>&#8203;(java.lang.String&nbsp;path,
+        java.util.Map&lt;java.lang.String,&#8203;java.lang.Object&gt;&nbsp;input,
+        com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;toValueType)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i32" class="altColor">
+<td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.lang.String,java.util.Map,com.fasterxml.jackson.databind.JavaType)">evaluate</a></span>&#8203;(java.lang.String&nbsp;path,
+        java.util.Map&lt;java.lang.String,&#8203;java.lang.Object&gt;&nbsp;input,
+        com.fasterxml.jackson.databind.JavaType&nbsp;toValueType)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i33" class="rowColor">
+<td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#evaluate(java.lang.String,java.util.Map,java.lang.Class)">evaluate</a></span>&#8203;(java.lang.String&nbsp;path,
+        java.util.Map&lt;java.lang.String,&#8203;java.lang.Object&gt;&nbsp;input,
+        java.lang.Class&lt;T&gt;&nbsp;toValueType)</code></th>
 <td class="colLast">
 <div class="block">Perform a query with an input document against a Rego rule head by its
  path.</div>
@@ -456,6 +612,397 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
+<a id="check(java.lang.String,java.lang.Object)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>check</h4>
+<pre class="methodSignature">public&nbsp;boolean&nbsp;check&#8203;(java.lang.String&nbsp;path,
+                     java.lang.Object&nbsp;input)
+              throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="OPAException.html" title="class in com.styra.opa">OPAException</a></code></dd>
+</dl>
+</li>
+</ul>
+<a id="evaluate(java.lang.String,java.util.Map,java.lang.Class)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>evaluate</h4>
+<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;evaluate&#8203;(java.lang.String&nbsp;path,
+                      java.util.Map&lt;java.lang.String,&#8203;java.lang.Object&gt;&nbsp;input,
+                      java.lang.Class&lt;T&gt;&nbsp;toValueType)
+               throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
+<div class="block">Perform a query with an input document against a Rego rule head by its
+ path.
+
+ The other overloaded variations of this method behave similar, but allow
+ any valid JSON value to be used as the input document.
+
+ If the input value is omitted, then an empty object is implicitly used
+ as the input.
+
+ Due to limitations in Java's generics, the type parameter T alone is not
+ always sufficient to determine the correct type to coerce the output to
+ (specifically with constructing the TypeReference to use with
+ fasterxml's ObjectMapper). In particular, the compiler needs a little
+ extra help when assigning the return of this method to an object. In
+ such situations, you will need to also provide a toValueType. Some ways
+ this might be accomplished are shown below:
+
+ <pre>
+ // likely to fail at compile time with:
+ //     java.lang.ClassCastException ... cannot be cast to class MyObject
+ MyObject obj = evaluate("/foo", "bar");
+
+ // using a TypeReference (recommended method)
+ MyObject obj = evaluate("/foo", "bar", TypeReference&#60;MyObject&#62;() {});
+
+ // using ObjectMapper
+ MyObject obj = evaluate("/foo", "bar", new ObjectMapper().constructType(instanceOfMyObject.getClass()));
+
+ // using .class (can cause checking issue with classes that have type parameters)
+ MyObject obj = evaluate("/foo", "bar", MyObject.class);
+ </pre></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>input</code> - Input document for OPA query.</dd>
+<dd><code>path</code> - Path to rule head to query, for example to access a rule
+ head "allow" in a Rego file that starts with "package main", you would
+ provide the value "main/allow".</dd>
+<dd><code>toValueType</code> - May optionally be used to provide an alternative
+ type for output conversion. This is especially useful when reading
+ the result of an OPA request into an object.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>The return value is automatically coerced to have a type
+ matching the type parameter T using
+ com.fasterxml.jackson.databind.ObjectMapper.</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="OPAException.html" title="class in com.styra.opa">OPAException</a></code></dd>
+</dl>
+</li>
+</ul>
+<a id="evaluate(java.lang.String,java.lang.String,java.lang.Class)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>evaluate</h4>
+<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;evaluate&#8203;(java.lang.String&nbsp;path,
+                      java.lang.String&nbsp;input,
+                      java.lang.Class&lt;T&gt;&nbsp;toValueType)
+               throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="OPAException.html" title="class in com.styra.opa">OPAException</a></code></dd>
+</dl>
+</li>
+</ul>
+<a id="evaluate(java.lang.String,boolean,java.lang.Class)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>evaluate</h4>
+<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;evaluate&#8203;(java.lang.String&nbsp;path,
+                      boolean&nbsp;input,
+                      java.lang.Class&lt;T&gt;&nbsp;toValueType)
+               throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="OPAException.html" title="class in com.styra.opa">OPAException</a></code></dd>
+</dl>
+</li>
+</ul>
+<a id="evaluate(java.lang.String,double,java.lang.Class)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>evaluate</h4>
+<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;evaluate&#8203;(java.lang.String&nbsp;path,
+                      double&nbsp;input,
+                      java.lang.Class&lt;T&gt;&nbsp;toValueType)
+               throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="OPAException.html" title="class in com.styra.opa">OPAException</a></code></dd>
+</dl>
+</li>
+</ul>
+<a id="evaluate(java.lang.String,java.util.List,java.lang.Class)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>evaluate</h4>
+<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;evaluate&#8203;(java.lang.String&nbsp;path,
+                      java.util.List&lt;java.lang.Object&gt;&nbsp;input,
+                      java.lang.Class&lt;T&gt;&nbsp;toValueType)
+               throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="OPAException.html" title="class in com.styra.opa">OPAException</a></code></dd>
+</dl>
+</li>
+</ul>
+<a id="evaluate(java.lang.String,java.lang.Class)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>evaluate</h4>
+<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;evaluate&#8203;(java.lang.String&nbsp;path,
+                      java.lang.Class&lt;T&gt;&nbsp;toValueType)
+               throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="OPAException.html" title="class in com.styra.opa">OPAException</a></code></dd>
+</dl>
+</li>
+</ul>
+<a id="evaluate(java.lang.String,java.lang.Object,java.lang.Class)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>evaluate</h4>
+<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;evaluate&#8203;(java.lang.String&nbsp;path,
+                      java.lang.Object&nbsp;input,
+                      java.lang.Class&lt;T&gt;&nbsp;toValueType)
+               throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="OPAException.html" title="class in com.styra.opa">OPAException</a></code></dd>
+</dl>
+</li>
+</ul>
+<a id="evaluate(java.lang.String,java.util.Map,com.fasterxml.jackson.databind.JavaType)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>evaluate</h4>
+<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;evaluate&#8203;(java.lang.String&nbsp;path,
+                      java.util.Map&lt;java.lang.String,&#8203;java.lang.Object&gt;&nbsp;input,
+                      com.fasterxml.jackson.databind.JavaType&nbsp;toValueType)
+               throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="OPAException.html" title="class in com.styra.opa">OPAException</a></code></dd>
+</dl>
+</li>
+</ul>
+<a id="evaluate(java.lang.String,java.lang.String,com.fasterxml.jackson.databind.JavaType)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>evaluate</h4>
+<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;evaluate&#8203;(java.lang.String&nbsp;path,
+                      java.lang.String&nbsp;input,
+                      com.fasterxml.jackson.databind.JavaType&nbsp;toValueType)
+               throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="OPAException.html" title="class in com.styra.opa">OPAException</a></code></dd>
+</dl>
+</li>
+</ul>
+<a id="evaluate(java.lang.String,boolean,com.fasterxml.jackson.databind.JavaType)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>evaluate</h4>
+<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;evaluate&#8203;(java.lang.String&nbsp;path,
+                      boolean&nbsp;input,
+                      com.fasterxml.jackson.databind.JavaType&nbsp;toValueType)
+               throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="OPAException.html" title="class in com.styra.opa">OPAException</a></code></dd>
+</dl>
+</li>
+</ul>
+<a id="evaluate(java.lang.String,double,com.fasterxml.jackson.databind.JavaType)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>evaluate</h4>
+<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;evaluate&#8203;(java.lang.String&nbsp;path,
+                      double&nbsp;input,
+                      com.fasterxml.jackson.databind.JavaType&nbsp;toValueType)
+               throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="OPAException.html" title="class in com.styra.opa">OPAException</a></code></dd>
+</dl>
+</li>
+</ul>
+<a id="evaluate(java.lang.String,java.util.List,com.fasterxml.jackson.databind.JavaType)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>evaluate</h4>
+<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;evaluate&#8203;(java.lang.String&nbsp;path,
+                      java.util.List&lt;java.lang.Object&gt;&nbsp;input,
+                      com.fasterxml.jackson.databind.JavaType&nbsp;toValueType)
+               throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="OPAException.html" title="class in com.styra.opa">OPAException</a></code></dd>
+</dl>
+</li>
+</ul>
+<a id="evaluate(java.lang.String,com.fasterxml.jackson.databind.JavaType)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>evaluate</h4>
+<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;evaluate&#8203;(java.lang.String&nbsp;path,
+                      com.fasterxml.jackson.databind.JavaType&nbsp;toValueType)
+               throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="OPAException.html" title="class in com.styra.opa">OPAException</a></code></dd>
+</dl>
+</li>
+</ul>
+<a id="evaluate(java.lang.String,java.lang.Object,com.fasterxml.jackson.databind.JavaType)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>evaluate</h4>
+<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;evaluate&#8203;(java.lang.String&nbsp;path,
+                      java.lang.Object&nbsp;input,
+                      com.fasterxml.jackson.databind.JavaType&nbsp;toValueType)
+               throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="OPAException.html" title="class in com.styra.opa">OPAException</a></code></dd>
+</dl>
+</li>
+</ul>
+<a id="evaluate(java.lang.String,java.util.Map,com.fasterxml.jackson.core.type.TypeReference)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>evaluate</h4>
+<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;evaluate&#8203;(java.lang.String&nbsp;path,
+                      java.util.Map&lt;java.lang.String,&#8203;java.lang.Object&gt;&nbsp;input,
+                      com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;toValueType)
+               throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="OPAException.html" title="class in com.styra.opa">OPAException</a></code></dd>
+</dl>
+</li>
+</ul>
+<a id="evaluate(java.lang.String,java.lang.String,com.fasterxml.jackson.core.type.TypeReference)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>evaluate</h4>
+<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;evaluate&#8203;(java.lang.String&nbsp;path,
+                      java.lang.String&nbsp;input,
+                      com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;toValueType)
+               throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="OPAException.html" title="class in com.styra.opa">OPAException</a></code></dd>
+</dl>
+</li>
+</ul>
+<a id="evaluate(java.lang.String,boolean,com.fasterxml.jackson.core.type.TypeReference)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>evaluate</h4>
+<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;evaluate&#8203;(java.lang.String&nbsp;path,
+                      boolean&nbsp;input,
+                      com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;toValueType)
+               throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="OPAException.html" title="class in com.styra.opa">OPAException</a></code></dd>
+</dl>
+</li>
+</ul>
+<a id="evaluate(java.lang.String,double,com.fasterxml.jackson.core.type.TypeReference)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>evaluate</h4>
+<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;evaluate&#8203;(java.lang.String&nbsp;path,
+                      double&nbsp;input,
+                      com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;toValueType)
+               throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="OPAException.html" title="class in com.styra.opa">OPAException</a></code></dd>
+</dl>
+</li>
+</ul>
+<a id="evaluate(java.lang.String,java.util.List,com.fasterxml.jackson.core.type.TypeReference)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>evaluate</h4>
+<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;evaluate&#8203;(java.lang.String&nbsp;path,
+                      java.util.List&lt;java.lang.Object&gt;&nbsp;input,
+                      com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;toValueType)
+               throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="OPAException.html" title="class in com.styra.opa">OPAException</a></code></dd>
+</dl>
+</li>
+</ul>
+<a id="evaluate(java.lang.String,com.fasterxml.jackson.core.type.TypeReference)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>evaluate</h4>
+<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;evaluate&#8203;(java.lang.String&nbsp;path,
+                      com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;toValueType)
+               throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="OPAException.html" title="class in com.styra.opa">OPAException</a></code></dd>
+</dl>
+</li>
+</ul>
+<a id="evaluate(java.lang.String,java.lang.Object,com.fasterxml.jackson.core.type.TypeReference)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>evaluate</h4>
+<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;evaluate&#8203;(java.lang.String&nbsp;path,
+                      java.lang.Object&nbsp;input,
+                      com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;toValueType)
+               throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="OPAException.html" title="class in com.styra.opa">OPAException</a></code></dd>
+</dl>
+</li>
+</ul>
 <a id="evaluate(java.lang.String,java.util.Map)">
 <!--   -->
 </a>
@@ -465,24 +1012,7 @@ extends java.lang.Object</pre>
 <pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;evaluate&#8203;(java.lang.String&nbsp;path,
                       java.util.Map&lt;java.lang.String,&#8203;java.lang.Object&gt;&nbsp;input)
                throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
-<div class="block">Perform a query with an input document against a Rego rule head by its
- path.
-
- The other overloaded variations of this method behave similar, but allow
- any valid JSON value to be used as the input document.
-
- If the input value is omitted, then an empty object is implicitly used
- as the input.</div>
 <dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>input</code> - Input document for OPA query.</dd>
-<dd><code>path</code> - Path to rule head to query, for example to access a rule
- head "allow" in a Rego file that starts with "package main", you would
- provide the value "main/allow".</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>The return value is automatically coerced to have a type
- matching the type parameter T using
- com.fasterxml.jackson.databind.ObjectMapper.</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code><a href="OPAException.html" title="class in com.styra.opa">OPAException</a></code></dd>
 </dl>
@@ -551,10 +1081,25 @@ extends java.lang.Object</pre>
 <a id="evaluate(java.lang.String)">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>evaluate</h4>
 <pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;evaluate&#8203;(java.lang.String&nbsp;path)
+               throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="OPAException.html" title="class in com.styra.opa">OPAException</a></code></dd>
+</dl>
+</li>
+</ul>
+<a id="evaluate(java.lang.String,java.lang.Object)">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>evaluate</h4>
+<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;evaluate&#8203;(java.lang.String&nbsp;path,
+                      java.lang.Object&nbsp;input)
                throws <a href="OPAException.html" title="class in com.styra.opa">OPAException</a></pre>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
