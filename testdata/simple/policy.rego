@@ -12,3 +12,7 @@ user_is_alice {
 
 hello := "Open Policy Agent"
 
+makeAlternateSampleClass := {
+    "nestedMap": input,
+    "stringVal": "hello, test suite!"
+}
