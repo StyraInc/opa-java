@@ -126,6 +126,12 @@ public class OPAClient {
         return evaluate(path, input);
     }
 
+    public boolean check(String path, java.lang.Object input) throws OPAException {
+        ObjectMapper om = new ObjectMapper();
+        Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {});
+        return evaluate(path, iMap);
+    }
+
     /**
      * Perform a query with an input document against a Rego rule head by its
      * path.
