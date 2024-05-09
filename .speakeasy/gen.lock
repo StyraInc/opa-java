@@ -3,19 +3,22 @@ id: 47e8e950-a454-4ebb-9f78-86fda7dfa0c2
 management:
   docChecksum: 2422daf10293e923232daf08349ae0ae
   docVersion: 0.2.0
-  speakeasyVersion: 1.279.0
-  generationVersion: 2.322.5
-  releaseVersion: 0.6.18
-  configChecksum: 4357a7547c2d03d1406e062d9276ea85
+  speakeasyVersion: 1.285.1
+  generationVersion: 2.326.3
+  releaseVersion: 0.7.0
+  configChecksum: fce52343a81a573dd9118e4fd849279d
   repoURL: https://github.com/StyraInc/opa-java.git
   published: true
 features:
   java:
+    additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.1
     core: 3.19.5
     examples: 2.81.3
     flattening: 2.81.1
+    globalSecurityCallbacks: 0.1.0
     globalServerURLs: 2.82.1
+    sdkHooks: 0.1.0
     unions: 0.0.3
 generatedFiles:
   - src/main/java/com/styra/opa/openapi/SecuritySource.java
