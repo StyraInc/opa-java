@@ -52,7 +52,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          github_access_token: ${{ secrets.github_access_token }}
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
           action: "release"
           speakeasy_api_key: ${{ secrets.speakeasy_api_key }}
           speakeasy_server_url: ${{ inputs.speakeasy_server_url }}
