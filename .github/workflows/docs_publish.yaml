@@ -1,6 +1,4 @@
-# TODO: might want to fold this back into sdk_publish later
-
-name: Publish Docs
+name: "03 - Publish Docs"
 "on":
   push:
     branches:

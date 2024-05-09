@@ -1,4 +1,4 @@
-name: Publish
+name: "04 - Publish to Maven Central and GitHub Release"
 "on":
   push:
     branches:
