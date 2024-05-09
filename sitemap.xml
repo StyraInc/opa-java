@@ -6,6 +6,26 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://styrainc.github.io/opa-java/maintenance/add-doc/</loc>
+         <lastmod>2024-05-09</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://styrainc.github.io/opa-java/maintenance/change-managed/</loc>
+         <lastmod>2024-05-09</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://styrainc.github.io/opa-java/maintenance/change-speakeasy/</loc>
+         <lastmod>2024-05-09</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://styrainc.github.io/opa-java/maintenance/releases/</loc>
+         <lastmod>2024-05-09</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://styrainc.github.io/opa-java/models/</loc>
          <lastmod>2024-05-09</lastmod>
          <changefreq>daily</changefreq>

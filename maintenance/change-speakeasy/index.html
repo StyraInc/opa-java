@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://styrainc.github.io/opa-java/maintenance/change-speakeasy/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Regenerate Speakeasy-Managed Code - OPA-Java SDK Documentation</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">OPA-Java SDK Documentation</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/StyraInc/opa-java" class="nav-link">GitHub</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../javadoc" class="nav-link">Javadoc</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../models" class="nav-link">Models</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../sdks" class="nav-link">SDKs</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Maintenance</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../add-doc/" class="dropdown-item">Add a Documentation Page</a>
+</li>
+                                    
+<li>
+    <a href="../change-managed/" class="dropdown-item">Modify Styra-Managed Code</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">Regenerate Speakeasy-Managed Code</a>
+</li>
+                                    
+<li>
+    <a href="../releases/" class="dropdown-item">Release</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../change-managed/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../releases/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#regenerate-speakeasy-manged-code" class="nav-link">Regenerate Speakeasy-Manged Code</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#understanding-styra-managed-buildgradle-changes" class="nav-link">Understanding Styra-Managed build.gradle Changes</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#further-reading" class="nav-link">Further Reading</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="regenerate-speakeasy-manged-code">Regenerate Speakeasy-Manged Code</h1>
+<p>Speakeasy-managed portions of the <code>opa-java</code> SDK are normally kept upt to date by <a href="https://github.com/StyraInc/opa-java/blob/main/.github/workflows/sdk_generation.yaml">SDK generation workflow</a>. Usually, no additional actions are required beyond merging the PRs this workflow creates automatically. For more information, see <a href="../releases/"><em>Releases</em></a>.</p>
+<p>If you need to re-generate the Speakeasy portions of the code manually, you can use the following shell commands:</p>
+<pre><code class="language-sh">speakeasy run --skip-compile --force
+./scripts/post-generate-hook.sh
+</code></pre>
+<p>Subsequently, you should use <code>./gradlew test</code> and <code>./gradlew lint</code> to ensure that the changes did not cause any regressions.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you commit changes generated using this manual procedure, it may prevent the SDK generation workflow from detecting them as changes, which may in turn prevent the release workflow from triggering automatically.</p>
+</div>
+<h2 id="understanding-styra-managed-buildgradle-changes">Understanding Styra-Managed <code>build.gradle</code> Changes</h2>
+<p>The <code>build.gradle</code> file generated by <code>speakeasy run</code> is unsuitable for use with the <code>opa-java</code> project out of the box; several additional tasks and plugins need to be added. It does have some Speakeasy-managed information in it that is required though, namely any updated dependencies and their versions. As a workaround a shell script is used to post-process the <code>build.gradle</code> which Speakeasy generates with additional Styra-managed modifications. This script has been appropriately connected to the GitHub Actions workflow for Speakeasy "chore" PRs, thus it should not normally need to be run manually.</p>
+<p>As a matter of convention, all post-generate modifications that are carried out automatically are kicked off by invoking <a href="https://github.com/StyraInc/opa-java/blob/main/scripts/post-generate-hook.sh"><code>scripts/post-generate-hook.sh</code></a>, although at time of writing this script only calls <code>fix-build-gradle.sh</code>.</p>
+<p>The script <a href="https://github.com/StyraInc/opa-java/blob/main/scripts/fix-build-gradle.sh"><code>scripts/fix-build-gradle.sh</code></a> performs the necessary modifications to <code>build.gradle</code> and <code>settings.gradle</code>. These changes include:</p>
+<ul>
+<li>The <code>plugins { ... }</code> block is replaced with the one in <a href="https://github.com/StyraInc/opa-java/blob/main/scripts/build-plugins.gradle"><code>scripts/build-plugins.gradle</code></a>.</li>
+<li>The file <a href="https://github.com/StyraInc/opa-java/blob/main/scripts/build-footer.gradle"><code>scripts/build-footer.gradle</code></a> is appended to the end of <code>build.gradle</code>; the string <code>=== build-footer ===</code> is used as a sigil to ensure this operation is idempotent.</li>
+<li>The root project name in <code>settings.gradle</code> is changed from <code>openapi</code> to <code>opa</code>.</li>
+<li>The group and artifact IDs in <code>build.gradle</code> used for release publishing are changed from <code>com.styra.opa</code> and <code>openapi</code> to <code>com.styra</code> and <code>opa</code> respectively.</li>
+<li><code>./gradlew fixGradleLint</code> to prevent the Gradle linter from complaining later about any unused dependencies added.</li>
+</ul>
+<p><code>post-generate-hook.sh</code>, and everything it calls, is designed to be idempotent, so you may run it as many times as you wish without any adverse effects. At time of writing, there is a known bug where an extra newline is added after the closing <code>}</code> of the <code>plugins</code> block, but that does not impact how Gradle interprets the file.</p>
+<p>As a safety feature for the potentially messy process of changing the group and artifact IDs, the <code>fix-build-gradle.sh</code> script will also attempt to lint for suspicious strings that may indicate an incorrectly rewritten group or artifact ID. In this situation, it will print the warning <code>WARNING: possible incorrect group/artifact ID rewrite</code>. If this occurs, <code>fix-build-gradle.sh</code> needs manual intervention to update it, as the Speakeasy generation of <code>build.gradle</code> has presumably changed.</p>
+<h3 id="historical-note-on-groupartifact-ids">Historical Note on Group/Artifact IDs</h3>
+<p>It is necessary to change the group and artifact IDs because of how Speakeasy generates code. The artifact and group IDs that are used as the "root" for code generation are specified in <a href="https://www.speakeasyapi.dev/docs/gen-reference"><code>gen.yaml</code></a> (<code>java.groupID</code>, <code>java.artifactID</code>). This results in an impedance mismatch, because in <code>opa-java</code>, the Speakeasy-generated code resides one level further down the package hierarchy than the human-authored high level API. It is not possible to simply set the "true" group and artifact IDs in <code>gen.yaml</code> because then the generated code would end up in the wrong place, have the wrong <code>package</code> statements, the wrong imports, etc.</p>
+<p>When the repo is used without an artifact repository, none of this is a problem so far. Gradle is perfectly happy to build the Java code anyway even though the top level package is "wrong". This breaks down when publishing to, for example, Maven Central, since that metadata is an important part of making the package available correctly.</p>
+<p>The workaround we settled on was allowing Speakeasy to generate everything, then simply correct the group and artifact IDs in the Gradle build files, which is the only place where that setting has an impact on being able to build and publish the library.</p>
+<h2 id="further-reading">Further Reading</h2>
+<ul>
+<li><a href="https://www.speakeasyapi.dev/docs/workflow-file-reference">Speakeasy Workflow File</a> - reference for <code>.speakeasy/workflow.yaml</code></li>
+<li><a href="https://www.speakeasyapi.dev/docs/gen-reference">gen.yaml Reference</a> - reference for <code>.speakeasy/gen.yaml</code></li>
+<li><a href="https://www.speakeasyapi.dev/docs/speakeasy-cli/run">run</a> - docs for <code>speakeasy run</code> command</li>
+<li><a href="https://www.speakeasyapi.dev/docs/workflow-reference/publishing-reference">Publishing Workflow</a> - info about publishing packages using Speakeasy's tooling</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

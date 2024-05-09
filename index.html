@@ -49,6 +49,27 @@
                             <li class="nav-item">
                                 <a href="sdks" class="nav-link">SDKs</a>
                             </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Maintenance</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="maintenance/add-doc/" class="dropdown-item">Add a Documentation Page</a>
+</li>
+                                    
+<li>
+    <a href="maintenance/change-managed/" class="dropdown-item">Modify Styra-Managed Code</a>
+</li>
+                                    
+<li>
+    <a href="maintenance/change-speakeasy/" class="dropdown-item">Regenerate Speakeasy-Managed Code</a>
+</li>
+                                    
+<li>
+    <a href="maintenance/releases/" class="dropdown-item">Release</a>
+</li>
+                                </ul>
+                            </li>
                         </ul>
 
                     <ul class="nav navbar-nav ms-md-auto">
@@ -57,6 +78,16 @@
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
+                            <li class="nav-item">
+                                <a rel="prev" class="nav-link disabled">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="maintenance/add-doc/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
                     </ul>
                 </div>
             </div>
@@ -77,6 +108,14 @@
             
             <li class="nav-item" data-bs-level="1"><a href="#opa-java-sdk-documentation-site" class="nav-link">OPA-Java SDK Documentation Site</a>
               <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#documentation-index" class="nav-link">Documentation Index</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#other-helpful-links" class="nav-link">Other Helpful Links</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
         </ul>
@@ -86,7 +125,14 @@
 
 <h1 id="opa-java-sdk-documentation-site">OPA-Java SDK Documentation Site</h1>
 <p>This site contains the documentation for <a href="https://github.com/StyraInc/opa-java/">opa-java</a>, a Java SDK for the <a href="https://www.openpolicyagent.org/">Open Policy Agent</a> <a href="https://www.openpolicyagent.org/docs/latest/rest-api/">REST API</a>. "Low level" wrappers around the REST API methods are generated using <a href="https://www.speakeasyapi.dev/">Speakeasy</a>. A higher level human-written API is also provided, which is intended to simplify the most common tasks for OPA API consumers. The Speakeasy-generated API can be found in the <a href="https://styrainc.github.io/opa-java/javadoc/com/styra/opa/sdk/package-summary.html"><code>com.styra.opa.sdk</code></a> package, while the higher level API is located in <a href="https://styrainc.github.io/opa-java/javadoc/com/styra/opa/package-summary.html"><code>com.styra.opa</code></a>.</p>
-<p>Helpful links:</p>
+<h2 id="documentation-index">Documentation Index</h2>
+<ul>
+<li><a href="maintenance/add-doc/">Add a Documentation Page</a></li>
+<li><a href="maintenance/change-managed/">Modify Styra-Managed Code</a></li>
+<li><a href="maintenance/change-speakeasy/">Regenerate Speakeasy-Managed Code</a></li>
+<li><a href="maintenance/releases/">Release</a></li>
+</ul>
+<h2 id="other-helpful-links">Other Helpful Links</h2>
 <ul>
 <li><a href="https://github.com/StyraInc/opa-java">StyraInc/opa-java GitHub repository</a></li>
 <li><a href="https://styrainc.github.io/opa-java/javadoc/">opa-java JavaDoc</a></li>
@@ -175,5 +221,5 @@
 
 <!--
 MkDocs version : 1.6.0
-Build Date UTC : 2024-05-09 21:22:37.282962+00:00
+Build Date UTC : 2024-05-09 21:26:56.042326+00:00
 -->
