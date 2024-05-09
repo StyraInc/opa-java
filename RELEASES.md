@@ -216,9 +216,14 @@ Based on:
 
 ## 2024-05-09 00:19:22
 ### Changes
+High-level API changes:
+* `java.lang.Object` values are now supported as inputs and outputs ([#43](https://github.com/StyraInc/opa-java/pull/43))
+
 Based on:
 - OpenAPI Doc  
 - Speakeasy CLI 1.285.1 (2.326.3) https://github.com/speakeasy-api/speakeasy
+
+
 ### Generated
 - [java v0.7.0] .
 ### Releases
