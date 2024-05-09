@@ -1,4 +1,4 @@
-name: Generate
+name: "02 - Generate"
 permissions:
   checks: write
   contents: write
