@@ -258,4 +258,46 @@ class OPATest {
         assertEquals(actual.getNestedMap(), expect.getNestedMap());
         assertEquals(actual.getStringVal(), expect.getStringVal());
     }
+
+    @Test
+    public void testOPADefaultPathWithInput() {
+        OPAClient opa = new OPAClient(address, headers);
+        Map<String,java.lang.Object> input = Map.ofEntries(entry("hello", "world"));
+        Map result = Map.ofEntries(entry("unit", "test"));
+        Map expect = Map.ofEntries(
+            entry("msg", "this is the default path"),
+            entry("echo", Map.ofEntries(entry("hello", "world")))
+        );
+
+        try {
+            result = opa.evaluate(input);
+        } catch (OPAException e) {
+            System.out.println("exception: " + e);
+            assertNull(e);
+        }
+
+        assertEquals(expect, result);
+    }
+
+    @Test
+    public void testOPADefaultPathWithoutInput() {
+        OPAClient opa = new OPAClient(address, headers);
+        Map expect = Map.ofEntries(
+            entry("msg", "this is the default path"),
+            entry("echo", Map.ofEntries())
+        );
+        Map result = Map.ofEntries(entry("unit", "test"));
+
+        try {
+            result = opa.evaluate();
+        } catch (OPAException e) {
+            System.out.println("exception: " + e);
+            assertNull(e);
+        }
+
+        assertEquals(expect, result);
+    }
+
+
 }
+
