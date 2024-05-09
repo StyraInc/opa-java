@@ -499,7 +499,6 @@ public class OPAClient {
         return evaluateMachinery(Input.of(defaultInput()), Optional.empty());
     }
 
-
     private ExecutePolicyWithInputRequest makeRequestForEvaluate(Input input, Optional<String> path) {
         String concretePath = "system/main";
         if (path.isPresent()) {
@@ -554,7 +553,7 @@ public class OPAClient {
                 ObjectMapper mapper = new ObjectMapper();
                 T typedResult = mapper.convertValue(out, new TypeReference<T>() {});
                 return typedResult;
-            } {
+            } else {
                 // No result, so we just return null
                 return null;
             }
@@ -617,7 +616,12 @@ public class OPAClient {
         }
     }
 
-    private <T> T evaluateMachinery(Input input, Optional<String> path, TypeReference<T> toValueType) throws OPAException {
+    private <T> T evaluateMachinery(
+        Input input,
+        Optional<String> path,
+        TypeReference<T> toValueType
+    ) throws OPAException {
+
         ExecutePolicyWithInputRequest req = makeRequestForEvaluate(input, path);
         ExecutePolicyWithInputResponse res;
 

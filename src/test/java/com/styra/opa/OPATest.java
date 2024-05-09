@@ -262,7 +262,7 @@ class OPATest {
     @Test
     public void testOPADefaultPathWithInput() {
         OPAClient opa = new OPAClient(address, headers);
-        Map<String,java.lang.Object> input = Map.ofEntries(entry("hello", "world"));
+        Map<String, java.lang.Object> input = Map.ofEntries(entry("hello", "world"));
         Map result = Map.ofEntries(entry("unit", "test"));
         Map expect = Map.ofEntries(
             entry("msg", "this is the default path"),
@@ -297,7 +297,6 @@ class OPATest {
 
         assertEquals(expect, result);
     }
-
 
 }
 
