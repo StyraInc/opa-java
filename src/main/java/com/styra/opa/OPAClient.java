@@ -137,6 +137,34 @@ public class OPAClient {
         return evaluate(path, iMap);
     }
 
+    // check with optional path
+
+    public boolean check(java.util.Map<String, Object> input) throws OPAException {
+        return evaluate(input);
+    }
+
+    public boolean check() throws OPAException {
+        return evaluate();
+    }
+
+    public boolean check(boolean input) throws OPAException {
+        return evaluate(input);
+    }
+
+    public boolean check(double input) throws OPAException {
+        return evaluate(input);
+    }
+
+    public boolean check(java.util.List<Object> input) throws OPAException {
+        return evaluate(input);
+    }
+
+    public boolean check(java.lang.Object input) throws OPAException {
+        ObjectMapper om = new ObjectMapper();
+        Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {});
+        return evaluate(iMap);
+    }
+
     /**
      * Perform a query with an input document against a Rego rule head by its
      * path.
