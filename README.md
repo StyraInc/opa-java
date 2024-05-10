@@ -87,7 +87,60 @@ public class App {
 <!-- Start SDK Example Usage [usage] -->
 ## SDK Example Usage
 
-### Example
+### Example 1
+
+```java
+package hello.world;
+
+import com.styra.opa.openapi.OpaApiClient;
+import com.styra.opa.openapi.models.operations.*;
+import com.styra.opa.openapi.models.shared.*;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
+import static java.util.Map.entry;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+        try {
+            OpaApiClient sdk = OpaApiClient.builder()
+                .build();
+
+            ExecuteDefaultPolicyWithInputRequest req = ExecuteDefaultPolicyWithInputRequest.builder()
+                .requestBody(ExecuteDefaultPolicyWithInputRequestBody.builder()
+                        .input(Input.of(8203.11d))
+                        .build())
+                .build();
+
+            ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
+                .request(req)
+                .call();
+
+            if (res.successfulPolicyEvaluation().isPresent()) {
+                // handle response
+            }
+        } catch (com.styra.opa.openapi.models.errors.ClientError e) {
+            // handle exception
+            throw e;
+        } catch (com.styra.opa.openapi.models.errors.ServerError e) {
+            // handle exception
+            throw e;
+        } catch (com.styra.opa.openapi.models.errors.SDKError e) {
+            // handle exception
+            throw e;
+        } catch (Exception e) {
+            // handle exception
+            throw e;
+        }
+    }
+}
+```
+
+### Example 2
 
 ```java
 package hello.world;
@@ -147,6 +200,7 @@ public class Application {
 
 ### [OpaApiClient SDK](docs/sdks/opaapiclient/README.md)
 
+* [executeDefaultPolicyWithInput](docs/sdks/opaapiclient/README.md#executedefaultpolicywithinput) - Execute the default decision with given an input
 * [executePolicy](docs/sdks/opaapiclient/README.md#executepolicy) - Execute a policy
 * [executePolicyWithInput](docs/sdks/opaapiclient/README.md#executepolicywithinput) - Execute a policy given an input
 * [health](docs/sdks/opaapiclient/README.md#health) - Verify the server is operational
@@ -187,11 +241,13 @@ public class Application {
                 .serverIndex(0)
                 .build();
 
-            ExecutePolicyRequest req = ExecutePolicyRequest.builder()
-                .path("app/rbac")
+            ExecuteDefaultPolicyWithInputRequest req = ExecuteDefaultPolicyWithInputRequest.builder()
+                .requestBody(ExecuteDefaultPolicyWithInputRequestBody.builder()
+                        .input(Input.of(8203.11d))
+                        .build())
                 .build();
 
-            ExecutePolicyResponse res = sdk.executePolicy()
+            ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
                 .request(req)
                 .call();
 
@@ -241,11 +297,13 @@ public class Application {
                 .serverURL("http://localhost:8181")
                 .build();
 
-            ExecutePolicyRequest req = ExecutePolicyRequest.builder()
-                .path("app/rbac")
+            ExecuteDefaultPolicyWithInputRequest req = ExecuteDefaultPolicyWithInputRequest.builder()
+                .requestBody(ExecuteDefaultPolicyWithInputRequestBody.builder()
+                        .input(Input.of(8203.11d))
+                        .build())
                 .build();
 
-            ExecutePolicyResponse res = sdk.executePolicy()
+            ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
                 .request(req)
                 .call();
 
@@ -304,11 +362,13 @@ public class Application {
             OpaApiClient sdk = OpaApiClient.builder()
                 .build();
 
-            ExecutePolicyRequest req = ExecutePolicyRequest.builder()
-                .path("app/rbac")
+            ExecuteDefaultPolicyWithInputRequest req = ExecuteDefaultPolicyWithInputRequest.builder()
+                .requestBody(ExecuteDefaultPolicyWithInputRequestBody.builder()
+                        .input(Input.of(8203.11d))
+                        .build())
                 .build();
 
-            ExecutePolicyResponse res = sdk.executePolicy()
+            ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
                 .request(req)
                 .call();
 

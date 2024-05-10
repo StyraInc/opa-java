@@ -2,6 +2,7 @@ package com.styra.opa;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.testcontainers.containers.BindMode;
 import org.testcontainers.containers.GenericContainer;
@@ -52,6 +53,13 @@ class OPATest {
     @BeforeEach
     public void setUp() {
         address = "http://" + opac.getHost() + ":" + opac.getMappedPort(opaPort);
+    }
+
+    @AfterEach
+    public void dumpLogs() {
+        System.out.println("==== container logs from OPA container ====");
+        final String logs = opac.getLogs();
+        System.out.println(logs);
     }
 
     @Test

@@ -63,7 +63,7 @@ test {
     useJUnitPlatform()
     testLogging {
         // uncomment for more verbose output during development
-        //events "passed", "skipped", "failed", "standard_out", "standard_error"
+        events "passed", "skipped", "failed", "standard_out", "standard_error"
     }
 }
 

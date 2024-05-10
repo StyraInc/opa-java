@@ -4,9 +4,12 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.styra.opa.openapi.OpaApiClient;
+import com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputRequest;
 import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequest;
 import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequestBody;
+import com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputRequestBody;
 import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputResponse;
+import com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse;
 import com.styra.opa.openapi.models.shared.Explain;
 import com.styra.opa.openapi.models.shared.Input;
 import com.styra.opa.openapi.utils.HTTPClient;
@@ -14,6 +17,7 @@ import com.styra.opa.utils.OPAHTTPClient;
 
 import java.util.Map;
 import java.util.Optional;
+import java.nio.charset.StandardCharsets;
 
 /**
  * The OPA class contains all the functionality and configuration needed to
@@ -499,14 +503,9 @@ public class OPAClient {
         return evaluateMachinery(Input.of(defaultInput()), Optional.empty());
     }
 
-    private ExecutePolicyWithInputRequest makeRequestForEvaluate(Input input, Optional<String> path) {
-        String concretePath = "system/main";
-        if (path.isPresent()) {
-            concretePath = path.get();
-        }
-
+    private ExecutePolicyWithInputRequest makeRequestForEvaluate(Input input, String path) {
         return ExecutePolicyWithInputRequest.builder()
-            .path(concretePath)
+            .path(path)
             .requestBody(ExecutePolicyWithInputRequestBody.builder()
                     .input(input).build())
             .pretty(policyRequestPretty)
@@ -516,6 +515,99 @@ public class OPAClient {
             .instrument(policyRequestInstrument)
             .strictBuiltinErrors(policyRequestStrictBuiltinErrors)
             .build();
+    }
+
+    private ExecuteDefaultPolicyWithInputRequest makeRequestForDefaultEvaluate(Input input) {
+        return ExecuteDefaultPolicyWithInputRequest.builder()
+            .requestBody(ExecuteDefaultPolicyWithInputRequestBody.builder()
+                    .input(input).build())
+            .pretty(policyRequestPretty)
+            .provenance(policyRequestProvenance)
+            .explain(policyRequestExplain)
+            .metrics(policyRequestMetrics)
+            .instrument(policyRequestInstrument)
+            .strictBuiltinErrors(policyRequestStrictBuiltinErrors)
+            .build();
+    }
+
+    /**
+     * This wrapper abstracts over making "default" requests, that is requests
+     * that POST to OPA's / in order to access the default policy, as well as
+     * requests that have a specific path in /v1/data.
+     *
+     * At the end of the day, in both of these situations, the end result
+     * is either an object containing the successful policy execution, null, or
+     * an exception. This avoids having to duplicate this code in each of
+     * the overloaded cases of evaluateMachinery().
+     *
+     * @param input
+     * @param path
+     * @return
+     * @throws OPAException
+     */
+    private java.lang.Object executePolicy(Input input, Optional<String> path) throws OPAException {
+        if (path.isPresent()) {
+            ExecutePolicyWithInputRequest req = makeRequestForEvaluate(input, path.get());
+            ExecutePolicyWithInputResponse res;
+
+            try {
+                res = sdk.executePolicyWithInput()
+                    .request(req)
+                    .call();
+
+            //CHECKSTYLE:OFF
+            } catch (Exception e) {
+                //CHECKSTYLE:ON
+                e.printStackTrace(System.out);
+                String msg = String.format("executing policy at '%s' with failed due to exception '%s'", path, e);
+                throw new OPAException(msg, e);
+            }
+
+            if (res.successfulPolicyEvaluation().isPresent()) {
+                if (res.successfulPolicyEvaluation().get().result().isPresent()) {
+                    Object out = res.successfulPolicyEvaluation().get().result().get().value();
+                    return out;
+                } else {
+                    String msg = String.format("executing policy at '%s' succeeded, but OPA did not reply with a result", path);
+                    throw new OPAException(msg);
+                }
+            }
+
+            return null;
+
+        } else {
+            ExecuteDefaultPolicyWithInputRequest req = makeRequestForDefaultEvaluate(input);
+            ExecuteDefaultPolicyWithInputResponse res;
+
+            try {
+                res = sdk.executeDefaultPolicyWithInput()
+                    .request(req)
+                    .call();
+
+            //CHECKSTYLE:OFF
+            } catch (Exception e) {
+                System.out.println(e);
+                //CHECKSTYLE:ON
+                e.printStackTrace(System.out);
+                String msg = String.format("executing default policy with failed due to exception '%s'", e);
+                throw new OPAException(msg, e);
+            }
+
+            if (res.successfulPolicyEvaluation().isPresent()) {
+                System.out.println("XXXXX");
+                System.out.println(res.successfulPolicyEvaluation().get());
+
+                if (res.successfulPolicyEvaluation().get().result().isPresent()) {
+                    Object out = res.successfulPolicyEvaluation().get().result().get().value();
+                    return out;
+                } else {
+                    String msg = "executing default policy succeeded, but OPA did not reply with a result";
+                    throw new OPAException(msg);
+                }
+            }
+
+            return null;
+        }
     }
 
     /**
@@ -528,59 +620,19 @@ public class OPAClient {
      * @throws OPAException
      */
     private <T> T evaluateMachinery(Input input, Optional<String> path) throws OPAException {
-        ExecutePolicyWithInputRequest req = makeRequestForEvaluate(input, path);
-        ExecutePolicyWithInputResponse res;
-
-        try {
-            res = sdk.executePolicyWithInput()
-                .request(req)
-                .call();
-
-        // Although it is preferred not to catch Exception, the generated
-        // Speakeasy SDK `throws Exception`, so we have to catch it. If the
-        // caller really cares, they can always unwrap the OPAException.
-        //CHECKSTYLE:OFF
-        } catch (Exception e) {
-            //CHECKSTYLE:ON
-            e.printStackTrace(System.out);
-            String msg = String.format("executing policy at '%s' with failed due to exception '%s'", path, e);
-            throw new OPAException(msg, e);
-        }
-
-        if (res.successfulPolicyEvaluation().isPresent()) {
-            if (res.successfulPolicyEvaluation().get().result().isPresent()) {
-                Object out = res.successfulPolicyEvaluation().get().result().get().value();
-                ObjectMapper mapper = new ObjectMapper();
-                T typedResult = mapper.convertValue(out, new TypeReference<T>() {});
-                return typedResult;
-            } else {
-                // No result, so we just return null
-                return null;
-            }
+        Object out = executePolicy(input, path);
+        if (out != null) {
+            ObjectMapper mapper = new ObjectMapper();
+            T typedResult = mapper.convertValue(out, new TypeReference<T>() {});
+            return typedResult;
         } else {
             return null;
         }
     }
 
     private <T> T evaluateMachinery(Input input, Optional<String> path, Class<T> toValueType) throws OPAException {
-        ExecutePolicyWithInputRequest req = makeRequestForEvaluate(input, path);
-        ExecutePolicyWithInputResponse res;
-
-        try {
-            res = sdk.executePolicyWithInput()
-                .request(req)
-                .call();
-
-        //CHECKSTYLE:OFF
-        } catch (Exception e) {
-            //CHECKSTYLE:ON
-            e.printStackTrace(System.out);
-            String msg = String.format("executing policy at '%s' with failed due to exception '%s'", path, e);
-            throw new OPAException(msg, e);
-        }
-
-        if (res.successfulPolicyEvaluation().isPresent()) {
-            Object out = res.successfulPolicyEvaluation().get().result().get().value();
+        Object out = executePolicy(input, path);
+        if (out != null) {
             ObjectMapper mapper = new ObjectMapper();
             T typedResult = mapper.convertValue(out, toValueType);
             return typedResult;
@@ -590,24 +642,8 @@ public class OPAClient {
     }
 
     private <T> T evaluateMachinery(Input input, Optional<String> path, JavaType toValueType) throws OPAException {
-        ExecutePolicyWithInputRequest req = makeRequestForEvaluate(input, path);
-        ExecutePolicyWithInputResponse res;
-
-        try {
-            res = sdk.executePolicyWithInput()
-                .request(req)
-                .call();
-
-        //CHECKSTYLE:OFF
-        } catch (Exception e) {
-            //CHECKSTYLE:ON
-            e.printStackTrace(System.out);
-            String msg = String.format("executing policy at '%s' with failed due to exception '%s'", path, e);
-            throw new OPAException(msg, e);
-        }
-
-        if (res.successfulPolicyEvaluation().isPresent()) {
-            Object out = res.successfulPolicyEvaluation().get().result().get().value();
+        Object out = executePolicy(input, path);
+        if (out != null) {
             ObjectMapper mapper = new ObjectMapper();
             T typedResult = mapper.convertValue(out, toValueType);
             return typedResult;
@@ -621,25 +657,8 @@ public class OPAClient {
         Optional<String> path,
         TypeReference<T> toValueType
     ) throws OPAException {
-
-        ExecutePolicyWithInputRequest req = makeRequestForEvaluate(input, path);
-        ExecutePolicyWithInputResponse res;
-
-        try {
-            res = sdk.executePolicyWithInput()
-                .request(req)
-                .call();
-
-        //CHECKSTYLE:OFF
-        } catch (Exception e) {
-            //CHECKSTYLE:ON
-            e.printStackTrace(System.out);
-            String msg = String.format("executing policy at '%s' with failed due to exception '%s'", path, e);
-            throw new OPAException(msg, e);
-        }
-
-        if (res.successfulPolicyEvaluation().isPresent()) {
-            Object out = res.successfulPolicyEvaluation().get().result().get().value();
+        Object out = executePolicy(input, path);
+        if (out != null) {
             ObjectMapper mapper = new ObjectMapper();
             T typedResult = mapper.convertValue(out, toValueType);
             return typedResult;
@@ -647,5 +666,4 @@ public class OPAClient {
             return null;
         }
     }
-
 }
