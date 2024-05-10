@@ -5,11 +5,11 @@ markdown_extensions:
 nav:
   - 'Home': "index.md"
   - 'GitHub': "https://github.com/StyraInc/opa-java"
+  - 'Other Styra OPA SDKs': "https://docs.styra.com/sdk"
   - 'Javadoc': "javadoc"
-  - 'Models': "models"
-  - 'SDKs': "sdks"
   - 'Maintenance':
     - "Add a Documentation Page": "maintenance/add-doc.md"
     - "Modify Styra-Managed Code": "maintenance/change-managed.md"
     - "Regenerate Speakeasy-Managed Code": "maintenance/change-speakeasy.md"
     - "Release": "maintenance/releases.md"
+    - "Using a Custom OpenAPI Spec": "maintenance/custom-spec.md"
