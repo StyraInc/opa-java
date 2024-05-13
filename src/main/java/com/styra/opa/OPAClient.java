@@ -7,7 +7,6 @@ import com.styra.opa.openapi.OpaApiClient;
 import com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputRequest;
 import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequest;
 import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequestBody;
-import com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputRequestBody;
 import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputResponse;
 import com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse;
 import com.styra.opa.openapi.models.shared.Explain;
@@ -519,8 +518,7 @@ public class OPAClient {
 
     private ExecuteDefaultPolicyWithInputRequest makeRequestForDefaultEvaluate(Input input) {
         return ExecuteDefaultPolicyWithInputRequest.builder()
-            .requestBody(ExecuteDefaultPolicyWithInputRequestBody.builder()
-                    .input(input).build())
+            .input(input)
             .pretty(policyRequestPretty)
             .provenance(policyRequestProvenance)
             .explain(policyRequestExplain)
@@ -593,17 +591,12 @@ public class OPAClient {
                 throw new OPAException(msg, e);
             }
 
-            if (res.successfulPolicyEvaluation().isPresent()) {
-                System.out.println("XXXXX");
-                System.out.println(res.successfulPolicyEvaluation().get());
+            System.out.println("DEBUG res");
+            System.out.println(res);
 
-                if (res.successfulPolicyEvaluation().get().result().isPresent()) {
-                    Object out = res.successfulPolicyEvaluation().get().result().get().value();
-                    return out;
-                } else {
-                    String msg = "executing default policy succeeded, but OPA did not reply with a result";
-                    throw new OPAException(msg);
-                }
+            if (res.result().isPresent()) {
+                Object out = res.result().get().value();
+                return out;
             }
 
             return null;

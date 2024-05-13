@@ -546,13 +546,7 @@ public final class Utils {
     }
     
     public static String toUtf8AndClose(InputStream in) throws IOException {
-        String x = new String(toByteArrayAndClose(in), StandardCharsets.UTF_8);
-        System.out.println("DEBUG toUtf8AndClose");
-        System.out.println("in=");
-        System.out.println(in);
-        System.out.println("x=");
-        System.out.println(x);
-        return x;
+        return new String(toByteArrayAndClose(in), StandardCharsets.UTF_8);
     }
 
     public static Object convertToShape(Object o, JsonShape shape, TypeReference<?> typeReference) {

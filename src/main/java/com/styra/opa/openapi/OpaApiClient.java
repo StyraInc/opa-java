@@ -30,7 +30,6 @@ import java.time.OffsetDateTime;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.nio.charset.StandardCharsets;
 import org.apache.http.NameValuePair;
 import org.openapitools.jackson.nullable.JsonNullable;
 
@@ -183,7 +182,7 @@ public class OpaApiClient implements
         Object _convertedRequest = Utils.convertToShape(request, Utils.JsonShape.DEFAULT,
             new TypeReference<com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputRequest>() {});
         SerializedBody _serializedRequestBody = Utils.serializeRequestBody(
-                _convertedRequest, "requestBody", "json", false);
+                _convertedRequest, "input", "json", false);
         if (_serializedRequestBody == null) {
             throw new Exception("Request body is required");
         }
@@ -239,14 +238,12 @@ public class OpaApiClient implements
         com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse _res = _resBuilder.build();
         
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
-            _res.withHeaders(_httpRes.headers().map());
-
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
                 ObjectMapper _mapper = JSON.getMapper();
-                com.styra.opa.openapi.models.shared.SuccessfulPolicyEvaluation _out = _mapper.readValue(
+                com.styra.opa.openapi.models.shared.Result _out = _mapper.readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<com.styra.opa.openapi.models.shared.SuccessfulPolicyEvaluation>() {});
-                _res.withSuccessfulPolicyEvaluation(java.util.Optional.ofNullable(_out));
+                    new TypeReference<com.styra.opa.openapi.models.shared.Result>() {});
+                _res.withResult(java.util.Optional.ofNullable(_out));
                 return _res;
             } else {
                 throw new SDKError(

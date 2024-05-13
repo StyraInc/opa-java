@@ -71,7 +71,7 @@ public class ExecuteDefaultPolicyWithInputRequest {
      * The input document
      */
     @SpeakeasyMetadata("request:mediaType=application/json")
-    private ExecuteDefaultPolicyWithInputRequestBody requestBody;
+    private com.styra.opa.openapi.models.shared.Input input;
 
     @JsonCreator
     public ExecuteDefaultPolicyWithInputRequest(
@@ -83,7 +83,7 @@ public class ExecuteDefaultPolicyWithInputRequest {
             Optional<? extends Boolean> metrics,
             Optional<? extends Boolean> instrument,
             Optional<? extends Boolean> strictBuiltinErrors,
-            ExecuteDefaultPolicyWithInputRequestBody requestBody) {
+            com.styra.opa.openapi.models.shared.Input input) {
         Utils.checkNotNull(contentEncoding, "contentEncoding");
         Utils.checkNotNull(acceptEncoding, "acceptEncoding");
         Utils.checkNotNull(pretty, "pretty");
@@ -92,7 +92,7 @@ public class ExecuteDefaultPolicyWithInputRequest {
         Utils.checkNotNull(metrics, "metrics");
         Utils.checkNotNull(instrument, "instrument");
         Utils.checkNotNull(strictBuiltinErrors, "strictBuiltinErrors");
-        Utils.checkNotNull(requestBody, "requestBody");
+        Utils.checkNotNull(input, "input");
         this.contentEncoding = contentEncoding;
         this.acceptEncoding = acceptEncoding;
         this.pretty = pretty;
@@ -101,12 +101,12 @@ public class ExecuteDefaultPolicyWithInputRequest {
         this.metrics = metrics;
         this.instrument = instrument;
         this.strictBuiltinErrors = strictBuiltinErrors;
-        this.requestBody = requestBody;
+        this.input = input;
     }
     
     public ExecuteDefaultPolicyWithInputRequest(
-            ExecuteDefaultPolicyWithInputRequestBody requestBody) {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), requestBody);
+            com.styra.opa.openapi.models.shared.Input input) {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), input);
     }
 
     /**
@@ -185,8 +185,8 @@ public class ExecuteDefaultPolicyWithInputRequest {
      * The input document
      */
     @JsonIgnore
-    public ExecuteDefaultPolicyWithInputRequestBody requestBody() {
-        return requestBody;
+    public com.styra.opa.openapi.models.shared.Input input() {
+        return input;
     }
 
     public final static Builder builder() {
@@ -340,9 +340,9 @@ public class ExecuteDefaultPolicyWithInputRequest {
     /**
      * The input document
      */
-    public ExecuteDefaultPolicyWithInputRequest withRequestBody(ExecuteDefaultPolicyWithInputRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
+    public ExecuteDefaultPolicyWithInputRequest withInput(com.styra.opa.openapi.models.shared.Input input) {
+        Utils.checkNotNull(input, "input");
+        this.input = input;
         return this;
     }
     
@@ -364,7 +364,7 @@ public class ExecuteDefaultPolicyWithInputRequest {
             java.util.Objects.deepEquals(this.metrics, other.metrics) &&
             java.util.Objects.deepEquals(this.instrument, other.instrument) &&
             java.util.Objects.deepEquals(this.strictBuiltinErrors, other.strictBuiltinErrors) &&
-            java.util.Objects.deepEquals(this.requestBody, other.requestBody);
+            java.util.Objects.deepEquals(this.input, other.input);
     }
     
     @Override
@@ -378,7 +378,7 @@ public class ExecuteDefaultPolicyWithInputRequest {
             metrics,
             instrument,
             strictBuiltinErrors,
-            requestBody);
+            input);
     }
     
     @Override
@@ -392,7 +392,7 @@ public class ExecuteDefaultPolicyWithInputRequest {
                 "metrics", metrics,
                 "instrument", instrument,
                 "strictBuiltinErrors", strictBuiltinErrors,
-                "requestBody", requestBody);
+                "input", input);
     }
     
     public final static class Builder {
@@ -413,7 +413,7 @@ public class ExecuteDefaultPolicyWithInputRequest {
  
         private Optional<? extends Boolean> strictBuiltinErrors = Optional.empty();
  
-        private ExecuteDefaultPolicyWithInputRequestBody requestBody;  
+        private com.styra.opa.openapi.models.shared.Input input;  
         
         private Builder() {
           // force use of static builder() method
@@ -566,9 +566,9 @@ public class ExecuteDefaultPolicyWithInputRequest {
         /**
          * The input document
          */
-        public Builder requestBody(ExecuteDefaultPolicyWithInputRequestBody requestBody) {
-            Utils.checkNotNull(requestBody, "requestBody");
-            this.requestBody = requestBody;
+        public Builder input(com.styra.opa.openapi.models.shared.Input input) {
+            Utils.checkNotNull(input, "input");
+            this.input = input;
             return this;
         }
         
@@ -582,7 +582,7 @@ public class ExecuteDefaultPolicyWithInputRequest {
                 metrics,
                 instrument,
                 strictBuiltinErrors,
-                requestBody);
+                input);
         }
     }
 }

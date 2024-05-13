@@ -34,40 +34,29 @@ public class ExecuteDefaultPolicyWithInputResponse implements com.styra.opa.open
      */
     private HttpResponse<InputStream> rawResponse;
 
-    /**
-     * Success.
-     * The server also returns 200 if the path refers to an undefined document. In this case, the response will not contain a result property.
-     * 
-     */
-    private Optional<? extends com.styra.opa.openapi.models.shared.SuccessfulPolicyEvaluation> successfulPolicyEvaluation;
-
-    private java.util.Map<String, java.util.List<String>> headers;
+    private Optional<? extends com.styra.opa.openapi.models.shared.Result> result;
 
     @JsonCreator
     public ExecuteDefaultPolicyWithInputResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends com.styra.opa.openapi.models.shared.SuccessfulPolicyEvaluation> successfulPolicyEvaluation,
-            java.util.Map<String, java.util.List<String>> headers) {
+            Optional<? extends com.styra.opa.openapi.models.shared.Result> result) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(successfulPolicyEvaluation, "successfulPolicyEvaluation");
-        headers = Utils.emptyMapIfNull(headers);
+        Utils.checkNotNull(result, "result");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.successfulPolicyEvaluation = successfulPolicyEvaluation;
-        this.headers = headers;
+        this.result = result;
     }
     
     public ExecuteDefaultPolicyWithInputResponse(
             String contentType,
             int statusCode,
-            HttpResponse<InputStream> rawResponse,
-            java.util.Map<String, java.util.List<String>> headers) {
-        this(contentType, statusCode, rawResponse, Optional.empty(), headers);
+            HttpResponse<InputStream> rawResponse) {
+        this(contentType, statusCode, rawResponse, Optional.empty());
     }
 
     /**
@@ -94,20 +83,10 @@ public class ExecuteDefaultPolicyWithInputResponse implements com.styra.opa.open
         return rawResponse;
     }
 
-    /**
-     * Success.
-     * The server also returns 200 if the path refers to an undefined document. In this case, the response will not contain a result property.
-     * 
-     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<com.styra.opa.openapi.models.shared.SuccessfulPolicyEvaluation> successfulPolicyEvaluation() {
-        return (Optional<com.styra.opa.openapi.models.shared.SuccessfulPolicyEvaluation>) successfulPolicyEvaluation;
-    }
-
-    @JsonIgnore
-    public java.util.Map<String, java.util.List<String>> headers() {
-        return headers;
+    public Optional<com.styra.opa.openapi.models.shared.Result> result() {
+        return (Optional<com.styra.opa.openapi.models.shared.Result>) result;
     }
 
     public final static Builder builder() {
@@ -141,31 +120,15 @@ public class ExecuteDefaultPolicyWithInputResponse implements com.styra.opa.open
         return this;
     }
 
-    /**
-     * Success.
-     * The server also returns 200 if the path refers to an undefined document. In this case, the response will not contain a result property.
-     * 
-     */
-    public ExecuteDefaultPolicyWithInputResponse withSuccessfulPolicyEvaluation(com.styra.opa.openapi.models.shared.SuccessfulPolicyEvaluation successfulPolicyEvaluation) {
-        Utils.checkNotNull(successfulPolicyEvaluation, "successfulPolicyEvaluation");
-        this.successfulPolicyEvaluation = Optional.ofNullable(successfulPolicyEvaluation);
+    public ExecuteDefaultPolicyWithInputResponse withResult(com.styra.opa.openapi.models.shared.Result result) {
+        Utils.checkNotNull(result, "result");
+        this.result = Optional.ofNullable(result);
         return this;
     }
 
-    /**
-     * Success.
-     * The server also returns 200 if the path refers to an undefined document. In this case, the response will not contain a result property.
-     * 
-     */
-    public ExecuteDefaultPolicyWithInputResponse withSuccessfulPolicyEvaluation(Optional<? extends com.styra.opa.openapi.models.shared.SuccessfulPolicyEvaluation> successfulPolicyEvaluation) {
-        Utils.checkNotNull(successfulPolicyEvaluation, "successfulPolicyEvaluation");
-        this.successfulPolicyEvaluation = successfulPolicyEvaluation;
-        return this;
-    }
-
-    public ExecuteDefaultPolicyWithInputResponse withHeaders(java.util.Map<String, java.util.List<String>> headers) {
-        Utils.checkNotNull(headers, "headers");
-        this.headers = headers;
+    public ExecuteDefaultPolicyWithInputResponse withResult(Optional<? extends com.styra.opa.openapi.models.shared.Result> result) {
+        Utils.checkNotNull(result, "result");
+        this.result = result;
         return this;
     }
     
@@ -182,8 +145,7 @@ public class ExecuteDefaultPolicyWithInputResponse implements com.styra.opa.open
             java.util.Objects.deepEquals(this.contentType, other.contentType) &&
             java.util.Objects.deepEquals(this.statusCode, other.statusCode) &&
             java.util.Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            java.util.Objects.deepEquals(this.successfulPolicyEvaluation, other.successfulPolicyEvaluation) &&
-            java.util.Objects.deepEquals(this.headers, other.headers);
+            java.util.Objects.deepEquals(this.result, other.result);
     }
     
     @Override
@@ -192,8 +154,7 @@ public class ExecuteDefaultPolicyWithInputResponse implements com.styra.opa.open
             contentType,
             statusCode,
             rawResponse,
-            successfulPolicyEvaluation,
-            headers);
+            result);
     }
     
     @Override
@@ -202,8 +163,7 @@ public class ExecuteDefaultPolicyWithInputResponse implements com.styra.opa.open
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "successfulPolicyEvaluation", successfulPolicyEvaluation,
-                "headers", headers);
+                "result", result);
     }
     
     public final static class Builder {
@@ -214,9 +174,7 @@ public class ExecuteDefaultPolicyWithInputResponse implements com.styra.opa.open
  
         private HttpResponse<InputStream> rawResponse;
  
-        private Optional<? extends com.styra.opa.openapi.models.shared.SuccessfulPolicyEvaluation> successfulPolicyEvaluation = Optional.empty();
- 
-        private java.util.Map<String, java.util.List<String>> headers;  
+        private Optional<? extends com.styra.opa.openapi.models.shared.Result> result = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -249,31 +207,15 @@ public class ExecuteDefaultPolicyWithInputResponse implements com.styra.opa.open
             return this;
         }
 
-        /**
-         * Success.
-         * The server also returns 200 if the path refers to an undefined document. In this case, the response will not contain a result property.
-         * 
-         */
-        public Builder successfulPolicyEvaluation(com.styra.opa.openapi.models.shared.SuccessfulPolicyEvaluation successfulPolicyEvaluation) {
-            Utils.checkNotNull(successfulPolicyEvaluation, "successfulPolicyEvaluation");
-            this.successfulPolicyEvaluation = Optional.ofNullable(successfulPolicyEvaluation);
+        public Builder result(com.styra.opa.openapi.models.shared.Result result) {
+            Utils.checkNotNull(result, "result");
+            this.result = Optional.ofNullable(result);
             return this;
         }
 
-        /**
-         * Success.
-         * The server also returns 200 if the path refers to an undefined document. In this case, the response will not contain a result property.
-         * 
-         */
-        public Builder successfulPolicyEvaluation(Optional<? extends com.styra.opa.openapi.models.shared.SuccessfulPolicyEvaluation> successfulPolicyEvaluation) {
-            Utils.checkNotNull(successfulPolicyEvaluation, "successfulPolicyEvaluation");
-            this.successfulPolicyEvaluation = successfulPolicyEvaluation;
-            return this;
-        }
-
-        public Builder headers(java.util.Map<String, java.util.List<String>> headers) {
-            Utils.checkNotNull(headers, "headers");
-            this.headers = headers;
+        public Builder result(Optional<? extends com.styra.opa.openapi.models.shared.Result> result) {
+            Utils.checkNotNull(result, "result");
+            this.result = result;
             return this;
         }
         
@@ -282,8 +224,7 @@ public class ExecuteDefaultPolicyWithInputResponse implements com.styra.opa.open
                 contentType,
                 statusCode,
                 rawResponse,
-                successfulPolicyEvaluation,
-                headers);
+                result);
         }
     }
 }

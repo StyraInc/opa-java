@@ -33,14 +33,13 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              required: [input]
-              properties:
-                input:
-                  $ref: "#/components/schemas/input"
+              $ref: "#/components/schemas/input"
       responses:
         "200":
-          $ref: "#/components/responses/SuccessfulPolicyEvaluation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/result"
         "400":
           $ref: "#/components/responses/BadRequest"
         "500":

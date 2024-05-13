@@ -111,16 +111,14 @@ public class Application {
                 .build();
 
             ExecuteDefaultPolicyWithInputRequest req = ExecuteDefaultPolicyWithInputRequest.builder()
-                .requestBody(ExecuteDefaultPolicyWithInputRequestBody.builder()
-                        .input(Input.of(8203.11d))
-                        .build())
+                .input(Input.of(8203.11d))
                 .build();
 
             ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
                 .request(req)
                 .call();
 
-            if (res.successfulPolicyEvaluation().isPresent()) {
+            if (res.result().isPresent()) {
                 // handle response
             }
         } catch (com.styra.opa.openapi.models.errors.ClientError e) {
@@ -242,16 +240,14 @@ public class Application {
                 .build();
 
             ExecuteDefaultPolicyWithInputRequest req = ExecuteDefaultPolicyWithInputRequest.builder()
-                .requestBody(ExecuteDefaultPolicyWithInputRequestBody.builder()
-                        .input(Input.of(8203.11d))
-                        .build())
+                .input(Input.of(8203.11d))
                 .build();
 
             ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
                 .request(req)
                 .call();
 
-            if (res.successfulPolicyEvaluation().isPresent()) {
+            if (res.result().isPresent()) {
                 // handle response
             }
         } catch (com.styra.opa.openapi.models.errors.ClientError e) {
@@ -298,16 +294,14 @@ public class Application {
                 .build();
 
             ExecuteDefaultPolicyWithInputRequest req = ExecuteDefaultPolicyWithInputRequest.builder()
-                .requestBody(ExecuteDefaultPolicyWithInputRequestBody.builder()
-                        .input(Input.of(8203.11d))
-                        .build())
+                .input(Input.of(8203.11d))
                 .build();
 
             ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
                 .request(req)
                 .call();
 
-            if (res.successfulPolicyEvaluation().isPresent()) {
+            if (res.result().isPresent()) {
                 // handle response
             }
         } catch (com.styra.opa.openapi.models.errors.ClientError e) {
@@ -363,16 +357,14 @@ public class Application {
                 .build();
 
             ExecuteDefaultPolicyWithInputRequest req = ExecuteDefaultPolicyWithInputRequest.builder()
-                .requestBody(ExecuteDefaultPolicyWithInputRequestBody.builder()
-                        .input(Input.of(8203.11d))
-                        .build())
+                .input(Input.of(8203.11d))
                 .build();
 
             ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
                 .request(req)
                 .call();
 
-            if (res.successfulPolicyEvaluation().isPresent()) {
+            if (res.result().isPresent()) {
                 // handle response
             }
         } catch (com.styra.opa.openapi.models.errors.ClientError e) {
