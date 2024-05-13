@@ -278,7 +278,7 @@ public class OPAClient {
     }
 
     public <T> T evaluate(Class<T> toValueType) throws OPAException {
-        return evaluateMachinery(Input.of(Map.ofEntries()), Optional.empty(), toValueType);
+        return evaluateMachinery(Input.of(defaultInput()), Optional.empty(), toValueType);
     }
 
     public <T> T evaluate(java.lang.Object input, Class<T> toValueType) throws OPAException {
