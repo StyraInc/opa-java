@@ -16,7 +16,8 @@ public class SDKMethodInterfaces {
 
     public interface MethodCallExecuteDefaultPolicyWithInput {
         com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse executeDefaultPolicyWithInput(
-            com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputRequest request) throws Exception;
+            Optional<? extends Boolean> pretty,
+            com.styra.opa.openapi.models.shared.Input input) throws Exception;
     }
 
 

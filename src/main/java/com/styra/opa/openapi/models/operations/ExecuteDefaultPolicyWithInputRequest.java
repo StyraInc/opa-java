@@ -20,52 +20,10 @@ import java.util.Optional;
 public class ExecuteDefaultPolicyWithInputRequest {
 
     /**
-     * Indicates that the request body is gzip encoded
-     */
-    @SpeakeasyMetadata("header:style=simple,explode=false,name=Content-Encoding")
-    private Optional<? extends com.styra.opa.openapi.models.shared.GzipContentEncoding> contentEncoding;
-
-    /**
-     * Indicates the server should respond with a gzip encoded body. The server will send the compressed response only if its length is above `server.encoding.gzip.min_length` value. See the configuration section
-     */
-    @SpeakeasyMetadata("header:style=simple,explode=false,name=Accept-Encoding")
-    private Optional<? extends com.styra.opa.openapi.models.shared.GzipAcceptEncoding> acceptEncoding;
-
-    /**
      * If parameter is `true`, response will formatted for humans.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=pretty")
     private Optional<? extends Boolean> pretty;
-
-    /**
-     * If parameter is true, response will include build/version info in addition to the result.
-     */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=provenance")
-    private Optional<? extends Boolean> provenance;
-
-    /**
-     * Return query explanation in addition to result.
-     */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=explain")
-    private Optional<? extends com.styra.opa.openapi.models.shared.Explain> explain;
-
-    /**
-     * Return query performance metrics in addition to result.
-     */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=metrics")
-    private Optional<? extends Boolean> metrics;
-
-    /**
-     * Instrument query evaluation and return a superset of performance metrics in addition to result.
-     */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=instrument")
-    private Optional<? extends Boolean> instrument;
-
-    /**
-     * Treat built-in function call errors as fatal and return an error immediately.
-     */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=strict-builtin-errors")
-    private Optional<? extends Boolean> strictBuiltinErrors;
 
     /**
      * The input document
@@ -75,56 +33,17 @@ public class ExecuteDefaultPolicyWithInputRequest {
 
     @JsonCreator
     public ExecuteDefaultPolicyWithInputRequest(
-            Optional<? extends com.styra.opa.openapi.models.shared.GzipContentEncoding> contentEncoding,
-            Optional<? extends com.styra.opa.openapi.models.shared.GzipAcceptEncoding> acceptEncoding,
             Optional<? extends Boolean> pretty,
-            Optional<? extends Boolean> provenance,
-            Optional<? extends com.styra.opa.openapi.models.shared.Explain> explain,
-            Optional<? extends Boolean> metrics,
-            Optional<? extends Boolean> instrument,
-            Optional<? extends Boolean> strictBuiltinErrors,
             com.styra.opa.openapi.models.shared.Input input) {
-        Utils.checkNotNull(contentEncoding, "contentEncoding");
-        Utils.checkNotNull(acceptEncoding, "acceptEncoding");
         Utils.checkNotNull(pretty, "pretty");
-        Utils.checkNotNull(provenance, "provenance");
-        Utils.checkNotNull(explain, "explain");
-        Utils.checkNotNull(metrics, "metrics");
-        Utils.checkNotNull(instrument, "instrument");
-        Utils.checkNotNull(strictBuiltinErrors, "strictBuiltinErrors");
         Utils.checkNotNull(input, "input");
-        this.contentEncoding = contentEncoding;
-        this.acceptEncoding = acceptEncoding;
         this.pretty = pretty;
-        this.provenance = provenance;
-        this.explain = explain;
-        this.metrics = metrics;
-        this.instrument = instrument;
-        this.strictBuiltinErrors = strictBuiltinErrors;
         this.input = input;
     }
     
     public ExecuteDefaultPolicyWithInputRequest(
             com.styra.opa.openapi.models.shared.Input input) {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), input);
-    }
-
-    /**
-     * Indicates that the request body is gzip encoded
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<com.styra.opa.openapi.models.shared.GzipContentEncoding> contentEncoding() {
-        return (Optional<com.styra.opa.openapi.models.shared.GzipContentEncoding>) contentEncoding;
-    }
-
-    /**
-     * Indicates the server should respond with a gzip encoded body. The server will send the compressed response only if its length is above `server.encoding.gzip.min_length` value. See the configuration section
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<com.styra.opa.openapi.models.shared.GzipAcceptEncoding> acceptEncoding() {
-        return (Optional<com.styra.opa.openapi.models.shared.GzipAcceptEncoding>) acceptEncoding;
+        this(Optional.empty(), input);
     }
 
     /**
@@ -137,51 +56,6 @@ public class ExecuteDefaultPolicyWithInputRequest {
     }
 
     /**
-     * If parameter is true, response will include build/version info in addition to the result.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<Boolean> provenance() {
-        return (Optional<Boolean>) provenance;
-    }
-
-    /**
-     * Return query explanation in addition to result.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<com.styra.opa.openapi.models.shared.Explain> explain() {
-        return (Optional<com.styra.opa.openapi.models.shared.Explain>) explain;
-    }
-
-    /**
-     * Return query performance metrics in addition to result.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<Boolean> metrics() {
-        return (Optional<Boolean>) metrics;
-    }
-
-    /**
-     * Instrument query evaluation and return a superset of performance metrics in addition to result.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<Boolean> instrument() {
-        return (Optional<Boolean>) instrument;
-    }
-
-    /**
-     * Treat built-in function call errors as fatal and return an error immediately.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<Boolean> strictBuiltinErrors() {
-        return (Optional<Boolean>) strictBuiltinErrors;
-    }
-
-    /**
      * The input document
      */
     @JsonIgnore
@@ -191,42 +65,6 @@ public class ExecuteDefaultPolicyWithInputRequest {
 
     public final static Builder builder() {
         return new Builder();
-    }
-
-    /**
-     * Indicates that the request body is gzip encoded
-     */
-    public ExecuteDefaultPolicyWithInputRequest withContentEncoding(com.styra.opa.openapi.models.shared.GzipContentEncoding contentEncoding) {
-        Utils.checkNotNull(contentEncoding, "contentEncoding");
-        this.contentEncoding = Optional.ofNullable(contentEncoding);
-        return this;
-    }
-
-    /**
-     * Indicates that the request body is gzip encoded
-     */
-    public ExecuteDefaultPolicyWithInputRequest withContentEncoding(Optional<? extends com.styra.opa.openapi.models.shared.GzipContentEncoding> contentEncoding) {
-        Utils.checkNotNull(contentEncoding, "contentEncoding");
-        this.contentEncoding = contentEncoding;
-        return this;
-    }
-
-    /**
-     * Indicates the server should respond with a gzip encoded body. The server will send the compressed response only if its length is above `server.encoding.gzip.min_length` value. See the configuration section
-     */
-    public ExecuteDefaultPolicyWithInputRequest withAcceptEncoding(com.styra.opa.openapi.models.shared.GzipAcceptEncoding acceptEncoding) {
-        Utils.checkNotNull(acceptEncoding, "acceptEncoding");
-        this.acceptEncoding = Optional.ofNullable(acceptEncoding);
-        return this;
-    }
-
-    /**
-     * Indicates the server should respond with a gzip encoded body. The server will send the compressed response only if its length is above `server.encoding.gzip.min_length` value. See the configuration section
-     */
-    public ExecuteDefaultPolicyWithInputRequest withAcceptEncoding(Optional<? extends com.styra.opa.openapi.models.shared.GzipAcceptEncoding> acceptEncoding) {
-        Utils.checkNotNull(acceptEncoding, "acceptEncoding");
-        this.acceptEncoding = acceptEncoding;
-        return this;
     }
 
     /**
@@ -244,96 +82,6 @@ public class ExecuteDefaultPolicyWithInputRequest {
     public ExecuteDefaultPolicyWithInputRequest withPretty(Optional<? extends Boolean> pretty) {
         Utils.checkNotNull(pretty, "pretty");
         this.pretty = pretty;
-        return this;
-    }
-
-    /**
-     * If parameter is true, response will include build/version info in addition to the result.
-     */
-    public ExecuteDefaultPolicyWithInputRequest withProvenance(boolean provenance) {
-        Utils.checkNotNull(provenance, "provenance");
-        this.provenance = Optional.ofNullable(provenance);
-        return this;
-    }
-
-    /**
-     * If parameter is true, response will include build/version info in addition to the result.
-     */
-    public ExecuteDefaultPolicyWithInputRequest withProvenance(Optional<? extends Boolean> provenance) {
-        Utils.checkNotNull(provenance, "provenance");
-        this.provenance = provenance;
-        return this;
-    }
-
-    /**
-     * Return query explanation in addition to result.
-     */
-    public ExecuteDefaultPolicyWithInputRequest withExplain(com.styra.opa.openapi.models.shared.Explain explain) {
-        Utils.checkNotNull(explain, "explain");
-        this.explain = Optional.ofNullable(explain);
-        return this;
-    }
-
-    /**
-     * Return query explanation in addition to result.
-     */
-    public ExecuteDefaultPolicyWithInputRequest withExplain(Optional<? extends com.styra.opa.openapi.models.shared.Explain> explain) {
-        Utils.checkNotNull(explain, "explain");
-        this.explain = explain;
-        return this;
-    }
-
-    /**
-     * Return query performance metrics in addition to result.
-     */
-    public ExecuteDefaultPolicyWithInputRequest withMetrics(boolean metrics) {
-        Utils.checkNotNull(metrics, "metrics");
-        this.metrics = Optional.ofNullable(metrics);
-        return this;
-    }
-
-    /**
-     * Return query performance metrics in addition to result.
-     */
-    public ExecuteDefaultPolicyWithInputRequest withMetrics(Optional<? extends Boolean> metrics) {
-        Utils.checkNotNull(metrics, "metrics");
-        this.metrics = metrics;
-        return this;
-    }
-
-    /**
-     * Instrument query evaluation and return a superset of performance metrics in addition to result.
-     */
-    public ExecuteDefaultPolicyWithInputRequest withInstrument(boolean instrument) {
-        Utils.checkNotNull(instrument, "instrument");
-        this.instrument = Optional.ofNullable(instrument);
-        return this;
-    }
-
-    /**
-     * Instrument query evaluation and return a superset of performance metrics in addition to result.
-     */
-    public ExecuteDefaultPolicyWithInputRequest withInstrument(Optional<? extends Boolean> instrument) {
-        Utils.checkNotNull(instrument, "instrument");
-        this.instrument = instrument;
-        return this;
-    }
-
-    /**
-     * Treat built-in function call errors as fatal and return an error immediately.
-     */
-    public ExecuteDefaultPolicyWithInputRequest withStrictBuiltinErrors(boolean strictBuiltinErrors) {
-        Utils.checkNotNull(strictBuiltinErrors, "strictBuiltinErrors");
-        this.strictBuiltinErrors = Optional.ofNullable(strictBuiltinErrors);
-        return this;
-    }
-
-    /**
-     * Treat built-in function call errors as fatal and return an error immediately.
-     */
-    public ExecuteDefaultPolicyWithInputRequest withStrictBuiltinErrors(Optional<? extends Boolean> strictBuiltinErrors) {
-        Utils.checkNotNull(strictBuiltinErrors, "strictBuiltinErrors");
-        this.strictBuiltinErrors = strictBuiltinErrors;
         return this;
     }
 
@@ -356,103 +104,32 @@ public class ExecuteDefaultPolicyWithInputRequest {
         }
         ExecuteDefaultPolicyWithInputRequest other = (ExecuteDefaultPolicyWithInputRequest) o;
         return 
-            java.util.Objects.deepEquals(this.contentEncoding, other.contentEncoding) &&
-            java.util.Objects.deepEquals(this.acceptEncoding, other.acceptEncoding) &&
             java.util.Objects.deepEquals(this.pretty, other.pretty) &&
-            java.util.Objects.deepEquals(this.provenance, other.provenance) &&
-            java.util.Objects.deepEquals(this.explain, other.explain) &&
-            java.util.Objects.deepEquals(this.metrics, other.metrics) &&
-            java.util.Objects.deepEquals(this.instrument, other.instrument) &&
-            java.util.Objects.deepEquals(this.strictBuiltinErrors, other.strictBuiltinErrors) &&
             java.util.Objects.deepEquals(this.input, other.input);
     }
     
     @Override
     public int hashCode() {
         return java.util.Objects.hash(
-            contentEncoding,
-            acceptEncoding,
             pretty,
-            provenance,
-            explain,
-            metrics,
-            instrument,
-            strictBuiltinErrors,
             input);
     }
     
     @Override
     public String toString() {
         return Utils.toString(ExecuteDefaultPolicyWithInputRequest.class,
-                "contentEncoding", contentEncoding,
-                "acceptEncoding", acceptEncoding,
                 "pretty", pretty,
-                "provenance", provenance,
-                "explain", explain,
-                "metrics", metrics,
-                "instrument", instrument,
-                "strictBuiltinErrors", strictBuiltinErrors,
                 "input", input);
     }
     
     public final static class Builder {
  
-        private Optional<? extends com.styra.opa.openapi.models.shared.GzipContentEncoding> contentEncoding = Optional.empty();
- 
-        private Optional<? extends com.styra.opa.openapi.models.shared.GzipAcceptEncoding> acceptEncoding = Optional.empty();
- 
         private Optional<? extends Boolean> pretty = Optional.empty();
- 
-        private Optional<? extends Boolean> provenance = Optional.empty();
- 
-        private Optional<? extends com.styra.opa.openapi.models.shared.Explain> explain = Optional.empty();
- 
-        private Optional<? extends Boolean> metrics = Optional.empty();
- 
-        private Optional<? extends Boolean> instrument = Optional.empty();
- 
-        private Optional<? extends Boolean> strictBuiltinErrors = Optional.empty();
  
         private com.styra.opa.openapi.models.shared.Input input;  
         
         private Builder() {
           // force use of static builder() method
-        }
-
-        /**
-         * Indicates that the request body is gzip encoded
-         */
-        public Builder contentEncoding(com.styra.opa.openapi.models.shared.GzipContentEncoding contentEncoding) {
-            Utils.checkNotNull(contentEncoding, "contentEncoding");
-            this.contentEncoding = Optional.ofNullable(contentEncoding);
-            return this;
-        }
-
-        /**
-         * Indicates that the request body is gzip encoded
-         */
-        public Builder contentEncoding(Optional<? extends com.styra.opa.openapi.models.shared.GzipContentEncoding> contentEncoding) {
-            Utils.checkNotNull(contentEncoding, "contentEncoding");
-            this.contentEncoding = contentEncoding;
-            return this;
-        }
-
-        /**
-         * Indicates the server should respond with a gzip encoded body. The server will send the compressed response only if its length is above `server.encoding.gzip.min_length` value. See the configuration section
-         */
-        public Builder acceptEncoding(com.styra.opa.openapi.models.shared.GzipAcceptEncoding acceptEncoding) {
-            Utils.checkNotNull(acceptEncoding, "acceptEncoding");
-            this.acceptEncoding = Optional.ofNullable(acceptEncoding);
-            return this;
-        }
-
-        /**
-         * Indicates the server should respond with a gzip encoded body. The server will send the compressed response only if its length is above `server.encoding.gzip.min_length` value. See the configuration section
-         */
-        public Builder acceptEncoding(Optional<? extends com.styra.opa.openapi.models.shared.GzipAcceptEncoding> acceptEncoding) {
-            Utils.checkNotNull(acceptEncoding, "acceptEncoding");
-            this.acceptEncoding = acceptEncoding;
-            return this;
         }
 
         /**
@@ -474,96 +151,6 @@ public class ExecuteDefaultPolicyWithInputRequest {
         }
 
         /**
-         * If parameter is true, response will include build/version info in addition to the result.
-         */
-        public Builder provenance(boolean provenance) {
-            Utils.checkNotNull(provenance, "provenance");
-            this.provenance = Optional.ofNullable(provenance);
-            return this;
-        }
-
-        /**
-         * If parameter is true, response will include build/version info in addition to the result.
-         */
-        public Builder provenance(Optional<? extends Boolean> provenance) {
-            Utils.checkNotNull(provenance, "provenance");
-            this.provenance = provenance;
-            return this;
-        }
-
-        /**
-         * Return query explanation in addition to result.
-         */
-        public Builder explain(com.styra.opa.openapi.models.shared.Explain explain) {
-            Utils.checkNotNull(explain, "explain");
-            this.explain = Optional.ofNullable(explain);
-            return this;
-        }
-
-        /**
-         * Return query explanation in addition to result.
-         */
-        public Builder explain(Optional<? extends com.styra.opa.openapi.models.shared.Explain> explain) {
-            Utils.checkNotNull(explain, "explain");
-            this.explain = explain;
-            return this;
-        }
-
-        /**
-         * Return query performance metrics in addition to result.
-         */
-        public Builder metrics(boolean metrics) {
-            Utils.checkNotNull(metrics, "metrics");
-            this.metrics = Optional.ofNullable(metrics);
-            return this;
-        }
-
-        /**
-         * Return query performance metrics in addition to result.
-         */
-        public Builder metrics(Optional<? extends Boolean> metrics) {
-            Utils.checkNotNull(metrics, "metrics");
-            this.metrics = metrics;
-            return this;
-        }
-
-        /**
-         * Instrument query evaluation and return a superset of performance metrics in addition to result.
-         */
-        public Builder instrument(boolean instrument) {
-            Utils.checkNotNull(instrument, "instrument");
-            this.instrument = Optional.ofNullable(instrument);
-            return this;
-        }
-
-        /**
-         * Instrument query evaluation and return a superset of performance metrics in addition to result.
-         */
-        public Builder instrument(Optional<? extends Boolean> instrument) {
-            Utils.checkNotNull(instrument, "instrument");
-            this.instrument = instrument;
-            return this;
-        }
-
-        /**
-         * Treat built-in function call errors as fatal and return an error immediately.
-         */
-        public Builder strictBuiltinErrors(boolean strictBuiltinErrors) {
-            Utils.checkNotNull(strictBuiltinErrors, "strictBuiltinErrors");
-            this.strictBuiltinErrors = Optional.ofNullable(strictBuiltinErrors);
-            return this;
-        }
-
-        /**
-         * Treat built-in function call errors as fatal and return an error immediately.
-         */
-        public Builder strictBuiltinErrors(Optional<? extends Boolean> strictBuiltinErrors) {
-            Utils.checkNotNull(strictBuiltinErrors, "strictBuiltinErrors");
-            this.strictBuiltinErrors = strictBuiltinErrors;
-            return this;
-        }
-
-        /**
          * The input document
          */
         public Builder input(com.styra.opa.openapi.models.shared.Input input) {
@@ -574,14 +161,7 @@ public class ExecuteDefaultPolicyWithInputRequest {
         
         public ExecuteDefaultPolicyWithInputRequest build() {
             return new ExecuteDefaultPolicyWithInputRequest(
-                contentEncoding,
-                acceptEncoding,
                 pretty,
-                provenance,
-                explain,
-                metrics,
-                instrument,
-                strictBuiltinErrors,
                 input);
         }
     }

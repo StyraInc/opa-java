@@ -20,12 +20,9 @@ public class Application {
             OpaApiClient sdk = OpaApiClient.builder()
                 .build();
 
-            ExecuteDefaultPolicyWithInputRequest req = ExecuteDefaultPolicyWithInputRequest.builder()
-                .input(Input.of(8203.11d))
-                .build();
-
             ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
-                .request(req)
+                .pretty(false)
+                .input(Input.of(8203.11d))
                 .call();
 
             if (res.result().isPresent()) {

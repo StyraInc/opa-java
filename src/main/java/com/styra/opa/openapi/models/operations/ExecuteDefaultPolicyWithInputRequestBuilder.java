@@ -19,22 +19,36 @@ import org.openapitools.jackson.nullable.JsonNullable;
 
 public class ExecuteDefaultPolicyWithInputRequestBuilder {
 
-    private ExecuteDefaultPolicyWithInputRequest request;
+    private Optional<? extends Boolean> pretty = Optional.empty();
+    private com.styra.opa.openapi.models.shared.Input input;
     private final SDKMethodInterfaces.MethodCallExecuteDefaultPolicyWithInput sdk;
 
     public ExecuteDefaultPolicyWithInputRequestBuilder(SDKMethodInterfaces.MethodCallExecuteDefaultPolicyWithInput sdk) {
         this.sdk = sdk;
     }
+                
+    public ExecuteDefaultPolicyWithInputRequestBuilder pretty(boolean pretty) {
+        Utils.checkNotNull(pretty, "pretty");
+        this.pretty = Optional.of(pretty);
+        return this;
+    }
 
-    public ExecuteDefaultPolicyWithInputRequestBuilder request(ExecuteDefaultPolicyWithInputRequest request) {
-        Utils.checkNotNull(request, "request");
-        this.request = request;
+    public ExecuteDefaultPolicyWithInputRequestBuilder pretty(Optional<? extends Boolean> pretty) {
+        Utils.checkNotNull(pretty, "pretty");
+        this.pretty = pretty;
+        return this;
+    }
+
+    public ExecuteDefaultPolicyWithInputRequestBuilder input(com.styra.opa.openapi.models.shared.Input input) {
+        Utils.checkNotNull(input, "input");
+        this.input = input;
         return this;
     }
 
     public ExecuteDefaultPolicyWithInputResponse call() throws Exception {
 
         return sdk.executeDefaultPolicyWithInput(
-            request);
+            pretty,
+            input);
     }
 }

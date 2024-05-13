@@ -520,11 +520,6 @@ public class OPAClient {
         return ExecuteDefaultPolicyWithInputRequest.builder()
             .input(input)
             .pretty(policyRequestPretty)
-            .provenance(policyRequestProvenance)
-            .explain(policyRequestExplain)
-            .metrics(policyRequestMetrics)
-            .instrument(policyRequestInstrument)
-            .strictBuiltinErrors(policyRequestStrictBuiltinErrors)
             .build();
     }
 
@@ -574,13 +569,14 @@ public class OPAClient {
             return null;
 
         } else {
-            ExecuteDefaultPolicyWithInputRequest req = makeRequestForDefaultEvaluate(input);
+            //ExecuteDefaultPolicyWithInputRequest req = makeRequestForDefaultEvaluate(input);
             ExecuteDefaultPolicyWithInputResponse res;
 
             try {
-                res = sdk.executeDefaultPolicyWithInput()
-                    .request(req)
-                    .call();
+                //res = sdk.executeDefaultPolicyWithInput()
+                //    .request(req)
+                //    .call();
+                res = sdk.executeDefaultPolicyWithInput(Optional.of(policyRequestPretty), input);
 
             //CHECKSTYLE:OFF
             } catch (Exception e) {

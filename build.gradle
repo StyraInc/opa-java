@@ -12,6 +12,7 @@ plugins {
 
 
 
+
 compileJava.options.encoding = "UTF-8"
 compileJava.options.compilerArgs += '-Xlint:unchecked'
 compileTestJava.options.encoding = "UTF-8"
@@ -71,7 +72,7 @@ publishing {
         maven(MavenPublication) {
             groupId = 'com.styra'
             artifactId = 'opa'
-            version = '0.7.6'
+            version = '0.7.8'
 
             from components.java
 

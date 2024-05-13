@@ -110,12 +110,9 @@ public class Application {
             OpaApiClient sdk = OpaApiClient.builder()
                 .build();
 
-            ExecuteDefaultPolicyWithInputRequest req = ExecuteDefaultPolicyWithInputRequest.builder()
-                .input(Input.of(8203.11d))
-                .build();
-
             ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
-                .request(req)
+                .pretty(false)
+                .input(Input.of(8203.11d))
                 .call();
 
             if (res.result().isPresent()) {
@@ -239,12 +236,9 @@ public class Application {
                 .serverIndex(0)
                 .build();
 
-            ExecuteDefaultPolicyWithInputRequest req = ExecuteDefaultPolicyWithInputRequest.builder()
-                .input(Input.of(8203.11d))
-                .build();
-
             ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
-                .request(req)
+                .pretty(false)
+                .input(Input.of(8203.11d))
                 .call();
 
             if (res.result().isPresent()) {
@@ -293,12 +287,9 @@ public class Application {
                 .serverURL("http://localhost:8181")
                 .build();
 
-            ExecuteDefaultPolicyWithInputRequest req = ExecuteDefaultPolicyWithInputRequest.builder()
-                .input(Input.of(8203.11d))
-                .build();
-
             ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
-                .request(req)
+                .pretty(false)
+                .input(Input.of(8203.11d))
                 .call();
 
             if (res.result().isPresent()) {
@@ -356,12 +347,9 @@ public class Application {
             OpaApiClient sdk = OpaApiClient.builder()
                 .build();
 
-            ExecuteDefaultPolicyWithInputRequest req = ExecuteDefaultPolicyWithInputRequest.builder()
-                .input(Input.of(8203.11d))
-                .build();
-
             ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
-                .request(req)
+                .pretty(false)
+                .input(Input.of(8203.11d))
                 .call();
 
             if (res.result().isPresent()) {

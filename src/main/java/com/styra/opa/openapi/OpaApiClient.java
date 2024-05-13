@@ -167,12 +167,31 @@ public class OpaApiClient implements
 
     /**
      * Execute the default decision with given an input
-     * @param request The request object containing all of the parameters for the API call.
+     * @param input Arbitrary JSON used within your policies by accessing `input`
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse executeDefaultPolicyWithInput(
-            com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputRequest request) throws Exception {
+            com.styra.opa.openapi.models.shared.Input input) throws Exception {
+        return executeDefaultPolicyWithInput(Optional.empty(), input);
+    }
+    /**
+     * Execute the default decision with given an input
+     * @param pretty If parameter is `true`, response will formatted for humans.
+     * @param input Arbitrary JSON used within your policies by accessing `input`
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse executeDefaultPolicyWithInput(
+            Optional<? extends Boolean> pretty,
+            com.styra.opa.openapi.models.shared.Input input) throws Exception {
+        com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputRequest request =
+            com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputRequest
+                .builder()
+                .pretty(pretty)
+                .input(input)
+                .build();
+        
         String _baseUrl = this.sdkConfiguration.serverUrl;
         String _url = Utils.generateURL(
                 _baseUrl,
@@ -180,7 +199,7 @@ public class OpaApiClient implements
         
         HTTPRequest _req = new HTTPRequest(_url, "POST");
         Object _convertedRequest = Utils.convertToShape(request, Utils.JsonShape.DEFAULT,
-            new TypeReference<com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputRequest>() {});
+            new TypeReference<java.lang.Object>() {});
         SerializedBody _serializedRequestBody = Utils.serializeRequestBody(
                 _convertedRequest, "input", "json", false);
         if (_serializedRequestBody == null) {
@@ -195,7 +214,6 @@ public class OpaApiClient implements
                 com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputRequest.class,
                 request, 
                 null));
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
 
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 

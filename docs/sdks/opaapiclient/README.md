@@ -39,12 +39,9 @@ public class Application {
             OpaApiClient sdk = OpaApiClient.builder()
                 .build();
 
-            ExecuteDefaultPolicyWithInputRequest req = ExecuteDefaultPolicyWithInputRequest.builder()
-                .input(Input.of(8203.11d))
-                .build();
-
             ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
-                .request(req)
+                .pretty(false)
+                .input(Input.of(8203.11d))
                 .call();
 
             if (res.result().isPresent()) {
@@ -69,9 +66,10 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                                                       | Type                                                                                                                                            | Required                                                                                                                                        | Description                                                                                                                                     |
-| ----------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                                                       | [com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputRequest](../../models/operations/ExecuteDefaultPolicyWithInputRequest.md) | :heavy_check_mark:                                                                                                                              | The request object to use for the request.                                                                                                      |
+| Parameter                                                                 | Type                                                                      | Required                                                                  | Description                                                               |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `pretty`                                                                  | *Optional<? extends Boolean>*                                             | :heavy_minus_sign:                                                        | If parameter is `true`, response will formatted for humans.               |
+| `input`                                                                   | [com.styra.opa.openapi.models.shared.Input](../../models/shared/Input.md) | :heavy_check_mark:                                                        | The input document                                                        |
 
 
 ### Response

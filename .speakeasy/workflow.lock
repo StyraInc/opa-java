@@ -2,16 +2,16 @@ speakeasyVersion: 1.286.0
 sources:
     openapi:
         sourceNamespace: openapi
-        sourceRevisionDigest: sha256:24d9a8927285958da33b451bca526983d50252dbe850d1f05b9d8db2c03f7b82
-        sourceBlobDigest: sha256:83701a577224862deb163b117169e3f24bec5f5a86f5bedb90fc49db66397c3f
+        sourceRevisionDigest: sha256:7f1c3e18640e265ea6d6498e97fa164f83870185144be9528cbe47c44031522b
+        sourceBlobDigest: sha256:3c9fed2658522904031104f607890184b156e12991f30663e89209389a97ef78
         tags:
             - latest
 targets:
     opa:
         source: openapi
         sourceNamespace: openapi
-        sourceRevisionDigest: sha256:24d9a8927285958da33b451bca526983d50252dbe850d1f05b9d8db2c03f7b82
-        sourceBlobDigest: sha256:83701a577224862deb163b117169e3f24bec5f5a86f5bedb90fc49db66397c3f
+        sourceRevisionDigest: sha256:7f1c3e18640e265ea6d6498e97fa164f83870185144be9528cbe47c44031522b
+        sourceBlobDigest: sha256:3c9fed2658522904031104f607890184b156e12991f30663e89209389a97ef78
         outLocation: /home/cad-styra/f/src/opa-java
 workflow:
     workflowVersion: 1.0.0
