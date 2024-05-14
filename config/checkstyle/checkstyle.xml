@@ -82,8 +82,8 @@ and used under MIT license:
     <module name="ModifiedControlVariable" />
     <module name="MultipleVariableDeclarations" />
     <module name="NestedForDepth" />
-    <module name="NestedIfDepth" />
-    <module name="NestedTryDepth" />
+    <module name="NestedIfDepth"><property name="max" value="2"/></module>
+    <module name="NestedTryDepth"/>
     <module name="NoClone" />
     <module name="NoFinalizer" />
     <module name="OneStatementPerLine" />

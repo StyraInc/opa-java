@@ -5,10 +5,12 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.styra.opa.openapi.OpaApiClient;
 import com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputRequest;
+import com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse;
+import com.styra.opa.openapi.models.operations.ExecutePolicyRequest;
+import com.styra.opa.openapi.models.operations.ExecutePolicyResponse;
 import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequest;
 import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequestBody;
 import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputResponse;
-import com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse;
 import com.styra.opa.openapi.models.shared.Explain;
 import com.styra.opa.openapi.models.shared.Input;
 import com.styra.opa.openapi.utils.HTTPClient;
@@ -16,7 +18,6 @@ import com.styra.opa.utils.OPAHTTPClient;
 
 import java.util.Map;
 import java.util.Optional;
-import java.nio.charset.StandardCharsets;
 
 /**
  * The OPA class contains all the functionality and configuration needed to
@@ -96,8 +97,8 @@ public class OPAClient {
         this.sdk = client;
     }
 
-    private Map<String, java.lang.Object> defaultInput() {
-        return Map.ofEntries();
+    private Optional<Input> defaultInput() {
+        return Optional.empty();
     }
 
     /**
@@ -144,10 +145,6 @@ public class OPAClient {
 
     public boolean check(java.util.Map<String, Object> input) throws OPAException {
         return evaluate(input);
-    }
-
-    public boolean check() throws OPAException {
-        return evaluate();
     }
 
     public boolean check(boolean input) throws OPAException {
@@ -221,35 +218,35 @@ public class OPAClient {
      * @throws OPAException
      */
     public <T> T evaluate(String path, java.util.Map<String, Object> input, Class<T> toValueType) throws OPAException {
-        return evaluateMachinery(Input.of(input), Optional.of(path), toValueType);
+        return evaluateMachinery(Optional.of(Input.of(input)), Optional.of(path), toValueType);
     }
 
     public <T> T evaluate(String path, String input, Class<T> toValueType) throws OPAException {
-        return evaluateMachinery(Input.of(input), Optional.of(path), toValueType);
+        return evaluateMachinery(Optional.of(Input.of(input)), Optional.of(path), toValueType);
     }
 
     public <T> T evaluate(String path, boolean input, Class<T> toValueType) throws OPAException {
-        return evaluateMachinery(Input.of(input), Optional.of(path), toValueType);
+        return evaluateMachinery(Optional.of(Input.of(input)), Optional.of(path), toValueType);
     }
 
     public <T> T evaluate(String path, double input, Class<T> toValueType) throws OPAException {
-        return evaluateMachinery(Input.of(input), Optional.of(path), toValueType);
+        return evaluateMachinery(Optional.of(Input.of(input)), Optional.of(path), toValueType);
     }
 
     public <T> T evaluate(String path, java.util.List<Object> input, Class<T> toValueType) throws OPAException {
-        return evaluateMachinery(Input.of(input), Optional.of(path), toValueType);
+        return evaluateMachinery(Optional.of(Input.of(input)), Optional.of(path), toValueType);
     }
 
     public <T> T evaluate(String path, java.lang.Object input, Class<T> toValueType) throws OPAException {
         ObjectMapper om = new ObjectMapper();
         Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {});
-        return evaluateMachinery(Input.of(iMap), Optional.of(path), toValueType);
+        return evaluateMachinery(Optional.of(Input.of(iMap)), Optional.of(path), toValueType);
     }
 
     // evaluate with Class<T> toTypeValue, but paths elided
 
     public <T> T evaluate(java.util.Map<String, Object> input, Class<T> toValueType) throws OPAException {
-        return evaluateMachinery(Input.of(input), Optional.empty(), toValueType);
+        return evaluateMachinery(Optional.of(Input.of(input)), Optional.empty(), toValueType);
     }
 
     /**
@@ -262,63 +259,59 @@ public class OPAClient {
      * @throws OPAException
      */
     public <T> T evaluate(String path, Class<T> toValueType) throws OPAException {
-        return evaluateMachinery(Input.of(defaultInput()), Optional.of(path), toValueType);
+        return evaluateMachinery(defaultInput(), Optional.of(path), toValueType);
     }
 
     public <T> T evaluate(boolean input, Class<T> toValueType) throws OPAException {
-        return evaluateMachinery(Input.of(input), Optional.empty(), toValueType);
+        return evaluateMachinery(Optional.of(Input.of(input)), Optional.empty(), toValueType);
     }
 
     public <T> T evaluate(double input, Class<T> toValueType) throws OPAException {
-        return evaluateMachinery(Input.of(input), Optional.empty(), toValueType);
+        return evaluateMachinery(Optional.of(Input.of(input)), Optional.empty(), toValueType);
     }
 
     public <T> T evaluate(java.util.List<Object> input, Class<T> toValueType) throws OPAException {
-        return evaluateMachinery(Input.of(input), Optional.empty(), toValueType);
-    }
-
-    public <T> T evaluate(Class<T> toValueType) throws OPAException {
-        return evaluateMachinery(Input.of(defaultInput()), Optional.empty(), toValueType);
+        return evaluateMachinery(Optional.of(Input.of(input)), Optional.empty(), toValueType);
     }
 
     public <T> T evaluate(java.lang.Object input, Class<T> toValueType) throws OPAException {
         ObjectMapper om = new ObjectMapper();
         Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {});
-        return evaluateMachinery(Input.of(iMap), Optional.empty(), toValueType);
+        return evaluateMachinery(Optional.of(Input.of(iMap)), Optional.empty(), toValueType);
     }
 
     // evaluate, but with JavaType toValueTypes
 
     public <T> T evaluate(String path, java.util.Map<String, Object> input, JavaType toValueType) throws OPAException {
-        return evaluateMachinery(Input.of(input), Optional.of(path), toValueType);
+        return evaluateMachinery(Optional.of(Input.of(input)), Optional.of(path), toValueType);
     }
 
     public <T> T evaluate(String path, String input, JavaType toValueType) throws OPAException {
-        return evaluateMachinery(Input.of(input), Optional.of(path), toValueType);
+        return evaluateMachinery(Optional.of(Input.of(input)), Optional.of(path), toValueType);
     }
 
     public <T> T evaluate(String path, boolean input, JavaType toValueType) throws OPAException {
-        return evaluateMachinery(Input.of(input), Optional.of(path), toValueType);
+        return evaluateMachinery(Optional.of(Input.of(input)), Optional.of(path), toValueType);
     }
 
     public <T> T evaluate(String path, double input, JavaType toValueType) throws OPAException {
-        return evaluateMachinery(Input.of(input), Optional.of(path), toValueType);
+        return evaluateMachinery(Optional.of(Input.of(input)), Optional.of(path), toValueType);
     }
 
     public <T> T evaluate(String path, java.util.List<Object> input, JavaType toValueType) throws OPAException {
-        return evaluateMachinery(Input.of(input), Optional.of(path), toValueType);
+        return evaluateMachinery(Optional.of(Input.of(input)), Optional.of(path), toValueType);
     }
 
     public <T> T evaluate(String path, java.lang.Object input, JavaType toValueType) throws OPAException {
         ObjectMapper om = new ObjectMapper();
         Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {});
-        return evaluateMachinery(Input.of(iMap), Optional.of(path), toValueType);
+        return evaluateMachinery(Optional.of(Input.of(iMap)), Optional.of(path), toValueType);
     }
 
     // evaluate, but with JavaType toValueTypes and paths elided
 
     public <T> T evaluate(java.util.Map<String, Object> input, JavaType toValueType) throws OPAException {
-        return evaluateMachinery(Input.of(input), Optional.empty(), toValueType);
+        return evaluateMachinery(Optional.of(Input.of(input)), Optional.empty(), toValueType);
     }
 
     /**
@@ -331,29 +324,25 @@ public class OPAClient {
      * @throws OPAException
      */
     public <T> T evaluate(String path, JavaType toValueType) throws OPAException {
-        return evaluateMachinery(Input.of(defaultInput()), Optional.of(path), toValueType);
+        return evaluateMachinery(defaultInput(), Optional.of(path), toValueType);
     }
 
     public <T> T evaluate(boolean input, JavaType toValueType) throws OPAException {
-        return evaluateMachinery(Input.of(input), Optional.empty(), toValueType);
+        return evaluateMachinery(Optional.of(Input.of(input)), Optional.empty(), toValueType);
     }
 
     public <T> T evaluate(double input, JavaType toValueType) throws OPAException {
-        return evaluateMachinery(Input.of(input), Optional.empty(), toValueType);
+        return evaluateMachinery(Optional.of(Input.of(input)), Optional.empty(), toValueType);
     }
 
     public <T> T evaluate(java.util.List<Object> input, JavaType toValueType) throws OPAException {
-        return evaluateMachinery(Input.of(input), Optional.empty(), toValueType);
-    }
-
-    public <T> T evaluate(JavaType toValueType) throws OPAException {
-        return evaluateMachinery(Input.of(Map.ofEntries()), Optional.empty(), toValueType);
+        return evaluateMachinery(Optional.of(Input.of(input)), Optional.empty(), toValueType);
     }
 
     public <T> T evaluate(java.lang.Object input, JavaType toValueType) throws OPAException {
         ObjectMapper om = new ObjectMapper();
         Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {});
-        return evaluateMachinery(Input.of(iMap), Optional.empty(), toValueType);
+        return evaluateMachinery(Optional.of(Input.of(iMap)), Optional.empty(), toValueType);
     }
 
     // evaluate, but with TypeReference toValueTypes
@@ -362,29 +351,29 @@ public class OPAClient {
             String path,
             java.util.Map<String, Object> input,
             TypeReference<T> toValueType) throws OPAException {
-        return evaluateMachinery(Input.of(input), Optional.of(path), toValueType);
+        return evaluateMachinery(Optional.of(Input.of(input)), Optional.of(path), toValueType);
     }
 
     public <T> T evaluate(String path, String input, TypeReference<T> toValueType) throws OPAException {
-        return evaluateMachinery(Input.of(input), Optional.of(path), toValueType);
+        return evaluateMachinery(Optional.of(Input.of(input)), Optional.of(path), toValueType);
     }
 
     public <T> T evaluate(String path, boolean input, TypeReference<T> toValueType) throws OPAException {
-        return evaluateMachinery(Input.of(input), Optional.of(path), toValueType);
+        return evaluateMachinery(Optional.of(Input.of(input)), Optional.of(path), toValueType);
     }
 
     public <T> T evaluate(String path, double input, TypeReference<T> toValueType) throws OPAException {
-        return evaluateMachinery(Input.of(input), Optional.of(path), toValueType);
+        return evaluateMachinery(Optional.of(Input.of(input)), Optional.of(path), toValueType);
     }
 
     public <T> T evaluate(String path, java.util.List<Object> input, TypeReference<T> toValueType) throws OPAException {
-        return evaluateMachinery(Input.of(input), Optional.of(path), toValueType);
+        return evaluateMachinery(Optional.of(Input.of(input)), Optional.of(path), toValueType);
     }
 
     public <T> T evaluate(String path, java.lang.Object input, TypeReference<T> toValueType) throws OPAException {
         ObjectMapper om = new ObjectMapper();
         Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {});
-        return evaluateMachinery(Input.of(iMap), Optional.of(path), toValueType);
+        return evaluateMachinery(Optional.of(Input.of(iMap)), Optional.of(path), toValueType);
     }
 
     // evaluate with TypeReference toTypeValues and paths elided
@@ -392,7 +381,7 @@ public class OPAClient {
     public <T> T evaluate(
             java.util.Map<String, Object> input,
             TypeReference<T> toValueType) throws OPAException {
-        return evaluateMachinery(Input.of(input), Optional.empty(), toValueType);
+        return evaluateMachinery(Optional.of(Input.of(input)), Optional.empty(), toValueType);
     }
 
     /**
@@ -405,61 +394,57 @@ public class OPAClient {
      * @throws OPAException
      */
     public <T> T evaluate(String path, TypeReference<T> toValueType) throws OPAException {
-        return evaluateMachinery(Input.of(defaultInput()), Optional.of(path), toValueType);
+        return evaluateMachinery(defaultInput(), Optional.of(path), toValueType);
     }
 
     public <T> T evaluate(boolean input, TypeReference<T> toValueType) throws OPAException {
-        return evaluateMachinery(Input.of(input), Optional.empty(), toValueType);
+        return evaluateMachinery(Optional.of(Input.of(input)), Optional.empty(), toValueType);
     }
 
     public <T> T evaluate(double input, TypeReference<T> toValueType) throws OPAException {
-        return evaluateMachinery(Input.of(input), Optional.empty(), toValueType);
+        return evaluateMachinery(Optional.of(Input.of(input)), Optional.empty(), toValueType);
     }
 
     public <T> T evaluate(java.util.List<Object> input, TypeReference<T> toValueType) throws OPAException {
-        return evaluateMachinery(Input.of(input), Optional.empty(), toValueType);
-    }
-
-    public <T> T evaluate(TypeReference<T> toValueType) throws OPAException {
-        return evaluateMachinery(Input.of(Map.ofEntries()), Optional.empty(), toValueType);
+        return evaluateMachinery(Optional.of(Input.of(input)), Optional.empty(), toValueType);
     }
 
     public <T> T evaluate(java.lang.Object input, TypeReference<T> toValueType) throws OPAException {
         ObjectMapper om = new ObjectMapper();
         Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {});
-        return evaluateMachinery(Input.of(iMap), Optional.empty(), toValueType);
+        return evaluateMachinery(Optional.of(Input.of(iMap)), Optional.empty(), toValueType);
     }
 
     // omit the toTypeValue and try to be smart
 
     public <T> T evaluate(String path, java.util.Map<String, Object> input) throws OPAException {
-        return evaluateMachinery(Input.of(input), Optional.of(path));
+        return evaluateMachinery(Optional.of(Input.of(input)), Optional.of(path));
     }
 
     public <T> T evaluate(String path, String input) throws OPAException {
-        return evaluateMachinery(Input.of(input), Optional.of(path));
+        return evaluateMachinery(Optional.of(Input.of(input)), Optional.of(path));
     }
 
     public <T> T evaluate(String path, boolean input) throws OPAException {
-        return evaluateMachinery(Input.of(input), Optional.of(path));
+        return evaluateMachinery(Optional.of(Input.of(input)), Optional.of(path));
     }
 
     public <T> T evaluate(String path, double input) throws OPAException {
-        return evaluateMachinery(Input.of(input), Optional.of(path));
+        return evaluateMachinery(Optional.of(Input.of(input)), Optional.of(path));
     }
 
     public <T> T evaluate(String path, java.util.List<Object> input) throws OPAException {
-        return evaluateMachinery(Input.of(input), Optional.of(path));
+        return evaluateMachinery(Optional.of(Input.of(input)), Optional.of(path));
     }
 
     public <T> T evaluate(String path, java.lang.Object input) throws OPAException {
         ObjectMapper om = new ObjectMapper();
         Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {});
-        return evaluateMachinery(Input.of(iMap), Optional.of(path));
+        return evaluateMachinery(Optional.of(Input.of(iMap)), Optional.of(path));
     }
 
     public <T> T evaluate(java.util.Map<String, Object> input) throws OPAException {
-        return evaluateMachinery(Input.of(input), Optional.empty());
+        return evaluateMachinery(Optional.of(Input.of(input)), Optional.empty());
     }
 
     /**
@@ -471,42 +456,44 @@ public class OPAClient {
      * @throws OPAException
      */
     public <T> T evaluate(String path) throws OPAException {
-        return evaluateMachinery(Input.of(defaultInput()), Optional.of(path));
+        return evaluateMachinery(defaultInput(), Optional.of(path));
     }
 
     public <T> T evaluate(boolean input) throws OPAException {
-        return evaluateMachinery(Input.of(defaultInput()), Optional.empty());
+        return evaluateMachinery(defaultInput(), Optional.empty());
     }
 
     public <T> T evaluate(double input) throws OPAException {
-        return evaluateMachinery(Input.of(defaultInput()), Optional.empty());
+        return evaluateMachinery(defaultInput(), Optional.empty());
     }
 
     public <T> T evaluate(java.util.List<Object> input) throws OPAException {
-        return evaluateMachinery(Input.of(defaultInput()), Optional.empty());
+        return evaluateMachinery(defaultInput(), Optional.empty());
     }
 
     public <T> T evaluate(java.lang.Object input) throws OPAException {
         ObjectMapper om = new ObjectMapper();
         Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {});
-        return evaluateMachinery(Input.of(iMap), Optional.empty());
+        return evaluateMachinery(Optional.of(Input.of(iMap)), Optional.empty());
     }
 
-    /**
-     * Base case where both path and input are omitted, so the input is empty
-     * and the default path is used.
-     * @return
-     * @throws OPAException
-     */
-    public <T> T evaluate() throws OPAException {
-        return evaluateMachinery(Input.of(defaultInput()), Optional.empty());
-    }
-
-    private ExecutePolicyWithInputRequest makeRequestForEvaluate(Input input, String path) {
+    private ExecutePolicyWithInputRequest makeRequestForEvaluateWithInput(Input input, String path) {
         return ExecutePolicyWithInputRequest.builder()
             .path(path)
             .requestBody(ExecutePolicyWithInputRequestBody.builder()
                     .input(input).build())
+            .pretty(policyRequestPretty)
+            .provenance(policyRequestProvenance)
+            .explain(policyRequestExplain)
+            .metrics(policyRequestMetrics)
+            .instrument(policyRequestInstrument)
+            .strictBuiltinErrors(policyRequestStrictBuiltinErrors)
+            .build();
+    }
+
+    private ExecutePolicyRequest makeRequestForEvaluate(String path) {
+        return ExecutePolicyRequest.builder()
+            .path(path)
             .pretty(policyRequestPretty)
             .provenance(policyRequestProvenance)
             .explain(policyRequestExplain)
@@ -538,13 +525,49 @@ public class OPAClient {
      * @return
      * @throws OPAException
      */
-    private java.lang.Object executePolicy(Input input, Optional<String> path) throws OPAException {
-        if (path.isPresent()) {
-            ExecutePolicyWithInputRequest req = makeRequestForEvaluate(input, path.get());
+    private java.lang.Object executePolicy(Optional<Input> input, Optional<String> path) throws OPAException {
+        if (path.isPresent() && input.isPresent()) {
+            ExecutePolicyWithInputRequest req = makeRequestForEvaluateWithInput(input.get(), path.get());
             ExecutePolicyWithInputResponse res;
 
             try {
                 res = sdk.executePolicyWithInput()
+                    .request(req)
+                    .call();
+
+            //CHECKSTYLE:OFF
+            } catch (Exception e) {
+                //CHECKSTYLE:ON
+                e.printStackTrace(System.out);
+                String msg = String.format(
+                    "executing policy at '%s' with failed due to exception '%s'",
+                    path,
+                    e
+                );
+                throw new OPAException(msg, e);
+            }
+
+            if (res.successfulPolicyEvaluation().isPresent()) {
+                if (res.successfulPolicyEvaluation().get().result().isPresent()) {
+                    Object out = res.successfulPolicyEvaluation().get().result().get().value();
+                    return out;
+                } else {
+                    String msg = String.format(
+                        "executing policy at '%s' succeeded, but OPA did not reply with a result",
+                        path
+                    );
+                    throw new OPAException(msg);
+                }
+            }
+
+            return null;
+
+        } else if (path.isPresent() && !input.isPresent()) {
+            ExecutePolicyRequest req = makeRequestForEvaluate(path.get());
+            ExecutePolicyResponse res;
+
+            try {
+                res = sdk.executePolicy()
                     .request(req)
                     .call();
 
@@ -561,7 +584,10 @@ public class OPAClient {
                     Object out = res.successfulPolicyEvaluation().get().result().get().value();
                     return out;
                 } else {
-                    String msg = String.format("executing policy at '%s' succeeded, but OPA did not reply with a result", path);
+                    String msg = String.format(
+                        "executing policy at '%s' succeeded, but OPA did not reply with a result",
+                        path
+                    );
                     throw new OPAException(msg);
                 }
             }
@@ -569,26 +595,21 @@ public class OPAClient {
             return null;
 
         } else {
-            //ExecuteDefaultPolicyWithInputRequest req = makeRequestForDefaultEvaluate(input);
+            if (!input.isPresent()) {
+                throw new OPAException("at least one of path or input must be provided");
+            }
+
             ExecuteDefaultPolicyWithInputResponse res;
 
             try {
-                //res = sdk.executeDefaultPolicyWithInput()
-                //    .request(req)
-                //    .call();
-                res = sdk.executeDefaultPolicyWithInput(Optional.of(policyRequestPretty), input);
+                res = sdk.executeDefaultPolicyWithInput(Optional.of(policyRequestPretty), input.get());
 
             //CHECKSTYLE:OFF
             } catch (Exception e) {
-                System.out.println(e);
                 //CHECKSTYLE:ON
-                e.printStackTrace(System.out);
                 String msg = String.format("executing default policy with failed due to exception '%s'", e);
                 throw new OPAException(msg, e);
             }
-
-            System.out.println("DEBUG res");
-            System.out.println(res);
 
             if (res.result().isPresent()) {
                 Object out = res.result().get().value();
@@ -608,7 +629,7 @@ public class OPAClient {
      * @return
      * @throws OPAException
      */
-    private <T> T evaluateMachinery(Input input, Optional<String> path) throws OPAException {
+    private <T> T evaluateMachinery(Optional<Input> input, Optional<String> path) throws OPAException {
         Object out = executePolicy(input, path);
         if (out != null) {
             ObjectMapper mapper = new ObjectMapper();
@@ -619,18 +640,11 @@ public class OPAClient {
         }
     }
 
-    private <T> T evaluateMachinery(Input input, Optional<String> path, Class<T> toValueType) throws OPAException {
-        Object out = executePolicy(input, path);
-        if (out != null) {
-            ObjectMapper mapper = new ObjectMapper();
-            T typedResult = mapper.convertValue(out, toValueType);
-            return typedResult;
-        } else {
-            return null;
-        }
-    }
-
-    private <T> T evaluateMachinery(Input input, Optional<String> path, JavaType toValueType) throws OPAException {
+    private <T> T evaluateMachinery(
+        Optional<Input> input,
+        Optional<String> path,
+        Class<T> toValueType
+    ) throws OPAException {
         Object out = executePolicy(input, path);
         if (out != null) {
             ObjectMapper mapper = new ObjectMapper();
@@ -642,7 +656,22 @@ public class OPAClient {
     }
 
     private <T> T evaluateMachinery(
-        Input input,
+        Optional<Input> input,
+        Optional<String> path,
+        JavaType toValueType
+    ) throws OPAException {
+        Object out = executePolicy(input, path);
+        if (out != null) {
+            ObjectMapper mapper = new ObjectMapper();
+            T typedResult = mapper.convertValue(out, toValueType);
+            return typedResult;
+        } else {
+            return null;
+        }
+    }
+
+    private <T> T evaluateMachinery(
+        Optional<Input> input,
         Optional<String> path,
         TypeReference<T> toValueType
     ) throws OPAException {

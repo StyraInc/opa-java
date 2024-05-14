@@ -12,7 +12,6 @@ plugins {
 
 
 
-
 compileJava.options.encoding = "UTF-8"
 compileJava.options.compilerArgs += '-Xlint:unchecked'
 compileTestJava.options.encoding = "UTF-8"
@@ -72,7 +71,7 @@ publishing {
         maven(MavenPublication) {
             groupId = 'com.styra'
             artifactId = 'opa'
-            version = '0.7.8'
+            version = '0.7.9'
 
             from components.java
 
@@ -192,7 +191,7 @@ test {
     useJUnitPlatform()
     testLogging {
         // uncomment for more verbose output during development
-        events "passed", "skipped", "failed", "standard_out", "standard_error"
+        //events "passed", "skipped", "failed", "standard_out", "standard_error"
     }
 }
 

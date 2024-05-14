@@ -1,8 +1,8 @@
 package com.styra.opa;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testcontainers.containers.BindMode;
 import org.testcontainers.containers.GenericContainer;
@@ -155,16 +155,16 @@ class OPATest {
     @Test
     public void testOPAWithoutInput() {
         OPAClient opa = new OPAClient(address, headers);
-        Map result = Map.ofEntries(entry("unit", "test"));
+        String result = "";
 
         try {
-            result = opa.evaluate("policy/echo");
+            result = opa.evaluate("policy/hello");
         } catch (OPAException e) {
             System.out.println("exception: " + e);
             assertNull(e);
         }
 
-        assertEquals(Map.ofEntries(), result);
+        assertEquals("Open Policy Agent", result);
     }
 
     @Test
@@ -279,25 +279,6 @@ class OPATest {
 
         try {
             result = opa.evaluate(input);
-        } catch (OPAException e) {
-            System.out.println("exception: " + e);
-            assertNull(e);
-        }
-
-        assertEquals(expect, result);
-    }
-
-    @Test
-    public void testOPADefaultPathWithoutInput() {
-        OPAClient opa = new OPAClient(address, headers);
-        Map expect = Map.ofEntries(
-            entry("msg", "this is the default path"),
-            entry("echo", Map.ofEntries())
-        );
-        Map result = Map.ofEntries(entry("unit", "test"));
-
-        try {
-            result = opa.evaluate();
         } catch (OPAException e) {
             System.out.println("exception: " + e);
             assertNull(e);
