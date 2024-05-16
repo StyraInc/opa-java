@@ -112,6 +112,7 @@ public class Application {
 
             ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
                 .pretty(false)
+                .acceptEncoding(GzipAcceptEncoding.GZIP)
                 .input(Input.of(8203.11d))
                 .call();
 
@@ -195,7 +196,7 @@ public class Application {
 
 ### [OpaApiClient SDK](docs/sdks/opaapiclient/README.md)
 
-* [executeDefaultPolicyWithInput](docs/sdks/opaapiclient/README.md#executedefaultpolicywithinput) - Execute the default decision with given an input
+* [executeDefaultPolicyWithInput](docs/sdks/opaapiclient/README.md#executedefaultpolicywithinput) - Execute the default decision  given an input
 * [executePolicy](docs/sdks/opaapiclient/README.md#executepolicy) - Execute a policy
 * [executePolicyWithInput](docs/sdks/opaapiclient/README.md#executepolicywithinput) - Execute a policy given an input
 * [health](docs/sdks/opaapiclient/README.md#health) - Verify the server is operational
@@ -238,6 +239,7 @@ public class Application {
 
             ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
                 .pretty(false)
+                .acceptEncoding(GzipAcceptEncoding.GZIP)
                 .input(Input.of(8203.11d))
                 .call();
 
@@ -289,6 +291,7 @@ public class Application {
 
             ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
                 .pretty(false)
+                .acceptEncoding(GzipAcceptEncoding.GZIP)
                 .input(Input.of(8203.11d))
                 .call();
 
@@ -320,7 +323,7 @@ Handling errors in this SDK should largely match your expectations.  All operati
 
 | Error Object              | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
-| models/errors/ClientError | 400                       | application/json          |
+| models/errors/ClientError | 400,404                   | application/json          |
 | models/errors/ServerError | 500                       | application/json          |
 | models/errors/SDKError    | 4xx-5xx                   | */*                       |
 
@@ -349,6 +352,7 @@ public class Application {
 
             ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
                 .pretty(false)
+                .acceptEncoding(GzipAcceptEncoding.GZIP)
                 .input(Input.of(8203.11d))
                 .call();
 

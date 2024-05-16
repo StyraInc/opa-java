@@ -26,6 +26,12 @@ public class ExecuteDefaultPolicyWithInputRequest {
     private Optional<? extends Boolean> pretty;
 
     /**
+     * Indicates the server should respond with a gzip encoded body. The server will send the compressed response only if its length is above `server.encoding.gzip.min_length` value. See the configuration section
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=Accept-Encoding")
+    private Optional<? extends com.styra.opa.openapi.models.shared.GzipAcceptEncoding> acceptEncoding;
+
+    /**
      * The input document
      */
     @SpeakeasyMetadata("request:mediaType=application/json")
@@ -34,16 +40,19 @@ public class ExecuteDefaultPolicyWithInputRequest {
     @JsonCreator
     public ExecuteDefaultPolicyWithInputRequest(
             Optional<? extends Boolean> pretty,
+            Optional<? extends com.styra.opa.openapi.models.shared.GzipAcceptEncoding> acceptEncoding,
             com.styra.opa.openapi.models.shared.Input input) {
         Utils.checkNotNull(pretty, "pretty");
+        Utils.checkNotNull(acceptEncoding, "acceptEncoding");
         Utils.checkNotNull(input, "input");
         this.pretty = pretty;
+        this.acceptEncoding = acceptEncoding;
         this.input = input;
     }
     
     public ExecuteDefaultPolicyWithInputRequest(
             com.styra.opa.openapi.models.shared.Input input) {
-        this(Optional.empty(), input);
+        this(Optional.empty(), Optional.empty(), input);
     }
 
     /**
@@ -53,6 +62,15 @@ public class ExecuteDefaultPolicyWithInputRequest {
     @JsonIgnore
     public Optional<Boolean> pretty() {
         return (Optional<Boolean>) pretty;
+    }
+
+    /**
+     * Indicates the server should respond with a gzip encoded body. The server will send the compressed response only if its length is above `server.encoding.gzip.min_length` value. See the configuration section
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<com.styra.opa.openapi.models.shared.GzipAcceptEncoding> acceptEncoding() {
+        return (Optional<com.styra.opa.openapi.models.shared.GzipAcceptEncoding>) acceptEncoding;
     }
 
     /**
@@ -86,6 +104,24 @@ public class ExecuteDefaultPolicyWithInputRequest {
     }
 
     /**
+     * Indicates the server should respond with a gzip encoded body. The server will send the compressed response only if its length is above `server.encoding.gzip.min_length` value. See the configuration section
+     */
+    public ExecuteDefaultPolicyWithInputRequest withAcceptEncoding(com.styra.opa.openapi.models.shared.GzipAcceptEncoding acceptEncoding) {
+        Utils.checkNotNull(acceptEncoding, "acceptEncoding");
+        this.acceptEncoding = Optional.ofNullable(acceptEncoding);
+        return this;
+    }
+
+    /**
+     * Indicates the server should respond with a gzip encoded body. The server will send the compressed response only if its length is above `server.encoding.gzip.min_length` value. See the configuration section
+     */
+    public ExecuteDefaultPolicyWithInputRequest withAcceptEncoding(Optional<? extends com.styra.opa.openapi.models.shared.GzipAcceptEncoding> acceptEncoding) {
+        Utils.checkNotNull(acceptEncoding, "acceptEncoding");
+        this.acceptEncoding = acceptEncoding;
+        return this;
+    }
+
+    /**
      * The input document
      */
     public ExecuteDefaultPolicyWithInputRequest withInput(com.styra.opa.openapi.models.shared.Input input) {
@@ -105,6 +141,7 @@ public class ExecuteDefaultPolicyWithInputRequest {
         ExecuteDefaultPolicyWithInputRequest other = (ExecuteDefaultPolicyWithInputRequest) o;
         return 
             java.util.Objects.deepEquals(this.pretty, other.pretty) &&
+            java.util.Objects.deepEquals(this.acceptEncoding, other.acceptEncoding) &&
             java.util.Objects.deepEquals(this.input, other.input);
     }
     
@@ -112,6 +149,7 @@ public class ExecuteDefaultPolicyWithInputRequest {
     public int hashCode() {
         return java.util.Objects.hash(
             pretty,
+            acceptEncoding,
             input);
     }
     
@@ -119,12 +157,15 @@ public class ExecuteDefaultPolicyWithInputRequest {
     public String toString() {
         return Utils.toString(ExecuteDefaultPolicyWithInputRequest.class,
                 "pretty", pretty,
+                "acceptEncoding", acceptEncoding,
                 "input", input);
     }
     
     public final static class Builder {
  
         private Optional<? extends Boolean> pretty = Optional.empty();
+ 
+        private Optional<? extends com.styra.opa.openapi.models.shared.GzipAcceptEncoding> acceptEncoding = Optional.empty();
  
         private com.styra.opa.openapi.models.shared.Input input;  
         
@@ -151,6 +192,24 @@ public class ExecuteDefaultPolicyWithInputRequest {
         }
 
         /**
+         * Indicates the server should respond with a gzip encoded body. The server will send the compressed response only if its length is above `server.encoding.gzip.min_length` value. See the configuration section
+         */
+        public Builder acceptEncoding(com.styra.opa.openapi.models.shared.GzipAcceptEncoding acceptEncoding) {
+            Utils.checkNotNull(acceptEncoding, "acceptEncoding");
+            this.acceptEncoding = Optional.ofNullable(acceptEncoding);
+            return this;
+        }
+
+        /**
+         * Indicates the server should respond with a gzip encoded body. The server will send the compressed response only if its length is above `server.encoding.gzip.min_length` value. See the configuration section
+         */
+        public Builder acceptEncoding(Optional<? extends com.styra.opa.openapi.models.shared.GzipAcceptEncoding> acceptEncoding) {
+            Utils.checkNotNull(acceptEncoding, "acceptEncoding");
+            this.acceptEncoding = acceptEncoding;
+            return this;
+        }
+
+        /**
          * The input document
          */
         public Builder input(com.styra.opa.openapi.models.shared.Input input) {
@@ -162,6 +221,7 @@ public class ExecuteDefaultPolicyWithInputRequest {
         public ExecuteDefaultPolicyWithInputRequest build() {
             return new ExecuteDefaultPolicyWithInputRequest(
                 pretty,
+                acceptEncoding,
                 input);
         }
     }

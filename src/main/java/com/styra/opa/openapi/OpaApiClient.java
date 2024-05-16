@@ -158,7 +158,7 @@ public class OpaApiClient implements
         this.sdkConfiguration.initialize();
     }
     /**
-     * Execute the default decision with given an input
+     * Execute the default decision  given an input
      * @return The call builder
      */
     public com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputRequestBuilder executeDefaultPolicyWithInput() {
@@ -166,29 +166,32 @@ public class OpaApiClient implements
     }
 
     /**
-     * Execute the default decision with given an input
+     * Execute the default decision  given an input
      * @param input Arbitrary JSON used within your policies by accessing `input`
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse executeDefaultPolicyWithInput(
             com.styra.opa.openapi.models.shared.Input input) throws Exception {
-        return executeDefaultPolicyWithInput(Optional.empty(), input);
+        return executeDefaultPolicyWithInput(Optional.empty(), Optional.empty(), input);
     }
     /**
-     * Execute the default decision with given an input
+     * Execute the default decision  given an input
      * @param pretty If parameter is `true`, response will formatted for humans.
+     * @param acceptEncoding
      * @param input Arbitrary JSON used within your policies by accessing `input`
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse executeDefaultPolicyWithInput(
             Optional<? extends Boolean> pretty,
+            Optional<? extends com.styra.opa.openapi.models.shared.GzipAcceptEncoding> acceptEncoding,
             com.styra.opa.openapi.models.shared.Input input) throws Exception {
         com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputRequest request =
             com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputRequest
                 .builder()
                 .pretty(pretty)
+                .acceptEncoding(acceptEncoding)
                 .input(input)
                 .build();
         
@@ -214,6 +217,7 @@ public class OpaApiClient implements
                 com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputRequest.class,
                 request, 
                 null));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
 
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
@@ -224,7 +228,7 @@ public class OpaApiClient implements
         HttpResponse<InputStream> _httpRes;
         try {
             _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "4XX", "500", "5XX")) {
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "404", "4XX", "500", "5XX")) {
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl("executeDefaultPolicyWithInput", sdkConfiguration.securitySource()),
@@ -256,6 +260,7 @@ public class OpaApiClient implements
         com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse _res = _resBuilder.build();
         
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+            _res.withHeaders(_httpRes.headers().map());
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
                 ObjectMapper _mapper = JSON.getMapper();
                 com.styra.opa.openapi.models.shared.Result _out = _mapper.readValue(
@@ -271,7 +276,7 @@ public class OpaApiClient implements
                     Utils.toByteArrayAndClose(_httpRes.body()));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "404")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
                 ObjectMapper _mapper = JSON.getMapper();
                 com.styra.opa.openapi.models.errors.ClientError _out = _mapper.readValue(

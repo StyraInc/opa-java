@@ -1,17 +1,17 @@
-speakeasyVersion: 1.289.0
+speakeasyVersion: 1.292.0
 sources:
     openapi:
         sourceNamespace: openapi
-        sourceRevisionDigest: sha256:f7cb5e800435f085a542983233d83d38a927c8766372655a627eaf9ce5ef1249
-        sourceBlobDigest: sha256:3c9fed2658522904031104f607890184b156e12991f30663e89209389a97ef78
+        sourceRevisionDigest: sha256:d7ce2b47fb37c8a57ff572bdf2f673093c4b6226ba8af77e38e8ad7f1b5cd113
+        sourceBlobDigest: sha256:153fe8e766cf694a916b1f96bf93d9d337eb2d5ff636ca6427fa24077b2b64a6
         tags:
             - latest
 targets:
     opa:
         source: openapi
         sourceNamespace: openapi
-        sourceRevisionDigest: sha256:f7cb5e800435f085a542983233d83d38a927c8766372655a627eaf9ce5ef1249
-        sourceBlobDigest: sha256:3c9fed2658522904031104f607890184b156e12991f30663e89209389a97ef78
+        sourceRevisionDigest: sha256:d7ce2b47fb37c8a57ff572bdf2f673093c4b6226ba8af77e38e8ad7f1b5cd113
+        sourceBlobDigest: sha256:153fe8e766cf694a916b1f96bf93d9d337eb2d5ff636ca6427fa24077b2b64a6
         outLocation: /home/cad-styra/f/src/opa-java
 workflow:
     workflowVersion: 1.0.0
@@ -19,7 +19,7 @@ workflow:
     sources:
         openapi:
             inputs:
-                - location: /home/cad-styra/f/src/opa-java/spec.yaml
+                - location: https://raw.githubusercontent.com/StyraInc/enterprise-opa/main/openapi/openapi.yaml
             registry:
                 location: registry.speakeasyapi.dev/styra/styra/openapi
     targets:

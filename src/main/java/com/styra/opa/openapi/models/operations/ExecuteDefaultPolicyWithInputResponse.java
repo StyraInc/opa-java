@@ -34,29 +34,40 @@ public class ExecuteDefaultPolicyWithInputResponse implements com.styra.opa.open
      */
     private HttpResponse<InputStream> rawResponse;
 
+    /**
+     * Success.
+     * Evaluating the default policy has the same response behavior as a successful policy evaluation, but with only the result as the response.
+     * 
+     */
     private Optional<? extends com.styra.opa.openapi.models.shared.Result> result;
+
+    private java.util.Map<String, java.util.List<String>> headers;
 
     @JsonCreator
     public ExecuteDefaultPolicyWithInputResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends com.styra.opa.openapi.models.shared.Result> result) {
+            Optional<? extends com.styra.opa.openapi.models.shared.Result> result,
+            java.util.Map<String, java.util.List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
         Utils.checkNotNull(result, "result");
+        headers = Utils.emptyMapIfNull(headers);
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
         this.result = result;
+        this.headers = headers;
     }
     
     public ExecuteDefaultPolicyWithInputResponse(
             String contentType,
             int statusCode,
-            HttpResponse<InputStream> rawResponse) {
-        this(contentType, statusCode, rawResponse, Optional.empty());
+            HttpResponse<InputStream> rawResponse,
+            java.util.Map<String, java.util.List<String>> headers) {
+        this(contentType, statusCode, rawResponse, Optional.empty(), headers);
     }
 
     /**
@@ -83,10 +94,20 @@ public class ExecuteDefaultPolicyWithInputResponse implements com.styra.opa.open
         return rawResponse;
     }
 
+    /**
+     * Success.
+     * Evaluating the default policy has the same response behavior as a successful policy evaluation, but with only the result as the response.
+     * 
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<com.styra.opa.openapi.models.shared.Result> result() {
         return (Optional<com.styra.opa.openapi.models.shared.Result>) result;
+    }
+
+    @JsonIgnore
+    public java.util.Map<String, java.util.List<String>> headers() {
+        return headers;
     }
 
     public final static Builder builder() {
@@ -120,15 +141,31 @@ public class ExecuteDefaultPolicyWithInputResponse implements com.styra.opa.open
         return this;
     }
 
+    /**
+     * Success.
+     * Evaluating the default policy has the same response behavior as a successful policy evaluation, but with only the result as the response.
+     * 
+     */
     public ExecuteDefaultPolicyWithInputResponse withResult(com.styra.opa.openapi.models.shared.Result result) {
         Utils.checkNotNull(result, "result");
         this.result = Optional.ofNullable(result);
         return this;
     }
 
+    /**
+     * Success.
+     * Evaluating the default policy has the same response behavior as a successful policy evaluation, but with only the result as the response.
+     * 
+     */
     public ExecuteDefaultPolicyWithInputResponse withResult(Optional<? extends com.styra.opa.openapi.models.shared.Result> result) {
         Utils.checkNotNull(result, "result");
         this.result = result;
+        return this;
+    }
+
+    public ExecuteDefaultPolicyWithInputResponse withHeaders(java.util.Map<String, java.util.List<String>> headers) {
+        Utils.checkNotNull(headers, "headers");
+        this.headers = headers;
         return this;
     }
     
@@ -145,7 +182,8 @@ public class ExecuteDefaultPolicyWithInputResponse implements com.styra.opa.open
             java.util.Objects.deepEquals(this.contentType, other.contentType) &&
             java.util.Objects.deepEquals(this.statusCode, other.statusCode) &&
             java.util.Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            java.util.Objects.deepEquals(this.result, other.result);
+            java.util.Objects.deepEquals(this.result, other.result) &&
+            java.util.Objects.deepEquals(this.headers, other.headers);
     }
     
     @Override
@@ -154,7 +192,8 @@ public class ExecuteDefaultPolicyWithInputResponse implements com.styra.opa.open
             contentType,
             statusCode,
             rawResponse,
-            result);
+            result,
+            headers);
     }
     
     @Override
@@ -163,7 +202,8 @@ public class ExecuteDefaultPolicyWithInputResponse implements com.styra.opa.open
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "result", result);
+                "result", result,
+                "headers", headers);
     }
     
     public final static class Builder {
@@ -174,7 +214,9 @@ public class ExecuteDefaultPolicyWithInputResponse implements com.styra.opa.open
  
         private HttpResponse<InputStream> rawResponse;
  
-        private Optional<? extends com.styra.opa.openapi.models.shared.Result> result = Optional.empty();  
+        private Optional<? extends com.styra.opa.openapi.models.shared.Result> result = Optional.empty();
+ 
+        private java.util.Map<String, java.util.List<String>> headers;  
         
         private Builder() {
           // force use of static builder() method
@@ -207,15 +249,31 @@ public class ExecuteDefaultPolicyWithInputResponse implements com.styra.opa.open
             return this;
         }
 
+        /**
+         * Success.
+         * Evaluating the default policy has the same response behavior as a successful policy evaluation, but with only the result as the response.
+         * 
+         */
         public Builder result(com.styra.opa.openapi.models.shared.Result result) {
             Utils.checkNotNull(result, "result");
             this.result = Optional.ofNullable(result);
             return this;
         }
 
+        /**
+         * Success.
+         * Evaluating the default policy has the same response behavior as a successful policy evaluation, but with only the result as the response.
+         * 
+         */
         public Builder result(Optional<? extends com.styra.opa.openapi.models.shared.Result> result) {
             Utils.checkNotNull(result, "result");
             this.result = result;
+            return this;
+        }
+
+        public Builder headers(java.util.Map<String, java.util.List<String>> headers) {
+            Utils.checkNotNull(headers, "headers");
+            this.headers = headers;
             return this;
         }
         
@@ -224,7 +282,8 @@ public class ExecuteDefaultPolicyWithInputResponse implements com.styra.opa.open
                 contentType,
                 statusCode,
                 rawResponse,
-                result);
+                result,
+                headers);
         }
     }
 }

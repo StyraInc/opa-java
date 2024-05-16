@@ -602,7 +602,12 @@ public class OPAClient {
             ExecuteDefaultPolicyWithInputResponse res;
 
             try {
-                res = sdk.executeDefaultPolicyWithInput(Optional.of(policyRequestPretty), input.get());
+                res = sdk.executeDefaultPolicyWithInput(
+                    Optional.of(
+                        policyRequestPretty),
+                        Optional.empty(),
+                        input.get()
+                );
 
             //CHECKSTYLE:OFF
             } catch (Exception e) {

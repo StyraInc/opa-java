@@ -7,14 +7,14 @@ Enterprise OPA documentation
 <https://docs.styra.com/enterprise-opa>
 ### Available Operations
 
-* [executeDefaultPolicyWithInput](#executedefaultpolicywithinput) - Execute the default decision with given an input
+* [executeDefaultPolicyWithInput](#executedefaultpolicywithinput) - Execute the default decision  given an input
 * [executePolicy](#executepolicy) - Execute a policy
 * [executePolicyWithInput](#executepolicywithinput) - Execute a policy given an input
 * [health](#health) - Verify the server is operational
 
 ## executeDefaultPolicyWithInput
 
-Execute the default decision with given an input
+Execute the default decision  given an input
 
 ### Example Usage
 
@@ -41,6 +41,7 @@ public class Application {
 
             ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
                 .pretty(false)
+                .acceptEncoding(GzipAcceptEncoding.GZIP)
                 .input(Input.of(8203.11d))
                 .call();
 
@@ -66,10 +67,11 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                 | Type                                                                      | Required                                                                  | Description                                                               |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| `pretty`                                                                  | *Optional<? extends Boolean>*                                             | :heavy_minus_sign:                                                        | If parameter is `true`, response will formatted for humans.               |
-| `input`                                                                   | [com.styra.opa.openapi.models.shared.Input](../../models/shared/Input.md) | :heavy_check_mark:                                                        | The input document                                                        |
+| Parameter                                                                                                                                                                                                     | Type                                                                                                                                                                                                          | Required                                                                                                                                                                                                      | Description                                                                                                                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `pretty`                                                                                                                                                                                                      | *Optional<? extends Boolean>*                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                            | If parameter is `true`, response will formatted for humans.                                                                                                                                                   |
+| `acceptEncoding`                                                                                                                                                                                              | [Optional<? extends com.styra.opa.openapi.models.shared.GzipAcceptEncoding>](../../models/shared/GzipAcceptEncoding.md)                                                                                       | :heavy_minus_sign:                                                                                                                                                                                            | Indicates the server should respond with a gzip encoded body. The server will send the compressed response only if its length is above `server.encoding.gzip.min_length` value. See the configuration section |
+| `input`                                                                                                                                                                                                       | [com.styra.opa.openapi.models.shared.Input](../../models/shared/Input.md)                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                            | The input document                                                                                                                                                                                            |
 
 
 ### Response
@@ -79,7 +81,7 @@ public class Application {
 
 | Error Object              | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
-| models/errors/ClientError | 400                       | application/json          |
+| models/errors/ClientError | 400,404                   | application/json          |
 | models/errors/ServerError | 500                       | application/json          |
 | models/errors/SDKError    | 4xx-5xx                   | */*                       |
 

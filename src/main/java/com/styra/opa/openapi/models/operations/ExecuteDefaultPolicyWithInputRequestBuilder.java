@@ -20,6 +20,7 @@ import org.openapitools.jackson.nullable.JsonNullable;
 public class ExecuteDefaultPolicyWithInputRequestBuilder {
 
     private Optional<? extends Boolean> pretty = Optional.empty();
+    private Optional<? extends com.styra.opa.openapi.models.shared.GzipAcceptEncoding> acceptEncoding = Optional.empty();
     private com.styra.opa.openapi.models.shared.Input input;
     private final SDKMethodInterfaces.MethodCallExecuteDefaultPolicyWithInput sdk;
 
@@ -38,6 +39,18 @@ public class ExecuteDefaultPolicyWithInputRequestBuilder {
         this.pretty = pretty;
         return this;
     }
+                
+    public ExecuteDefaultPolicyWithInputRequestBuilder acceptEncoding(com.styra.opa.openapi.models.shared.GzipAcceptEncoding acceptEncoding) {
+        Utils.checkNotNull(acceptEncoding, "acceptEncoding");
+        this.acceptEncoding = Optional.of(acceptEncoding);
+        return this;
+    }
+
+    public ExecuteDefaultPolicyWithInputRequestBuilder acceptEncoding(Optional<? extends com.styra.opa.openapi.models.shared.GzipAcceptEncoding> acceptEncoding) {
+        Utils.checkNotNull(acceptEncoding, "acceptEncoding");
+        this.acceptEncoding = acceptEncoding;
+        return this;
+    }
 
     public ExecuteDefaultPolicyWithInputRequestBuilder input(com.styra.opa.openapi.models.shared.Input input) {
         Utils.checkNotNull(input, "input");
@@ -49,6 +62,7 @@ public class ExecuteDefaultPolicyWithInputRequestBuilder {
 
         return sdk.executeDefaultPolicyWithInput(
             pretty,
+            acceptEncoding,
             input);
     }
 }

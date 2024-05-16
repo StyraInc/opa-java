@@ -22,6 +22,7 @@ public class Application {
 
             ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
                 .pretty(false)
+                .acceptEncoding(GzipAcceptEncoding.GZIP)
                 .input(Input.of(8203.11d))
                 .call();
 

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 47e8e950-a454-4ebb-9f78-86fda7dfa0c2
 management:
-  docChecksum: cd0b6ad117815b8de61d93e5d5be5524
+  docChecksum: 11b8c1e1d3f9d5dab18c36b33f81200d
   docVersion: 0.2.0
-  speakeasyVersion: 1.289.0
-  generationVersion: 2.331.0
-  releaseVersion: 0.7.9
-  configChecksum: f202126c2e0edbe4c7636f179ac945f2
+  speakeasyVersion: 1.292.0
+  generationVersion: 2.332.4
+  releaseVersion: 0.7.11
+  configChecksum: afb2823abec96aebcd7561ecf8e1ffc1
   repoURL: https://github.com/StyraInc/opa-java.git
   published: true
 features:
@@ -81,11 +81,11 @@ generatedFiles:
   - src/main/java/com/styra/opa/openapi/models/operations/HealthResponse.java
   - src/main/java/com/styra/opa/openapi/models/shared/Result.java
   - src/main/java/com/styra/opa/openapi/models/shared/Input.java
+  - src/main/java/com/styra/opa/openapi/models/shared/GzipAcceptEncoding.java
   - src/main/java/com/styra/opa/openapi/models/shared/SuccessfulPolicyEvaluation.java
   - src/main/java/com/styra/opa/openapi/models/shared/Revision.java
   - src/main/java/com/styra/opa/openapi/models/shared/Provenance.java
   - src/main/java/com/styra/opa/openapi/models/shared/Explain.java
-  - src/main/java/com/styra/opa/openapi/models/shared/GzipAcceptEncoding.java
   - src/main/java/com/styra/opa/openapi/models/shared/GzipContentEncoding.java
   - src/main/java/com/styra/opa/openapi/models/shared/HealthyServer.java
   - src/main/java/com/styra/opa/openapi/models/errors/Location.java
@@ -106,11 +106,11 @@ generatedFiles:
   - docs/models/operations/HealthResponse.md
   - docs/models/shared/Result.md
   - docs/models/shared/Input.md
+  - docs/models/shared/GzipAcceptEncoding.md
   - docs/models/shared/SuccessfulPolicyEvaluation.md
   - docs/models/shared/Revision.md
   - docs/models/shared/Provenance.md
   - docs/models/shared/Explain.md
-  - docs/models/shared/GzipAcceptEncoding.md
   - docs/models/shared/GzipContentEncoding.md
   - docs/models/shared/HealthyServer.md
   - docs/models/errors/Location.md
