@@ -41,13 +41,10 @@
                                 <a href="https://github.com/StyraInc/opa-java" class="nav-link">GitHub</a>
                             </li>
                             <li class="nav-item">
+                                <a href="https://docs.styra.com/sdk" class="nav-link">Other Styra OPA SDKs</a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="../../javadoc" class="nav-link">Javadoc</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="../../models" class="nav-link">Models</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href=".." class="nav-link">SDKs</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Maintenance</a>
@@ -67,6 +64,10 @@
                                     
 <li>
     <a href="../../maintenance/releases/" class="dropdown-item">Release</a>
+</li>
+                                    
+<li>
+    <a href="../../maintenance/custom-spec/" class="dropdown-item">Using a Custom OpenAPI Spec</a>
 </li>
                                 </ul>
                             </li>
@@ -102,6 +103,10 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            <li class="nav-item" data-bs-level="2"><a href="#executedefaultpolicywithinput" class="nav-link">executeDefaultPolicyWithInput</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
             <li class="nav-item" data-bs-level="2"><a href="#executepolicy" class="nav-link">executePolicy</a>
               <ul class="nav flex-column">
               </ul>
@@ -127,13 +132,122 @@
 <a href="https://docs.styra.com/enterprise-opa">https://docs.styra.com/enterprise-opa</a></p>
 <h3 id="available-operations">Available Operations</h3>
 <ul>
+<li><a href="#executedefaultpolicywithinput">executeDefaultPolicyWithInput</a> - Execute the default decision  given an input</li>
 <li><a href="#executepolicy">executePolicy</a> - Execute a policy</li>
 <li><a href="#executepolicywithinput">executePolicyWithInput</a> - Execute a policy given an input</li>
 <li><a href="#health">health</a> - Verify the server is operational</li>
 </ul>
+<h2 id="executedefaultpolicywithinput">executeDefaultPolicyWithInput</h2>
+<p>Execute the default decision  given an input</p>
+<h3 id="example-usage">Example Usage</h3>
+<pre><code class="language-java">package hello.world;
+
+import com.styra.opa.openapi.OpaApiClient;
+import com.styra.opa.openapi.models.operations.*;
+import com.styra.opa.openapi.models.shared.*;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
+import static java.util.Map.entry;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+        try {
+            OpaApiClient sdk = OpaApiClient.builder()
+                .build();
+
+            ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
+                .pretty(false)
+                .acceptEncoding(GzipAcceptEncoding.GZIP)
+                .input(Input.of(8203.11d))
+                .call();
+
+            if (res.result().isPresent()) {
+                // handle response
+            }
+        } catch (com.styra.opa.openapi.models.errors.ClientError e) {
+            // handle exception
+            throw e;
+        } catch (com.styra.opa.openapi.models.errors.ServerError e) {
+            // handle exception
+            throw e;
+        } catch (com.styra.opa.openapi.models.errors.SDKError e) {
+            // handle exception
+            throw e;
+        } catch (Exception e) {
+            // handle exception
+            throw e;
+        }
+    }
+}
+</code></pre>
+<h3 id="parameters">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pretty</code></td>
+<td><em>Optional&lt;? extends Boolean&gt;</em></td>
+<td>:heavy_minus_sign:</td>
+<td>If parameter is <code>true</code>, response will formatted for humans.</td>
+</tr>
+<tr>
+<td><code>acceptEncoding</code></td>
+<td><a href="../../models/shared/GzipAcceptEncoding/">Optional&lt;? extends com.styra.opa.openapi.models.shared.GzipAcceptEncoding&gt;</a></td>
+<td>:heavy_minus_sign:</td>
+<td>Indicates the server should respond with a gzip encoded body. The server will send the compressed response only if its length is above <code>server.encoding.gzip.min_length</code> value. See the configuration section</td>
+</tr>
+<tr>
+<td><code>input</code></td>
+<td><a href="../../models/shared/Input/">com.styra.opa.openapi.models.shared.Input</a></td>
+<td>:heavy_check_mark:</td>
+<td>The input document</td>
+</tr>
+</tbody>
+</table>
+<h3 id="response">Response</h3>
+<p><strong><a href="../../models/operations/ExecuteDefaultPolicyWithInputResponse/">Optional&lt;? extends com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse&gt;</a></strong></p>
+<h3 id="errors">Errors</h3>
+<table>
+<thead>
+<tr>
+<th>Error Object</th>
+<th>Status Code</th>
+<th>Content Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>models/errors/ClientError</td>
+<td>400,404</td>
+<td>application/json</td>
+</tr>
+<tr>
+<td>models/errors/ServerError</td>
+<td>500</td>
+<td>application/json</td>
+</tr>
+<tr>
+<td>models/errors/SDKError</td>
+<td>4xx-5xx</td>
+<td><em>/</em></td>
+</tr>
+</tbody>
+</table>
 <h2 id="executepolicy">executePolicy</h2>
 <p>Execute a policy</p>
-<h3 id="example-usage">Example Usage</h3>
+<h3 id="example-usage_1">Example Usage</h3>
 <pre><code class="language-java">package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
@@ -181,7 +295,7 @@ public class Application {
     }
 }
 </code></pre>
-<h3 id="parameters">Parameters</h3>
+<h3 id="parameters_1">Parameters</h3>
 <table>
 <thead>
 <tr>
@@ -200,9 +314,9 @@ public class Application {
 </tr>
 </tbody>
 </table>
-<h3 id="response">Response</h3>
+<h3 id="response_1">Response</h3>
 <p><strong><a href="../../models/operations/ExecutePolicyResponse/">Optional&lt;? extends com.styra.opa.openapi.models.operations.ExecutePolicyResponse&gt;</a></strong></p>
-<h3 id="errors">Errors</h3>
+<h3 id="errors_1">Errors</h3>
 <table>
 <thead>
 <tr>
@@ -231,7 +345,7 @@ public class Application {
 </table>
 <h2 id="executepolicywithinput">executePolicyWithInput</h2>
 <p>Execute a policy given an input</p>
-<h3 id="example-usage_1">Example Usage</h3>
+<h3 id="example-usage_2">Example Usage</h3>
 <pre><code class="language-java">package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
@@ -282,7 +396,7 @@ public class Application {
     }
 }
 </code></pre>
-<h3 id="parameters_1">Parameters</h3>
+<h3 id="parameters_2">Parameters</h3>
 <table>
 <thead>
 <tr>
@@ -301,9 +415,9 @@ public class Application {
 </tr>
 </tbody>
 </table>
-<h3 id="response_1">Response</h3>
+<h3 id="response_2">Response</h3>
 <p><strong><a href="../../models/operations/ExecutePolicyWithInputResponse/">Optional&lt;? extends com.styra.opa.openapi.models.operations.ExecutePolicyWithInputResponse&gt;</a></strong></p>
-<h3 id="errors_1">Errors</h3>
+<h3 id="errors_2">Errors</h3>
 <table>
 <thead>
 <tr>
@@ -332,7 +446,7 @@ public class Application {
 </table>
 <h2 id="health">health</h2>
 <p>The health API endpoint executes a simple built-in policy query to verify that the server is operational. Optionally it can account for bundle activation as well (useful for “ready” checks at startup).</p>
-<h3 id="example-usage_2">Example Usage</h3>
+<h3 id="example-usage_3">Example Usage</h3>
 <pre><code class="language-java">package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
@@ -376,7 +490,7 @@ public class Application {
     }
 }
 </code></pre>
-<h3 id="parameters_2">Parameters</h3>
+<h3 id="parameters_3">Parameters</h3>
 <table>
 <thead>
 <tr>
@@ -407,9 +521,9 @@ public class Application {
 </tr>
 </tbody>
 </table>
-<h3 id="response_2">Response</h3>
+<h3 id="response_3">Response</h3>
 <p><strong><a href="../../models/operations/HealthResponse/">Optional&lt;? extends com.styra.opa.openapi.models.operations.HealthResponse&gt;</a></strong></p>
-<h3 id="errors_2">Errors</h3>
+<h3 id="errors_3">Errors</h3>
 <table>
 <thead>
 <tr>
