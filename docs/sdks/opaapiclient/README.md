@@ -7,9 +7,83 @@ Enterprise OPA documentation
 <https://docs.styra.com/enterprise-opa>
 ### Available Operations
 
+* [executeDefaultPolicyWithInput](#executedefaultpolicywithinput) - Execute the default decision  given an input
 * [executePolicy](#executepolicy) - Execute a policy
 * [executePolicyWithInput](#executepolicywithinput) - Execute a policy given an input
 * [health](#health) - Verify the server is operational
+
+## executeDefaultPolicyWithInput
+
+Execute the default decision  given an input
+
+### Example Usage
+
+```java
+package hello.world;
+
+import com.styra.opa.openapi.OpaApiClient;
+import com.styra.opa.openapi.models.operations.*;
+import com.styra.opa.openapi.models.shared.*;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
+import static java.util.Map.entry;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+        try {
+            OpaApiClient sdk = OpaApiClient.builder()
+                .build();
+
+            ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
+                .pretty(false)
+                .acceptEncoding(GzipAcceptEncoding.GZIP)
+                .input(Input.of(8203.11d))
+                .call();
+
+            if (res.result().isPresent()) {
+                // handle response
+            }
+        } catch (com.styra.opa.openapi.models.errors.ClientError e) {
+            // handle exception
+            throw e;
+        } catch (com.styra.opa.openapi.models.errors.ServerError e) {
+            // handle exception
+            throw e;
+        } catch (com.styra.opa.openapi.models.errors.SDKError e) {
+            // handle exception
+            throw e;
+        } catch (Exception e) {
+            // handle exception
+            throw e;
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                     | Type                                                                                                                                                                                                          | Required                                                                                                                                                                                                      | Description                                                                                                                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `pretty`                                                                                                                                                                                                      | *Optional<? extends Boolean>*                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                            | If parameter is `true`, response will formatted for humans.                                                                                                                                                   |
+| `acceptEncoding`                                                                                                                                                                                              | [Optional<? extends com.styra.opa.openapi.models.shared.GzipAcceptEncoding>](../../models/shared/GzipAcceptEncoding.md)                                                                                       | :heavy_minus_sign:                                                                                                                                                                                            | Indicates the server should respond with a gzip encoded body. The server will send the compressed response only if its length is above `server.encoding.gzip.min_length` value. See the configuration section |
+| `input`                                                                                                                                                                                                       | [com.styra.opa.openapi.models.shared.Input](../../models/shared/Input.md)                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                            | The input document                                                                                                                                                                                            |
+
+
+### Response
+
+**[Optional<? extends com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse>](../../models/operations/ExecuteDefaultPolicyWithInputResponse.md)**
+### Errors
+
+| Error Object              | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| models/errors/ClientError | 400,404                   | application/json          |
+| models/errors/ServerError | 500                       | application/json          |
+| models/errors/SDKError    | 4xx-5xx                   | */*                       |
 
 ## executePolicy
 

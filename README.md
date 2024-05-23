@@ -4,7 +4,7 @@
 [![Maven Central Version](https://img.shields.io/maven-central/v/com.styra/opa?label=Maven%20Central&logo=apache-maven&color=%2324b6e0)](https://central.sonatype.com/artifact/com.styra/opa)
 
 > [!IMPORTANT]
-> The documentation for this SDK lives at https://docs.styra.com/sdk, with reference documentation available at https://styrainc.github.io/opa-java
+> The documentation for this SDK lives at https://docs.styra.com/sdk, with reference documentation available at https://styrainc.github.io/opa-java/javadoc
 
 You can use the Styra OPA SDK to connect to [Open Policy Agent](https://www.openpolicyagent.org/) and [Enterprise OPA](https://www.styra.com/enterprise-opa/) deployments.
 
@@ -87,7 +87,56 @@ public class App {
 <!-- Start SDK Example Usage [usage] -->
 ## SDK Example Usage
 
-### Example
+### Example 1
+
+```java
+package hello.world;
+
+import com.styra.opa.openapi.OpaApiClient;
+import com.styra.opa.openapi.models.operations.*;
+import com.styra.opa.openapi.models.shared.*;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
+import static java.util.Map.entry;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+        try {
+            OpaApiClient sdk = OpaApiClient.builder()
+                .build();
+
+            ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
+                .pretty(false)
+                .acceptEncoding(GzipAcceptEncoding.GZIP)
+                .input(Input.of(8203.11d))
+                .call();
+
+            if (res.result().isPresent()) {
+                // handle response
+            }
+        } catch (com.styra.opa.openapi.models.errors.ClientError e) {
+            // handle exception
+            throw e;
+        } catch (com.styra.opa.openapi.models.errors.ServerError e) {
+            // handle exception
+            throw e;
+        } catch (com.styra.opa.openapi.models.errors.SDKError e) {
+            // handle exception
+            throw e;
+        } catch (Exception e) {
+            // handle exception
+            throw e;
+        }
+    }
+}
+```
+
+### Example 2
 
 ```java
 package hello.world;
@@ -147,6 +196,7 @@ public class Application {
 
 ### [OpaApiClient SDK](docs/sdks/opaapiclient/README.md)
 
+* [executeDefaultPolicyWithInput](docs/sdks/opaapiclient/README.md#executedefaultpolicywithinput) - Execute the default decision  given an input
 * [executePolicy](docs/sdks/opaapiclient/README.md#executepolicy) - Execute a policy
 * [executePolicyWithInput](docs/sdks/opaapiclient/README.md#executepolicywithinput) - Execute a policy given an input
 * [health](docs/sdks/opaapiclient/README.md#health) - Verify the server is operational
@@ -187,15 +237,13 @@ public class Application {
                 .serverIndex(0)
                 .build();
 
-            ExecutePolicyRequest req = ExecutePolicyRequest.builder()
-                .path("app/rbac")
-                .build();
-
-            ExecutePolicyResponse res = sdk.executePolicy()
-                .request(req)
+            ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
+                .pretty(false)
+                .acceptEncoding(GzipAcceptEncoding.GZIP)
+                .input(Input.of(8203.11d))
                 .call();
 
-            if (res.successfulPolicyEvaluation().isPresent()) {
+            if (res.result().isPresent()) {
                 // handle response
             }
         } catch (com.styra.opa.openapi.models.errors.ClientError e) {
@@ -241,15 +289,13 @@ public class Application {
                 .serverURL("http://localhost:8181")
                 .build();
 
-            ExecutePolicyRequest req = ExecutePolicyRequest.builder()
-                .path("app/rbac")
-                .build();
-
-            ExecutePolicyResponse res = sdk.executePolicy()
-                .request(req)
+            ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
+                .pretty(false)
+                .acceptEncoding(GzipAcceptEncoding.GZIP)
+                .input(Input.of(8203.11d))
                 .call();
 
-            if (res.successfulPolicyEvaluation().isPresent()) {
+            if (res.result().isPresent()) {
                 // handle response
             }
         } catch (com.styra.opa.openapi.models.errors.ClientError e) {
@@ -277,7 +323,7 @@ Handling errors in this SDK should largely match your expectations.  All operati
 
 | Error Object              | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
-| models/errors/ClientError | 400                       | application/json          |
+| models/errors/ClientError | 400,404                   | application/json          |
 | models/errors/ServerError | 500                       | application/json          |
 | models/errors/SDKError    | 4xx-5xx                   | */*                       |
 
@@ -304,15 +350,13 @@ public class Application {
             OpaApiClient sdk = OpaApiClient.builder()
                 .build();
 
-            ExecutePolicyRequest req = ExecutePolicyRequest.builder()
-                .path("app/rbac")
-                .build();
-
-            ExecutePolicyResponse res = sdk.executePolicy()
-                .request(req)
+            ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
+                .pretty(false)
+                .acceptEncoding(GzipAcceptEncoding.GZIP)
+                .input(Input.of(8203.11d))
                 .call();
 
-            if (res.successfulPolicyEvaluation().isPresent()) {
+            if (res.result().isPresent()) {
                 // handle response
             }
         } catch (com.styra.opa.openapi.models.errors.ClientError e) {

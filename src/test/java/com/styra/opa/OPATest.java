@@ -1,6 +1,7 @@
 package com.styra.opa;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testcontainers.containers.BindMode;
@@ -52,6 +53,13 @@ class OPATest {
     @BeforeEach
     public void setUp() {
         address = "http://" + opac.getHost() + ":" + opac.getMappedPort(opaPort);
+    }
+
+    @AfterEach
+    public void dumpLogs() {
+        System.out.println("==== container logs from OPA container ====");
+        final String logs = opac.getLogs();
+        System.out.println(logs);
     }
 
     @Test
@@ -147,16 +155,16 @@ class OPATest {
     @Test
     public void testOPAWithoutInput() {
         OPAClient opa = new OPAClient(address, headers);
-        Map result = Map.ofEntries(entry("unit", "test"));
+        String result = "";
 
         try {
-            result = opa.evaluate("policy/echo");
+            result = opa.evaluate("policy/hello");
         } catch (OPAException e) {
             System.out.println("exception: " + e);
             assertNull(e);
         }
 
-        assertEquals(Map.ofEntries(), result);
+        assertEquals("Open Policy Agent", result);
     }
 
     @Test
@@ -258,4 +266,26 @@ class OPATest {
         assertEquals(actual.getNestedMap(), expect.getNestedMap());
         assertEquals(actual.getStringVal(), expect.getStringVal());
     }
+
+    @Test
+    public void testOPADefaultPathWithInput() {
+        OPAClient opa = new OPAClient(address, headers);
+        Map<String, java.lang.Object> input = Map.ofEntries(entry("hello", "world"));
+        Map result = Map.ofEntries(entry("unit", "test"));
+        Map expect = Map.ofEntries(
+            entry("msg", "this is the default path"),
+            entry("echo", Map.ofEntries(entry("hello", "world")))
+        );
+
+        try {
+            result = opa.evaluate(input);
+        } catch (OPAException e) {
+            System.out.println("exception: " + e);
+            assertNull(e);
+        }
+
+        assertEquals(expect, result);
+    }
+
 }
+

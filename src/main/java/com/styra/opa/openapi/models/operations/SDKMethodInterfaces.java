@@ -14,6 +14,14 @@ import org.openapitools.jackson.nullable.JsonNullable;
 
 public class SDKMethodInterfaces {
 
+    public interface MethodCallExecuteDefaultPolicyWithInput {
+        com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse executeDefaultPolicyWithInput(
+            Optional<? extends Boolean> pretty,
+            Optional<? extends com.styra.opa.openapi.models.shared.GzipAcceptEncoding> acceptEncoding,
+            com.styra.opa.openapi.models.shared.Input input) throws Exception;
+    }
+
+
     public interface MethodCallExecutePolicy {
         com.styra.opa.openapi.models.operations.ExecutePolicyResponse executePolicy(
             com.styra.opa.openapi.models.operations.ExecutePolicyRequest request) throws Exception;
