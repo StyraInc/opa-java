@@ -262,8 +262,7 @@ public class OpaApiClient implements
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             _res.withHeaders(_httpRes.headers().map());
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                ObjectMapper _mapper = JSON.getMapper();
-                com.styra.opa.openapi.models.shared.Result _out = _mapper.readValue(
+                com.styra.opa.openapi.models.shared.Result _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
                     new TypeReference<com.styra.opa.openapi.models.shared.Result>() {});
                 _res.withResult(java.util.Optional.ofNullable(_out));
@@ -278,8 +277,7 @@ public class OpaApiClient implements
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "404")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                ObjectMapper _mapper = JSON.getMapper();
-                com.styra.opa.openapi.models.errors.ClientError _out = _mapper.readValue(
+                com.styra.opa.openapi.models.errors.ClientError _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
                     new TypeReference<com.styra.opa.openapi.models.errors.ClientError>() {});
                 throw _out;
@@ -301,8 +299,7 @@ public class OpaApiClient implements
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "500")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                ObjectMapper _mapper = JSON.getMapper();
-                com.styra.opa.openapi.models.errors.ServerError _out = _mapper.readValue(
+                com.styra.opa.openapi.models.errors.ServerError _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
                     new TypeReference<com.styra.opa.openapi.models.errors.ServerError>() {});
                 throw _out;
@@ -398,8 +395,7 @@ public class OpaApiClient implements
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             _res.withHeaders(_httpRes.headers().map());
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                ObjectMapper _mapper = JSON.getMapper();
-                com.styra.opa.openapi.models.shared.SuccessfulPolicyEvaluation _out = _mapper.readValue(
+                com.styra.opa.openapi.models.shared.SuccessfulPolicyEvaluation _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
                     new TypeReference<com.styra.opa.openapi.models.shared.SuccessfulPolicyEvaluation>() {});
                 _res.withSuccessfulPolicyEvaluation(java.util.Optional.ofNullable(_out));
@@ -414,8 +410,7 @@ public class OpaApiClient implements
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                ObjectMapper _mapper = JSON.getMapper();
-                com.styra.opa.openapi.models.errors.ClientError _out = _mapper.readValue(
+                com.styra.opa.openapi.models.errors.ClientError _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
                     new TypeReference<com.styra.opa.openapi.models.errors.ClientError>() {});
                 throw _out;
@@ -437,8 +432,7 @@ public class OpaApiClient implements
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "500")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                ObjectMapper _mapper = JSON.getMapper();
-                com.styra.opa.openapi.models.errors.ServerError _out = _mapper.readValue(
+                com.styra.opa.openapi.models.errors.ServerError _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
                     new TypeReference<com.styra.opa.openapi.models.errors.ServerError>() {});
                 throw _out;
@@ -542,8 +536,7 @@ public class OpaApiClient implements
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             _res.withHeaders(_httpRes.headers().map());
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                ObjectMapper _mapper = JSON.getMapper();
-                com.styra.opa.openapi.models.shared.SuccessfulPolicyEvaluation _out = _mapper.readValue(
+                com.styra.opa.openapi.models.shared.SuccessfulPolicyEvaluation _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
                     new TypeReference<com.styra.opa.openapi.models.shared.SuccessfulPolicyEvaluation>() {});
                 _res.withSuccessfulPolicyEvaluation(java.util.Optional.ofNullable(_out));
@@ -558,8 +551,7 @@ public class OpaApiClient implements
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                ObjectMapper _mapper = JSON.getMapper();
-                com.styra.opa.openapi.models.errors.ClientError _out = _mapper.readValue(
+                com.styra.opa.openapi.models.errors.ClientError _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
                     new TypeReference<com.styra.opa.openapi.models.errors.ClientError>() {});
                 throw _out;
@@ -581,8 +573,7 @@ public class OpaApiClient implements
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "500")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                ObjectMapper _mapper = JSON.getMapper();
-                com.styra.opa.openapi.models.errors.ServerError _out = _mapper.readValue(
+                com.styra.opa.openapi.models.errors.ServerError _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
                     new TypeReference<com.styra.opa.openapi.models.errors.ServerError>() {});
                 throw _out;
@@ -697,8 +688,7 @@ public class OpaApiClient implements
         
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                ObjectMapper _mapper = JSON.getMapper();
-                com.styra.opa.openapi.models.shared.HealthyServer _out = _mapper.readValue(
+                com.styra.opa.openapi.models.shared.HealthyServer _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
                     new TypeReference<com.styra.opa.openapi.models.shared.HealthyServer>() {});
                 _res.withHealthyServer(java.util.Optional.ofNullable(_out));
@@ -721,8 +711,7 @@ public class OpaApiClient implements
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "500")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                ObjectMapper _mapper = JSON.getMapper();
-                com.styra.opa.openapi.models.errors.UnhealthyServer _out = _mapper.readValue(
+                com.styra.opa.openapi.models.errors.UnhealthyServer _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
                     new TypeReference<com.styra.opa.openapi.models.errors.UnhealthyServer>() {});
                 throw _out;

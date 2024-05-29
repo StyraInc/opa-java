@@ -3,23 +3,23 @@ id: 47e8e950-a454-4ebb-9f78-86fda7dfa0c2
 management:
   docChecksum: 11b8c1e1d3f9d5dab18c36b33f81200d
   docVersion: 0.2.0
-  speakeasyVersion: 1.292.0
-  generationVersion: 2.332.4
-  releaseVersion: 0.7.11
-  configChecksum: afb2823abec96aebcd7561ecf8e1ffc1
+  speakeasyVersion: 1.296.1
+  generationVersion: 2.338.1
+  releaseVersion: 0.8.0
+  configChecksum: ec7f833a03f75dd1f7ab4cbfaee69682
   repoURL: https://github.com/StyraInc/opa-java.git
   published: true
 features:
   java:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.1
-    core: 3.19.7
+    core: 3.21.0
     examples: 2.81.3
     flattening: 2.81.1
     globalSecurityCallbacks: 0.1.0
     globalServerURLs: 2.82.1
     sdkHooks: 0.1.0
-    unions: 0.0.3
+    unions: 0.0.4
 generatedFiles:
   - src/main/java/com/styra/opa/openapi/SecuritySource.java
   - src/main/java/com/styra/opa/openapi/models/shared/Security.java
@@ -41,6 +41,10 @@ generatedFiles:
   - src/main/java/com/styra/opa/openapi/utils/BigDecimalString.java
   - src/main/java/com/styra/opa/openapi/utils/BigIntegerString.java
   - src/main/java/com/styra/opa/openapi/utils/Deserializers.java
+  - src/main/java/com/styra/opa/openapi/utils/EventStream.java
+  - src/main/java/com/styra/opa/openapi/utils/EventStreamLineReader.java
+  - src/main/java/com/styra/opa/openapi/utils/EventStreamMessage.java
+  - src/main/java/com/styra/opa/openapi/utils/EventStreamReader.java
   - src/main/java/com/styra/opa/openapi/utils/FormMetadata.java
   - src/main/java/com/styra/opa/openapi/utils/HTTPClient.java
   - src/main/java/com/styra/opa/openapi/utils/HTTPRequest.java
