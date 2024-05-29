@@ -40,7 +40,11 @@ import org.openapitools.jackson.nullable.JsonNullable;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.IntNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.node.TextNode;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 
 public final class Utils {
@@ -861,4 +865,42 @@ public final class Utils {
         );
         return builder;
     }
+    
+    // convenience method so that classes don't need to import a possibly colliding name of JSON 
+    // (Utils is a very common import)
+    public static ObjectMapper mapper() {
+        return JSON.getMapper();
+    }
+    
+    public static <T> T asType(EventStreamMessage x, ObjectMapper mapper, TypeReference<T> typeReference) {
+        try {
+            try {
+                String json = json(x, mapper, false);
+                return mapper.readValue(json, typeReference);
+            } catch (JsonProcessingException e) {
+                // retry with the assumption that data field is plain text
+                String json = json(x, mapper, true);
+                return mapper.readValue(json, typeReference);
+            }
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static String json(EventStreamMessage m, ObjectMapper mapper, boolean dataIsPlainText)
+            throws JsonProcessingException {
+        ObjectNode node = mapper.createObjectNode();
+        m.event().ifPresent(value -> node.set("event", new TextNode(value)));
+        m.id().ifPresent(value -> node.set("id", new TextNode(value)));
+        m.retryMs().ifPresent(value -> node.set("retry", new IntNode(value)));
+        // data is always present (but may be an empty string)
+        if (dataIsPlainText || m.data().trim().isEmpty()) {
+            node.set("data", new TextNode(m.data()));
+        } else {
+            JsonNode tree = mapper.readTree(m.data());
+            node.set("data", tree);
+        }
+        return mapper.writeValueAsString(node);
+    }
+    
 }

@@ -16,7 +16,6 @@ import java.math.BigInteger;
 import java.net.http.HttpResponse;
 import java.util.Optional;
 
-
 public class ExecutePolicyResponse implements com.styra.opa.openapi.utils.Response {
 
     /**
