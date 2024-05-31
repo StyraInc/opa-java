@@ -1,0 +1,34 @@
+name: "05 - Release Version Check"
+
+"on":
+  schedule:
+    - cron: 0 0 * * *
+
+jobs:
+  verscheck:
+    name: Check Release Versions
+    runs-on: ubuntu-latest
+    steps:
+      - name: Tune GitHub-hosted runner network
+        uses: smorimoto/tune-github-hosted-runner-network@v1
+      - uses: actions/checkout@v4
+      - name: Setup OPA
+        uses: open-policy-agent/setup-opa@v2
+        with:
+          version: latest
+      - name: Run version-checker script
+        run: |
+          cd repo
+          ./scripts/check-released-versions.sh
+      - uses: ravsamhq/notify-slack-action@v2
+        if: always() && env.SLACK_WEBHOOK_URL != ''
+        with:
+          status: ${{ job.status }}
+          token: ${{ secrets.github_access_token }}
+          notify_when: "failure"
+          notification_title: "Maven Central release for opa-java does not match GitHub release version"
+          message_format: "{emoji} *{workflow}* {status_message} in <{repo_url}|{repo}>, see release docs here: https://styrainc.github.io/opa-java/maintenance/releases/"
+          footer: "Linked Repo <{repo_url}|{repo}> | <{run_url}|View Run>"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
