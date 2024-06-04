@@ -4,11 +4,10 @@
 
 package com.styra.opa.openapi.utils;
 
-import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublisher;
 import java.net.http.HttpRequest.BodyPublishers;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -17,7 +16,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.apache.http.NameValuePair;
-import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.message.BasicNameValuePair;
 
 public class HTTPRequest {
@@ -81,17 +80,15 @@ public class HTTPRequest {
             bodyPublisher = BodyPublishers.noBody();
         }
         requestBuilder.method(method, bodyPublisher);
-        requestBuilder.uri(resolveURL());
-
+        try {
+            URIBuilder b = new URIBuilder(this.baseURL);
+            queryParams.forEach(pair -> b.addParameter(pair.getName(), pair.getValue()));
+            requestBuilder.uri(b.build());
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
         headers.forEach((k, list) -> list.forEach(v -> requestBuilder.header(k, v)));
         return requestBuilder.build();
     }
 
-    private URI resolveURL() {
-        String url = this.baseURL;
-        if (queryParams != null && queryParams.size() > 0) {
-            url += "?" + URLEncodedUtils.format(queryParams, StandardCharsets.UTF_8);
-        }
-        return URI.create(url);
-    }
 }

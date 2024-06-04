@@ -5,12 +5,17 @@
 package com.styra.opa.openapi.utils;
 
 import java.io.InputStream;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.net.URI;
 import java.net.URLEncoder;
+import java.net.http.HttpClient.Version;
+import java.net.http.HttpHeaders;
 import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
@@ -31,6 +36,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
+
+import javax.net.ssl.SSLSession;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.http.NameValuePair;
@@ -901,6 +908,91 @@ public final class Utils {
             node.set("data", tree);
         }
         return mapper.writeValueAsString(node);
+    }
+    
+    /**
+     * Fully reads the body of the given response and caches it in memory. The
+     * returned response has utility methods to view the body
+     * ({@code bodyAsUtf8(), bodyAsBytes()} and the {@code body()} method can be
+     * called multiple times, each returning a fresh {@link InputStream} that will
+     * read from the cached byte array.
+     * 
+     * <p>
+     * This method is most likely to be used in a diagnostic/logging situtation so
+     * that the contents of a response can be viewed without affecting processing.
+     * Using this method with a very large body may be problematic in
+     * terms of memory use.
+     * 
+     * @param response response to cache
+     * @return response with a cached body
+     * @throws IOException
+     */
+    public static HttpResponseCached cache(HttpResponse<InputStream> response) throws IOException {
+        return new HttpResponseCached(response);
+    }
+    
+    public static final class HttpResponseCached implements HttpResponse<InputStream> {
+
+        private final HttpResponse<InputStream> response;
+        private final byte[] bytes;
+        
+        public HttpResponseCached(HttpResponse<InputStream> response) throws IOException {
+            this.response = response;
+            this.bytes = Utils.toByteArrayAndClose(response.body());
+        }
+
+        public String bodyAsUtf8() {
+            return new String(bytes, StandardCharsets.UTF_8);
+        }
+        
+        public byte[] bodyAsBytes() {
+            return bytes;
+        }
+
+        @Override
+        public int statusCode() {
+            return response.statusCode();
+        }
+
+        @Override
+        public HttpRequest request() {
+            return response.request();
+        }
+
+        @Override
+        public Optional<HttpResponse<InputStream>> previousResponse() {
+            return response.previousResponse();
+        }
+        
+        @Override
+        public HttpHeaders headers() {
+            return response.headers();
+        }
+
+        @Override
+        public InputStream body() {
+            return new ByteArrayInputStream(bytes);
+        }
+
+        @Override
+        public Optional<SSLSession> sslSession() {
+            return response.sslSession();
+        }
+
+        @Override
+        public URI uri() {
+            return response.uri();
+        }
+
+        @Override
+        public Version version() {
+            return response.version();
+        }
+        
+        @Override
+        public String toString() {
+            return response.toString();
+        }
     }
     
 }
