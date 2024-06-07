@@ -6,9 +6,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testcontainers.containers.BindMode;
 import org.testcontainers.containers.GenericContainer;
+import org.testcontainers.images.builder.ImageFromDockerfile;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.utility.DockerImageName;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -25,6 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 class OPATest {
 
     private int opaPort = 8181;
+    private int altPort = 8282;
 
     // Checkstyle does not like magic numbers, but these are just test values.
     // The B value should be double the A value.
@@ -33,6 +34,7 @@ class OPATest {
     private double testDoubleA = 3.14159;
 
     private String address;
+    private String altAddress;
     private Map<String, String> headers = Map.ofEntries(entry("Authorization", "Bearer supersecret"));
 
     @Container
@@ -44,8 +46,14 @@ class OPATest {
     // variables are supposed to be declared first. But then it would need to
     // have magic numbers since opaPort and friends are private.
     //CHECKSTYLE:OFF
-    public GenericContainer opac = new GenericContainer(DockerImageName.parse("openpolicyagent/opa:latest"))
-        .withExposedPorts(opaPort)
+    public GenericContainer<?> opac = new GenericContainer<>(
+            new ImageFromDockerfile()
+                // .withFileFromClasspath(path_in_build_context, path_in_resources_dir)
+                .withFileFromClasspath("Dockerfile", "opa.Dockerfile")
+                .withFileFromClasspath("nginx.conf", "nginx.conf")
+                .withFileFromClasspath("entrypoint.sh", "entrypoint.sh")
+        )
+        .withExposedPorts(opaPort, altPort)
         .withFileSystemBind("./testdata/simple", "/policy", BindMode.READ_ONLY)
         .withCommand("run -s --authentication=token --authorization=basic --bundle /policy");
     //CHECKSTYLE:ON
@@ -53,6 +61,7 @@ class OPATest {
     @BeforeEach
     public void setUp() {
         address = "http://" + opac.getHost() + ":" + opac.getMappedPort(opaPort);
+        altAddress = "http://" + opac.getHost() + ":" + opac.getMappedPort(altPort) + "/customprefix";
     }
 
     @AfterEach
@@ -69,6 +78,31 @@ class OPATest {
 
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest req = HttpRequest.newBuilder().uri(URI.create(address + "/health")).build();
+        HttpResponse<String> resp = null;
+
+        try {
+            resp = client.send(req, HttpResponse.BodyHandlers.ofString());
+        // This is a unit test, I will catch whatever exceptions I want.
+        //CHECKSTYLE:OFF
+        } catch (Exception e) {
+            //CHECKSTYLE:ON
+            System.out.println("exception: " + e);
+            assertNull(e);
+        }
+
+        String body = resp.body();
+
+        assertEquals("{}\n", body);
+    }
+
+    @Test
+    public void testOPAHealthAlternate() {
+        // This makes sure that we can also successfully reach the OPA health
+        // API on the "alternate", reverse-proxy based OPA that has a URL
+        // prefix.
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest req = HttpRequest.newBuilder().uri(URI.create(altAddress + "/health")).build();
         HttpResponse<String> resp = null;
 
         try {
@@ -227,6 +261,50 @@ class OPATest {
     @Test
     public void testObjectRoundtripWithTypeChange() {
         OPAClient opa = new OPAClient(address, headers);
+
+        Map<String, String> sampleMap1 = Map.ofEntries(entry("hello", "world"));
+        Map<String, String> sampleMap2 = Map.ofEntries(entry("hello", "world"));
+
+        Map<String, java.lang.Object> expectNestedMap = Map.ofEntries(
+            entry("boolProperty", true),
+            entry("intProperty", testIntegerA),
+            entry("customProperty", testDoubleA),
+            entry("customAnnotatedProperty", testIntegerB),
+            entry("mapProperty", sampleMap1)
+        );
+
+        SampleObject<Double> input = new SampleObject<Double>();
+        input.setBoolProperty(true);
+        input.setIntProperty(testIntegerA);
+        input.setCustomProperty(testDoubleA);
+        input.setAnnotatedProperty(testIntegerB);
+        input.setMapProperty(sampleMap1);
+
+        AlternateSampleObject expect = new AlternateSampleObject();
+        expect.setNestedMap(expectNestedMap);
+        expect.setStringVal("hello, test suite!");
+
+        AlternateSampleObject actual = new AlternateSampleObject();
+
+        try {
+            actual = opa.evaluate(
+                    "policy/makeAlternateSampleClass",
+                    input,
+                    new TypeReference<AlternateSampleObject>() {}
+            );
+        } catch (OPAException e) {
+            System.out.println("exception: " + e);
+            assertNull(e);
+        }
+
+        assertEquals(actual.getNestedMap(), expect.getNestedMap());
+        assertEquals(actual.getStringVal(), expect.getStringVal());
+    }
+
+    @Test
+    public void testObjectRoundtripWithTypeChangeAlternate() {
+        // Same as before, but using the alternate reverse-proxy OPA.
+        OPAClient opa = new OPAClient(altAddress, headers);
 
         Map<String, String> sampleMap1 = Map.ofEntries(entry("hello", "world"));
         Map<String, String> sampleMap2 = Map.ofEntries(entry("hello", "world"));
