@@ -21,12 +21,17 @@ class SDKConfiguration {
     public int serverIdx = 0;
     public String language = "java";
     public String openapiDocVersion = "0.2.0";
-    public String sdkVersion = "1.0.0";
-    public String genVersion = "2.339.1";
-    public String userAgent = "speakeasy-sdk/java 1.0.0 2.339.1 0.2.0 com.styra.opa.openapi";
+    public String sdkVersion = "1.1.0";
+    public String genVersion = "2.347.8";
+    public String userAgent = "speakeasy-sdk/java 1.1.0 2.347.8 0.2.0 com.styra.opa.openapi";
 
-    private com.styra.opa.openapi.utils.Hooks _hooks = new com.styra.opa.openapi.utils.Hooks();
+    private com.styra.opa.openapi.utils.Hooks _hooks = createHooks();
 
+    private static com.styra.opa.openapi.utils.Hooks createHooks() {
+        com.styra.opa.openapi.utils.Hooks hooks = new com.styra.opa.openapi.utils.Hooks();
+        return hooks;
+    }
+    
     public com.styra.opa.openapi.utils.Hooks hooks() {
         return _hooks;
     }

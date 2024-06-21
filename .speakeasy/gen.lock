@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 47e8e950-a454-4ebb-9f78-86fda7dfa0c2
 management:
-  docChecksum: 11b8c1e1d3f9d5dab18c36b33f81200d
+  docChecksum: a34bd1c885aa42eb3175940494581f67
   docVersion: 0.2.0
-  speakeasyVersion: 1.300.1
-  generationVersion: 2.339.1
-  releaseVersion: 1.0.0
-  configChecksum: ff63c88af0d20ceaa673f21c65426d38
+  speakeasyVersion: 1.313.0
+  generationVersion: 2.347.8
+  releaseVersion: 1.1.0
+  configChecksum: 74db0773f9d729982dc305a109ef0df7
   repoURL: https://github.com/StyraInc/opa-java.git
   published: true
 features:
   java:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.1
-    core: 3.22.0
+    core: 3.23.4
     examples: 2.81.3
     flattening: 2.81.1
     globalSecurityCallbacks: 0.1.0
@@ -27,6 +27,7 @@ generatedFiles:
   - src/main/java/com/styra/opa/openapi/models/operations/ExecuteDefaultPolicyWithInputRequestBuilder.java
   - src/main/java/com/styra/opa/openapi/models/operations/ExecutePolicyRequestBuilder.java
   - src/main/java/com/styra/opa/openapi/models/operations/ExecutePolicyWithInputRequestBuilder.java
+  - src/main/java/com/styra/opa/openapi/models/operations/ExecuteBatchPolicyWithInputRequestBuilder.java
   - src/main/java/com/styra/opa/openapi/models/operations/HealthRequestBuilder.java
   - src/main/java/com/styra/opa/openapi/models/operations/SDKMethodInterfaces.java
   - src/main/java/com/styra/opa/openapi/OpaApiClient.java
@@ -49,6 +50,7 @@ generatedFiles:
   - src/main/java/com/styra/opa/openapi/utils/HTTPClient.java
   - src/main/java/com/styra/opa/openapi/utils/HTTPRequest.java
   - src/main/java/com/styra/opa/openapi/utils/HeaderMetadata.java
+  - src/main/java/com/styra/opa/openapi/utils/Helpers.java
   - src/main/java/com/styra/opa/openapi/utils/Hook.java
   - src/main/java/com/styra/opa/openapi/utils/Hooks.java
   - src/main/java/com/styra/opa/openapi/utils/JSON.java
@@ -73,6 +75,7 @@ generatedFiles:
   - src/main/java/com/styra/opa/openapi/utils/TypedObject.java
   - src/main/java/com/styra/opa/openapi/utils/Types.java
   - src/main/java/com/styra/opa/openapi/utils/Utils.java
+  - src/main/java/com/styra/opa/openapi/models/errors/AuthException.java
   - src/main/java/com/styra/opa/openapi/models/errors/SDKError.java
   - src/main/java/com/styra/opa/openapi/models/operations/ExecuteDefaultPolicyWithInputRequest.java
   - src/main/java/com/styra/opa/openapi/models/operations/ExecuteDefaultPolicyWithInputResponse.java
@@ -81,16 +84,26 @@ generatedFiles:
   - src/main/java/com/styra/opa/openapi/models/operations/ExecutePolicyWithInputRequestBody.java
   - src/main/java/com/styra/opa/openapi/models/operations/ExecutePolicyWithInputRequest.java
   - src/main/java/com/styra/opa/openapi/models/operations/ExecutePolicyWithInputResponse.java
+  - src/main/java/com/styra/opa/openapi/models/operations/ExecuteBatchPolicyWithInputRequestBody.java
+  - src/main/java/com/styra/opa/openapi/models/operations/ExecuteBatchPolicyWithInputRequest.java
+  - src/main/java/com/styra/opa/openapi/models/operations/ExecuteBatchPolicyWithInputResponse.java
   - src/main/java/com/styra/opa/openapi/models/operations/HealthRequest.java
   - src/main/java/com/styra/opa/openapi/models/operations/HealthResponse.java
   - src/main/java/com/styra/opa/openapi/models/shared/Result.java
   - src/main/java/com/styra/opa/openapi/models/shared/Input.java
   - src/main/java/com/styra/opa/openapi/models/shared/GzipAcceptEncoding.java
-  - src/main/java/com/styra/opa/openapi/models/shared/SuccessfulPolicyEvaluation.java
+  - src/main/java/com/styra/opa/openapi/models/shared/SuccessfulPolicyResponse.java
   - src/main/java/com/styra/opa/openapi/models/shared/Revision.java
   - src/main/java/com/styra/opa/openapi/models/shared/Provenance.java
   - src/main/java/com/styra/opa/openapi/models/shared/Explain.java
   - src/main/java/com/styra/opa/openapi/models/shared/GzipContentEncoding.java
+  - src/main/java/com/styra/opa/openapi/models/shared/Location.java
+  - src/main/java/com/styra/opa/openapi/models/shared/Errors.java
+  - src/main/java/com/styra/opa/openapi/models/shared/ServerError.java
+  - src/main/java/com/styra/opa/openapi/models/shared/ResponsesSuccessfulPolicyResponse.java
+  - src/main/java/com/styra/opa/openapi/models/shared/Responses.java
+  - src/main/java/com/styra/opa/openapi/models/shared/BatchMixedResults.java
+  - src/main/java/com/styra/opa/openapi/models/shared/BatchSuccessfulPolicyEvaluation.java
   - src/main/java/com/styra/opa/openapi/models/shared/HealthyServer.java
   - src/main/java/com/styra/opa/openapi/models/errors/Location.java
   - src/main/java/com/styra/opa/openapi/models/errors/Errors.java
@@ -98,6 +111,7 @@ generatedFiles:
   - src/main/java/com/styra/opa/openapi/models/errors/ServerErrorLocation.java
   - src/main/java/com/styra/opa/openapi/models/errors/ServerErrorErrors.java
   - src/main/java/com/styra/opa/openapi/models/errors/ServerError.java
+  - src/main/java/com/styra/opa/openapi/models/errors/BatchServerError.java
   - src/main/java/com/styra/opa/openapi/models/errors/UnhealthyServer.java
   - docs/models/operations/ExecuteDefaultPolicyWithInputRequest.md
   - docs/models/operations/ExecuteDefaultPolicyWithInputResponse.md
@@ -106,16 +120,26 @@ generatedFiles:
   - docs/models/operations/ExecutePolicyWithInputRequestBody.md
   - docs/models/operations/ExecutePolicyWithInputRequest.md
   - docs/models/operations/ExecutePolicyWithInputResponse.md
+  - docs/models/operations/ExecuteBatchPolicyWithInputRequestBody.md
+  - docs/models/operations/ExecuteBatchPolicyWithInputRequest.md
+  - docs/models/operations/ExecuteBatchPolicyWithInputResponse.md
   - docs/models/operations/HealthRequest.md
   - docs/models/operations/HealthResponse.md
   - docs/models/shared/Result.md
   - docs/models/shared/Input.md
   - docs/models/shared/GzipAcceptEncoding.md
-  - docs/models/shared/SuccessfulPolicyEvaluation.md
+  - docs/models/shared/SuccessfulPolicyResponse.md
   - docs/models/shared/Revision.md
   - docs/models/shared/Provenance.md
   - docs/models/shared/Explain.md
   - docs/models/shared/GzipContentEncoding.md
+  - docs/models/shared/Location.md
+  - docs/models/shared/Errors.md
+  - docs/models/shared/ServerError.md
+  - docs/models/shared/ResponsesSuccessfulPolicyResponse.md
+  - docs/models/shared/Responses.md
+  - docs/models/shared/BatchMixedResults.md
+  - docs/models/shared/BatchSuccessfulPolicyEvaluation.md
   - docs/models/shared/HealthyServer.md
   - docs/models/errors/Location.md
   - docs/models/errors/Errors.md
@@ -123,6 +147,7 @@ generatedFiles:
   - docs/models/errors/ServerErrorLocation.md
   - docs/models/errors/ServerErrorErrors.md
   - docs/models/errors/ServerError.md
+  - docs/models/errors/BatchServerError.md
   - docs/models/errors/UnhealthyServer.md
   - docs/sdks/opaapiclient/README.md
   - USAGE.md

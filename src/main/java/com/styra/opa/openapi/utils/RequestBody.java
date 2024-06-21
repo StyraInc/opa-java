@@ -212,7 +212,7 @@ public final class RequestBody {
         builder.addBinaryBody(fieldName, content, ContentType.APPLICATION_OCTET_STREAM, fileName);
     }
 
-    private static SerializedBody serializeFormData(Object value)
+    public static SerializedBody serializeFormData(Object value)
             throws IOException, IllegalArgumentException, IllegalAccessException {
         List<NameValuePair> params = new ArrayList<>();
 
