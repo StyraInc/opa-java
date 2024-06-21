@@ -547,9 +547,9 @@ public class OPAClient {
                 throw new OPAException(msg, e);
             }
 
-            if (res.successfulPolicyEvaluation().isPresent()) {
-                if (res.successfulPolicyEvaluation().get().result().isPresent()) {
-                    Object out = res.successfulPolicyEvaluation().get().result().get().value();
+            if (res.successfulPolicyResponse().isPresent()) {
+                if (res.successfulPolicyResponse().get().result().isPresent()) {
+                    Object out = res.successfulPolicyResponse().get().result().get().value();
                     return out;
                 } else {
                     String msg = String.format(
@@ -579,9 +579,9 @@ public class OPAClient {
                 throw new OPAException(msg, e);
             }
 
-            if (res.successfulPolicyEvaluation().isPresent()) {
-                if (res.successfulPolicyEvaluation().get().result().isPresent()) {
-                    Object out = res.successfulPolicyEvaluation().get().result().get().value();
+            if (res.successfulPolicyResponse().isPresent()) {
+                if (res.successfulPolicyResponse().get().result().isPresent()) {
+                    Object out = res.successfulPolicyResponse().get().result().get().value();
                     return out;
                 } else {
                     String msg = String.format(
