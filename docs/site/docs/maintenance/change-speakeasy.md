@@ -23,13 +23,11 @@ As a matter of convention, all post-generate modifications that are carried out 
 
 The script [`scripts/fix-build-gradle.sh`](https://github.com/StyraInc/opa-java/blob/main/scripts/fix-build-gradle.sh) performs the necessary modifications to `build.gradle` and `settings.gradle`. These changes include:
 
-* The `plugins { ... }` block is replaced with the one in [`scripts/build-plugins.gradle`](https://github.com/StyraInc/opa-java/blob/main/scripts/build-plugins.gradle).
-* The file [`scripts/build-footer.gradle`](https://github.com/StyraInc/opa-java/blob/main/scripts/build-footer.gradle) is appended to the end of `build.gradle`; the string `=== build-footer ===` is used as a sigil to ensure this operation is idempotent.
 * The root project name in `settings.gradle` is changed from `openapi` to `opa`.
 * The group and artifact IDs in `build.gradle` used for release publishing are changed from `com.styra.opa` and `openapi` to `com.styra` and `opa` respectively.
 * `./gradlew fixGradleLint` to prevent the Gradle linter from complaining later about any unused dependencies added.
 
-`post-generate-hook.sh`, and everything it calls, is designed to be idempotent, so you may run it as many times as you wish without any adverse effects. At time of writing, there is a known bug where an extra newline is added after the closing `}` of the `plugins` block, but that does not impact how Gradle interprets the file.
+`post-generate-hook.sh`, and everything it calls, is designed to be idempotent, so you may run it as many times as you wish without any adverse effects.
 
 As a safety feature for the potentially messy process of changing the group and artifact IDs, the `fix-build-gradle.sh` script will also attempt to lint for suspicious strings that may indicate an incorrectly rewritten group or artifact ID. In this situation, it will print the warning `WARNING: possible incorrect group/artifact ID rewrite`. If this occurs, `fix-build-gradle.sh` needs manual intervention to update it, as the Speakeasy generation of `build.gradle` has presumably changed.
 
@@ -41,8 +39,13 @@ When the repo is used without an artifact repository, none of this is a problem 
 
 The workaround we settled on was allowing Speakeasy to generate everything, then simply correct the group and artifact IDs in the Gradle build files, which is the only place where that setting has an impact on being able to build and publish the library.
 
+#### 2024-06-21 - Adopt `aditionalPlugins`, `additionalDependencies`, and `build-extra.gradle`
+
+Since `opa-java` was first released, Speakeasy's tooling has grown support for adding additional dependencies and plugins, and also for automatically including a `build-extra.gradle` via `apply from`. In past versions, `fix-build-gradle.sh` also rewrote the `plugins { ... }` block, and inserted a build footer into `build.gradle` with extra rules and dependencies. Starting 2024-06-21, these Speakeasy features have been adopted, and those aspects of `fix-build-gradle.sh` have been removed.
+
 ## Further Reading
 
+* [Speakeasy Java Build Customization Docs](https://www.speakeasyapi.dev/docs/sdk-design/java/methodology-java#build-customization)
 * [Speakeasy Workflow File](https://www.speakeasyapi.dev/docs/workflow-file-reference) - reference for `.speakeasy/workflow.yaml`
 * [gen.yaml Reference](https://www.speakeasyapi.dev/docs/gen-reference) - reference for `.speakeasy/gen.yaml`
 * [run](https://www.speakeasyapi.dev/docs/speakeasy-cli/run) - docs for `speakeasy run` command

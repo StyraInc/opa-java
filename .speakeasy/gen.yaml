@@ -12,9 +12,20 @@ generation:
   auth:
     oAuth2ClientCredentialsEnabled: false
 java:
-  version: 1.1.0
-  additionalDependencies: []
-  additionalPlugins: []
+  version: 1.2.3
+  additionalDependencies:
+    - testImplementation:org.junit.jupiter:junit-jupiter-api:5.8.2
+    - runtimeOnly:org.junit.jupiter:junit-jupiter-engine:5.8.2
+    - testImplementation:org.testcontainers:testcontainers-bom:1.19.7
+    - testImplementation:org.testcontainers:testcontainers:1.19.7
+    - testImplementation:org.testcontainers:junit-jupiter:1.19.7
+    - implementation:com.fasterxml.jackson.core:jackson-annotations:2.17.0
+    - implementation:com.fasterxml.jackson.core:jackson-core:2.17.0
+    - implementation:org.apache.httpcomponents:httpcore:4.4.16
+  additionalPlugins:
+    - id("java")
+    - id "nebula.lint" version "17.8.0"
+    - id("checkstyle")
   artifactID: openapi
   clientServerStatusCodesAsErrors: true
   companyEmail: devrel@styra.com
