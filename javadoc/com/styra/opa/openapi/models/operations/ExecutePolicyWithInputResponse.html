@@ -191,7 +191,7 @@ implements <a href="../../utils/Response.html" title="interface in com.styra.opa
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String,int,java.net.http.HttpResponse,java.util.Optional,java.util.Map)">ExecutePolicyWithInputResponse</a></span>&#8203;(java.lang.String&nbsp;contentType,
                               int&nbsp;statusCode,
                               java.net.http.HttpResponse&lt;java.io.InputStream&gt;&nbsp;rawResponse,
-                              java.util.Optional&lt;? extends <a href="../shared/SuccessfulPolicyEvaluation.html" title="class in com.styra.opa.openapi.models.shared">SuccessfulPolicyEvaluation</a>&gt;&nbsp;successfulPolicyEvaluation,
+                              java.util.Optional&lt;? extends <a href="../shared/SuccessfulPolicyResponse.html" title="class in com.styra.opa.openapi.models.shared">SuccessfulPolicyResponse</a>&gt;&nbsp;successfulPolicyResponse,
                               java.util.Map&lt;java.lang.String,&#8203;java.util.List&lt;java.lang.String&gt;&gt;&nbsp;headers)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -255,8 +255,8 @@ implements <a href="../../utils/Response.html" title="interface in com.styra.opa
 </td>
 </tr>
 <tr id="i7" class="rowColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../shared/SuccessfulPolicyEvaluation.html" title="class in com.styra.opa.openapi.models.shared">SuccessfulPolicyEvaluation</a>&gt;</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#successfulPolicyEvaluation()">successfulPolicyEvaluation</a></span>()</code></th>
+<td class="colFirst"><code>java.util.Optional&lt;<a href="../shared/SuccessfulPolicyResponse.html" title="class in com.styra.opa.openapi.models.shared">SuccessfulPolicyResponse</a>&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#successfulPolicyResponse()">successfulPolicyResponse</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Success.</div>
 </td>
@@ -294,14 +294,14 @@ implements <a href="../../utils/Response.html" title="interface in com.styra.opa
 </tr>
 <tr id="i13" class="rowColor">
 <td class="colFirst"><code><a href="ExecutePolicyWithInputResponse.html" title="class in com.styra.opa.openapi.models.operations">ExecutePolicyWithInputResponse</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withSuccessfulPolicyEvaluation(com.styra.opa.openapi.models.shared.SuccessfulPolicyEvaluation)">withSuccessfulPolicyEvaluation</a></span>&#8203;(<a href="../shared/SuccessfulPolicyEvaluation.html" title="class in com.styra.opa.openapi.models.shared">SuccessfulPolicyEvaluation</a>&nbsp;successfulPolicyEvaluation)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withSuccessfulPolicyResponse(com.styra.opa.openapi.models.shared.SuccessfulPolicyResponse)">withSuccessfulPolicyResponse</a></span>&#8203;(<a href="../shared/SuccessfulPolicyResponse.html" title="class in com.styra.opa.openapi.models.shared">SuccessfulPolicyResponse</a>&nbsp;successfulPolicyResponse)</code></th>
 <td class="colLast">
 <div class="block">Success.</div>
 </td>
 </tr>
 <tr id="i14" class="altColor">
 <td class="colFirst"><code><a href="ExecutePolicyWithInputResponse.html" title="class in com.styra.opa.openapi.models.operations">ExecutePolicyWithInputResponse</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withSuccessfulPolicyEvaluation(java.util.Optional)">withSuccessfulPolicyEvaluation</a></span>&#8203;(java.util.Optional&lt;? extends <a href="../shared/SuccessfulPolicyEvaluation.html" title="class in com.styra.opa.openapi.models.shared">SuccessfulPolicyEvaluation</a>&gt;&nbsp;successfulPolicyEvaluation)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withSuccessfulPolicyResponse(java.util.Optional)">withSuccessfulPolicyResponse</a></span>&#8203;(java.util.Optional&lt;? extends <a href="../shared/SuccessfulPolicyResponse.html" title="class in com.styra.opa.openapi.models.shared">SuccessfulPolicyResponse</a>&gt;&nbsp;successfulPolicyResponse)</code></th>
 <td class="colLast">
 <div class="block">Success.</div>
 </td>
@@ -339,7 +339,7 @@ implements <a href="../../utils/Response.html" title="interface in com.styra.opa
 <pre>public&nbsp;ExecutePolicyWithInputResponse&#8203;(java.lang.String&nbsp;contentType,
                                       int&nbsp;statusCode,
                                       java.net.http.HttpResponse&lt;java.io.InputStream&gt;&nbsp;rawResponse,
-                                      java.util.Optional&lt;? extends <a href="../shared/SuccessfulPolicyEvaluation.html" title="class in com.styra.opa.openapi.models.shared">SuccessfulPolicyEvaluation</a>&gt;&nbsp;successfulPolicyEvaluation,
+                                      java.util.Optional&lt;? extends <a href="../shared/SuccessfulPolicyResponse.html" title="class in com.styra.opa.openapi.models.shared">SuccessfulPolicyResponse</a>&gt;&nbsp;successfulPolicyResponse,
                                       java.util.Map&lt;java.lang.String,&#8203;java.util.List&lt;java.lang.String&gt;&gt;&nbsp;headers)</pre>
 </li>
 </ul>
@@ -407,13 +407,13 @@ implements <a href="../../utils/Response.html" title="interface in com.styra.opa
 </dl>
 </li>
 </ul>
-<a id="successfulPolicyEvaluation()">
+<a id="successfulPolicyResponse()">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>successfulPolicyEvaluation</h4>
-<pre class="methodSignature">public&nbsp;java.util.Optional&lt;<a href="../shared/SuccessfulPolicyEvaluation.html" title="class in com.styra.opa.openapi.models.shared">SuccessfulPolicyEvaluation</a>&gt;&nbsp;successfulPolicyEvaluation()</pre>
+<h4>successfulPolicyResponse</h4>
+<pre class="methodSignature">public&nbsp;java.util.Optional&lt;<a href="../shared/SuccessfulPolicyResponse.html" title="class in com.styra.opa.openapi.models.shared">SuccessfulPolicyResponse</a>&gt;&nbsp;successfulPolicyResponse()</pre>
 <div class="block">Success.
  The server also returns 200 if the path refers to an undefined document. In this case, the response will not contain a result property.</div>
 </li>
@@ -466,24 +466,24 @@ implements <a href="../../utils/Response.html" title="interface in com.styra.opa
 <div class="block">Raw HTTP response; suitable for custom response parsing</div>
 </li>
 </ul>
-<a id="withSuccessfulPolicyEvaluation(com.styra.opa.openapi.models.shared.SuccessfulPolicyEvaluation)">
+<a id="withSuccessfulPolicyResponse(com.styra.opa.openapi.models.shared.SuccessfulPolicyResponse)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>withSuccessfulPolicyEvaluation</h4>
-<pre class="methodSignature">public&nbsp;<a href="ExecutePolicyWithInputResponse.html" title="class in com.styra.opa.openapi.models.operations">ExecutePolicyWithInputResponse</a>&nbsp;withSuccessfulPolicyEvaluation&#8203;(<a href="../shared/SuccessfulPolicyEvaluation.html" title="class in com.styra.opa.openapi.models.shared">SuccessfulPolicyEvaluation</a>&nbsp;successfulPolicyEvaluation)</pre>
+<h4>withSuccessfulPolicyResponse</h4>
+<pre class="methodSignature">public&nbsp;<a href="ExecutePolicyWithInputResponse.html" title="class in com.styra.opa.openapi.models.operations">ExecutePolicyWithInputResponse</a>&nbsp;withSuccessfulPolicyResponse&#8203;(<a href="../shared/SuccessfulPolicyResponse.html" title="class in com.styra.opa.openapi.models.shared">SuccessfulPolicyResponse</a>&nbsp;successfulPolicyResponse)</pre>
 <div class="block">Success.
  The server also returns 200 if the path refers to an undefined document. In this case, the response will not contain a result property.</div>
 </li>
 </ul>
-<a id="withSuccessfulPolicyEvaluation(java.util.Optional)">
+<a id="withSuccessfulPolicyResponse(java.util.Optional)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>withSuccessfulPolicyEvaluation</h4>
-<pre class="methodSignature">public&nbsp;<a href="ExecutePolicyWithInputResponse.html" title="class in com.styra.opa.openapi.models.operations">ExecutePolicyWithInputResponse</a>&nbsp;withSuccessfulPolicyEvaluation&#8203;(java.util.Optional&lt;? extends <a href="../shared/SuccessfulPolicyEvaluation.html" title="class in com.styra.opa.openapi.models.shared">SuccessfulPolicyEvaluation</a>&gt;&nbsp;successfulPolicyEvaluation)</pre>
+<h4>withSuccessfulPolicyResponse</h4>
+<pre class="methodSignature">public&nbsp;<a href="ExecutePolicyWithInputResponse.html" title="class in com.styra.opa.openapi.models.operations">ExecutePolicyWithInputResponse</a>&nbsp;withSuccessfulPolicyResponse&#8203;(java.util.Optional&lt;? extends <a href="../shared/SuccessfulPolicyResponse.html" title="class in com.styra.opa.openapi.models.shared">SuccessfulPolicyResponse</a>&gt;&nbsp;successfulPolicyResponse)</pre>
 <div class="block">Success.
  The server also returns 200 if the path refers to an undefined document. In this case, the response will not contain a result property.</div>
 </li>

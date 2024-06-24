@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":9,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10};
+var data = {"i0":9,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -132,12 +132,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="models/operations/SDKMethodInterfaces.MethodCallExecuteDefaultPolicyWithInput.html" title="interface in com.styra.opa.openapi.models.operations">SDKMethodInterfaces.MethodCallExecuteDefaultPolicyWithInput</a></code>, <code><a href="models/operations/SDKMethodInterfaces.MethodCallExecutePolicy.html" title="interface in com.styra.opa.openapi.models.operations">SDKMethodInterfaces.MethodCallExecutePolicy</a></code>, <code><a href="models/operations/SDKMethodInterfaces.MethodCallExecutePolicyWithInput.html" title="interface in com.styra.opa.openapi.models.operations">SDKMethodInterfaces.MethodCallExecutePolicyWithInput</a></code>, <code><a href="models/operations/SDKMethodInterfaces.MethodCallHealth.html" title="interface in com.styra.opa.openapi.models.operations">SDKMethodInterfaces.MethodCallHealth</a></code></dd>
+<dd><code><a href="models/operations/SDKMethodInterfaces.MethodCallExecuteBatchPolicyWithInput.html" title="interface in com.styra.opa.openapi.models.operations">SDKMethodInterfaces.MethodCallExecuteBatchPolicyWithInput</a></code>, <code><a href="models/operations/SDKMethodInterfaces.MethodCallExecuteDefaultPolicyWithInput.html" title="interface in com.styra.opa.openapi.models.operations">SDKMethodInterfaces.MethodCallExecuteDefaultPolicyWithInput</a></code>, <code><a href="models/operations/SDKMethodInterfaces.MethodCallExecutePolicy.html" title="interface in com.styra.opa.openapi.models.operations">SDKMethodInterfaces.MethodCallExecutePolicy</a></code>, <code><a href="models/operations/SDKMethodInterfaces.MethodCallExecutePolicyWithInput.html" title="interface in com.styra.opa.openapi.models.operations">SDKMethodInterfaces.MethodCallExecutePolicyWithInput</a></code>, <code><a href="models/operations/SDKMethodInterfaces.MethodCallHealth.html" title="interface in com.styra.opa.openapi.models.operations">SDKMethodInterfaces.MethodCallHealth</a></code></dd>
 </dl>
 <hr>
 <pre>public class <span class="typeNameLabel">OpaApiClient</span>
 extends java.lang.Object
-implements <a href="models/operations/SDKMethodInterfaces.MethodCallExecuteDefaultPolicyWithInput.html" title="interface in com.styra.opa.openapi.models.operations">SDKMethodInterfaces.MethodCallExecuteDefaultPolicyWithInput</a>, <a href="models/operations/SDKMethodInterfaces.MethodCallExecutePolicy.html" title="interface in com.styra.opa.openapi.models.operations">SDKMethodInterfaces.MethodCallExecutePolicy</a>, <a href="models/operations/SDKMethodInterfaces.MethodCallExecutePolicyWithInput.html" title="interface in com.styra.opa.openapi.models.operations">SDKMethodInterfaces.MethodCallExecutePolicyWithInput</a>, <a href="models/operations/SDKMethodInterfaces.MethodCallHealth.html" title="interface in com.styra.opa.openapi.models.operations">SDKMethodInterfaces.MethodCallHealth</a></pre>
+implements <a href="models/operations/SDKMethodInterfaces.MethodCallExecuteDefaultPolicyWithInput.html" title="interface in com.styra.opa.openapi.models.operations">SDKMethodInterfaces.MethodCallExecuteDefaultPolicyWithInput</a>, <a href="models/operations/SDKMethodInterfaces.MethodCallExecutePolicy.html" title="interface in com.styra.opa.openapi.models.operations">SDKMethodInterfaces.MethodCallExecutePolicy</a>, <a href="models/operations/SDKMethodInterfaces.MethodCallExecutePolicyWithInput.html" title="interface in com.styra.opa.openapi.models.operations">SDKMethodInterfaces.MethodCallExecutePolicyWithInput</a>, <a href="models/operations/SDKMethodInterfaces.MethodCallExecuteBatchPolicyWithInput.html" title="interface in com.styra.opa.openapi.models.operations">SDKMethodInterfaces.MethodCallExecuteBatchPolicyWithInput</a>, <a href="models/operations/SDKMethodInterfaces.MethodCallHealth.html" title="interface in com.styra.opa.openapi.models.operations">SDKMethodInterfaces.MethodCallHealth</a></pre>
 <div class="block">https://docs.styra.com/enterprise-opa - Enterprise OPA documentation</div>
 </li>
 </ul>
@@ -217,20 +217,34 @@ implements <a href="models/operations/SDKMethodInterfaces.MethodCallExecuteDefau
 </td>
 </tr>
 <tr id="i1" class="rowColor">
+<td class="colFirst"><code><a href="models/operations/ExecuteBatchPolicyWithInputRequestBuilder.html" title="class in com.styra.opa.openapi.models.operations">ExecuteBatchPolicyWithInputRequestBuilder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#executeBatchPolicyWithInput()">executeBatchPolicyWithInput</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Execute a policy given a batch of inputs</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="models/operations/ExecuteBatchPolicyWithInputResponse.html" title="class in com.styra.opa.openapi.models.operations">ExecuteBatchPolicyWithInputResponse</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#executeBatchPolicyWithInput(com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequest)">executeBatchPolicyWithInput</a></span>&#8203;(<a href="models/operations/ExecuteBatchPolicyWithInputRequest.html" title="class in com.styra.opa.openapi.models.operations">ExecuteBatchPolicyWithInputRequest</a>&nbsp;request)</code></th>
+<td class="colLast">
+<div class="block">Execute a policy given a batch of inputs</div>
+</td>
+</tr>
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="models/operations/ExecuteDefaultPolicyWithInputRequestBuilder.html" title="class in com.styra.opa.openapi.models.operations">ExecuteDefaultPolicyWithInputRequestBuilder</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#executeDefaultPolicyWithInput()">executeDefaultPolicyWithInput</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Execute the default decision  given an input</div>
 </td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="models/operations/ExecuteDefaultPolicyWithInputResponse.html" title="class in com.styra.opa.openapi.models.operations">ExecuteDefaultPolicyWithInputResponse</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#executeDefaultPolicyWithInput(com.styra.opa.openapi.models.shared.Input)">executeDefaultPolicyWithInput</a></span>&#8203;(<a href="models/shared/Input.html" title="class in com.styra.opa.openapi.models.shared">Input</a>&nbsp;input)</code></th>
 <td class="colLast">
 <div class="block">Execute the default decision  given an input</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="models/operations/ExecuteDefaultPolicyWithInputResponse.html" title="class in com.styra.opa.openapi.models.operations">ExecuteDefaultPolicyWithInputResponse</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#executeDefaultPolicyWithInput(java.util.Optional,java.util.Optional,com.styra.opa.openapi.models.shared.Input)">executeDefaultPolicyWithInput</a></span>&#8203;(java.util.Optional&lt;? extends java.lang.Boolean&gt;&nbsp;pretty,
                              java.util.Optional&lt;? extends <a href="models/shared/GzipAcceptEncoding.html" title="enum in com.styra.opa.openapi.models.shared">GzipAcceptEncoding</a>&gt;&nbsp;acceptEncoding,
@@ -239,35 +253,35 @@ implements <a href="models/operations/SDKMethodInterfaces.MethodCallExecuteDefau
 <div class="block">Execute the default decision  given an input</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="models/operations/ExecutePolicyRequestBuilder.html" title="class in com.styra.opa.openapi.models.operations">ExecutePolicyRequestBuilder</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#executePolicy()">executePolicy</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Execute a policy</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="models/operations/ExecutePolicyResponse.html" title="class in com.styra.opa.openapi.models.operations">ExecutePolicyResponse</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#executePolicy(com.styra.opa.openapi.models.operations.ExecutePolicyRequest)">executePolicy</a></span>&#8203;(<a href="models/operations/ExecutePolicyRequest.html" title="class in com.styra.opa.openapi.models.operations">ExecutePolicyRequest</a>&nbsp;request)</code></th>
 <td class="colLast">
 <div class="block">Execute a policy</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="models/operations/ExecutePolicyWithInputRequestBuilder.html" title="class in com.styra.opa.openapi.models.operations">ExecutePolicyWithInputRequestBuilder</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#executePolicyWithInput()">executePolicyWithInput</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Execute a policy given an input</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code><a href="models/operations/ExecutePolicyWithInputResponse.html" title="class in com.styra.opa.openapi.models.operations">ExecutePolicyWithInputResponse</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#executePolicyWithInput(com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequest)">executePolicyWithInput</a></span>&#8203;(<a href="models/operations/ExecutePolicyWithInputRequest.html" title="class in com.styra.opa.openapi.models.operations">ExecutePolicyWithInputRequest</a>&nbsp;request)</code></th>
 <td class="colLast">
 <div class="block">Execute a policy given an input</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code><a href="models/operations/HealthRequestBuilder.html" title="class in com.styra.opa.openapi.models.operations">HealthRequestBuilder</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#health()">health</a></span>()</code></th>
 <td class="colLast">
@@ -275,7 +289,7 @@ implements <a href="models/operations/SDKMethodInterfaces.MethodCallExecuteDefau
  The health API endpoint executes a simple built-in policy query to verify that the server is operational.</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code><a href="models/operations/HealthResponse.html" title="class in com.styra.opa.openapi.models.operations">HealthResponse</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#health(java.util.Optional,java.util.Optional,java.util.Optional)">health</a></span>&#8203;(java.util.Optional&lt;? extends java.lang.Boolean&gt;&nbsp;bundles,
       java.util.Optional&lt;? extends java.lang.Boolean&gt;&nbsp;plugins,
@@ -285,7 +299,7 @@ implements <a href="models/operations/SDKMethodInterfaces.MethodCallExecuteDefau
  The health API endpoint executes a simple built-in policy query to verify that the server is operational.</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code><a href="models/operations/HealthResponse.html" title="class in com.styra.opa.openapi.models.operations">HealthResponse</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#healthDirect()">healthDirect</a></span>()</code></th>
 <td class="colLast">
@@ -470,6 +484,41 @@ implements <a href="models/operations/SDKMethodInterfaces.MethodCallExecuteDefau
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="models/operations/SDKMethodInterfaces.MethodCallExecutePolicyWithInput.html#executePolicyWithInput(com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequest)">executePolicyWithInput</a></code>&nbsp;in interface&nbsp;<code><a href="models/operations/SDKMethodInterfaces.MethodCallExecutePolicyWithInput.html" title="interface in com.styra.opa.openapi.models.operations">SDKMethodInterfaces.MethodCallExecutePolicyWithInput</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>request</code> - The request object containing all of the parameters for the API call.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>The response from the API call</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.lang.Exception</code> - if the API call fails</dd>
+</dl>
+</li>
+</ul>
+<a id="executeBatchPolicyWithInput()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>executeBatchPolicyWithInput</h4>
+<pre class="methodSignature">public&nbsp;<a href="models/operations/ExecuteBatchPolicyWithInputRequestBuilder.html" title="class in com.styra.opa.openapi.models.operations">ExecuteBatchPolicyWithInputRequestBuilder</a>&nbsp;executeBatchPolicyWithInput()</pre>
+<div class="block">Execute a policy given a batch of inputs</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>The call builder</dd>
+</dl>
+</li>
+</ul>
+<a id="executeBatchPolicyWithInput(com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequest)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>executeBatchPolicyWithInput</h4>
+<pre class="methodSignature">public&nbsp;<a href="models/operations/ExecuteBatchPolicyWithInputResponse.html" title="class in com.styra.opa.openapi.models.operations">ExecuteBatchPolicyWithInputResponse</a>&nbsp;executeBatchPolicyWithInput&#8203;(<a href="models/operations/ExecuteBatchPolicyWithInputRequest.html" title="class in com.styra.opa.openapi.models.operations">ExecuteBatchPolicyWithInputRequest</a>&nbsp;request)
+                                                                throws java.lang.Exception</pre>
+<div class="block">Execute a policy given a batch of inputs</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="models/operations/SDKMethodInterfaces.MethodCallExecuteBatchPolicyWithInput.html#executeBatchPolicyWithInput(com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequest)">executeBatchPolicyWithInput</a></code>&nbsp;in interface&nbsp;<code><a href="models/operations/SDKMethodInterfaces.MethodCallExecuteBatchPolicyWithInput.html" title="interface in com.styra.opa.openapi.models.operations">SDKMethodInterfaces.MethodCallExecuteBatchPolicyWithInput</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>request</code> - The request object containing all of the parameters for the API call.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>

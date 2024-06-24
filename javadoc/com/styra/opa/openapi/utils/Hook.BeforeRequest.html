@@ -232,7 +232,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <pre class="methodSignature">java.net.http.HttpRequest&nbsp;beforeRequest&#8203;(<a href="Hook.BeforeRequestContext.html" title="interface in com.styra.opa.openapi.utils">Hook.BeforeRequestContext</a>&nbsp;context,
                                         java.net.http.HttpRequest&nbsp;request)
                                  throws java.lang.Exception</pre>
-<div class="block">Transforms the given <code>HttpRequest</code> before sending.</div>
+<div class="block">Transforms the given <code>HttpRequest</code> before sending.
+ 
+ <p>Note that <code>HttpRequest</code> is immutable. To modify the request you can use
+ <code>HttpRequest#newBuilder(HttpRequest, BiPredicate<String, String>)</code> with 
+ JDK 16 and later (which will copy the request for modification in a builder). 
+ If that method is not available then use <a href="Helpers.html#copy(java.net.http.HttpRequest)"><code>Helpers.copy(java.net.http.HttpRequest)</code></a> (which also returns
+ a builder).</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>context</code> - context for the hook call</dd>

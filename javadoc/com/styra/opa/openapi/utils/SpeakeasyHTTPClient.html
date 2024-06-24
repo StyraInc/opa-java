@@ -182,7 +182,9 @@ implements <a href="HTTPClient.html" title="interface in com.styra.opa.openapi.u
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>java.net.http.HttpResponse&lt;java.io.InputStream&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#send(java.net.http.HttpRequest)">send</a></span>&#8203;(java.net.http.HttpRequest&nbsp;request)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Sends an HTTP request and returns the response.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -237,9 +239,21 @@ implements <a href="HTTPClient.html" title="interface in com.styra.opa.openapi.u
                                                      throws java.io.IOException,
                                                             java.lang.InterruptedException,
                                                             java.net.URISyntaxException</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="HTTPClient.html#send(java.net.http.HttpRequest)">HTTPClient</a></code></span></div>
+<div class="block">Sends an HTTP request and returns the response.
+ 
+ <p>Note that <code>HttpRequest</code> is immutable. To modify the request you can use
+ <code>HttpRequest#newBuilder(HttpRequest, BiPredicate<String, String>)</code> with 
+ JDK 16 and later (which will copy the request for modification in a builder). 
+ If that method is not available then use <a href="Helpers.html#copy(java.net.http.HttpRequest)"><code>Helpers.copy(java.net.http.HttpRequest)</code></a> (which also returns
+ a builder).</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="HTTPClient.html#send(java.net.http.HttpRequest)">send</a></code>&nbsp;in interface&nbsp;<code><a href="HTTPClient.html" title="interface in com.styra.opa.openapi.utils">HTTPClient</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>request</code> - HTTP request</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>HTTP response</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code>java.io.IOException</code></dd>
 <dd><code>java.lang.InterruptedException</code></dd>

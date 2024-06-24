@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":9,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10};
+var data = {"i0":9,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -205,9 +205,10 @@ extends java.lang.RuntimeException</pre>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String,java.lang.String,java.util.Optional)">ServerError</a></span>&#8203;(java.lang.String&nbsp;code,
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String,java.lang.String,java.util.Optional,java.util.Optional)">ServerError</a></span>&#8203;(java.lang.String&nbsp;code,
            java.lang.String&nbsp;message,
-           java.util.Optional&lt;? extends java.util.List&lt;<a href="ServerErrorErrors.html" title="class in com.styra.opa.openapi.models.errors">ServerErrorErrors</a>&gt;&gt;&nbsp;errors)</code></th>
+           java.util.Optional&lt;? extends java.util.List&lt;<a href="ServerErrorErrors.html" title="class in com.styra.opa.openapi.models.errors">ServerErrorErrors</a>&gt;&gt;&nbsp;errors,
+           java.util.Optional&lt;? extends java.lang.String&gt;&nbsp;decisionId)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 </table>
@@ -239,46 +240,61 @@ extends java.lang.RuntimeException</pre>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
+<td class="colFirst"><code>java.util.Optional&lt;? extends java.lang.String&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#decisionId()">decisionId</a></span>()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#equals(java.lang.Object)">equals</a></span>&#8203;(java.lang.Object&nbsp;o)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>java.util.Optional&lt;? extends java.util.List&lt;<a href="ServerErrorErrors.html" title="class in com.styra.opa.openapi.models.errors">ServerErrorErrors</a>&gt;&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#errors()">errors</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#hashCode()">hashCode</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#message()">message</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toString()">toString</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="ServerError.html" title="class in com.styra.opa.openapi.models.errors">ServerError</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withCode(java.lang.String)">withCode</a></span>&#8203;(java.lang.String&nbsp;code)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
+<td class="colFirst"><code><a href="ServerError.html" title="class in com.styra.opa.openapi.models.errors">ServerError</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withDecisionId(java.lang.String)">withDecisionId</a></span>&#8203;(java.lang.String&nbsp;decisionId)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i10" class="altColor">
+<td class="colFirst"><code><a href="ServerError.html" title="class in com.styra.opa.openapi.models.errors">ServerError</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withDecisionId(java.util.Optional)">withDecisionId</a></span>&#8203;(java.util.Optional&lt;? extends java.lang.String&gt;&nbsp;decisionId)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code><a href="ServerError.html" title="class in com.styra.opa.openapi.models.errors">ServerError</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withErrors(java.util.List)">withErrors</a></span>&#8203;(java.util.List&lt;<a href="ServerErrorErrors.html" title="class in com.styra.opa.openapi.models.errors">ServerErrorErrors</a>&gt;&nbsp;errors)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code><a href="ServerError.html" title="class in com.styra.opa.openapi.models.errors">ServerError</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withErrors(java.util.Optional)">withErrors</a></span>&#8203;(java.util.Optional&lt;? extends java.util.List&lt;<a href="ServerErrorErrors.html" title="class in com.styra.opa.openapi.models.errors">ServerErrorErrors</a>&gt;&gt;&nbsp;errors)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code><a href="ServerError.html" title="class in com.styra.opa.openapi.models.errors">ServerError</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withMessage(java.lang.String)">withMessage</a></span>&#8203;(java.lang.String&nbsp;message)</code></th>
 <td class="colLast">&nbsp;</td>
@@ -314,7 +330,7 @@ extends java.lang.RuntimeException</pre>
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a id="&lt;init&gt;(java.lang.String,java.lang.String,java.util.Optional)">
+<a id="&lt;init&gt;(java.lang.String,java.lang.String,java.util.Optional,java.util.Optional)">
 <!--   -->
 </a>
 <ul class="blockList">
@@ -322,7 +338,8 @@ extends java.lang.RuntimeException</pre>
 <h4>ServerError</h4>
 <pre>public&nbsp;ServerError&#8203;(java.lang.String&nbsp;code,
                    java.lang.String&nbsp;message,
-                   java.util.Optional&lt;? extends java.util.List&lt;<a href="ServerErrorErrors.html" title="class in com.styra.opa.openapi.models.errors">ServerErrorErrors</a>&gt;&gt;&nbsp;errors)</pre>
+                   java.util.Optional&lt;? extends java.util.List&lt;<a href="ServerErrorErrors.html" title="class in com.styra.opa.openapi.models.errors">ServerErrorErrors</a>&gt;&gt;&nbsp;errors,
+                   java.util.Optional&lt;? extends java.lang.String&gt;&nbsp;decisionId)</pre>
 </li>
 </ul>
 <a id="&lt;init&gt;(java.lang.String,java.lang.String)">
@@ -372,6 +389,15 @@ extends java.lang.RuntimeException</pre>
 <pre class="methodSignature">public&nbsp;java.util.Optional&lt;? extends java.util.List&lt;<a href="ServerErrorErrors.html" title="class in com.styra.opa.openapi.models.errors">ServerErrorErrors</a>&gt;&gt;&nbsp;errors()</pre>
 </li>
 </ul>
+<a id="decisionId()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>decisionId</h4>
+<pre class="methodSignature">public&nbsp;java.util.Optional&lt;? extends java.lang.String&gt;&nbsp;decisionId()</pre>
+</li>
+</ul>
 <a id="builder()">
 <!--   -->
 </a>
@@ -415,6 +441,24 @@ extends java.lang.RuntimeException</pre>
 <li class="blockList">
 <h4>withErrors</h4>
 <pre class="methodSignature">public&nbsp;<a href="ServerError.html" title="class in com.styra.opa.openapi.models.errors">ServerError</a>&nbsp;withErrors&#8203;(java.util.Optional&lt;? extends java.util.List&lt;<a href="ServerErrorErrors.html" title="class in com.styra.opa.openapi.models.errors">ServerErrorErrors</a>&gt;&gt;&nbsp;errors)</pre>
+</li>
+</ul>
+<a id="withDecisionId(java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>withDecisionId</h4>
+<pre class="methodSignature">public&nbsp;<a href="ServerError.html" title="class in com.styra.opa.openapi.models.errors">ServerError</a>&nbsp;withDecisionId&#8203;(java.lang.String&nbsp;decisionId)</pre>
+</li>
+</ul>
+<a id="withDecisionId(java.util.Optional)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>withDecisionId</h4>
+<pre class="methodSignature">public&nbsp;<a href="ServerError.html" title="class in com.styra.opa.openapi.models.errors">ServerError</a>&nbsp;withDecisionId&#8203;(java.util.Optional&lt;? extends java.lang.String&gt;&nbsp;decisionId)</pre>
 </li>
 </ul>
 <a id="equals(java.lang.Object)">

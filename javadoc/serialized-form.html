@@ -113,6 +113,42 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <section>
 <h2 title="Package">Package&nbsp;com.styra.opa.openapi.models.errors</h2>
 <ul class="blockList">
+<li class="blockList"><a id="com.styra.opa.openapi.models.errors.AuthException">
+<!--   -->
+</a>
+<h3>Class <a href="com/styra/opa/openapi/models/errors/AuthException.html" title="class in com.styra.opa.openapi.models.errors">com.styra.opa.openapi.models.errors.AuthException</a> extends java.lang.RuntimeException implements Serializable</h3>
+<ul class="blockList">
+<li class="blockList">
+<h3>Serialized Fields</h3>
+<ul class="blockList">
+<li class="blockListLast">
+<h4>statusCode</h4>
+<pre>java.util.Optional&lt;java.lang.Integer&gt; statusCode</pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="blockList"><a id="com.styra.opa.openapi.models.errors.BatchServerError">
+<!--   -->
+</a>
+<h3>Class <a href="com/styra/opa/openapi/models/errors/BatchServerError.html" title="class in com.styra.opa.openapi.models.errors">com.styra.opa.openapi.models.errors.BatchServerError</a> extends java.lang.RuntimeException implements Serializable</h3>
+<ul class="blockList">
+<li class="blockList">
+<h3>Serialized Fields</h3>
+<ul class="blockList">
+<li class="blockList">
+<h4>batchDecisionId</h4>
+<pre>java.util.Optional&lt;? extends java.lang.String&gt; batchDecisionId</pre>
+</li>
+<li class="blockListLast">
+<h4>responses</h4>
+<pre>java.util.Optional&lt;? extends java.util.Map&lt;java.lang.String,&#8203;<a href="com/styra/opa/openapi/models/errors/ServerError.html" title="class in com.styra.opa.openapi.models.errors">ServerError</a>&gt;&gt; responses</pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="blockList"><a id="com.styra.opa.openapi.models.errors.ClientError">
 <!--   -->
 </a>
@@ -178,6 +214,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <pre>java.lang.String code</pre>
 </li>
 <li class="blockList">
+<h4>decisionId</h4>
+<pre>java.util.Optional&lt;? extends java.lang.String&gt; decisionId</pre>
+</li>
+<li class="blockList">
 <h4>errors</h4>
 <pre>java.util.Optional&lt;? extends java.util.List&lt;<a href="com/styra/opa/openapi/models/errors/ServerErrorErrors.html" title="class in com.styra.opa.openapi.models.errors">ServerErrorErrors</a>&gt;&gt; errors</pre>
 </li>
@@ -216,6 +256,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <!--   -->
 </a>
 <h3>Class <a href="com/styra/opa/openapi/models/shared/Input._Deserializer.html" title="class in com.styra.opa.openapi.models.shared">com.styra.opa.openapi.models.shared.Input._Deserializer</a> extends <a href="com/styra/opa/openapi/utils/OneOfDeserializer.html" title="class in com.styra.opa.openapi.utils">OneOfDeserializer</a>&lt;<a href="com/styra/opa/openapi/models/shared/Input.html" title="class in com.styra.opa.openapi.models.shared">Input</a>&gt; implements Serializable</h3>
+</li>
+<li class="blockList"><a id="com.styra.opa.openapi.models.shared.Responses._Deserializer">
+<!--   -->
+</a>
+<h3>Class <a href="com/styra/opa/openapi/models/shared/Responses._Deserializer.html" title="class in com.styra.opa.openapi.models.shared">com.styra.opa.openapi.models.shared.Responses._Deserializer</a> extends <a href="com/styra/opa/openapi/utils/OneOfDeserializer.html" title="class in com.styra.opa.openapi.utils">OneOfDeserializer</a>&lt;<a href="com/styra/opa/openapi/models/shared/Responses.html" title="class in com.styra.opa.openapi.models.shared">Responses</a>&gt; implements Serializable</h3>
 </li>
 <li class="blockList"><a id="com.styra.opa.openapi.models.shared.Result._Deserializer">
 <!--   -->

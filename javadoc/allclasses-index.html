@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":2,"i1":2,"i2":2,"i3":2,"i4":2,"i5":2,"i6":2,"i7":2,"i8":8,"i9":2,"i10":2,"i11":2,"i12":2,"i13":2,"i14":2,"i15":2,"i16":2,"i17":2,"i18":2,"i19":2,"i20":2,"i21":2,"i22":2,"i23":2,"i24":2,"i25":2,"i26":2,"i27":2,"i28":2,"i29":2,"i30":2,"i31":2,"i32":2,"i33":2,"i34":4,"i35":4,"i36":4,"i37":2,"i38":2,"i39":2,"i40":2,"i41":2,"i42":2,"i43":2,"i44":2,"i45":1,"i46":1,"i47":2,"i48":1,"i49":1,"i50":2,"i51":1,"i52":1,"i53":2,"i54":1,"i55":2,"i56":1,"i57":2,"i58":2,"i59":8,"i60":1,"i61":2,"i62":2,"i63":2,"i64":2,"i65":2,"i66":2,"i67":2,"i68":2,"i69":2,"i70":2,"i71":2,"i72":8,"i73":2,"i74":2,"i75":2,"i76":4,"i77":2,"i78":2,"i79":2,"i80":2,"i81":1,"i82":2,"i83":2,"i84":2,"i85":2,"i86":8,"i87":8,"i88":2,"i89":2,"i90":4,"i91":2,"i92":2,"i93":8,"i94":2,"i95":2,"i96":1,"i97":1,"i98":1,"i99":1,"i100":2,"i101":2,"i102":1,"i103":2,"i104":2,"i105":8,"i106":2,"i107":2,"i108":2,"i109":2,"i110":2,"i111":2,"i112":32,"i113":2,"i114":2,"i115":2,"i116":2,"i117":4,"i118":8,"i119":2,"i120":2,"i121":1,"i122":2,"i123":4,"i124":2};
+var data = {"i0":8,"i1":2,"i2":2,"i3":2,"i4":2,"i5":8,"i6":2,"i7":2,"i8":2,"i9":2,"i10":2,"i11":2,"i12":2,"i13":2,"i14":2,"i15":8,"i16":2,"i17":2,"i18":2,"i19":2,"i20":2,"i21":2,"i22":2,"i23":2,"i24":2,"i25":2,"i26":2,"i27":2,"i28":2,"i29":2,"i30":2,"i31":2,"i32":2,"i33":2,"i34":2,"i35":2,"i36":2,"i37":2,"i38":2,"i39":2,"i40":2,"i41":2,"i42":2,"i43":2,"i44":2,"i45":2,"i46":2,"i47":2,"i48":2,"i49":2,"i50":4,"i51":4,"i52":4,"i53":2,"i54":2,"i55":2,"i56":2,"i57":2,"i58":2,"i59":2,"i60":2,"i61":2,"i62":1,"i63":1,"i64":2,"i65":1,"i66":1,"i67":2,"i68":1,"i69":1,"i70":2,"i71":1,"i72":2,"i73":1,"i74":2,"i75":2,"i76":8,"i77":1,"i78":2,"i79":2,"i80":2,"i81":2,"i82":2,"i83":2,"i84":2,"i85":2,"i86":2,"i87":2,"i88":2,"i89":2,"i90":2,"i91":8,"i92":2,"i93":2,"i94":2,"i95":4,"i96":2,"i97":2,"i98":2,"i99":2,"i100":1,"i101":2,"i102":2,"i103":2,"i104":2,"i105":2,"i106":2,"i107":2,"i108":2,"i109":8,"i110":8,"i111":2,"i112":2,"i113":4,"i114":2,"i115":2,"i116":8,"i117":2,"i118":2,"i119":1,"i120":1,"i121":1,"i122":1,"i123":1,"i124":2,"i125":2,"i126":1,"i127":2,"i128":2,"i129":8,"i130":2,"i131":2,"i132":2,"i133":2,"i134":2,"i135":2,"i136":2,"i137":2,"i138":32,"i139":2,"i140":2,"i141":2,"i142":2,"i143":4,"i144":8,"i145":2,"i146":2,"i147":1,"i148":2,"i149":4,"i150":2};
 var tabs = {65535:["t0","All Classes"],1:["t1","Interface Summary"],2:["t2","Class Summary"],4:["t3","Enum Summary"],8:["t4","Exception Summary"],32:["t6","Annotation Types Summary"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -111,6 +111,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/models/errors/AuthException.html" title="class in com.styra.opa.openapi.models.errors">AuthException</a></td>
+<th class="colLast" scope="row">
+<div class="block">An exception associated with Authentication or Authorization.</div>
+</th>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/BackoffStrategy.html" title="class in com.styra.opa.openapi.utils">BackoffStrategy</a></td>
 <th class="colLast" scope="row">
 <div class="block">Exponential Backoff Strategy with Jitter
@@ -120,546 +126,650 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  where baseFactor is the base factor and r a random value between 0 and jitterFactor*intervalMs.</div>
 </th>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/BackoffStrategy.Builder.html" title="class in com.styra.opa.openapi.utils">BackoffStrategy.Builder</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i2" class="altColor">
-<td class="colFirst"><a href="com/styra/opa/openapi/utils/BigDecimalString.html" title="class in com.styra.opa.openapi.utils">BigDecimalString</a></td>
-<th class="colLast" scope="row">&nbsp;</th>
-</tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><a href="com/styra/opa/openapi/utils/BigDecimalString.BigDecimalStringDeserializer.html" title="class in com.styra.opa.openapi.utils">BigDecimalString.BigDecimalStringDeserializer</a></td>
+<td class="colFirst"><a href="com/styra/opa/openapi/models/shared/BatchMixedResults.html" title="class in com.styra.opa.openapi.models.shared">BatchMixedResults</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><a href="com/styra/opa/openapi/utils/BigDecimalString.BigDecimalStringSerializer.html" title="class in com.styra.opa.openapi.utils">BigDecimalString.BigDecimalStringSerializer</a></td>
+<td class="colFirst"><a href="com/styra/opa/openapi/models/shared/BatchMixedResults.Builder.html" title="class in com.styra.opa.openapi.models.shared">BatchMixedResults.Builder</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
 <tr id="i5" class="rowColor">
-<td class="colFirst"><a href="com/styra/opa/openapi/utils/BigIntegerString.html" title="class in com.styra.opa.openapi.utils">BigIntegerString</a></td>
+<td class="colFirst"><a href="com/styra/opa/openapi/models/errors/BatchServerError.html" title="class in com.styra.opa.openapi.models.errors">BatchServerError</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
 <tr id="i6" class="altColor">
-<td class="colFirst"><a href="com/styra/opa/openapi/utils/BigIntegerString.BigIntegerStringDeserializer.html" title="class in com.styra.opa.openapi.utils">BigIntegerString.BigIntegerStringDeserializer</a></td>
+<td class="colFirst"><a href="com/styra/opa/openapi/models/errors/BatchServerError.Builder.html" title="class in com.styra.opa.openapi.models.errors">BatchServerError.Builder</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
 <tr id="i7" class="rowColor">
-<td class="colFirst"><a href="com/styra/opa/openapi/utils/BigIntegerString.BigIntegerStringSerializer.html" title="class in com.styra.opa.openapi.utils">BigIntegerString.BigIntegerStringSerializer</a></td>
+<td class="colFirst"><a href="com/styra/opa/openapi/models/shared/BatchSuccessfulPolicyEvaluation.html" title="class in com.styra.opa.openapi.models.shared">BatchSuccessfulPolicyEvaluation</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
 <tr id="i8" class="altColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/models/shared/BatchSuccessfulPolicyEvaluation.Builder.html" title="class in com.styra.opa.openapi.models.shared">BatchSuccessfulPolicyEvaluation.Builder</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i9" class="rowColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/utils/BigDecimalString.html" title="class in com.styra.opa.openapi.utils">BigDecimalString</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i10" class="altColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/utils/BigDecimalString.BigDecimalStringDeserializer.html" title="class in com.styra.opa.openapi.utils">BigDecimalString.BigDecimalStringDeserializer</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i11" class="rowColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/utils/BigDecimalString.BigDecimalStringSerializer.html" title="class in com.styra.opa.openapi.utils">BigDecimalString.BigDecimalStringSerializer</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i12" class="altColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/utils/BigIntegerString.html" title="class in com.styra.opa.openapi.utils">BigIntegerString</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i13" class="rowColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/utils/BigIntegerString.BigIntegerStringDeserializer.html" title="class in com.styra.opa.openapi.utils">BigIntegerString.BigIntegerStringDeserializer</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i14" class="altColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/utils/BigIntegerString.BigIntegerStringSerializer.html" title="class in com.styra.opa.openapi.utils">BigIntegerString.BigIntegerStringSerializer</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i15" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/errors/ClientError.html" title="class in com.styra.opa.openapi.models.errors">ClientError</a></td>
 <th class="colLast" scope="row">
 <div class="block">ClientError - Bad Request</div>
 </th>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/errors/ClientError.Builder.html" title="class in com.styra.opa.openapi.models.errors">ClientError.Builder</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/Deserializers.html" title="class in com.styra.opa.openapi.utils">Deserializers</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i18" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/errors/Errors.html" title="class in com.styra.opa.openapi.models.errors">Errors</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i19" class="rowColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/models/shared/Errors.html" title="class in com.styra.opa.openapi.models.shared">Errors</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i20" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/errors/Errors.Builder.html" title="class in com.styra.opa.openapi.models.errors">Errors.Builder</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i21" class="rowColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/models/shared/Errors.Builder.html" title="class in com.styra.opa.openapi.models.shared">Errors.Builder</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i22" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/EventStream.html" title="class in com.styra.opa.openapi.utils">EventStream</a>&lt;<a href="com/styra/opa/openapi/utils/EventStream.html" title="type parameter in EventStream">T</a>&gt;</td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i23" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/EventStreamLineReader.html" title="class in com.styra.opa.openapi.utils">EventStreamLineReader</a></td>
 <th class="colLast" scope="row">
 <div class="block">Converts CR-LF, LF, CR to LF</div>
 </th>
 </tr>
-<tr id="i15" class="rowColor">
+<tr id="i24" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/EventStreamMessage.html" title="class in com.styra.opa.openapi.utils">EventStreamMessage</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i16" class="altColor">
+<tr id="i25" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/EventStreamReader.html" title="class in com.styra.opa.openapi.utils">EventStreamReader</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i17" class="rowColor">
-<td class="colFirst"><a href="com/styra/opa/openapi/models/operations/ExecuteDefaultPolicyWithInputRequest.html" title="class in com.styra.opa.openapi.models.operations">ExecuteDefaultPolicyWithInputRequest</a></td>
-<th class="colLast" scope="row">&nbsp;</th>
-</tr>
-<tr id="i18" class="altColor">
-<td class="colFirst"><a href="com/styra/opa/openapi/models/operations/ExecuteDefaultPolicyWithInputRequest.Builder.html" title="class in com.styra.opa.openapi.models.operations">ExecuteDefaultPolicyWithInputRequest.Builder</a></td>
-<th class="colLast" scope="row">&nbsp;</th>
-</tr>
-<tr id="i19" class="rowColor">
-<td class="colFirst"><a href="com/styra/opa/openapi/models/operations/ExecuteDefaultPolicyWithInputRequestBuilder.html" title="class in com.styra.opa.openapi.models.operations">ExecuteDefaultPolicyWithInputRequestBuilder</a></td>
-<th class="colLast" scope="row">&nbsp;</th>
-</tr>
-<tr id="i20" class="altColor">
-<td class="colFirst"><a href="com/styra/opa/openapi/models/operations/ExecuteDefaultPolicyWithInputResponse.html" title="class in com.styra.opa.openapi.models.operations">ExecuteDefaultPolicyWithInputResponse</a></td>
-<th class="colLast" scope="row">&nbsp;</th>
-</tr>
-<tr id="i21" class="rowColor">
-<td class="colFirst"><a href="com/styra/opa/openapi/models/operations/ExecuteDefaultPolicyWithInputResponse.Builder.html" title="class in com.styra.opa.openapi.models.operations">ExecuteDefaultPolicyWithInputResponse.Builder</a></td>
-<th class="colLast" scope="row">&nbsp;</th>
-</tr>
-<tr id="i22" class="altColor">
-<td class="colFirst"><a href="com/styra/opa/openapi/models/operations/ExecutePolicyRequest.html" title="class in com.styra.opa.openapi.models.operations">ExecutePolicyRequest</a></td>
-<th class="colLast" scope="row">&nbsp;</th>
-</tr>
-<tr id="i23" class="rowColor">
-<td class="colFirst"><a href="com/styra/opa/openapi/models/operations/ExecutePolicyRequest.Builder.html" title="class in com.styra.opa.openapi.models.operations">ExecutePolicyRequest.Builder</a></td>
-<th class="colLast" scope="row">&nbsp;</th>
-</tr>
-<tr id="i24" class="altColor">
-<td class="colFirst"><a href="com/styra/opa/openapi/models/operations/ExecutePolicyRequestBuilder.html" title="class in com.styra.opa.openapi.models.operations">ExecutePolicyRequestBuilder</a></td>
-<th class="colLast" scope="row">&nbsp;</th>
-</tr>
-<tr id="i25" class="rowColor">
-<td class="colFirst"><a href="com/styra/opa/openapi/models/operations/ExecutePolicyResponse.html" title="class in com.styra.opa.openapi.models.operations">ExecutePolicyResponse</a></td>
-<th class="colLast" scope="row">&nbsp;</th>
-</tr>
 <tr id="i26" class="altColor">
-<td class="colFirst"><a href="com/styra/opa/openapi/models/operations/ExecutePolicyResponse.Builder.html" title="class in com.styra.opa.openapi.models.operations">ExecutePolicyResponse.Builder</a></td>
+<td class="colFirst"><a href="com/styra/opa/openapi/models/operations/ExecuteBatchPolicyWithInputRequest.html" title="class in com.styra.opa.openapi.models.operations">ExecuteBatchPolicyWithInputRequest</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
 <tr id="i27" class="rowColor">
-<td class="colFirst"><a href="com/styra/opa/openapi/models/operations/ExecutePolicyWithInputRequest.html" title="class in com.styra.opa.openapi.models.operations">ExecutePolicyWithInputRequest</a></td>
+<td class="colFirst"><a href="com/styra/opa/openapi/models/operations/ExecuteBatchPolicyWithInputRequest.Builder.html" title="class in com.styra.opa.openapi.models.operations">ExecuteBatchPolicyWithInputRequest.Builder</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
 <tr id="i28" class="altColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/models/operations/ExecuteBatchPolicyWithInputRequestBody.html" title="class in com.styra.opa.openapi.models.operations">ExecuteBatchPolicyWithInputRequestBody</a></td>
+<th class="colLast" scope="row">
+<div class="block">ExecuteBatchPolicyWithInputRequestBody - The batch of inputs</div>
+</th>
+</tr>
+<tr id="i29" class="rowColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/models/operations/ExecuteBatchPolicyWithInputRequestBody.Builder.html" title="class in com.styra.opa.openapi.models.operations">ExecuteBatchPolicyWithInputRequestBody.Builder</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i30" class="altColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/models/operations/ExecuteBatchPolicyWithInputRequestBuilder.html" title="class in com.styra.opa.openapi.models.operations">ExecuteBatchPolicyWithInputRequestBuilder</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i31" class="rowColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/models/operations/ExecuteBatchPolicyWithInputResponse.html" title="class in com.styra.opa.openapi.models.operations">ExecuteBatchPolicyWithInputResponse</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i32" class="altColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/models/operations/ExecuteBatchPolicyWithInputResponse.Builder.html" title="class in com.styra.opa.openapi.models.operations">ExecuteBatchPolicyWithInputResponse.Builder</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i33" class="rowColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/models/operations/ExecuteDefaultPolicyWithInputRequest.html" title="class in com.styra.opa.openapi.models.operations">ExecuteDefaultPolicyWithInputRequest</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i34" class="altColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/models/operations/ExecuteDefaultPolicyWithInputRequest.Builder.html" title="class in com.styra.opa.openapi.models.operations">ExecuteDefaultPolicyWithInputRequest.Builder</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i35" class="rowColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/models/operations/ExecuteDefaultPolicyWithInputRequestBuilder.html" title="class in com.styra.opa.openapi.models.operations">ExecuteDefaultPolicyWithInputRequestBuilder</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i36" class="altColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/models/operations/ExecuteDefaultPolicyWithInputResponse.html" title="class in com.styra.opa.openapi.models.operations">ExecuteDefaultPolicyWithInputResponse</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i37" class="rowColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/models/operations/ExecuteDefaultPolicyWithInputResponse.Builder.html" title="class in com.styra.opa.openapi.models.operations">ExecuteDefaultPolicyWithInputResponse.Builder</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i38" class="altColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/models/operations/ExecutePolicyRequest.html" title="class in com.styra.opa.openapi.models.operations">ExecutePolicyRequest</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i39" class="rowColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/models/operations/ExecutePolicyRequest.Builder.html" title="class in com.styra.opa.openapi.models.operations">ExecutePolicyRequest.Builder</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i40" class="altColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/models/operations/ExecutePolicyRequestBuilder.html" title="class in com.styra.opa.openapi.models.operations">ExecutePolicyRequestBuilder</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i41" class="rowColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/models/operations/ExecutePolicyResponse.html" title="class in com.styra.opa.openapi.models.operations">ExecutePolicyResponse</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i42" class="altColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/models/operations/ExecutePolicyResponse.Builder.html" title="class in com.styra.opa.openapi.models.operations">ExecutePolicyResponse.Builder</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i43" class="rowColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/models/operations/ExecutePolicyWithInputRequest.html" title="class in com.styra.opa.openapi.models.operations">ExecutePolicyWithInputRequest</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i44" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/operations/ExecutePolicyWithInputRequest.Builder.html" title="class in com.styra.opa.openapi.models.operations">ExecutePolicyWithInputRequest.Builder</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i29" class="rowColor">
+<tr id="i45" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/operations/ExecutePolicyWithInputRequestBody.html" title="class in com.styra.opa.openapi.models.operations">ExecutePolicyWithInputRequestBody</a></td>
 <th class="colLast" scope="row">
 <div class="block">ExecutePolicyWithInputRequestBody - The input document</div>
 </th>
 </tr>
-<tr id="i30" class="altColor">
+<tr id="i46" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/operations/ExecutePolicyWithInputRequestBody.Builder.html" title="class in com.styra.opa.openapi.models.operations">ExecutePolicyWithInputRequestBody.Builder</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i31" class="rowColor">
+<tr id="i47" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/operations/ExecutePolicyWithInputRequestBuilder.html" title="class in com.styra.opa.openapi.models.operations">ExecutePolicyWithInputRequestBuilder</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i32" class="altColor">
+<tr id="i48" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/operations/ExecutePolicyWithInputResponse.html" title="class in com.styra.opa.openapi.models.operations">ExecutePolicyWithInputResponse</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i33" class="rowColor">
+<tr id="i49" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/operations/ExecutePolicyWithInputResponse.Builder.html" title="class in com.styra.opa.openapi.models.operations">ExecutePolicyWithInputResponse.Builder</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i34" class="altColor">
+<tr id="i50" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/shared/Explain.html" title="enum in com.styra.opa.openapi.models.shared">Explain</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i35" class="rowColor">
+<tr id="i51" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/shared/GzipAcceptEncoding.html" title="enum in com.styra.opa.openapi.models.shared">GzipAcceptEncoding</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i36" class="altColor">
+<tr id="i52" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/shared/GzipContentEncoding.html" title="enum in com.styra.opa.openapi.models.shared">GzipContentEncoding</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i37" class="rowColor">
+<tr id="i53" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/operations/HealthRequest.html" title="class in com.styra.opa.openapi.models.operations">HealthRequest</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i38" class="altColor">
+<tr id="i54" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/operations/HealthRequest.Builder.html" title="class in com.styra.opa.openapi.models.operations">HealthRequest.Builder</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i39" class="rowColor">
+<tr id="i55" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/operations/HealthRequestBuilder.html" title="class in com.styra.opa.openapi.models.operations">HealthRequestBuilder</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i40" class="altColor">
+<tr id="i56" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/operations/HealthResponse.html" title="class in com.styra.opa.openapi.models.operations">HealthResponse</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i41" class="rowColor">
+<tr id="i57" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/operations/HealthResponse.Builder.html" title="class in com.styra.opa.openapi.models.operations">HealthResponse.Builder</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i42" class="altColor">
+<tr id="i58" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/shared/HealthyServer.html" title="class in com.styra.opa.openapi.models.shared">HealthyServer</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i43" class="rowColor">
+<tr id="i59" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/shared/HealthyServer.Builder.html" title="class in com.styra.opa.openapi.models.shared">HealthyServer.Builder</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i44" class="altColor">
+<tr id="i60" class="altColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/utils/Helpers.html" title="class in com.styra.opa.openapi.utils">Helpers</a></td>
+<th class="colLast" scope="row">
+<div class="block">Public helper methods for use by customers and end-users.</div>
+</th>
+</tr>
+<tr id="i61" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/Hook.html" title="class in com.styra.opa.openapi.utils">Hook</a></td>
 <th class="colLast" scope="row">
 <div class="block">Holder class for hook-associated types.</div>
 </th>
 </tr>
-<tr id="i45" class="rowColor">
+<tr id="i62" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/Hook.AfterError.html" title="interface in com.styra.opa.openapi.utils">Hook.AfterError</a></td>
 <th class="colLast" scope="row">
 <div class="block">Specifies what happens if a request action throws an Exception.</div>
 </th>
 </tr>
-<tr id="i46" class="altColor">
+<tr id="i63" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/Hook.AfterErrorContext.html" title="interface in com.styra.opa.openapi.utils">Hook.AfterErrorContext</a></td>
 <th class="colLast" scope="row">
 <div class="block">Context for an AfterError hook call.</div>
 </th>
 </tr>
-<tr id="i47" class="rowColor">
+<tr id="i64" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/Hook.AfterErrorContextImpl.html" title="class in com.styra.opa.openapi.utils">Hook.AfterErrorContextImpl</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i48" class="altColor">
+<tr id="i65" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/Hook.AfterSuccess.html" title="interface in com.styra.opa.openapi.utils">Hook.AfterSuccess</a></td>
 <th class="colLast" scope="row">
 <div class="block">Specifies how a response is transformed before response processing.</div>
 </th>
 </tr>
-<tr id="i49" class="rowColor">
+<tr id="i66" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/Hook.AfterSuccessContext.html" title="interface in com.styra.opa.openapi.utils">Hook.AfterSuccessContext</a></td>
 <th class="colLast" scope="row">
 <div class="block">Context for an AfterSuccess hook call.</div>
 </th>
 </tr>
-<tr id="i50" class="altColor">
+<tr id="i67" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/Hook.AfterSuccessContextImpl.html" title="class in com.styra.opa.openapi.utils">Hook.AfterSuccessContextImpl</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i51" class="rowColor">
+<tr id="i68" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/Hook.BeforeRequest.html" title="interface in com.styra.opa.openapi.utils">Hook.BeforeRequest</a></td>
 <th class="colLast" scope="row">
 <div class="block">Specifies how a request is transformed before sending.</div>
 </th>
 </tr>
-<tr id="i52" class="altColor">
+<tr id="i69" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/Hook.BeforeRequestContext.html" title="interface in com.styra.opa.openapi.utils">Hook.BeforeRequestContext</a></td>
 <th class="colLast" scope="row">
 <div class="block">Context for a BeforeRequest hook call.</div>
 </th>
 </tr>
-<tr id="i53" class="rowColor">
+<tr id="i70" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/Hook.BeforeRequestContextImpl.html" title="class in com.styra.opa.openapi.utils">Hook.BeforeRequestContextImpl</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i54" class="altColor">
+<tr id="i71" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/Hook.HookContext.html" title="interface in com.styra.opa.openapi.utils">Hook.HookContext</a></td>
 <th class="colLast" scope="row">
 <div class="block">Context for a hook call.</div>
 </th>
 </tr>
-<tr id="i55" class="rowColor">
+<tr id="i72" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/Hook.IdempotencyHook.html" title="class in com.styra.opa.openapi.utils">Hook.IdempotencyHook</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i56" class="altColor">
+<tr id="i73" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/Hook.SdkInit.html" title="interface in com.styra.opa.openapi.utils">Hook.SdkInit</a></td>
 <th class="colLast" scope="row">
 <div class="block">Transforms the HTTPClient before use.</div>
 </th>
 </tr>
-<tr id="i57" class="rowColor">
+<tr id="i74" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/Hook.SdkInitData.html" title="class in com.styra.opa.openapi.utils">Hook.SdkInitData</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i58" class="altColor">
+<tr id="i75" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/Hooks.html" title="class in com.styra.opa.openapi.utils">Hooks</a></td>
 <th class="colLast" scope="row">
 <div class="block">Registers hooks for use at runtime by an end-user or for use by a customer
  that may edit the SDKHooks.java file.</div>
 </th>
 </tr>
-<tr id="i59" class="rowColor">
+<tr id="i76" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/Hooks.FailEarlyException.html" title="class in com.styra.opa.openapi.utils">Hooks.FailEarlyException</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i60" class="altColor">
+<tr id="i77" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/HTTPClient.html" title="interface in com.styra.opa.openapi.utils">HTTPClient</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i61" class="rowColor">
+<tr id="i78" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/HTTPRequest.html" title="class in com.styra.opa.openapi.utils">HTTPRequest</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i62" class="altColor">
+<tr id="i79" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/shared/Input.html" title="class in com.styra.opa.openapi.models.shared">Input</a></td>
 <th class="colLast" scope="row">
 <div class="block">Input - Arbitrary JSON used within your policies by accessing `input`</div>
 </th>
 </tr>
-<tr id="i63" class="rowColor">
+<tr id="i80" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/shared/Input._Deserializer.html" title="class in com.styra.opa.openapi.models.shared">Input._Deserializer</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i64" class="altColor">
+<tr id="i81" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/JSON.html" title="class in com.styra.opa.openapi.utils">JSON</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i65" class="rowColor">
+<tr id="i82" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/LazySingletonValue.html" title="class in com.styra.opa.openapi.utils">LazySingletonValue</a>&lt;<a href="com/styra/opa/openapi/utils/LazySingletonValue.html" title="type parameter in LazySingletonValue">T</a>&gt;</td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i66" class="altColor">
+<tr id="i83" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/errors/Location.html" title="class in com.styra.opa.openapi.models.errors">Location</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i67" class="rowColor">
+<tr id="i84" class="altColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/models/shared/Location.html" title="class in com.styra.opa.openapi.models.shared">Location</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i85" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/errors/Location.Builder.html" title="class in com.styra.opa.openapi.models.errors">Location.Builder</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i68" class="altColor">
+<tr id="i86" class="altColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/models/shared/Location.Builder.html" title="class in com.styra.opa.openapi.models.shared">Location.Builder</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i87" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/OneOfDeserializer.html" title="class in com.styra.opa.openapi.utils">OneOfDeserializer</a>&lt;<a href="com/styra/opa/openapi/utils/OneOfDeserializer.html" title="type parameter in OneOfDeserializer">T</a>&gt;</td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i69" class="rowColor">
+<tr id="i88" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/OpaApiClient.html" title="class in com.styra.opa.openapi">OpaApiClient</a></td>
 <th class="colLast" scope="row">
 <div class="block">https://docs.styra.com/enterprise-opa - Enterprise OPA documentation</div>
 </th>
 </tr>
-<tr id="i70" class="altColor">
+<tr id="i89" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/OpaApiClient.Builder.html" title="class in com.styra.opa.openapi">OpaApiClient.Builder</a></td>
 <th class="colLast" scope="row">
 <div class="block">The Builder class allows the configuration of a new instance of the SDK.</div>
 </th>
 </tr>
-<tr id="i71" class="rowColor">
+<tr id="i90" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/OPAClient.html" title="class in com.styra.opa">OPAClient</a></td>
 <th class="colLast" scope="row">
 <div class="block">The OPA class contains all the functionality and configuration needed to
  make "happy path" queries against an OPA server.</div>
 </th>
 </tr>
-<tr id="i72" class="altColor">
+<tr id="i91" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/OPAException.html" title="class in com.styra.opa">OPAException</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i73" class="rowColor">
+<tr id="i92" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/utils/OPAHTTPClient.html" title="class in com.styra.opa.utils">OPAHTTPClient</a></td>
 <th class="colLast" scope="row">
 <div class="block">This HTTPClient implementation also injects additional headers provided to
  its constructor into each HTTP request that it sends.</div>
 </th>
 </tr>
-<tr id="i74" class="altColor">
+<tr id="i93" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/Options.html" title="class in com.styra.opa.openapi.utils">Options</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i75" class="rowColor">
+<tr id="i94" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/Options.Builder.html" title="class in com.styra.opa.openapi.utils">Options.Builder</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i76" class="altColor">
+<tr id="i95" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/Options.Option.html" title="enum in com.styra.opa.openapi.utils">Options.Option</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i77" class="rowColor">
+<tr id="i96" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/shared/Provenance.html" title="class in com.styra.opa.openapi.models.shared">Provenance</a></td>
 <th class="colLast" scope="row">
 <div class="block">Provenance - Provenance information can be requested on individual API calls and are returned inline with the API response.</div>
 </th>
 </tr>
-<tr id="i78" class="altColor">
+<tr id="i97" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/shared/Provenance.Builder.html" title="class in com.styra.opa.openapi.models.shared">Provenance.Builder</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i79" class="rowColor">
+<tr id="i98" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/QueryParameters.html" title="class in com.styra.opa.openapi.utils">QueryParameters</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i80" class="altColor">
+<tr id="i99" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/RequestBody.html" title="class in com.styra.opa.openapi.utils">RequestBody</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i81" class="rowColor">
+<tr id="i100" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/Response.html" title="interface in com.styra.opa.openapi.utils">Response</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i82" class="altColor">
+<tr id="i101" class="rowColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/models/shared/Responses.html" title="class in com.styra.opa.openapi.models.shared">Responses</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i102" class="altColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/models/shared/Responses._Deserializer.html" title="class in com.styra.opa.openapi.models.shared">Responses._Deserializer</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i103" class="rowColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/models/shared/ResponsesSuccessfulPolicyResponse.html" title="class in com.styra.opa.openapi.models.shared">ResponsesSuccessfulPolicyResponse</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i104" class="altColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/models/shared/ResponsesSuccessfulPolicyResponse.Builder.html" title="class in com.styra.opa.openapi.models.shared">ResponsesSuccessfulPolicyResponse.Builder</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i105" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/shared/Result.html" title="class in com.styra.opa.openapi.models.shared">Result</a></td>
 <th class="colLast" scope="row">
 <div class="block">Result - The base or virtual document referred to by the URL path.</div>
 </th>
 </tr>
-<tr id="i83" class="rowColor">
+<tr id="i106" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/shared/Result._Deserializer.html" title="class in com.styra.opa.openapi.models.shared">Result._Deserializer</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i84" class="altColor">
+<tr id="i107" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/Retries.html" title="class in com.styra.opa.openapi.utils">Retries</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i85" class="rowColor">
+<tr id="i108" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/Retries.Builder.html" title="class in com.styra.opa.openapi.utils">Retries.Builder</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i86" class="altColor">
+<tr id="i109" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/Retries.NonRetryableException.html" title="class in com.styra.opa.openapi.utils">Retries.NonRetryableException</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i87" class="rowColor">
+<tr id="i110" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/Retries.RetryableException.html" title="class in com.styra.opa.openapi.utils">Retries.RetryableException</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i88" class="altColor">
+<tr id="i111" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/RetryConfig.html" title="class in com.styra.opa.openapi.utils">RetryConfig</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i89" class="rowColor">
+<tr id="i112" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/RetryConfig.Builder.html" title="class in com.styra.opa.openapi.utils">RetryConfig.Builder</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i90" class="altColor">
+<tr id="i113" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/RetryConfig.Strategy.html" title="enum in com.styra.opa.openapi.utils">RetryConfig.Strategy</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i91" class="rowColor">
+<tr id="i114" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/shared/Revision.html" title="class in com.styra.opa.openapi.models.shared">Revision</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i92" class="altColor">
+<tr id="i115" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/shared/Revision.Builder.html" title="class in com.styra.opa.openapi.models.shared">Revision.Builder</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i93" class="rowColor">
+<tr id="i116" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/errors/SDKError.html" title="class in com.styra.opa.openapi.models.errors">SDKError</a></td>
 <th class="colLast" scope="row">
 <div class="block">Thrown by a service call when an error response occurs.</div>
 </th>
 </tr>
-<tr id="i94" class="altColor">
+<tr id="i117" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/hooks/SDKHooks.html" title="class in com.styra.opa.openapi.hooks">SDKHooks</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i95" class="rowColor">
+<tr id="i118" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/operations/SDKMethodInterfaces.html" title="class in com.styra.opa.openapi.models.operations">SDKMethodInterfaces</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i96" class="altColor">
+<tr id="i119" class="rowColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/models/operations/SDKMethodInterfaces.MethodCallExecuteBatchPolicyWithInput.html" title="interface in com.styra.opa.openapi.models.operations">SDKMethodInterfaces.MethodCallExecuteBatchPolicyWithInput</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i120" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/operations/SDKMethodInterfaces.MethodCallExecuteDefaultPolicyWithInput.html" title="interface in com.styra.opa.openapi.models.operations">SDKMethodInterfaces.MethodCallExecuteDefaultPolicyWithInput</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i97" class="rowColor">
+<tr id="i121" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/operations/SDKMethodInterfaces.MethodCallExecutePolicy.html" title="interface in com.styra.opa.openapi.models.operations">SDKMethodInterfaces.MethodCallExecutePolicy</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i98" class="altColor">
+<tr id="i122" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/operations/SDKMethodInterfaces.MethodCallExecutePolicyWithInput.html" title="interface in com.styra.opa.openapi.models.operations">SDKMethodInterfaces.MethodCallExecutePolicyWithInput</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i99" class="rowColor">
+<tr id="i123" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/operations/SDKMethodInterfaces.MethodCallHealth.html" title="interface in com.styra.opa.openapi.models.operations">SDKMethodInterfaces.MethodCallHealth</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i100" class="altColor">
+<tr id="i124" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/shared/Security.html" title="class in com.styra.opa.openapi.models.shared">Security</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i101" class="rowColor">
+<tr id="i125" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/Security.html" title="class in com.styra.opa.openapi.utils">Security</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i102" class="altColor">
+<tr id="i126" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/SecuritySource.html" title="interface in com.styra.opa.openapi">SecuritySource</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i103" class="rowColor">
+<tr id="i127" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/SecuritySource.DefaultSecuritySource.html" title="class in com.styra.opa.openapi">SecuritySource.DefaultSecuritySource</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i104" class="altColor">
+<tr id="i128" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/SerializedBody.html" title="class in com.styra.opa.openapi.utils">SerializedBody</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i105" class="rowColor">
+<tr id="i129" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/errors/ServerError.html" title="class in com.styra.opa.openapi.models.errors">ServerError</a></td>
 <th class="colLast" scope="row">
 <div class="block">ServerError - Server Error</div>
 </th>
 </tr>
-<tr id="i106" class="altColor">
+<tr id="i130" class="altColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/models/shared/ServerError.html" title="class in com.styra.opa.openapi.models.shared">ServerError</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i131" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/errors/ServerError.Builder.html" title="class in com.styra.opa.openapi.models.errors">ServerError.Builder</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i107" class="rowColor">
+<tr id="i132" class="altColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/models/shared/ServerError.Builder.html" title="class in com.styra.opa.openapi.models.shared">ServerError.Builder</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i133" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/errors/ServerErrorErrors.html" title="class in com.styra.opa.openapi.models.errors">ServerErrorErrors</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i108" class="altColor">
+<tr id="i134" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/errors/ServerErrorErrors.Builder.html" title="class in com.styra.opa.openapi.models.errors">ServerErrorErrors.Builder</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i109" class="rowColor">
+<tr id="i135" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/errors/ServerErrorLocation.html" title="class in com.styra.opa.openapi.models.errors">ServerErrorLocation</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i110" class="altColor">
+<tr id="i136" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/errors/ServerErrorLocation.Builder.html" title="class in com.styra.opa.openapi.models.errors">ServerErrorLocation.Builder</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i111" class="rowColor">
+<tr id="i137" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/SpeakeasyHTTPClient.html" title="class in com.styra.opa.openapi.utils">SpeakeasyHTTPClient</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i112" class="altColor">
+<tr id="i138" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/SpeakeasyMetadata.html" title="annotation in com.styra.opa.openapi.utils">SpeakeasyMetadata</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i113" class="rowColor">
-<td class="colFirst"><a href="com/styra/opa/openapi/models/shared/SuccessfulPolicyEvaluation.html" title="class in com.styra.opa.openapi.models.shared">SuccessfulPolicyEvaluation</a></td>
+<tr id="i139" class="rowColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/models/shared/SuccessfulPolicyResponse.html" title="class in com.styra.opa.openapi.models.shared">SuccessfulPolicyResponse</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i114" class="altColor">
-<td class="colFirst"><a href="com/styra/opa/openapi/models/shared/SuccessfulPolicyEvaluation.Builder.html" title="class in com.styra.opa.openapi.models.shared">SuccessfulPolicyEvaluation.Builder</a></td>
+<tr id="i140" class="altColor">
+<td class="colFirst"><a href="com/styra/opa/openapi/models/shared/SuccessfulPolicyResponse.Builder.html" title="class in com.styra.opa.openapi.models.shared">SuccessfulPolicyResponse.Builder</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i115" class="rowColor">
+<tr id="i141" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/TypedObject.html" title="class in com.styra.opa.openapi.utils">TypedObject</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i116" class="altColor">
+<tr id="i142" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/TypedObject.Serializer.html" title="class in com.styra.opa.openapi.utils">TypedObject.Serializer</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i117" class="rowColor">
+<tr id="i143" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/Types.html" title="enum in com.styra.opa.openapi.utils">Types</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i118" class="altColor">
+<tr id="i144" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/errors/UnhealthyServer.html" title="class in com.styra.opa.openapi.models.errors">UnhealthyServer</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i119" class="rowColor">
+<tr id="i145" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/models/errors/UnhealthyServer.Builder.html" title="class in com.styra.opa.openapi.models.errors">UnhealthyServer.Builder</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i120" class="altColor">
+<tr id="i146" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/Utils.html" title="class in com.styra.opa.openapi.utils">Utils</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i121" class="rowColor">
+<tr id="i147" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/Utils.Function.html" title="interface in com.styra.opa.openapi.utils">Utils.Function</a>&lt;<a href="com/styra/opa/openapi/utils/Utils.Function.html" title="type parameter in Utils.Function">S</a>,&#8203;<a href="com/styra/opa/openapi/utils/Utils.Function.html" title="type parameter in Utils.Function">T</a>&gt;</td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i122" class="altColor">
+<tr id="i148" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/Utils.HttpResponseCached.html" title="class in com.styra.opa.openapi.utils">Utils.HttpResponseCached</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i123" class="rowColor">
+<tr id="i149" class="rowColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/Utils.JsonShape.html" title="enum in com.styra.opa.openapi.utils">Utils.JsonShape</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
-<tr id="i124" class="altColor">
+<tr id="i150" class="altColor">
 <td class="colFirst"><a href="com/styra/opa/openapi/utils/Utils.TypeReferenceWithShape.html" title="class in com.styra.opa.openapi.utils">Utils.TypeReferenceWithShape</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>

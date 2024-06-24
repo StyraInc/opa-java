@@ -115,6 +115,10 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            <li class="nav-item" data-bs-level="2"><a href="#executebatchpolicywithinput" class="nav-link">executeBatchPolicyWithInput</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
             <li class="nav-item" data-bs-level="2"><a href="#health" class="nav-link">health</a>
               <ul class="nav flex-column">
               </ul>
@@ -135,6 +139,7 @@
 <li><a href="#executedefaultpolicywithinput">executeDefaultPolicyWithInput</a> - Execute the default decision  given an input</li>
 <li><a href="#executepolicy">executePolicy</a> - Execute a policy</li>
 <li><a href="#executepolicywithinput">executePolicyWithInput</a> - Execute a policy given an input</li>
+<li><a href="#executebatchpolicywithinput">executeBatchPolicyWithInput</a> - Execute a policy given a batch of inputs</li>
 <li><a href="#health">health</a> - Verify the server is operational</li>
 </ul>
 <h2 id="executedefaultpolicywithinput">executeDefaultPolicyWithInput</h2>
@@ -184,6 +189,7 @@ public class Application {
             // handle exception
             throw e;
         }
+
     }
 }
 </code></pre>
@@ -280,7 +286,7 @@ public class Application {
                 .request(req)
                 .call();
 
-            if (res.successfulPolicyEvaluation().isPresent()) {
+            if (res.successfulPolicyResponse().isPresent()) {
                 // handle response
             }
         } catch (com.styra.opa.openapi.models.errors.ClientError e) {
@@ -296,6 +302,7 @@ public class Application {
             // handle exception
             throw e;
         }
+
     }
 }
 </code></pre>
@@ -383,7 +390,7 @@ public class Application {
                 .request(req)
                 .call();
 
-            if (res.successfulPolicyEvaluation().isPresent()) {
+            if (res.successfulPolicyResponse().isPresent()) {
                 // handle response
             }
         } catch (com.styra.opa.openapi.models.errors.ClientError e) {
@@ -399,6 +406,7 @@ public class Application {
             // handle exception
             throw e;
         }
+
     }
 }
 </code></pre>
@@ -450,9 +458,114 @@ public class Application {
 </tr>
 </tbody>
 </table>
+<h2 id="executebatchpolicywithinput">executeBatchPolicyWithInput</h2>
+<p>Execute a policy given a batch of inputs</p>
+<h3 id="example-usage_3">Example Usage</h3>
+<pre><code class="language-java">package hello.world;
+
+import com.styra.opa.openapi.OpaApiClient;
+import com.styra.opa.openapi.models.operations.*;
+import com.styra.opa.openapi.models.shared.*;
+import com.styra.opa.openapi.utils.EventStream;
+import java.math.BigDecimal;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
+import static java.util.Map.entry;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+        try {
+            OpaApiClient sdk = OpaApiClient.builder()
+                .build();
+
+            ExecuteBatchPolicyWithInputRequest req = ExecuteBatchPolicyWithInputRequest.builder()
+                .path(&quot;app/rbac&quot;)
+                .requestBody(ExecuteBatchPolicyWithInputRequestBody.builder()
+                        .inputs(java.util.Map.ofEntries(
+                                entry(&quot;key&quot;, Input.of(&quot;&lt;value&gt;&quot;))))
+                        .build())
+                .build();
+
+            ExecuteBatchPolicyWithInputResponse res = sdk.executeBatchPolicyWithInput()
+                .request(req)
+                .call();
+
+            if (res.batchSuccessfulPolicyEvaluation().isPresent()) {
+                // handle response
+            }
+        } catch (com.styra.opa.openapi.models.errors.ClientError e) {
+            // handle exception
+            throw e;
+        } catch (com.styra.opa.openapi.models.errors.BatchServerError e) {
+            // handle exception
+            throw e;
+        } catch (com.styra.opa.openapi.models.errors.SDKError e) {
+            // handle exception
+            throw e;
+        } catch (Exception e) {
+            // handle exception
+            throw e;
+        }
+
+    }
+}
+</code></pre>
+<h3 id="parameters_3">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>request</code></td>
+<td><a href="../../models/operations/ExecuteBatchPolicyWithInputRequest/">com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequest</a></td>
+<td>:heavy_check_mark:</td>
+<td>The request object to use for the request.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="response_3">Response</h3>
+<p><strong><a href="../../models/operations/ExecuteBatchPolicyWithInputResponse/">Optional&lt;? extends com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputResponse&gt;</a></strong></p>
+<h3 id="errors_3">Errors</h3>
+<table>
+<thead>
+<tr>
+<th>Error Object</th>
+<th>Status Code</th>
+<th>Content Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>models/errors/ClientError</td>
+<td>400</td>
+<td>application/json</td>
+</tr>
+<tr>
+<td>models/errors/BatchServerError</td>
+<td>500</td>
+<td>application/json</td>
+</tr>
+<tr>
+<td>models/errors/SDKError</td>
+<td>4xx-5xx</td>
+<td><em>/</em></td>
+</tr>
+</tbody>
+</table>
 <h2 id="health">health</h2>
 <p>The health API endpoint executes a simple built-in policy query to verify that the server is operational. Optionally it can account for bundle activation as well (useful for “ready” checks at startup).</p>
-<h3 id="example-usage_3">Example Usage</h3>
+<h3 id="example-usage_4">Example Usage</h3>
 <pre><code class="language-java">package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
@@ -495,10 +608,11 @@ public class Application {
             // handle exception
             throw e;
         }
+
     }
 }
 </code></pre>
-<h3 id="parameters_3">Parameters</h3>
+<h3 id="parameters_4">Parameters</h3>
 <table>
 <thead>
 <tr>
@@ -529,9 +643,9 @@ public class Application {
 </tr>
 </tbody>
 </table>
-<h3 id="response_3">Response</h3>
+<h3 id="response_4">Response</h3>
 <p><strong><a href="../../models/operations/HealthResponse/">Optional&lt;? extends com.styra.opa.openapi.models.operations.HealthResponse&gt;</a></strong></p>
-<h3 id="errors_3">Errors</h3>
+<h3 id="errors_4">Errors</h3>
 <table>
 <thead>
 <tr>

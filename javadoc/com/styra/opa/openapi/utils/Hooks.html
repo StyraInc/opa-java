@@ -307,7 +307,7 @@ implements <a href="Hook.BeforeRequest.html" title="interface in com.styra.opa.o
 <td class="colFirst"><code><a href="Hooks.html" title="class in com.styra.opa.openapi.utils">Hooks</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#registerSdkInit(com.styra.opa.openapi.utils.Hook.SdkInit)">registerSdkInit</a></span>&#8203;(<a href="Hook.SdkInit.html" title="interface in com.styra.opa.openapi.utils">Hook.SdkInit</a>&nbsp;SdkInit)</code></th>
 <td class="colLast">
-<div class="block">Registers a  hook to be applied in order of registration
+<div class="block">Registers a <a href="Hook.SdkInit.html" title="interface in com.styra.opa.openapi.utils"><code>Hook.SdkInit</code></a> hook to be applied in order of registration
  (multiple can be registered).</div>
 </td>
 </tr>
@@ -430,7 +430,7 @@ implements <a href="Hook.BeforeRequest.html" title="interface in com.styra.opa.o
 <li class="blockList">
 <h4>registerSdkInit</h4>
 <pre class="methodSignature">public&nbsp;<a href="Hooks.html" title="class in com.styra.opa.openapi.utils">Hooks</a>&nbsp;registerSdkInit&#8203;(<a href="Hook.SdkInit.html" title="interface in com.styra.opa.openapi.utils">Hook.SdkInit</a>&nbsp;SdkInit)</pre>
-<div class="block">Registers a  hook to be applied in order of registration
+<div class="block">Registers a <a href="Hook.SdkInit.html" title="interface in com.styra.opa.openapi.utils"><code>Hook.SdkInit</code></a> hook to be applied in order of registration
  (multiple can be registered).</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -450,7 +450,13 @@ implements <a href="Hook.BeforeRequest.html" title="interface in com.styra.opa.o
                                                java.net.http.HttpRequest&nbsp;request)
                                         throws java.lang.Exception</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="Hook.BeforeRequest.html#beforeRequest(com.styra.opa.openapi.utils.Hook.BeforeRequestContext,java.net.http.HttpRequest)">Hook.BeforeRequest</a></code></span></div>
-<div class="block">Transforms the given <code>HttpRequest</code> before sending.</div>
+<div class="block">Transforms the given <code>HttpRequest</code> before sending.
+ 
+ <p>Note that <code>HttpRequest</code> is immutable. To modify the request you can use
+ <code>HttpRequest#newBuilder(HttpRequest, BiPredicate<String, String>)</code> with 
+ JDK 16 and later (which will copy the request for modification in a builder). 
+ If that method is not available then use <a href="Helpers.html#copy(java.net.http.HttpRequest)"><code>Helpers.copy(java.net.http.HttpRequest)</code></a> (which also returns
+ a builder).</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="Hook.BeforeRequest.html#beforeRequest(com.styra.opa.openapi.utils.Hook.BeforeRequestContext,java.net.http.HttpRequest)">beforeRequest</a></code>&nbsp;in interface&nbsp;<code><a href="Hook.BeforeRequest.html" title="interface in com.styra.opa.openapi.utils">Hook.BeforeRequest</a></code></dd>
