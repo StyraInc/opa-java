@@ -34,6 +34,12 @@ public class SDKMethodInterfaces {
     }
 
 
+    public interface MethodCallExecuteBatchPolicyWithInput {
+        com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputResponse executeBatchPolicyWithInput(
+            com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequest request) throws Exception;
+    }
+
+
     public interface MethodCallHealth {
         com.styra.opa.openapi.models.operations.HealthResponse health(
             Optional<? extends Boolean> bundles,

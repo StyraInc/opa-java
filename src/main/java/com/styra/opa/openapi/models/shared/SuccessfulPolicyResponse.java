@@ -18,7 +18,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 
-public class SuccessfulPolicyEvaluation {
+public class SuccessfulPolicyResponse {
 
     /**
      * The base or virtual document referred to by the URL path. If the path is undefined, this key will be omitted.
@@ -49,7 +49,7 @@ public class SuccessfulPolicyEvaluation {
     private Optional<? extends Provenance> provenance;
 
     @JsonCreator
-    public SuccessfulPolicyEvaluation(
+    public SuccessfulPolicyResponse(
             @JsonProperty("result") Optional<? extends Result> result,
             @JsonProperty("metrics") Optional<? extends java.util.Map<String, java.lang.Object>> metrics,
             @JsonProperty("decision_id") Optional<? extends String> decisionId,
@@ -64,7 +64,7 @@ public class SuccessfulPolicyEvaluation {
         this.provenance = provenance;
     }
     
-    public SuccessfulPolicyEvaluation() {
+    public SuccessfulPolicyResponse() {
         this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
@@ -111,7 +111,7 @@ public class SuccessfulPolicyEvaluation {
     /**
      * The base or virtual document referred to by the URL path. If the path is undefined, this key will be omitted.
      */
-    public SuccessfulPolicyEvaluation withResult(Result result) {
+    public SuccessfulPolicyResponse withResult(Result result) {
         Utils.checkNotNull(result, "result");
         this.result = Optional.ofNullable(result);
         return this;
@@ -120,7 +120,7 @@ public class SuccessfulPolicyEvaluation {
     /**
      * The base or virtual document referred to by the URL path. If the path is undefined, this key will be omitted.
      */
-    public SuccessfulPolicyEvaluation withResult(Optional<? extends Result> result) {
+    public SuccessfulPolicyResponse withResult(Optional<? extends Result> result) {
         Utils.checkNotNull(result, "result");
         this.result = result;
         return this;
@@ -129,7 +129,7 @@ public class SuccessfulPolicyEvaluation {
     /**
      * If query metrics are enabled, this field contains query performance metrics collected during the parse, compile, and evaluation steps.
      */
-    public SuccessfulPolicyEvaluation withMetrics(java.util.Map<String, java.lang.Object> metrics) {
+    public SuccessfulPolicyResponse withMetrics(java.util.Map<String, java.lang.Object> metrics) {
         Utils.checkNotNull(metrics, "metrics");
         this.metrics = Optional.ofNullable(metrics);
         return this;
@@ -138,7 +138,7 @@ public class SuccessfulPolicyEvaluation {
     /**
      * If query metrics are enabled, this field contains query performance metrics collected during the parse, compile, and evaluation steps.
      */
-    public SuccessfulPolicyEvaluation withMetrics(Optional<? extends java.util.Map<String, java.lang.Object>> metrics) {
+    public SuccessfulPolicyResponse withMetrics(Optional<? extends java.util.Map<String, java.lang.Object>> metrics) {
         Utils.checkNotNull(metrics, "metrics");
         this.metrics = metrics;
         return this;
@@ -147,7 +147,7 @@ public class SuccessfulPolicyEvaluation {
     /**
      * If decision logging is enabled, this field contains a string that uniquely identifies the decision. The identifier will be included in the decision log event for this decision. Callers can use the identifier for correlation purposes.
      */
-    public SuccessfulPolicyEvaluation withDecisionId(String decisionId) {
+    public SuccessfulPolicyResponse withDecisionId(String decisionId) {
         Utils.checkNotNull(decisionId, "decisionId");
         this.decisionId = Optional.ofNullable(decisionId);
         return this;
@@ -156,7 +156,7 @@ public class SuccessfulPolicyEvaluation {
     /**
      * If decision logging is enabled, this field contains a string that uniquely identifies the decision. The identifier will be included in the decision log event for this decision. Callers can use the identifier for correlation purposes.
      */
-    public SuccessfulPolicyEvaluation withDecisionId(Optional<? extends String> decisionId) {
+    public SuccessfulPolicyResponse withDecisionId(Optional<? extends String> decisionId) {
         Utils.checkNotNull(decisionId, "decisionId");
         this.decisionId = decisionId;
         return this;
@@ -165,7 +165,7 @@ public class SuccessfulPolicyEvaluation {
     /**
      * Provenance information can be requested on individual API calls and are returned inline with the API response. To obtain provenance information on an API call, specify the `provenance=true` query parameter when executing the API call.
      */
-    public SuccessfulPolicyEvaluation withProvenance(Provenance provenance) {
+    public SuccessfulPolicyResponse withProvenance(Provenance provenance) {
         Utils.checkNotNull(provenance, "provenance");
         this.provenance = Optional.ofNullable(provenance);
         return this;
@@ -174,7 +174,7 @@ public class SuccessfulPolicyEvaluation {
     /**
      * Provenance information can be requested on individual API calls and are returned inline with the API response. To obtain provenance information on an API call, specify the `provenance=true` query parameter when executing the API call.
      */
-    public SuccessfulPolicyEvaluation withProvenance(Optional<? extends Provenance> provenance) {
+    public SuccessfulPolicyResponse withProvenance(Optional<? extends Provenance> provenance) {
         Utils.checkNotNull(provenance, "provenance");
         this.provenance = provenance;
         return this;
@@ -188,7 +188,7 @@ public class SuccessfulPolicyEvaluation {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        SuccessfulPolicyEvaluation other = (SuccessfulPolicyEvaluation) o;
+        SuccessfulPolicyResponse other = (SuccessfulPolicyResponse) o;
         return 
             java.util.Objects.deepEquals(this.result, other.result) &&
             java.util.Objects.deepEquals(this.metrics, other.metrics) &&
@@ -207,7 +207,7 @@ public class SuccessfulPolicyEvaluation {
     
     @Override
     public String toString() {
-        return Utils.toString(SuccessfulPolicyEvaluation.class,
+        return Utils.toString(SuccessfulPolicyResponse.class,
                 "result", result,
                 "metrics", metrics,
                 "decisionId", decisionId,
@@ -300,8 +300,8 @@ public class SuccessfulPolicyEvaluation {
             return this;
         }
         
-        public SuccessfulPolicyEvaluation build() {
-            return new SuccessfulPolicyEvaluation(
+        public SuccessfulPolicyResponse build() {
+            return new SuccessfulPolicyResponse(
                 result,
                 metrics,
                 decisionId,

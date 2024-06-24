@@ -7,6 +7,7 @@ package com.styra.opa.openapi.utils;
 import java.io.InputStream;
 import java.net.http.HttpResponse;
 import java.net.http.HttpRequest;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -27,6 +28,7 @@ public final class Hook {
      */
     public interface HookContext {
         String operationId();
+        Optional<List<String>> oauthScopes();
         Optional<SecuritySource> securitySource();
     }
     
@@ -39,10 +41,12 @@ public final class Hook {
     public static final class BeforeRequestContextImpl implements BeforeRequestContext {
         
         private final String operationId;
+        private final Optional<List<String>> oauthScopes;
         private final Optional<SecuritySource> securitySource;
         
-        public BeforeRequestContextImpl(String operationId, Optional<SecuritySource> securitySource) {
+        public BeforeRequestContextImpl(String operationId, Optional<List<String>> oauthScopes, Optional<SecuritySource> securitySource) {
             this.operationId = operationId;
+            this.oauthScopes = oauthScopes;
             this.securitySource = securitySource;
         }
         
@@ -54,6 +58,11 @@ public final class Hook {
         @Override
         public Optional<SecuritySource> securitySource() {
             return securitySource;
+        }
+        
+        @Override
+        public Optional<List<String>> oauthScopes() {
+            return oauthScopes;
         }
     }
     
@@ -66,11 +75,13 @@ public final class Hook {
     public static final class AfterSuccessContextImpl implements AfterSuccessContext {
         
         private final String operationId;
+        private final Optional<List<String>> oauthScopes;
         private final Optional<SecuritySource> securitySource;
         
-        public AfterSuccessContextImpl(String operationId, Optional<SecuritySource> securitySource) {
+        public AfterSuccessContextImpl(String operationId, Optional<List<String>> oauthScopes, Optional<SecuritySource> securitySource) {
             Utils.checkNotNull(securitySource, "securitySource");
             this.operationId = operationId;
+            this.oauthScopes = oauthScopes;
             this.securitySource = securitySource;
         }
         
@@ -82,6 +93,11 @@ public final class Hook {
         @Override
         public Optional<SecuritySource> securitySource() {
             return securitySource;
+        }
+        
+        @Override 
+        public Optional<List<String>> oauthScopes() {
+            return oauthScopes;
         }
     }
 
@@ -94,20 +110,29 @@ public final class Hook {
     public static final class AfterErrorContextImpl implements AfterErrorContext {
         
         private final String operationId;
+        private final Optional<List<String>> oauthScopes;
         private final Optional<SecuritySource> securitySource;
         
-        public AfterErrorContextImpl(String operationId, Optional<SecuritySource> securitySource) {
+        public AfterErrorContextImpl(String operationId, Optional<List<String>> oauthScopes, Optional<SecuritySource> securitySource) {
             Utils.checkNotNull(securitySource, "securitySource");
             this.operationId = operationId;
+            this.oauthScopes = oauthScopes;
             this.securitySource = securitySource;
         }
         
+        @Override
         public String operationId() {
             return operationId;
         }
         
+        @Override
         public Optional<SecuritySource> securitySource() {
             return securitySource;
+        }
+        
+        @Override
+        public Optional<List<String>> oauthScopes() {
+            return oauthScopes;
         }
     }
 
@@ -118,6 +143,12 @@ public final class Hook {
 
         /**
          * Transforms the given {@link HttpRequest} before sending.
+         * 
+         * <p>Note that {@link HttpRequest} is immutable. To modify the request you can use
+         * {@link HttpRequest#newBuilder(HttpRequest, BiPredicate<String, String>)} with 
+         * JDK 16 and later (which will copy the request for modification in a builder). 
+         * If that method is not available then use {@link Helpers#copy} (which also returns
+         * a builder).
          * 
          * @param context context for the hook call
          * @param request request to be transformed
@@ -233,7 +264,7 @@ public final class Hook {
     
         @Override
         public HttpRequest beforeRequest(BeforeRequestContext context, HttpRequest request) throws Exception {
-            HttpRequest.Builder b = Utils.copy(request);
+            HttpRequest.Builder b = Helpers.copy(request);
             b.header("Idempotency-Key", UUID.randomUUID().toString());
             return b.build();
         }

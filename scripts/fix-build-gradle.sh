@@ -8,6 +8,28 @@
 # footer replaces everything between the comment `// === build-footer ===` and
 # the end of the file with whatever is in the file in ./scripts.
 
+# It is useful to be able to develop from MacOS, but it's sed implementation
+# chokes. Rather than hard-coding MacOS stuff, we just check if the system sed
+# is not GNU sed, and if so try to detect an installed gsed.
+SED="$(which sed)"
+if "$SED" --version 2>&1 | head -n1 | grep -q 'GNU sed' ; then
+	printf "" # pass
+else
+	if [ ! -x "$(which gsed)" ] ; then
+		echo "FATAL: '$SED' is not GNU sed, and gsed is not found." 1>&2
+		echo "HINT: on MacOS, try brew install gsed" 1>&2
+		exit 1
+	fi
+
+	SED="$(which gsed)"
+	if "$SED" --version 2>&1 | head -n1 | grep -q 'GNU sed' ; then
+		printf "" # pass
+	else
+		echo "FATAL: '$SED' is your system 'gsed', but is not GNU sed." 1>&2
+		exit 1
+	fi
+fi
+
 cd "$(dirname "$0")/.."
 set -e
 set -u
@@ -15,71 +37,23 @@ set -x
 
 trap 'rm -f build.gradle.tmp*' EXIT
 
-# This AWK program replaces the plugins section of build.gradle with a custom
-# one, specified in the variable `f`. The variable `p` is used to track whether
-# we are still parsing the `plugins` block or not. In explanation of each of
-# its clauses:
-#
-#     p==1 && $1 != "}" {next}
-#
-#         If we are still parsing the plugins block, and the current line does
-#         not start with `}`, continue to the next line without doing anything.
-#
-#     $1 == "plugins" && $2 == "{" && p !=1 {p=1; while((getline l<f)){print(l)}; next}
-#
-#         If the line starts with `plugins {` (note that `plugins{` will not be
-#         accepted), and we aren't already parsing the plugins block, set `p=1`
-#         so we know we are in the plugins block, then print every line of the
-#         file `f` to the output. Finally, proceed to processing the next line
-#         without considering any of the remaining clauses.
-#
-#     $1 == "}" && p == 1 {p=0;next}
-#
-#         If the line starts with `}` and we are parsing the plugins block,
-#         set `p=0` and continue to the next line. This intentionally avoids
-#         printing the closing `}`, as `scripts/build-plugins.gradle` should
-#         include that itself.
-#
-#     {print($0)}
-#
-#         Print the line. This causes any lines outside of the plugin block to
-#         be printed without modification.
-#
-# Notice also the use of `trap`, which ensures that if the AWK script fails for
-# some reason, we will clean up the .tmp file it creates on our way out the
-# door. By writing to a temp file and then overwriting the main one, we can
-# ensure that the modification process is atomic (assuming `mv` is atomic on
-# the hose filesystem).
-#
-# This does seem to be adding an extra trailing newline to after the plugins
-# block each time that it runs, presumably due to the default print($0) action.
-awk -v f=./scripts/build-plugins.gradle 'p==1 && $1 != "}" {next} $1 == "plugins" && $2 == "{" && p !=1 {p=1; while((getline l<f)){print(l)}; next} $1 == "}" && p == 1 {p=0;next} {print($0)}' < build.gradle > build.gradle.tmp1
-
-
-# This AWK script works on a similar principle to the above. It first searches
-# for an existing `// === build-footer ===` comment and if it finds one, uses
-# `exit` to jump directly to the `END` block, otherwise simply outputting the
-# lines that it sees unmodified. When the `END` block is run, it simply outputs
-# the footer file.
-awk -v f=./scripts/build-footer.gradle '$1 == "//" && $2 == "===" && $3 == "build-footer" && $4 == "===" {exit} {print($0)} END {print("// === build-footer ==="); while((getline l<f)){print(l)}}' < build.gradle.tmp1 > build.gradle.tmp2
-
 # Rewrite the artifact and group ID to be one level "up", so we publish
 # com.styra.opa rather than com.styra.opa.openapi.
-sed 's#into("META-INF/maven/com.styra.opa/openapi")#into("META-INF/maven/com.styra/opa")#g' < build.gradle.tmp2 | \
-	sed 's#group = "com.styra.opa"#group = "com.styra"#g' | \
-	sed "s#groupId = 'com.styra.opa'#groupId = 'com.styra'#g" | \
-	sed "s#artifactId = 'openapi'#artifactId = 'opa'#g" | \
-	sed 's#archiveBaseName = "openapi"#archiveBaseName = "opa"#g' | \
-	sed 's#libs/openapi-#libs/opa-#g' > build.gradle.tmp3
+"$SED" 's#into("META-INF/maven/com.styra.opa/openapi")#into("META-INF/maven/com.styra/opa")#g' < build.gradle | \
+	"$SED" 's#group = "com.styra.opa"#group = "com.styra"#g' | \
+	"$SED" "s#groupId = 'com.styra.opa'#groupId = 'com.styra'#g" | \
+	"$SED" "s#artifactId = 'openapi'#artifactId = 'opa'#g" | \
+	"$SED" 's#archiveBaseName = "openapi"#archiveBaseName = "opa"#g' | \
+	"$SED" 's#libs/openapi-#libs/opa-#g' > build.gradle.tmp
 
 # Finalize changes to build.gradle
-mv build.gradle.tmp3 build.gradle
+mv build.gradle.tmp build.gradle
 
 # Automatically remove any unused deps SE may have added.
 ./gradlew fixGradleLint
 
 # Update settings.gradle to set the root project name.
-sed -i "s#rootProject.name = 'openapi'#rootProject.name = 'opa'#g" ./settings.gradle
+"$SED" -i "s/rootProject[.]name = 'openapi'/rootProject.name = 'opa'/g" ./settings.gradle
 
 # Check for any suspicious strings that might indicate a bad group or artifact
 # ID. If this check fails, most likely the generated build.gradle has changed
@@ -98,4 +72,9 @@ groupartifactlint() {
 set +x
 groupartifactlint 'com[.]styra[.]opa[.]openapi'
 groupartifactlint 'opa[.]openapi'
-groupartifactlint 'com[.]styra[.]opa/openapi' 
+groupartifactlint 'com[.]styra[.]opa/openapi'
+
+if grep -q 'rootProject[.]name.*openapi' < settings.gradle ; then
+	echo "WARNING: possible incorrect root project name in settings.gradle after running '$0'" 1>&2
+	exit 1
+fi
