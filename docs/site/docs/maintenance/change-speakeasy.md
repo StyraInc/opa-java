@@ -1,5 +1,9 @@
 # Regenerate Speakeasy-Manged Code
 
+!!! warning
+
+    Be aware that manually generating using `speakeasy run` can cause the version numbers in `.speakeasy/gen.yaml` and `RELEASES.md` to drift out of sync, which can result in releases being published with inconsistent version numbers. Be sure to check this before releasing from any branch where manual generation has been performed.
+
 Speakeasy-managed portions of the `opa-java` SDK are normally kept upt to date by [SDK generation workflow](https://github.com/StyraInc/opa-java/blob/main/.github/workflows/sdk_generation.yaml). Usually, no additional actions are required beyond merging the PRs this workflow creates automatically. For more information, see [*Releases*](./releases.md).
 
 If you need to re-generate the Speakeasy portions of the code manually, you can use the following shell commands:
