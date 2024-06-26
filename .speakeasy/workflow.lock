@@ -1,17 +1,17 @@
-speakeasyVersion: 1.315.1
+speakeasyVersion: 1.320.0
 sources:
     openapi:
         sourceNamespace: openapi
-        sourceRevisionDigest: sha256:fb5f79d7d512c1930065ffdd3cb92e412164c3d53bc0c936b1c44a6bb4329828
-        sourceBlobDigest: sha256:7d4ebf8b4a38acf08835ed8fa2e4e4cfd31ba01defc2a2bfd44cec637c87e35e
+        sourceRevisionDigest: sha256:160b992f9f36d7ee99ccfcf3fe3cff8693343dfa470d499fcff0bce054c7a71e
+        sourceBlobDigest: sha256:8b9d7ab82b2a9b48852bb5b6818294594a9a7949678b919f272da8f6518825aa
         tags:
             - latest
 targets:
     opa:
         source: openapi
         sourceNamespace: openapi
-        sourceRevisionDigest: sha256:fb5f79d7d512c1930065ffdd3cb92e412164c3d53bc0c936b1c44a6bb4329828
-        sourceBlobDigest: sha256:7d4ebf8b4a38acf08835ed8fa2e4e4cfd31ba01defc2a2bfd44cec637c87e35e
+        sourceRevisionDigest: sha256:160b992f9f36d7ee99ccfcf3fe3cff8693343dfa470d499fcff0bce054c7a71e
+        sourceBlobDigest: sha256:8b9d7ab82b2a9b48852bb5b6818294594a9a7949678b919f272da8f6518825aa
         outLocation: /Users/cad/f/src/opa-java
 workflow:
     workflowVersion: 1.0.0

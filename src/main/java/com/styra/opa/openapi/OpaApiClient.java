@@ -225,7 +225,7 @@ public class OpaApiClient implements
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
-                  new BeforeRequestContextImpl("executeDefaultPolicyWithInput", Optional.empty(), sdkConfiguration.securitySource()),
+                  new BeforeRequestContextImpl("executeDefaultPolicyWithInput", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -233,18 +233,18 @@ public class OpaApiClient implements
             if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "404", "4XX", "500", "5XX")) {
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
-                        new AfterErrorContextImpl("executeDefaultPolicyWithInput", Optional.empty(), sdkConfiguration.securitySource()),
+                        new AfterErrorContextImpl("executeDefaultPolicyWithInput", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
-                        new AfterSuccessContextImpl("executeDefaultPolicyWithInput", Optional.empty(), sdkConfiguration.securitySource()),
+                        new AfterSuccessContextImpl("executeDefaultPolicyWithInput", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
                          _httpRes);
             }
         } catch (Exception _e) {
             _httpRes = sdkConfiguration.hooks()
-                    .afterError(new AfterErrorContextImpl("executeDefaultPolicyWithInput", Optional.empty(), sdkConfiguration.securitySource()), 
+                    .afterError(new AfterErrorContextImpl("executeDefaultPolicyWithInput", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -359,7 +359,7 @@ public class OpaApiClient implements
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
-                  new BeforeRequestContextImpl("executePolicy", Optional.empty(), sdkConfiguration.securitySource()),
+                  new BeforeRequestContextImpl("executePolicy", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -367,18 +367,18 @@ public class OpaApiClient implements
             if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "4XX", "500", "5XX")) {
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
-                        new AfterErrorContextImpl("executePolicy", Optional.empty(), sdkConfiguration.securitySource()),
+                        new AfterErrorContextImpl("executePolicy", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
-                        new AfterSuccessContextImpl("executePolicy", Optional.empty(), sdkConfiguration.securitySource()),
+                        new AfterSuccessContextImpl("executePolicy", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
                          _httpRes);
             }
         } catch (Exception _e) {
             _httpRes = sdkConfiguration.hooks()
-                    .afterError(new AfterErrorContextImpl("executePolicy", Optional.empty(), sdkConfiguration.securitySource()), 
+                    .afterError(new AfterErrorContextImpl("executePolicy", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -501,7 +501,7 @@ public class OpaApiClient implements
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
-                  new BeforeRequestContextImpl("executePolicyWithInput", Optional.empty(), sdkConfiguration.securitySource()),
+                  new BeforeRequestContextImpl("executePolicyWithInput", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -509,18 +509,18 @@ public class OpaApiClient implements
             if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "4XX", "500", "5XX")) {
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
-                        new AfterErrorContextImpl("executePolicyWithInput", Optional.empty(), sdkConfiguration.securitySource()),
+                        new AfterErrorContextImpl("executePolicyWithInput", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
-                        new AfterSuccessContextImpl("executePolicyWithInput", Optional.empty(), sdkConfiguration.securitySource()),
+                        new AfterSuccessContextImpl("executePolicyWithInput", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
                          _httpRes);
             }
         } catch (Exception _e) {
             _httpRes = sdkConfiguration.hooks()
-                    .afterError(new AfterErrorContextImpl("executePolicyWithInput", Optional.empty(), sdkConfiguration.securitySource()), 
+                    .afterError(new AfterErrorContextImpl("executePolicyWithInput", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -643,7 +643,7 @@ public class OpaApiClient implements
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
-                  new BeforeRequestContextImpl("executeBatchPolicyWithInput", Optional.empty(), sdkConfiguration.securitySource()),
+                  new BeforeRequestContextImpl("executeBatchPolicyWithInput", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -651,18 +651,18 @@ public class OpaApiClient implements
             if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "4XX", "500", "5XX")) {
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
-                        new AfterErrorContextImpl("executeBatchPolicyWithInput", Optional.empty(), sdkConfiguration.securitySource()),
+                        new AfterErrorContextImpl("executeBatchPolicyWithInput", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
-                        new AfterSuccessContextImpl("executeBatchPolicyWithInput", Optional.empty(), sdkConfiguration.securitySource()),
+                        new AfterSuccessContextImpl("executeBatchPolicyWithInput", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
                          _httpRes);
             }
         } catch (Exception _e) {
             _httpRes = sdkConfiguration.hooks()
-                    .afterError(new AfterErrorContextImpl("executeBatchPolicyWithInput", Optional.empty(), sdkConfiguration.securitySource()), 
+                    .afterError(new AfterErrorContextImpl("executeBatchPolicyWithInput", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -813,7 +813,7 @@ public class OpaApiClient implements
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
-                  new BeforeRequestContextImpl("health", Optional.empty(), sdkConfiguration.securitySource()),
+                  new BeforeRequestContextImpl("health", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -821,18 +821,18 @@ public class OpaApiClient implements
             if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX", "500", "5XX")) {
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
-                        new AfterErrorContextImpl("health", Optional.empty(), sdkConfiguration.securitySource()),
+                        new AfterErrorContextImpl("health", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
-                        new AfterSuccessContextImpl("health", Optional.empty(), sdkConfiguration.securitySource()),
+                        new AfterSuccessContextImpl("health", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
                          _httpRes);
             }
         } catch (Exception _e) {
             _httpRes = sdkConfiguration.hooks()
-                    .afterError(new AfterErrorContextImpl("health", Optional.empty(), sdkConfiguration.securitySource()), 
+                    .afterError(new AfterErrorContextImpl("health", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()), 
                         Optional.empty(),
                         Optional.of(_e));
         }
