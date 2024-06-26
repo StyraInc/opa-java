@@ -125,6 +125,10 @@
                     <div class="col-md-9" role="main">
 
 <h1 id="regenerate-speakeasy-manged-code">Regenerate Speakeasy-Manged Code</h1>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Be aware that manually generating using <code>speakeasy run</code> can cause the version numbers in <code>.speakeasy/gen.yaml</code> and <code>RELEASES.md</code> to drift out of sync, which can result in releases being published with inconsistent version numbers. Be sure to check this before releasing from any branch where manual generation has been performed.</p>
+</div>
 <p>Speakeasy-managed portions of the <code>opa-java</code> SDK are normally kept upt to date by <a href="https://github.com/StyraInc/opa-java/blob/main/.github/workflows/sdk_generation.yaml">SDK generation workflow</a>. Usually, no additional actions are required beyond merging the PRs this workflow creates automatically. For more information, see <a href="../releases/"><em>Releases</em></a>.</p>
 <p>If you need to re-generate the Speakeasy portions of the code manually, you can use the following shell commands:</p>
 <pre><code class="language-sh">speakeasy run --skip-compile --force
