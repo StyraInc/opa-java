@@ -42,7 +42,7 @@ model {
 jar {
     dependsOn(":generatePomFileForMavenPublication")
 
-    into("META-INF/maven/com.styra/opa") {
+    into("META-INF/maven/com.styra.opa/openapi") {
         from("$buildDir/pom.xml")
     }
 }
@@ -75,9 +75,9 @@ publishing {
 
     publications {
         maven(MavenPublication) {
-            groupId = 'com.styra'
-            artifactId = 'opa'
-            version = '1.3.0'
+            groupId = 'com.styra.opa'
+            artifactId = 'openapi'
+            version = '1.4.0'
 
             from components.java
 

@@ -4,6 +4,10 @@
 
     There are manual steps required before releases will appear on Maven Central, scroll down for more information.
 
+!!! warning
+
+    Before performing a release, be sure to check that the version number in `.speakeasy/gen.yaml` matches the one in `RELEASES.md`, otherwise the GitHub and Maven Central release may have inconsistent version numbers. You can do this by running `./scripts/check-version-mismatch.sh`
+
 Releases normally happen when the Speakeasy automation in the [SDK generation workflow](https://github.com/StyraInc/opa-java/blob/main/.github/workflows/sdk_generation.yaml) detects that a dependency needs updated, or the code generation changes. It should automatically create a PR (for example, [#40](https://github.com/StyraInc/opa-java/pull/40)) which updates the [`RELEASES.md`](https://github.com/StyraInc/opa-java/blob/main/RELEASES.md) file. This workflow runs nightly.
 
 You can force the creation of one of these PRs by running the workflow manually and checking "Force generation of SDKs" option. In this situation, the PR is created even if nothing has changed. This can be useful if you need to force a release for some reason or another.

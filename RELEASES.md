@@ -269,3 +269,11 @@ Based on:
 - [java v1.1.0] .
 ### Releases
 - [Maven Central v1.1.0] https://central.sonatype.com/artifact/com.styra.opa/openapi/1.1.0 - .
+
+## 2024-06-26 17:52:00
+### Changes
+- Manually generated to correct version mismatch between GH and Maven Central.
+### Generated
+- [java v1.4.0] .
+### Releases
+- [Maven Central v1.4.0] https://central.sonatype.com/artifact/com.styra.opa/openapi/1.4.0 - .
