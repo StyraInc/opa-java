@@ -26,6 +26,9 @@ gradlew.bat publishToMavenLocal -Pskip.signing
 
 ## SDK Example Usage (high-level)
 
+> [!TIP]
+> You can find more examples in the documentation [here](https://docs.styra.com/sdk/java/examples). A start to finish "hello world" tutorial is available [here](https://docs.styra.com/sdk/java/tutorials/hello-world).
+
 ```java
 package org.example;
 
@@ -37,8 +40,13 @@ import java.util.List;
 
 import static java.util.Map.entry;
 
+
 public class App {
-    public static void main(String[] args) throws Exception {
+    public String getGreeting() {
+        return "Hello World!";
+    }
+
+    public static void main(String[] args) throws OPAException {
         System.out.println(new App().getGreeting());
 
         // Create an OPA instance, this handles any state needed for interacting
@@ -53,15 +61,11 @@ public class App {
             entry("resource", "/finance/reports/fy2038_budget.csv")
         );
 
-        // We will read the list of policy violations, and whether the request
-        // is allowed or not into these.
-        java.util.List<Object> violations;
-        boolean allowed;
+        boolean allowed = false;
 
         // Perform the request against OPA.
         try {
-            allowed = opa.check("policy/allow", input);
-            violations = opa.evaluate("policy/violations", input);
+            allowed = opa.check("authz/allow", input);
         } catch (OPAException e ) {
             // Note that OPAException usually wraps other exception types, in
             // case you need to do more complex error handling.
@@ -70,7 +74,6 @@ public class App {
         }
 
         System.out.println("allowed: " + allowed);
-        System.out.println("violations: " + violations);
     }
 }
 ```
