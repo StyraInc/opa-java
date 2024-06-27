@@ -1,6 +1,9 @@
 package com.styra.opa;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.styra.opa.openapi.utils.HTTPClient;
+import com.styra.opa.utils.OPAHTTPClient;
+import com.styra.opa.utils.OPALatencyMeasuringHTTPClient;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,11 +17,18 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 
 import static java.util.Map.entry;
+import static java.util.logging.Level.ALL;
+import static java.util.logging.Level.INFO;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Testcontainers
 
@@ -218,6 +228,106 @@ class OPATest {
         }
 
         assertEquals(expect, result);
+    }
+
+    @Test
+    public void testOPAEchoWithCustomClient() {
+        // Normally, OPAClient handles instantiating the OPAHTTPClient under
+        // the hood to accommodate custom headers. This test ensures that
+        // passing it to the constructor directly works, since if the client
+        // isn't adding the headers properly then OPA's auth will bounce
+        // the requests.
+
+        HTTPClient httpc = new OPAHTTPClient(headers);
+        OPAClient opa = new OPAClient(address, httpc);
+        Map result = Map.ofEntries(entry("unit", "test"));
+        Map expect = Map.ofEntries(entry("hello", "world"), entry("foo", Map.ofEntries(entry("bar", testIntegerA))));
+
+        try {
+            result = opa.evaluate("policy/echo", Map.ofEntries(
+                entry("hello", "world"),
+                entry("foo", Map.ofEntries(entry("bar", testIntegerA)))
+            ));
+        } catch (OPAException e) {
+            System.out.println("exception: " + e);
+            assertNull(e);
+        }
+
+        assertEquals(expect, result);
+    }
+
+    @Test
+    public void testLatencyMeasurement() {
+        Logger logger = Logger.getLogger("testLatencyMeasurementLogger");
+        RecordingHandler handlerObj = new RecordingHandler();
+        handlerObj.setLevel(ALL);
+        logger.addHandler(handlerObj);
+        logger.setLevel(ALL);
+        logger.setUseParentHandlers(false);
+
+        OPALatencyMeasuringHTTPClient httpc = new OPALatencyMeasuringHTTPClient(logger, headers);
+        httpc.setLatencyMeasurementFormat("LATENCY MEASUREMENT #{0,number,#}#{1}#");
+        httpc.setLatencyMeasurementLogLevel(INFO);
+        OPAClient opa = new OPAClient(address, httpc);
+        Map result = Map.ofEntries(entry("unit", "test"));
+        Map expect = Map.ofEntries(entry("hello", "world"), entry("foo", Map.ofEntries(entry("bar", testIntegerA))));
+
+        try {
+            result = opa.evaluate("policy/echo", Map.ofEntries(
+                entry("hello", "world"),
+                entry("foo", Map.ofEntries(entry("bar", testIntegerA)))
+            ));
+        } catch (OPAException e) {
+            System.out.println("exception: " + e);
+            assertNull(e);
+        }
+
+        assertEquals(expect, result);
+
+        List<LogRecord> recs = handlerObj.getSeenRecs();
+        List<String> logs = new ArrayList<String>();
+        recs.forEach(elem -> logs.add(elem.getLevel().getName() + " " + elem.getMessage()));
+
+        for (String msg : logs) {
+            System.out.printf("DEBUG: log line: %s\n", msg);
+            assertTrue(msg.matches("^INFO LATENCY MEASUREMENT #[0-9]+#/v1/data/policy/echo#$"));
+        }
+    }
+
+    @Test
+    public void testLatencyMeasurementDefaults() {
+        Logger logger = Logger.getLogger("testLatencyMeasurementLogger");
+        RecordingHandler handlerObj = new RecordingHandler();
+        handlerObj.setLevel(ALL);
+        logger.addHandler(handlerObj);
+        logger.setLevel(ALL);
+        logger.setUseParentHandlers(false);
+
+        OPALatencyMeasuringHTTPClient httpc = new OPALatencyMeasuringHTTPClient(logger, headers);
+        OPAClient opa = new OPAClient(address, httpc);
+        Map result = Map.ofEntries(entry("unit", "test"));
+        Map expect = Map.ofEntries(entry("hello", "world"), entry("foo", Map.ofEntries(entry("bar", testIntegerA))));
+
+        try {
+            result = opa.evaluate("policy/echo", Map.ofEntries(
+                entry("hello", "world"),
+                entry("foo", Map.ofEntries(entry("bar", testIntegerA)))
+            ));
+        } catch (OPAException e) {
+            System.out.println("exception: " + e);
+            assertNull(e);
+        }
+
+        assertEquals(expect, result);
+
+        List<LogRecord> recs = handlerObj.getSeenRecs();
+        List<String> logs = new ArrayList<String>();
+        recs.forEach(elem -> logs.add(elem.getLevel().getName() + " " + elem.getMessage()));
+
+        for (String msg : logs) {
+            System.out.printf("DEBUG: log line: %s\n", msg);
+            assertTrue(msg.matches("^FINE path='/v1/data/policy/echo' latency=[0-9]+ms$"));
+        }
     }
 
     @Test
