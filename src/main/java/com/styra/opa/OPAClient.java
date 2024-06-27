@@ -70,6 +70,18 @@ public class OPAClient {
     }
 
     /**
+     * This constructor can be used to instantiate an OPAClient which uses a
+     * custom HTTP client implementation for the underlying OpaApiClient.
+     *
+     * @param opaURL URL at which OPA should be connected to.
+     * @param httpclient custom HTTP client to use
+     */
+    public OPAClient(String opaURL, HTTPClient httpclient) {
+        this.sdkServerURL = opaURL;
+        this.sdk = OpaApiClient.builder().serverURL(opaURL).client(httpclient).build();
+    }
+
+    /**
      * This constructor allows instantiating the OPA wrapper with additional
      * HTTP headers to be injected into every request. This is intended to be
      * used with OPA bearer token authentication, which you can learn more
