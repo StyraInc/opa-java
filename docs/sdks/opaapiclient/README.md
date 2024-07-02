@@ -80,14 +80,14 @@ public class Application {
 
 ### Response
 
-**[Optional<? extends com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse>](../../models/operations/ExecuteDefaultPolicyWithInputResponse.md)**
+**[com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse](../../models/operations/ExecuteDefaultPolicyWithInputResponse.md)**
 ### Errors
 
 | Error Object              | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | models/errors/ClientError | 400,404                   | application/json          |
 | models/errors/ServerError | 500                       | application/json          |
-| models/errors/SDKError    | 4xx-5xx                   | */*                       |
+| models/errors/SDKError    | 4xx-5xx                   | \*\/*                     |
 
 ## executePolicy
 
@@ -156,14 +156,14 @@ public class Application {
 
 ### Response
 
-**[Optional<? extends com.styra.opa.openapi.models.operations.ExecutePolicyResponse>](../../models/operations/ExecutePolicyResponse.md)**
+**[com.styra.opa.openapi.models.operations.ExecutePolicyResponse](../../models/operations/ExecutePolicyResponse.md)**
 ### Errors
 
 | Error Object              | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | models/errors/ClientError | 400                       | application/json          |
 | models/errors/ServerError | 500                       | application/json          |
-| models/errors/SDKError    | 4xx-5xx                   | */*                       |
+| models/errors/SDKError    | 4xx-5xx                   | \*\/*                     |
 
 ## executePolicyWithInput
 
@@ -235,14 +235,14 @@ public class Application {
 
 ### Response
 
-**[Optional<? extends com.styra.opa.openapi.models.operations.ExecutePolicyWithInputResponse>](../../models/operations/ExecutePolicyWithInputResponse.md)**
+**[com.styra.opa.openapi.models.operations.ExecutePolicyWithInputResponse](../../models/operations/ExecutePolicyWithInputResponse.md)**
 ### Errors
 
 | Error Object              | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
 | models/errors/ClientError | 400                       | application/json          |
 | models/errors/ServerError | 500                       | application/json          |
-| models/errors/SDKError    | 4xx-5xx                   | */*                       |
+| models/errors/SDKError    | 4xx-5xx                   | \*\/*                     |
 
 ## executeBatchPolicyWithInput
 
@@ -315,14 +315,14 @@ public class Application {
 
 ### Response
 
-**[Optional<? extends com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputResponse>](../../models/operations/ExecuteBatchPolicyWithInputResponse.md)**
+**[com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputResponse](../../models/operations/ExecuteBatchPolicyWithInputResponse.md)**
 ### Errors
 
 | Error Object                   | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | models/errors/ClientError      | 400                            | application/json               |
 | models/errors/BatchServerError | 500                            | application/json               |
-| models/errors/SDKError         | 4xx-5xx                        | */*                            |
+| models/errors/SDKError         | 4xx-5xx                        | \*\/*                          |
 
 ## health
 
@@ -389,10 +389,10 @@ public class Application {
 
 ### Response
 
-**[Optional<? extends com.styra.opa.openapi.models.operations.HealthResponse>](../../models/operations/HealthResponse.md)**
+**[com.styra.opa.openapi.models.operations.HealthResponse](../../models/operations/HealthResponse.md)**
 ### Errors
 
 | Error Object                  | Status Code                   | Content Type                  |
 | ----------------------------- | ----------------------------- | ----------------------------- |
 | models/errors/UnhealthyServer | 500                           | application/json              |
-| models/errors/SDKError        | 4xx-5xx                       | */*                           |
+| models/errors/SDKError        | 4xx-5xx                       | \*\/*                         |

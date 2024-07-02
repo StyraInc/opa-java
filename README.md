@@ -396,7 +396,7 @@ Handling errors in this SDK should largely match your expectations.  All operati
 | ------------------------- | ------------------------- | ------------------------- |
 | models/errors/ClientError | 400,404                   | application/json          |
 | models/errors/ServerError | 500                       | application/json          |
-| models/errors/SDKError    | 4xx-5xx                   | */*                       |
+| models/errors/SDKError    | 4xx-5xx                   | \*\/*                     |
 
 ### Example
 
