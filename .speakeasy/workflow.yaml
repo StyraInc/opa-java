@@ -6,6 +6,8 @@ sources:
           - location: https://raw.githubusercontent.com/StyraInc/enterprise-opa/main/openapi/openapi.yaml
         registry:
             location: registry.speakeasyapi.dev/styra/styra/openapi
+        overlays:
+          - location: ./.speakeasy/overlay.yaml
 targets:
     opa:
         target: java

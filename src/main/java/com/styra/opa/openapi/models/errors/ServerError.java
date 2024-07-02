@@ -27,53 +27,53 @@ public class ServerError extends RuntimeException {
     @JsonProperty("code")
     private String code;
 
-    @JsonProperty("message")
-    private String message;
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("decision_id")
+    private Optional<? extends String> decisionId;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("errors")
     private Optional<? extends java.util.List<ServerErrorErrors>> errors;
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("decision_id")
-    private Optional<? extends String> decisionId;
+    @JsonProperty("message")
+    private String message;
 
     @JsonCreator
     public ServerError(
             @JsonProperty("code") String code,
-            @JsonProperty("message") String message,
+            @JsonProperty("decision_id") Optional<? extends String> decisionId,
             @JsonProperty("errors") Optional<? extends java.util.List<ServerErrorErrors>> errors,
-            @JsonProperty("decision_id") Optional<? extends String> decisionId) {
+            @JsonProperty("message") String message) {
         Utils.checkNotNull(code, "code");
-        Utils.checkNotNull(message, "message");
-        Utils.checkNotNull(errors, "errors");
         Utils.checkNotNull(decisionId, "decisionId");
+        Utils.checkNotNull(errors, "errors");
+        Utils.checkNotNull(message, "message");
         this.code = code;
-        this.message = message;
-        this.errors = errors;
         this.decisionId = decisionId;
+        this.errors = errors;
+        this.message = message;
     }
     
     public ServerError(
             String code,
             String message) {
-        this(code, message, Optional.empty(), Optional.empty());
+        this(code, Optional.empty(), Optional.empty(), message);
     }
 
     public String code(){
         return code;
     }
 
-    public String message(){
-        return message;
+    public Optional<? extends String> decisionId(){
+        return decisionId;
     }
 
     public Optional<? extends java.util.List<ServerErrorErrors>> errors(){
         return errors;
     }
 
-    public Optional<? extends String> decisionId(){
-        return decisionId;
+    public String message(){
+        return message;
     }
     
     public final static Builder builder() {
@@ -83,24 +83,6 @@ public class ServerError extends RuntimeException {
     public ServerError withCode(String code) {
         Utils.checkNotNull(code, "code");
         this.code = code;
-        return this;
-    }
-
-    public ServerError withMessage(String message) {
-        Utils.checkNotNull(message, "message");
-        this.message = message;
-        return this;
-    }
-
-    public ServerError withErrors(java.util.List<ServerErrorErrors> errors) {
-        Utils.checkNotNull(errors, "errors");
-        this.errors = Optional.ofNullable(errors);
-        return this;
-    }
-    
-    public ServerError withErrors(Optional<? extends java.util.List<ServerErrorErrors>> errors) {
-        Utils.checkNotNull(errors, "errors");
-        this.errors = errors;
         return this;
     }
 
@@ -116,6 +98,24 @@ public class ServerError extends RuntimeException {
         return this;
     }
 
+    public ServerError withErrors(java.util.List<ServerErrorErrors> errors) {
+        Utils.checkNotNull(errors, "errors");
+        this.errors = Optional.ofNullable(errors);
+        return this;
+    }
+    
+    public ServerError withErrors(Optional<? extends java.util.List<ServerErrorErrors>> errors) {
+        Utils.checkNotNull(errors, "errors");
+        this.errors = errors;
+        return this;
+    }
+
+    public ServerError withMessage(String message) {
+        Utils.checkNotNull(message, "message");
+        this.message = message;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -127,38 +127,38 @@ public class ServerError extends RuntimeException {
         ServerError other = (ServerError) o;
         return
             java.util.Objects.deepEquals(this.code, other.code) &&
-            java.util.Objects.deepEquals(this.message, other.message) &&
+            java.util.Objects.deepEquals(this.decisionId, other.decisionId) &&
             java.util.Objects.deepEquals(this.errors, other.errors) &&
-            java.util.Objects.deepEquals(this.decisionId, other.decisionId);
+            java.util.Objects.deepEquals(this.message, other.message);
     }
 
     @Override
     public int hashCode() {
         return java.util.Objects.hash(
             code,
-            message,
+            decisionId,
             errors,
-            decisionId);
+            message);
     }
 
     @Override
     public String toString() {
         return Utils.toString(ServerError.class,
                 "code", code,
-                "message", message,
+                "decisionId", decisionId,
                 "errors", errors,
-                "decisionId", decisionId);
+                "message", message);
     }
 
     public final static class Builder {
 
         private String code;
 
-        private String message;
+        private Optional<? extends String> decisionId = Optional.empty();
 
         private Optional<? extends java.util.List<ServerErrorErrors>> errors = Optional.empty();
 
-        private Optional<? extends String> decisionId = Optional.empty();
+        private String message;
 
         private Builder() {
           // force use of static builder() method
@@ -167,24 +167,6 @@ public class ServerError extends RuntimeException {
         public Builder code(String code) {
             Utils.checkNotNull(code, "code");
             this.code = code;
-            return this;
-        }
-
-        public Builder message(String message) {
-            Utils.checkNotNull(message, "message");
-            this.message = message;
-            return this;
-        }
-
-        public Builder errors(java.util.List<ServerErrorErrors> errors) {
-            Utils.checkNotNull(errors, "errors");
-            this.errors = Optional.ofNullable(errors);
-            return this;
-        }
-        
-        public Builder errors(Optional<? extends java.util.List<ServerErrorErrors>> errors) {
-            Utils.checkNotNull(errors, "errors");
-            this.errors = errors;
             return this;
         }
 
@@ -200,12 +182,30 @@ public class ServerError extends RuntimeException {
             return this;
         }
 
+        public Builder errors(java.util.List<ServerErrorErrors> errors) {
+            Utils.checkNotNull(errors, "errors");
+            this.errors = Optional.ofNullable(errors);
+            return this;
+        }
+        
+        public Builder errors(Optional<? extends java.util.List<ServerErrorErrors>> errors) {
+            Utils.checkNotNull(errors, "errors");
+            this.errors = errors;
+            return this;
+        }
+
+        public Builder message(String message) {
+            Utils.checkNotNull(message, "message");
+            this.message = message;
+            return this;
+        }
+
         public ServerError build() {
             return new ServerError(
                 code,
-                message,
+                decisionId,
                 errors,
-                decisionId);
+                message);
         }
     }
 }

@@ -11,12 +11,25 @@ import com.styra.opa.openapi.models.operations.ExecutePolicyResponse;
 import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequest;
 import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequestBody;
 import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputResponse;
+import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequestBody;
+import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequest;
+import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputResponse;
+import com.styra.opa.openapi.models.shared.BatchMixedResults;
+import com.styra.opa.openapi.models.shared.Result;
+import com.styra.opa.openapi.models.shared.Responses;
 import com.styra.opa.openapi.models.shared.Explain;
 import com.styra.opa.openapi.models.shared.Input;
 import com.styra.opa.openapi.utils.HTTPClient;
 import com.styra.opa.utils.OPAHTTPClient;
+import com.styra.opa.openapi.models.errors.ServerError;
+import com.styra.opa.openapi.models.shared.ResponsesSuccessfulPolicyResponse;
+import com.styra.opa.openapi.models.shared.BatchSuccessfulPolicyEvaluation;
+import com.styra.opa.openapi.models.shared.SuccessfulPolicyResponse;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.HashMap;
 import java.util.Optional;
 
 /**
@@ -135,7 +148,7 @@ public class OPAClient {
         return evaluate(path, input);
     }
 
-    public boolean check(String path, java.lang.Object input) throws OPAException {
+    public boolean check(String path, Object input) throws OPAException {
         ObjectMapper om = new ObjectMapper();
         Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {});
         return evaluate(path, iMap);
@@ -159,7 +172,7 @@ public class OPAClient {
         return evaluate(input);
     }
 
-    public boolean check(java.lang.Object input) throws OPAException {
+    public boolean check(Object input) throws OPAException {
         ObjectMapper om = new ObjectMapper();
         Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {});
         return evaluate(iMap);
@@ -237,7 +250,7 @@ public class OPAClient {
         return evaluateMachinery(Optional.of(Input.of(input)), Optional.of(path), toValueType);
     }
 
-    public <T> T evaluate(String path, java.lang.Object input, Class<T> toValueType) throws OPAException {
+    public <T> T evaluate(String path, Object input, Class<T> toValueType) throws OPAException {
         ObjectMapper om = new ObjectMapper();
         Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {});
         return evaluateMachinery(Optional.of(Input.of(iMap)), Optional.of(path), toValueType);
@@ -274,7 +287,7 @@ public class OPAClient {
         return evaluateMachinery(Optional.of(Input.of(input)), Optional.empty(), toValueType);
     }
 
-    public <T> T evaluate(java.lang.Object input, Class<T> toValueType) throws OPAException {
+    public <T> T evaluate(Object input, Class<T> toValueType) throws OPAException {
         ObjectMapper om = new ObjectMapper();
         Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {});
         return evaluateMachinery(Optional.of(Input.of(iMap)), Optional.empty(), toValueType);
@@ -302,7 +315,7 @@ public class OPAClient {
         return evaluateMachinery(Optional.of(Input.of(input)), Optional.of(path), toValueType);
     }
 
-    public <T> T evaluate(String path, java.lang.Object input, JavaType toValueType) throws OPAException {
+    public <T> T evaluate(String path, Object input, JavaType toValueType) throws OPAException {
         ObjectMapper om = new ObjectMapper();
         Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {});
         return evaluateMachinery(Optional.of(Input.of(iMap)), Optional.of(path), toValueType);
@@ -339,7 +352,7 @@ public class OPAClient {
         return evaluateMachinery(Optional.of(Input.of(input)), Optional.empty(), toValueType);
     }
 
-    public <T> T evaluate(java.lang.Object input, JavaType toValueType) throws OPAException {
+    public <T> T evaluate(Object input, JavaType toValueType) throws OPAException {
         ObjectMapper om = new ObjectMapper();
         Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {});
         return evaluateMachinery(Optional.of(Input.of(iMap)), Optional.empty(), toValueType);
@@ -370,7 +383,7 @@ public class OPAClient {
         return evaluateMachinery(Optional.of(Input.of(input)), Optional.of(path), toValueType);
     }
 
-    public <T> T evaluate(String path, java.lang.Object input, TypeReference<T> toValueType) throws OPAException {
+    public <T> T evaluate(String path, Object input, TypeReference<T> toValueType) throws OPAException {
         ObjectMapper om = new ObjectMapper();
         Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {});
         return evaluateMachinery(Optional.of(Input.of(iMap)), Optional.of(path), toValueType);
@@ -409,7 +422,7 @@ public class OPAClient {
         return evaluateMachinery(Optional.of(Input.of(input)), Optional.empty(), toValueType);
     }
 
-    public <T> T evaluate(java.lang.Object input, TypeReference<T> toValueType) throws OPAException {
+    public <T> T evaluate(Object input, TypeReference<T> toValueType) throws OPAException {
         ObjectMapper om = new ObjectMapper();
         Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {});
         return evaluateMachinery(Optional.of(Input.of(iMap)), Optional.empty(), toValueType);
@@ -437,7 +450,7 @@ public class OPAClient {
         return evaluateMachinery(Optional.of(Input.of(input)), Optional.of(path));
     }
 
-    public <T> T evaluate(String path, java.lang.Object input) throws OPAException {
+    public <T> T evaluate(String path, Object input) throws OPAException {
         ObjectMapper om = new ObjectMapper();
         Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {});
         return evaluateMachinery(Optional.of(Input.of(iMap)), Optional.of(path));
@@ -471,7 +484,7 @@ public class OPAClient {
         return evaluateMachinery(defaultInput(), Optional.empty());
     }
 
-    public <T> T evaluate(java.lang.Object input) throws OPAException {
+    public <T> T evaluate(Object input) throws OPAException {
         ObjectMapper om = new ObjectMapper();
         Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {});
         return evaluateMachinery(Optional.of(Input.of(iMap)), Optional.empty());
@@ -525,7 +538,7 @@ public class OPAClient {
      * @return
      * @throws OPAException
      */
-    private java.lang.Object executePolicy(Optional<Input> input, Optional<String> path) throws OPAException {
+    private Object executePolicy(Optional<Input> input, Optional<String> path) throws OPAException {
         if (path.isPresent() && input.isPresent()) {
             ExecutePolicyWithInputRequest req = makeRequestForEvaluateWithInput(input.get(), path.get());
             ExecutePolicyWithInputResponse res;
@@ -688,5 +701,95 @@ public class OPAClient {
         } else {
             return null;
         }
+    }
+
+    public <T> Map<String, T> evaluateBatch(String path, Map<String, Object> input, TypeReference<T> toValueType) throws OPAException {
+
+        HashMap<String, Input> iMap = new HashMap<String, Input>();
+        ObjectMapper om = new ObjectMapper();
+        for (Map.Entry<String, Object> entry : input.entrySet()) {
+            Input converted = Input.of(om.convertValue(entry.getValue(), new TypeReference<Map<String, Object>>() {}));
+            iMap.put(entry.getKey(), converted);
+        }
+
+        Map<String, Object> out = executePolicyBatch(iMap, path, true);
+        Map<String, T> converted = new HashMap<String, T>();
+
+        for (Map.Entry<String, Object> entry : out.entrySet()) {
+            T convertedValue = om.convertValue(entry.getValue(), toValueType);
+            converted.put(entry.getKey(), convertedValue);
+        }
+
+        return converted;
+    }
+
+    private Map<String, Object> executePolicyBatch(Map<String, Input> inputs, String path, boolean rejectMixed) throws OPAException {
+
+        ExecuteBatchPolicyWithInputRequestBody rb = new ExecuteBatchPolicyWithInputRequestBody(inputs);
+        ExecuteBatchPolicyWithInputRequest req = new ExecuteBatchPolicyWithInputRequest(path, rb);
+        ExecuteBatchPolicyWithInputResponse resp = null;
+
+        try {
+            resp = sdk.executeBatchPolicyWithInput(req);
+        //CHECKSTYLE:OFF
+        } catch (Exception e) {
+            //CHECKSTYLE:ON
+            String msg = String.format(
+                "batch executing policy at '%s' with failed due to exception '%s'",
+                path,
+                e
+            );
+            throw new OPAException(msg, e);
+        }
+
+        HashMap<String, Object> out = new HashMap<String, Object>();
+        Optional<BatchMixedResults> mrbox = resp.batchMixedResults();
+        Optional<BatchSuccessfulPolicyEvaluation> sbox = resp.batchSuccessfulPolicyEvaluation();
+
+        if (mrbox.isPresent() && mrbox.get().responses().isPresent()) {
+            Optional<Map<String, Responses>> respsbox = mrbox.get().responses();
+            Map<String, Responses> resps = respsbox.get();
+
+            for (Map.Entry<String, Responses> entry : resps.entrySet()) {
+                Object responsesValue = entry.getValue();
+                if ((!(responsesValue instanceof ServerError)) && (!(responsesValue instanceof ResponsesSuccessfulPolicyResponse))) {
+                    // If this ever happens, then the SE-generated code has
+                    // changed in an incompatible way.
+                    throw new OPAException(String.format("unexpected response type '%s', this should never happen", responsesValue.getClass().getSimpleName()));
+                }
+
+                if ((responsesValue instanceof ServerError) && (rejectMixed)) {
+                        throw new OPAException("OPA error in batch response", (ServerError) responsesValue);
+                        // TODO: should probably expose all the errors, not
+                        // just the first one we find, especially when
+                        // rejectMixed=false
+                }
+
+                if (responsesValue instanceof ResponsesSuccessfulPolicyResponse) {
+                    Optional<Result> resultBox = ((ResponsesSuccessfulPolicyResponse) responsesValue).result();
+                    if (!resultBox.isPresent()) {
+                        continue;
+                    }
+                    Object resultValue = resultBox.get().value();
+                    out.put(entry.getKey(), resultValue);
+                }
+            }
+        }
+
+        if (sbox.isPresent() && sbox.get().responses().isPresent()) {
+            Optional<Map<String, SuccessfulPolicyResponse>> respsbox = sbox.get().responses();
+            Map<String, SuccessfulPolicyResponse> resps = respsbox.get();
+
+            for (Map.Entry<String, SuccessfulPolicyResponse> entry : resps.entrySet()) {
+                Optional<Result> resultBox = entry.getValue().result();
+                if (!resultBox.isPresent()) {
+                    continue;
+                }
+                Object resultValue = resultBox.get().value();
+                out.put(entry.getKey(), resultValue);
+            }
+        }
+
+        return out;
     }
 }

@@ -164,24 +164,25 @@ public class Application {
             OpaApiClient sdk = OpaApiClient.builder()
                 .build();
 
-            ExecutePolicyWithInputRequest req = ExecutePolicyWithInputRequest.builder()
+            ExecuteBatchPolicyWithInputRequest req = ExecuteBatchPolicyWithInputRequest.builder()
                 .path("app/rbac")
-                .requestBody(ExecutePolicyWithInputRequestBody.builder()
-                        .input(Input.of(false))
+                .requestBody(ExecuteBatchPolicyWithInputRequestBody.builder()
+                        .inputs(java.util.Map.ofEntries(
+                                entry("key", Input.of("<value>"))))
                         .build())
                 .build();
 
-            ExecutePolicyWithInputResponse res = sdk.executePolicyWithInput()
+            ExecuteBatchPolicyWithInputResponse res = sdk.executeBatchPolicyWithInput()
                 .request(req)
                 .call();
 
-            if (res.successfulPolicyResponse().isPresent()) {
+            if (res.batchSuccessfulPolicyEvaluation().isPresent()) {
                 // handle response
             }
         } catch (com.styra.opa.openapi.models.errors.ClientError e) {
             // handle exception
             throw e;
-        } catch (com.styra.opa.openapi.models.errors.ServerError e) {
+        } catch (com.styra.opa.openapi.models.errors.BatchServerError e) {
             // handle exception
             throw e;
         } catch (com.styra.opa.openapi.models.errors.SDKError e) {
@@ -221,25 +222,24 @@ public class Application {
             OpaApiClient sdk = OpaApiClient.builder()
                 .build();
 
-            ExecuteBatchPolicyWithInputRequest req = ExecuteBatchPolicyWithInputRequest.builder()
+            ExecutePolicyWithInputRequest req = ExecutePolicyWithInputRequest.builder()
                 .path("app/rbac")
-                .requestBody(ExecuteBatchPolicyWithInputRequestBody.builder()
-                        .inputs(java.util.Map.ofEntries(
-                                entry("key", Input.of("<value>"))))
+                .requestBody(ExecutePolicyWithInputRequestBody.builder()
+                        .input(Input.of(false))
                         .build())
                 .build();
 
-            ExecuteBatchPolicyWithInputResponse res = sdk.executeBatchPolicyWithInput()
+            ExecutePolicyWithInputResponse res = sdk.executePolicyWithInput()
                 .request(req)
                 .call();
 
-            if (res.batchSuccessfulPolicyEvaluation().isPresent()) {
+            if (res.successfulPolicyResponse().isPresent()) {
                 // handle response
             }
         } catch (com.styra.opa.openapi.models.errors.ClientError e) {
             // handle exception
             throw e;
-        } catch (com.styra.opa.openapi.models.errors.BatchServerError e) {
+        } catch (com.styra.opa.openapi.models.errors.ServerError e) {
             // handle exception
             throw e;
         } catch (com.styra.opa.openapi.models.errors.SDKError e) {
@@ -261,10 +261,10 @@ public class Application {
 ### [OpaApiClient SDK](docs/sdks/opaapiclient/README.md)
 
 * [executeDefaultPolicyWithInput](docs/sdks/opaapiclient/README.md#executedefaultpolicywithinput) - Execute the default decision  given an input
+* [health](docs/sdks/opaapiclient/README.md#health) - Verify the server is operational
+* [executeBatchPolicyWithInput](docs/sdks/opaapiclient/README.md#executebatchpolicywithinput) - Execute a policy given a batch of inputs
 * [executePolicy](docs/sdks/opaapiclient/README.md#executepolicy) - Execute a policy
 * [executePolicyWithInput](docs/sdks/opaapiclient/README.md#executepolicywithinput) - Execute a policy given an input
-* [executeBatchPolicyWithInput](docs/sdks/opaapiclient/README.md#executebatchpolicywithinput) - Execute a policy given a batch of inputs
-* [health](docs/sdks/opaapiclient/README.md#health) - Verify the server is operational
 <!-- End Available Resources and Operations [operations] -->
 
 <!-- Start Server Selection [server] -->
@@ -396,7 +396,7 @@ Handling errors in this SDK should largely match your expectations.  All operati
 | ------------------------- | ------------------------- | ------------------------- |
 | models/errors/ClientError | 400,404                   | application/json          |
 | models/errors/ServerError | 500                       | application/json          |
-| models/errors/SDKError    | 4xx-5xx                   | */*                       |
+| models/errors/SDKError    | 4xx-5xx                   | \*\/*                     |
 
 ### Example
 

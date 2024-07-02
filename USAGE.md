@@ -72,24 +72,25 @@ public class Application {
             OpaApiClient sdk = OpaApiClient.builder()
                 .build();
 
-            ExecutePolicyWithInputRequest req = ExecutePolicyWithInputRequest.builder()
+            ExecuteBatchPolicyWithInputRequest req = ExecuteBatchPolicyWithInputRequest.builder()
                 .path("app/rbac")
-                .requestBody(ExecutePolicyWithInputRequestBody.builder()
-                        .input(Input.of(false))
+                .requestBody(ExecuteBatchPolicyWithInputRequestBody.builder()
+                        .inputs(java.util.Map.ofEntries(
+                                entry("key", Input.of("<value>"))))
                         .build())
                 .build();
 
-            ExecutePolicyWithInputResponse res = sdk.executePolicyWithInput()
+            ExecuteBatchPolicyWithInputResponse res = sdk.executeBatchPolicyWithInput()
                 .request(req)
                 .call();
 
-            if (res.successfulPolicyResponse().isPresent()) {
+            if (res.batchSuccessfulPolicyEvaluation().isPresent()) {
                 // handle response
             }
         } catch (com.styra.opa.openapi.models.errors.ClientError e) {
             // handle exception
             throw e;
-        } catch (com.styra.opa.openapi.models.errors.ServerError e) {
+        } catch (com.styra.opa.openapi.models.errors.BatchServerError e) {
             // handle exception
             throw e;
         } catch (com.styra.opa.openapi.models.errors.SDKError e) {
@@ -127,25 +128,24 @@ public class Application {
             OpaApiClient sdk = OpaApiClient.builder()
                 .build();
 
-            ExecuteBatchPolicyWithInputRequest req = ExecuteBatchPolicyWithInputRequest.builder()
+            ExecutePolicyWithInputRequest req = ExecutePolicyWithInputRequest.builder()
                 .path("app/rbac")
-                .requestBody(ExecuteBatchPolicyWithInputRequestBody.builder()
-                        .inputs(java.util.Map.ofEntries(
-                                entry("key", Input.of("<value>"))))
+                .requestBody(ExecutePolicyWithInputRequestBody.builder()
+                        .input(Input.of(false))
                         .build())
                 .build();
 
-            ExecuteBatchPolicyWithInputResponse res = sdk.executeBatchPolicyWithInput()
+            ExecutePolicyWithInputResponse res = sdk.executePolicyWithInput()
                 .request(req)
                 .call();
 
-            if (res.batchSuccessfulPolicyEvaluation().isPresent()) {
+            if (res.successfulPolicyResponse().isPresent()) {
                 // handle response
             }
         } catch (com.styra.opa.openapi.models.errors.ClientError e) {
             // handle exception
             throw e;
-        } catch (com.styra.opa.openapi.models.errors.BatchServerError e) {
+        } catch (com.styra.opa.openapi.models.errors.ServerError e) {
             // handle exception
             throw e;
         } catch (com.styra.opa.openapi.models.errors.SDKError e) {

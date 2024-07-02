@@ -22,15 +22,11 @@ public class SDKMethodInterfaces {
     }
 
 
-    public interface MethodCallExecutePolicy {
-        com.styra.opa.openapi.models.operations.ExecutePolicyResponse executePolicy(
-            com.styra.opa.openapi.models.operations.ExecutePolicyRequest request) throws Exception;
-    }
-
-
-    public interface MethodCallExecutePolicyWithInput {
-        com.styra.opa.openapi.models.operations.ExecutePolicyWithInputResponse executePolicyWithInput(
-            com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequest request) throws Exception;
+    public interface MethodCallHealth {
+        com.styra.opa.openapi.models.operations.HealthResponse health(
+            Optional<? extends Boolean> bundles,
+            Optional<? extends Boolean> plugins,
+            Optional<? extends java.util.List<String>> excludePlugin) throws Exception;
     }
 
 
@@ -40,11 +36,15 @@ public class SDKMethodInterfaces {
     }
 
 
-    public interface MethodCallHealth {
-        com.styra.opa.openapi.models.operations.HealthResponse health(
-            Optional<? extends Boolean> bundles,
-            Optional<? extends Boolean> plugins,
-            Optional<? extends java.util.List<String>> excludePlugin) throws Exception;
+    public interface MethodCallExecutePolicy {
+        com.styra.opa.openapi.models.operations.ExecutePolicyResponse executePolicy(
+            com.styra.opa.openapi.models.operations.ExecutePolicyRequest request) throws Exception;
+    }
+
+
+    public interface MethodCallExecutePolicyWithInput {
+        com.styra.opa.openapi.models.operations.ExecutePolicyWithInputResponse executePolicyWithInput(
+            com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequest request) throws Exception;
     }
 
 }

@@ -35,6 +35,8 @@ class OPATest {
 
     private String address;
     private String altAddress;
+    private String eopaAddress;
+    private String eopaAltAddress;
     private Map<String, String> headers = Map.ofEntries(entry("Authorization", "Bearer supersecret"));
 
     @Container
@@ -58,10 +60,26 @@ class OPATest {
         .withCommand("run -s --authentication=token --authorization=basic --bundle /policy");
     //CHECKSTYLE:ON
 
+    @Container
+    //CHECKSTYLE:OFF
+    public GenericContainer<?> eopac = new GenericContainer<>(
+            new ImageFromDockerfile()
+                .withFileFromClasspath("Dockerfile", "eopa.Dockerfile")
+                .withFileFromClasspath("nginx.conf", "nginx.conf")
+                .withFileFromClasspath("entrypoint.sh", "entrypoint.sh")
+        )
+        .withExposedPorts(opaPort, altPort)
+        .withFileSystemBind("./testdata/simple", "/policy", BindMode.READ_ONLY)
+        .withCommand("run -s --authentication=token --authorization=basic --bundle /policy")
+        .withEnv("EOPA_LICENSE_KEY", System.getenv("EOPA_LICENSE_KEY"));
+    //CHECKSTYLE:ON
+
     @BeforeEach
     public void setUp() {
         address = "http://" + opac.getHost() + ":" + opac.getMappedPort(opaPort);
         altAddress = "http://" + opac.getHost() + ":" + opac.getMappedPort(altPort) + "/customprefix";
+        eopaAddress = "http://" + eopac.getHost() + ":" + eopac.getMappedPort(opaPort);
+        eopaAltAddress = "http://" + eopac.getHost() + ":" + eopac.getMappedPort(altPort) + "/customprefix";
     }
 
     @AfterEach
@@ -69,6 +87,10 @@ class OPATest {
         System.out.println("==== container logs from OPA container ====");
         final String logs = opac.getLogs();
         System.out.println(logs);
+
+        System.out.println("==== container logs from EOPA container ====");
+        final String eopalogs = eopac.getLogs();
+        System.out.println(eopalogs);
     }
 
     @Test
@@ -96,6 +118,30 @@ class OPATest {
     }
 
     @Test
+    public void testEOPAHealth() {
+        // This test just makes sure that we can reach the OPAClient health endpoint
+        // and that it returns the expected {} value.
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest req = HttpRequest.newBuilder().uri(URI.create(eopaAddress + "/health")).build();
+        HttpResponse<String> resp = null;
+
+        try {
+            resp = client.send(req, HttpResponse.BodyHandlers.ofString());
+        //CHECKSTYLE:OFF
+        } catch (Exception e) {
+            //CHECKSTYLE:ON
+            System.out.println("exception: " + e);
+            assertNull(e);
+        }
+
+        String body = resp.body();
+
+        assertEquals("{}\n", body);
+    }
+
+
+    @Test
     public void testOPAHealthAlternate() {
         // This makes sure that we can also successfully reach the OPA health
         // API on the "alternate", reverse-proxy based OPA that has a URL
@@ -108,6 +154,30 @@ class OPATest {
         try {
             resp = client.send(req, HttpResponse.BodyHandlers.ofString());
         // This is a unit test, I will catch whatever exceptions I want.
+        //CHECKSTYLE:OFF
+        } catch (Exception e) {
+            //CHECKSTYLE:ON
+            System.out.println("exception: " + e);
+            assertNull(e);
+        }
+
+        String body = resp.body();
+
+        assertEquals("{}\n", body);
+    }
+
+    @Test
+    public void testEOPAHealthAlternate() {
+        // This makes sure that we can also successfully reach the OPA health
+        // API on the "alternate", reverse-proxy based OPA that has a URL
+        // prefix.
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest req = HttpRequest.newBuilder().uri(URI.create(eopaAltAddress + "/health")).build();
+        HttpResponse<String> resp = null;
+
+        try {
+            resp = client.send(req, HttpResponse.BodyHandlers.ofString());
         //CHECKSTYLE:OFF
         } catch (Exception e) {
             //CHECKSTYLE:ON
@@ -357,6 +427,31 @@ class OPATest {
 
         try {
             result = opa.evaluate(input);
+        } catch (OPAException e) {
+            System.out.println("exception: " + e);
+            assertNull(e);
+        }
+
+        assertEquals(expect, result);
+    }
+
+    @Test
+    public void testEOPAEvaluateBatch() {
+        OPAClient opa = new OPAClient(eopaAddress, headers);
+        Map<String, Object> input = Map.ofEntries(
+            entry("job1", Map.ofEntries(entry("aaa", "111"))),
+            entry("job2", Map.ofEntries(entry("bbb", "222")))
+        );
+        Map<String, Map<String, Object>> result = Map.ofEntries();
+        Map<String, Object> expect = Map.ofEntries(
+            entry("job1", Map.ofEntries(entry("aaa", "111"))),
+            entry("job2", Map.ofEntries(entry("bbb", "222")))
+        );
+
+        TypeReference<Map<String, Object>> tr = new TypeReference <Map<String, Object>>() {};
+
+        try {
+            result = opa.evaluateBatch("policy/echo", input, tr);
         } catch (OPAException e) {
             System.out.println("exception: " + e);
             assertNull(e);

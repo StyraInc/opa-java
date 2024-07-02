@@ -27,42 +27,42 @@ public class ClientError extends RuntimeException {
     @JsonProperty("code")
     private String code;
 
-    @JsonProperty("message")
-    private String message;
-
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("errors")
     private Optional<? extends java.util.List<Errors>> errors;
 
+    @JsonProperty("message")
+    private String message;
+
     @JsonCreator
     public ClientError(
             @JsonProperty("code") String code,
-            @JsonProperty("message") String message,
-            @JsonProperty("errors") Optional<? extends java.util.List<Errors>> errors) {
+            @JsonProperty("errors") Optional<? extends java.util.List<Errors>> errors,
+            @JsonProperty("message") String message) {
         Utils.checkNotNull(code, "code");
-        Utils.checkNotNull(message, "message");
         Utils.checkNotNull(errors, "errors");
+        Utils.checkNotNull(message, "message");
         this.code = code;
-        this.message = message;
         this.errors = errors;
+        this.message = message;
     }
     
     public ClientError(
             String code,
             String message) {
-        this(code, message, Optional.empty());
+        this(code, Optional.empty(), message);
     }
 
     public String code(){
         return code;
     }
 
-    public String message(){
-        return message;
-    }
-
     public Optional<? extends java.util.List<Errors>> errors(){
         return errors;
+    }
+
+    public String message(){
+        return message;
     }
     
     public final static Builder builder() {
@@ -72,12 +72,6 @@ public class ClientError extends RuntimeException {
     public ClientError withCode(String code) {
         Utils.checkNotNull(code, "code");
         this.code = code;
-        return this;
-    }
-
-    public ClientError withMessage(String message) {
-        Utils.checkNotNull(message, "message");
-        this.message = message;
         return this;
     }
 
@@ -93,6 +87,12 @@ public class ClientError extends RuntimeException {
         return this;
     }
 
+    public ClientError withMessage(String message) {
+        Utils.checkNotNull(message, "message");
+        this.message = message;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -104,33 +104,33 @@ public class ClientError extends RuntimeException {
         ClientError other = (ClientError) o;
         return
             java.util.Objects.deepEquals(this.code, other.code) &&
-            java.util.Objects.deepEquals(this.message, other.message) &&
-            java.util.Objects.deepEquals(this.errors, other.errors);
+            java.util.Objects.deepEquals(this.errors, other.errors) &&
+            java.util.Objects.deepEquals(this.message, other.message);
     }
 
     @Override
     public int hashCode() {
         return java.util.Objects.hash(
             code,
-            message,
-            errors);
+            errors,
+            message);
     }
 
     @Override
     public String toString() {
         return Utils.toString(ClientError.class,
                 "code", code,
-                "message", message,
-                "errors", errors);
+                "errors", errors,
+                "message", message);
     }
 
     public final static class Builder {
 
         private String code;
 
-        private String message;
-
         private Optional<? extends java.util.List<Errors>> errors = Optional.empty();
+
+        private String message;
 
         private Builder() {
           // force use of static builder() method
@@ -139,12 +139,6 @@ public class ClientError extends RuntimeException {
         public Builder code(String code) {
             Utils.checkNotNull(code, "code");
             this.code = code;
-            return this;
-        }
-
-        public Builder message(String message) {
-            Utils.checkNotNull(message, "message");
-            this.message = message;
             return this;
         }
 
@@ -160,11 +154,17 @@ public class ClientError extends RuntimeException {
             return this;
         }
 
+        public Builder message(String message) {
+            Utils.checkNotNull(message, "message");
+            this.message = message;
+            return this;
+        }
+
         public ClientError build() {
             return new ClientError(
                 code,
-                message,
-                errors);
+                errors,
+                message);
         }
     }
 }
