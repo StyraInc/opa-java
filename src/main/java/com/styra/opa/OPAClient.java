@@ -4,6 +4,11 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.styra.opa.openapi.OpaApiClient;
+import com.styra.opa.openapi.models.errors.SDKError;
+import com.styra.opa.openapi.models.errors.ServerError;
+import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequest;
+import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequestBody;
+import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputResponse;
 import com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputRequest;
 import com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse;
 import com.styra.opa.openapi.models.operations.ExecutePolicyRequest;
@@ -11,20 +16,16 @@ import com.styra.opa.openapi.models.operations.ExecutePolicyResponse;
 import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequest;
 import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequestBody;
 import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputResponse;
-import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequestBody;
-import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequest;
-import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputResponse;
 import com.styra.opa.openapi.models.shared.BatchMixedResults;
-import com.styra.opa.openapi.models.shared.Result;
-import com.styra.opa.openapi.models.shared.Responses;
+import com.styra.opa.openapi.models.shared.BatchSuccessfulPolicyEvaluation;
 import com.styra.opa.openapi.models.shared.Explain;
 import com.styra.opa.openapi.models.shared.Input;
+import com.styra.opa.openapi.models.shared.Responses;
+import com.styra.opa.openapi.models.shared.ResponsesSuccessfulPolicyResponse;
+import com.styra.opa.openapi.models.shared.Result;
+import com.styra.opa.openapi.models.shared.SuccessfulPolicyResponse;
 import com.styra.opa.openapi.utils.HTTPClient;
 import com.styra.opa.utils.OPAHTTPClient;
-import com.styra.opa.openapi.models.errors.ServerError;
-import com.styra.opa.openapi.models.shared.ResponsesSuccessfulPolicyResponse;
-import com.styra.opa.openapi.models.shared.BatchSuccessfulPolicyEvaluation;
-import com.styra.opa.openapi.models.shared.SuccessfulPolicyResponse;
 
 import java.util.List;
 import java.util.Map;
@@ -57,6 +58,10 @@ public class OPAClient {
     private boolean policyRequestMetrics;
     private boolean policyRequestInstrument;
     private boolean policyRequestStrictBuiltinErrors;
+
+    // The first time a batch request fails, we trip this and subsequently
+    // always use the fallback method.
+    private boolean enableBatchFallback = false;
 
     /**
      * Default OPA server URL to connect to.
@@ -112,6 +117,20 @@ public class OPAClient {
 
     private Optional<Input> defaultInput() {
         return Optional.empty();
+    }
+
+    /**
+     * Bypass batch mode support detection and force the API client to
+     * enable or disable fallback mode.
+     *
+     * If newEnableBatchFallback is 'true', then fallback mode is always used.
+     * If it is 'false', then batch support detection will be reset, though
+     * subsequent batch evaluation calls may detect if the batch API is not
+     * supported and re-enable the fallback later. You should not need to use
+     * this method during normal usage.
+     */
+    public void forceBatchFallback(boolean newEnableBatchFallback) {
+        this.enableBatchFallback = newEnableBatchFallback;
     }
 
     /**
@@ -551,7 +570,6 @@ public class OPAClient {
             //CHECKSTYLE:OFF
             } catch (Exception e) {
                 //CHECKSTYLE:ON
-                e.printStackTrace(System.out);
                 String msg = String.format(
                     "executing policy at '%s' with failed due to exception '%s'",
                     path,
@@ -587,7 +605,6 @@ public class OPAClient {
             //CHECKSTYLE:OFF
             } catch (Exception e) {
                 //CHECKSTYLE:ON
-                e.printStackTrace(System.out);
                 String msg = String.format("executing policy at '%s' with failed due to exception '%s'", path, e);
                 throw new OPAException(msg, e);
             }
@@ -725,6 +742,10 @@ public class OPAClient {
 
     private Map<String, Object> executePolicyBatch(Map<String, Input> inputs, String path, boolean rejectMixed) throws OPAException {
 
+        if (this.enableBatchFallback) {
+            return this.executePolicyBatchFallback(inputs, path, rejectMixed);
+        }
+
         ExecuteBatchPolicyWithInputRequestBody rb = new ExecuteBatchPolicyWithInputRequestBody(inputs);
         ExecuteBatchPolicyWithInputRequest req = new ExecuteBatchPolicyWithInputRequest(path, rb);
         ExecuteBatchPolicyWithInputResponse resp = null;
@@ -733,6 +754,13 @@ public class OPAClient {
             resp = sdk.executeBatchPolicyWithInput(req);
         //CHECKSTYLE:OFF
         } catch (Exception e) {
+            if (e instanceof SDKError) {
+                if (((SDKError) e).code() == 404) {
+                    this.enableBatchFallback = true;
+                    return this.executePolicyBatchFallback(inputs, path, rejectMixed);
+                }
+            }
+
             //CHECKSTYLE:ON
             String msg = String.format(
                 "batch executing policy at '%s' with failed due to exception '%s'",
@@ -792,4 +820,25 @@ public class OPAClient {
 
         return out;
     }
+
+    private Map<String, Object> executePolicyBatchFallback(Map<String, Input> inputs, String path, boolean rejectMixed) throws OPAException {
+
+        HashMap<String, Object> out = new HashMap<String, Object>();
+
+        for (Map.Entry<String, Input> entry : inputs.entrySet()) {
+            try {
+                Object result = this.executePolicy(Optional.of(entry.getValue()), Optional.of(path));
+                out.put(entry.getKey(), result);
+            } catch (OPAException e) {
+                if (rejectMixed) {
+                    throw new OPAException(String.format("OPA error in batch response (fallback mode)", e));
+                }
+                // TODO: should we record this error in some way if
+                // rejectMixed=false or just ignore it?
+            }
+        }
+
+        return out;
+    }
+
 }

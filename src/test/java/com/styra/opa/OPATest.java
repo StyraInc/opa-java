@@ -460,5 +460,111 @@ class OPATest {
         assertEquals(expect, result);
     }
 
+    @Test
+    public void testEOPAEvaluateBatchFallback() {
+        OPAClient opa = new OPAClient(eopaAddress, headers);
+        opa.forceBatchFallback(true);
+        Map<String, Object> input = Map.ofEntries(
+            entry("job1", Map.ofEntries(entry("aaa", "111"))),
+            entry("job2", Map.ofEntries(entry("bbb", "222")))
+        );
+        Map<String, Map<String, Object>> result = Map.ofEntries();
+        Map<String, Object> expect = Map.ofEntries(
+            entry("job1", Map.ofEntries(entry("aaa", "111"))),
+            entry("job2", Map.ofEntries(entry("bbb", "222")))
+        );
+
+        TypeReference<Map<String, Object>> tr = new TypeReference <Map<String, Object>>() {};
+
+        try {
+            result = opa.evaluateBatch("policy/echo", input, tr);
+        } catch (OPAException e) {
+            System.out.println("exception: " + e);
+            assertNull(e);
+        }
+
+        assertEquals(expect, result);
+    }
+
+    @Test
+    public void testOPAEvaluateBatchFallback() {
+        OPAClient opa = new OPAClient(address, headers);
+        // This test intentionally does not exercise batch API support
+        // detection.
+        opa.forceBatchFallback(true);
+        Map<String, Object> input = Map.ofEntries(
+            entry("job1", Map.ofEntries(entry("aaa", "111"))),
+            entry("job2", Map.ofEntries(entry("bbb", "222")))
+        );
+        Map<String, Map<String, Object>> result = Map.ofEntries();
+        Map<String, Object> expect = Map.ofEntries(
+            entry("job1", Map.ofEntries(entry("aaa", "111"))),
+            entry("job2", Map.ofEntries(entry("bbb", "222")))
+        );
+
+        TypeReference<Map<String, Object>> tr = new TypeReference <Map<String, Object>>() {};
+
+        try {
+            result = opa.evaluateBatch("policy/echo", input, tr);
+        } catch (OPAException e) {
+            System.out.println("exception: " + e);
+            assertNull(e);
+        }
+
+        assertEquals(expect, result);
+    }
+
+    @Test
+    public void testOPAEvaluateBatchFallbackAutodetect() {
+        // The OPA client should automatically detect that OPA does not support
+        // EOPA's batch API, and should use the fallback mode automatically.
+        OPAClient opa = new OPAClient(address, headers);
+        Map<String, Object> input = Map.ofEntries(
+            entry("job1", Map.ofEntries(entry("aaa", "111"))),
+            entry("job2", Map.ofEntries(entry("bbb", "222")))
+        );
+        Map<String, Map<String, Object>> result = Map.ofEntries();
+        Map<String, Object> expect = Map.ofEntries(
+            entry("job1", Map.ofEntries(entry("aaa", "111"))),
+            entry("job2", Map.ofEntries(entry("bbb", "222")))
+        );
+
+        TypeReference<Map<String, Object>> tr = new TypeReference <Map<String, Object>>() {};
+
+        try {
+            result = opa.evaluateBatch("policy/echo", input, tr);
+        } catch (OPAException e) {
+            System.out.println("exception: " + e);
+            assertNull(e);
+        }
+
+        assertEquals(expect, result);
+    }
+
+    @Test
+    public void testEOPAEvaluateBatchMixed() {
+        OPAClient opa = new OPAClient(eopaAddress, headers);
+        Map<String, Object> input = Map.ofEntries(
+            entry("job1", Map.ofEntries(entry("aaa", "111"), entry("bbb", "111"))),
+            entry("job2", Map.ofEntries(entry("bbb", "222")))
+        );
+        Map<String, Map<String, Object>> result = Map.ofEntries();
+        Map<String, Object> expect = Map.ofEntries(
+            entry("job1", Map.ofEntries(entry("aaa", "111"))),
+            entry("job2", Map.ofEntries(entry("bbb", "222")))
+        );
+
+        TypeReference<Map<String, Object>> tr = new TypeReference <Map<String, Object>>() {};
+
+        try {
+            result = opa.evaluateBatch("condfail/p", input, tr);
+        } catch (OPAException e) {
+            System.out.println("exception: " + e);
+            assertNull(e);
+        }
+
+        assertEquals(expect, result);
+    }
+
 }
 
