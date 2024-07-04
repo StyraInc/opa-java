@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: gradle/gradle-build-action@v2
+      - uses: gradle/gradle-build-action@v3
       - uses: open-policy-agent/setup-opa@v2
       - run: ./gradlew test lint checkstyleMain checkstyleTest
       - run: ./scripts/check-version-mismatch.sh
