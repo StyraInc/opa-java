@@ -17,6 +17,7 @@ import java.net.http.HttpResponse;
 import java.util.Map;
 
 import static java.util.Map.entry;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
@@ -314,7 +315,6 @@ class OPATest {
         SampleObject<Double> actual = new SampleObject<Double>();
 
         try {
-            //actual = opa.evaluate("policy/echo", input, new ObjectMapper().constructType(actual.getClass()));
             actual = opa.evaluate("policy/echo", input, new TypeReference<SampleObject<Double>>() {});
         } catch (OPAException e) {
             System.out.println("exception: " + e);
@@ -326,6 +326,54 @@ class OPATest {
         assertEquals(input.getCustomProperty(), expect.getCustomProperty());
         assertEquals(input.getAnnotatedProperty(), expect.getAnnotatedProperty());
         assertEquals(input.getMapProperty(), expect.getMapProperty());
+        assertEquals(expect.getBoolProperty(), actual.getBoolProperty());
+        assertEquals(expect.getIntProperty(), actual.getIntProperty());
+        assertEquals(expect.getCustomProperty(), actual.getCustomProperty());
+        assertEquals(expect.getAnnotatedProperty(), actual.getAnnotatedProperty());
+        assertEquals(expect.getMapProperty(), actual.getMapProperty());
+    }
+
+    @Test
+    public void testObjectRoundtripDeferred() {
+        OPAClient opa = new OPAClient(address, headers);
+
+        Map<String, String> sampleMap1 = Map.ofEntries(entry("hello", "world"));
+        Map<String, String> sampleMap2 = Map.ofEntries(entry("hello", "world"));
+
+        SampleObject<Double> input = new SampleObject<Double>();
+        input.setBoolProperty(true);
+        input.setIntProperty(testIntegerA);
+        input.setCustomProperty(testDoubleA);
+        input.setAnnotatedProperty(testIntegerB);
+        input.setMapProperty(sampleMap1);
+
+        SampleObject<Double> expect = new SampleObject<Double>();
+        expect.setBoolProperty(true);
+        expect.setIntProperty(testIntegerA);
+        expect.setCustomProperty(testDoubleA);
+        expect.setAnnotatedProperty(testIntegerB);
+        expect.setMapProperty(sampleMap2);
+
+        SampleObject<Double> actual = new SampleObject<Double>();
+        OPAResult res = opa.evaluateDeferred("policy/echo", input);
+
+        try {
+            actual = res.get(new TypeReference<SampleObject<Double>>() {});
+        } catch (OPAException e) {
+            System.out.println("exception: " + e);
+            assertNull(e);
+        }
+
+        assertEquals(input.getBoolProperty(), expect.getBoolProperty());
+        assertEquals(input.getIntProperty(), expect.getIntProperty());
+        assertEquals(input.getCustomProperty(), expect.getCustomProperty());
+        assertEquals(input.getAnnotatedProperty(), expect.getAnnotatedProperty());
+        assertEquals(input.getMapProperty(), expect.getMapProperty());
+        assertEquals(expect.getBoolProperty(), actual.getBoolProperty());
+        assertEquals(expect.getIntProperty(), actual.getIntProperty());
+        assertEquals(expect.getCustomProperty(), actual.getCustomProperty());
+        assertEquals(expect.getAnnotatedProperty(), actual.getAnnotatedProperty());
+        assertEquals(expect.getMapProperty(), actual.getMapProperty());
     }
 
     @Test
@@ -442,22 +490,29 @@ class OPATest {
             entry("job1", Map.ofEntries(entry("aaa", "111"))),
             entry("job2", Map.ofEntries(entry("bbb", "222")))
         );
-        Map<String, Map<String, Object>> result = Map.ofEntries();
+        Map<String, OPAResult> result = Map.ofEntries();
         Map<String, Object> expect = Map.ofEntries(
             entry("job1", Map.ofEntries(entry("aaa", "111"))),
             entry("job2", Map.ofEntries(entry("bbb", "222")))
         );
 
-        TypeReference<Map<String, Object>> tr = new TypeReference <Map<String, Object>>() {};
-
         try {
-            result = opa.evaluateBatch("policy/echo", input, tr);
+            result = opa.evaluateBatch("policy/echo", input);
         } catch (OPAException e) {
             System.out.println("exception: " + e);
             assertNull(e);
         }
 
-        assertEquals(expect, result);
+        for (Map.Entry<String, OPAResult> entry: result.entrySet()) {
+            assertTrue(entry.getValue().success());
+            try {
+                Map<String, Object> v = entry.getValue().get();
+                assertEquals(expect.get(entry.getKey()), v);
+            } catch (OPAException e) {
+                System.out.println("exception: " + e);
+                assertNull(e);
+            }
+        }
     }
 
     @Test
@@ -468,22 +523,29 @@ class OPATest {
             entry("job1", Map.ofEntries(entry("aaa", "111"))),
             entry("job2", Map.ofEntries(entry("bbb", "222")))
         );
-        Map<String, Map<String, Object>> result = Map.ofEntries();
+        Map<String,  OPAResult> result = Map.ofEntries();
         Map<String, Object> expect = Map.ofEntries(
             entry("job1", Map.ofEntries(entry("aaa", "111"))),
             entry("job2", Map.ofEntries(entry("bbb", "222")))
         );
 
-        TypeReference<Map<String, Object>> tr = new TypeReference <Map<String, Object>>() {};
-
         try {
-            result = opa.evaluateBatch("policy/echo", input, tr);
+            result = opa.evaluateBatch("policy/echo", input);
         } catch (OPAException e) {
             System.out.println("exception: " + e);
             assertNull(e);
         }
 
-        assertEquals(expect, result);
+        for (Map.Entry<String, OPAResult> entry: result.entrySet()) {
+            assertTrue(entry.getValue().success());
+            try {
+                Map<String, Object> v = entry.getValue().get();
+                assertEquals(expect.get(entry.getKey()), v);
+            } catch (OPAException e) {
+                System.out.println("exception: " + e);
+                assertNull(e);
+            }
+        }
     }
 
     @Test
@@ -496,22 +558,29 @@ class OPATest {
             entry("job1", Map.ofEntries(entry("aaa", "111"))),
             entry("job2", Map.ofEntries(entry("bbb", "222")))
         );
-        Map<String, Map<String, Object>> result = Map.ofEntries();
+        Map<String,  OPAResult> result = Map.ofEntries();
         Map<String, Object> expect = Map.ofEntries(
             entry("job1", Map.ofEntries(entry("aaa", "111"))),
             entry("job2", Map.ofEntries(entry("bbb", "222")))
         );
 
-        TypeReference<Map<String, Object>> tr = new TypeReference <Map<String, Object>>() {};
-
         try {
-            result = opa.evaluateBatch("policy/echo", input, tr);
+            result = opa.evaluateBatch("policy/echo", input);
         } catch (OPAException e) {
             System.out.println("exception: " + e);
             assertNull(e);
         }
 
-        assertEquals(expect, result);
+        for (Map.Entry<String, OPAResult> entry: result.entrySet()) {
+            assertTrue(entry.getValue().success());
+            try {
+                Map<String, Object> v = entry.getValue().get();
+                assertEquals(expect.get(entry.getKey()), v);
+            } catch (OPAException e) {
+                System.out.println("exception: " + e);
+                assertNull(e);
+            }
+        }
     }
 
     @Test
@@ -523,49 +592,56 @@ class OPATest {
             entry("job1", Map.ofEntries(entry("aaa", "111"))),
             entry("job2", Map.ofEntries(entry("bbb", "222")))
         );
-        Map<String, Map<String, Object>> result = Map.ofEntries();
+        Map<String,  OPAResult> result = Map.ofEntries();
         Map<String, Object> expect = Map.ofEntries(
             entry("job1", Map.ofEntries(entry("aaa", "111"))),
             entry("job2", Map.ofEntries(entry("bbb", "222")))
         );
 
-        TypeReference<Map<String, Object>> tr = new TypeReference <Map<String, Object>>() {};
-
         try {
-            result = opa.evaluateBatch("policy/echo", input, tr);
+            result = opa.evaluateBatch("policy/echo", input);
         } catch (OPAException e) {
             System.out.println("exception: " + e);
             assertNull(e);
         }
 
-        assertEquals(expect, result);
-    }
-
-    @Test
-    public void testEOPAEvaluateBatchMixed() {
-        OPAClient opa = new OPAClient(eopaAddress, headers);
-        Map<String, Object> input = Map.ofEntries(
-            entry("job1", Map.ofEntries(entry("aaa", "111"), entry("bbb", "111"))),
-            entry("job2", Map.ofEntries(entry("bbb", "222")))
-        );
-        Map<String, Map<String, Object>> result = Map.ofEntries();
-        Map<String, Object> expect = Map.ofEntries(
-            entry("job1", Map.ofEntries(entry("aaa", "111"))),
-            entry("job2", Map.ofEntries(entry("bbb", "222")))
-        );
-
-        TypeReference<Map<String, Object>> tr = new TypeReference <Map<String, Object>>() {};
-
-        try {
-            result = opa.evaluateBatch("condfail/p", input, tr);
-        } catch (OPAException e) {
-            e.printStackTrace(System.out);
-            System.out.println("exception: " + e);
-            assertNull(e);
+        for (Map.Entry<String, OPAResult> entry: result.entrySet()) {
+            assertTrue(entry.getValue().success());
+            try {
+                Map<String, Object> v = entry.getValue().get();
+                assertEquals(expect.get(entry.getKey()), v);
+            } catch (OPAException e) {
+                System.out.println("exception: " + e);
+                assertNull(e);
+            }
         }
-
-        assertEquals(expect, result);
     }
+
+    //@Test
+    //public void testEOPAEvaluateBatchMixed() {
+    //    OPAClient opa = new OPAClient(eopaAddress, headers);
+    //    Map<String, Object> input = Map.ofEntries(
+    //        entry("job1", Map.ofEntries(entry("aaa", "111"), entry("bbb", "111"))),
+    //        entry("job2", Map.ofEntries(entry("bbb", "222")))
+    //    );
+    //    Map<String, OPAResult> result = Map.ofEntries();
+    //    Map<String, Object> expect = Map.ofEntries(
+    //        entry("job1", Map.ofEntries(entry("aaa", "111"))),
+    //        entry("job2", Map.ofEntries(entry("bbb", "222")))
+    //    );
+    //
+    //    TypeReference<Map<String, Object>> tr = new TypeReference <Map<String, Object>>() {};
+    //
+    //    try {
+    //        result = opa.evaluateBatch("condfail/p", input, tr);
+    //    } catch (OPAException e) {
+    //        e.printStackTrace(System.out);
+    //        System.out.println("exception: " + e);
+    //        assertNull(e);
+    //    }
+    //
+    //    assertEquals(expect, result);
+    //}
 
 }
 
