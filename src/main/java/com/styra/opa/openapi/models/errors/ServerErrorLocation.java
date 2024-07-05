@@ -17,31 +17,26 @@ import java.math.BigInteger;
 
 public class ServerErrorLocation {
 
-    @JsonProperty("col")
-    private long col;
-
     @JsonProperty("file")
     private String file;
 
     @JsonProperty("row")
     private long row;
 
+    @JsonProperty("col")
+    private long col;
+
     @JsonCreator
     public ServerErrorLocation(
-            @JsonProperty("col") long col,
             @JsonProperty("file") String file,
-            @JsonProperty("row") long row) {
-        Utils.checkNotNull(col, "col");
+            @JsonProperty("row") long row,
+            @JsonProperty("col") long col) {
         Utils.checkNotNull(file, "file");
         Utils.checkNotNull(row, "row");
-        this.col = col;
+        Utils.checkNotNull(col, "col");
         this.file = file;
         this.row = row;
-    }
-
-    @JsonIgnore
-    public long col() {
-        return col;
+        this.col = col;
     }
 
     @JsonIgnore
@@ -54,14 +49,13 @@ public class ServerErrorLocation {
         return row;
     }
 
-    public final static Builder builder() {
-        return new Builder();
+    @JsonIgnore
+    public long col() {
+        return col;
     }
 
-    public ServerErrorLocation withCol(long col) {
-        Utils.checkNotNull(col, "col");
-        this.col = col;
-        return this;
+    public final static Builder builder() {
+        return new Builder();
     }
 
     public ServerErrorLocation withFile(String file) {
@@ -75,6 +69,12 @@ public class ServerErrorLocation {
         this.row = row;
         return this;
     }
+
+    public ServerErrorLocation withCol(long col) {
+        Utils.checkNotNull(col, "col");
+        this.col = col;
+        return this;
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -86,43 +86,37 @@ public class ServerErrorLocation {
         }
         ServerErrorLocation other = (ServerErrorLocation) o;
         return 
-            java.util.Objects.deepEquals(this.col, other.col) &&
             java.util.Objects.deepEquals(this.file, other.file) &&
-            java.util.Objects.deepEquals(this.row, other.row);
+            java.util.Objects.deepEquals(this.row, other.row) &&
+            java.util.Objects.deepEquals(this.col, other.col);
     }
     
     @Override
     public int hashCode() {
         return java.util.Objects.hash(
-            col,
             file,
-            row);
+            row,
+            col);
     }
     
     @Override
     public String toString() {
         return Utils.toString(ServerErrorLocation.class,
-                "col", col,
                 "file", file,
-                "row", row);
+                "row", row,
+                "col", col);
     }
     
     public final static class Builder {
  
-        private Long col;
- 
         private String file;
  
-        private Long row;  
+        private Long row;
+ 
+        private Long col;  
         
         private Builder() {
           // force use of static builder() method
-        }
-
-        public Builder col(long col) {
-            Utils.checkNotNull(col, "col");
-            this.col = col;
-            return this;
         }
 
         public Builder file(String file) {
@@ -136,12 +130,18 @@ public class ServerErrorLocation {
             this.row = row;
             return this;
         }
+
+        public Builder col(long col) {
+            Utils.checkNotNull(col, "col");
+            this.col = col;
+            return this;
+        }
         
         public ServerErrorLocation build() {
             return new ServerErrorLocation(
-                col,
                 file,
-                row);
+                row,
+                col);
         }
     }
 }

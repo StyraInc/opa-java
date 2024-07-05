@@ -23,30 +23,30 @@ public class Errors {
     @JsonProperty("code")
     private String code;
 
+    @JsonProperty("message")
+    private String message;
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("location")
     private Optional<? extends Location> location;
 
-    @JsonProperty("message")
-    private String message;
-
     @JsonCreator
     public Errors(
             @JsonProperty("code") String code,
-            @JsonProperty("location") Optional<? extends Location> location,
-            @JsonProperty("message") String message) {
+            @JsonProperty("message") String message,
+            @JsonProperty("location") Optional<? extends Location> location) {
         Utils.checkNotNull(code, "code");
-        Utils.checkNotNull(location, "location");
         Utils.checkNotNull(message, "message");
+        Utils.checkNotNull(location, "location");
         this.code = code;
-        this.location = location;
         this.message = message;
+        this.location = location;
     }
     
     public Errors(
             String code,
             String message) {
-        this(code, Optional.empty(), message);
+        this(code, message, Optional.empty());
     }
 
     @JsonIgnore
@@ -54,15 +54,15 @@ public class Errors {
         return code;
     }
 
+    @JsonIgnore
+    public String message() {
+        return message;
+    }
+
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<Location> location() {
         return (Optional<Location>) location;
-    }
-
-    @JsonIgnore
-    public String message() {
-        return message;
     }
 
     public final static Builder builder() {
@@ -72,6 +72,12 @@ public class Errors {
     public Errors withCode(String code) {
         Utils.checkNotNull(code, "code");
         this.code = code;
+        return this;
+    }
+
+    public Errors withMessage(String message) {
+        Utils.checkNotNull(message, "message");
+        this.message = message;
         return this;
     }
 
@@ -86,12 +92,6 @@ public class Errors {
         this.location = location;
         return this;
     }
-
-    public Errors withMessage(String message) {
-        Utils.checkNotNull(message, "message");
-        this.message = message;
-        return this;
-    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -104,33 +104,33 @@ public class Errors {
         Errors other = (Errors) o;
         return 
             java.util.Objects.deepEquals(this.code, other.code) &&
-            java.util.Objects.deepEquals(this.location, other.location) &&
-            java.util.Objects.deepEquals(this.message, other.message);
+            java.util.Objects.deepEquals(this.message, other.message) &&
+            java.util.Objects.deepEquals(this.location, other.location);
     }
     
     @Override
     public int hashCode() {
         return java.util.Objects.hash(
             code,
-            location,
-            message);
+            message,
+            location);
     }
     
     @Override
     public String toString() {
         return Utils.toString(Errors.class,
                 "code", code,
-                "location", location,
-                "message", message);
+                "message", message,
+                "location", location);
     }
     
     public final static class Builder {
  
         private String code;
  
-        private Optional<? extends Location> location = Optional.empty();
+        private String message;
  
-        private String message;  
+        private Optional<? extends Location> location = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -139,6 +139,12 @@ public class Errors {
         public Builder code(String code) {
             Utils.checkNotNull(code, "code");
             this.code = code;
+            return this;
+        }
+
+        public Builder message(String message) {
+            Utils.checkNotNull(message, "message");
+            this.message = message;
             return this;
         }
 
@@ -153,18 +159,12 @@ public class Errors {
             this.location = location;
             return this;
         }
-
-        public Builder message(String message) {
-            Utils.checkNotNull(message, "message");
-            this.message = message;
-            return this;
-        }
         
         public Errors build() {
             return new Errors(
                 code,
-                location,
-                message);
+                message,
+                location);
         }
     }
 }

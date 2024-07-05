@@ -559,6 +559,7 @@ class OPATest {
         try {
             result = opa.evaluateBatch("condfail/p", input, tr);
         } catch (OPAException e) {
+            e.printStackTrace(System.out);
             System.out.println("exception: " + e);
             assertNull(e);
         }

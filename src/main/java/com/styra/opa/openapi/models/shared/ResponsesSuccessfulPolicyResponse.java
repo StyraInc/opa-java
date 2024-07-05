@@ -21,11 +21,11 @@ import java.util.Optional;
 public class ResponsesSuccessfulPolicyResponse {
 
     /**
-     * If decision logging is enabled, this field contains a string that uniquely identifies the decision. The identifier will be included in the decision log event for this decision. Callers can use the identifier for correlation purposes.
+     * The base or virtual document referred to by the URL path. If the path is undefined, this key will be omitted.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("decision_id")
-    private Optional<? extends String> decisionId;
+    @JsonProperty("result")
+    private Optional<? extends Result> result;
 
     /**
      * If query metrics are enabled, this field contains query performance metrics collected during the parse, compile, and evaluation steps.
@@ -35,18 +35,18 @@ public class ResponsesSuccessfulPolicyResponse {
     private Optional<? extends java.util.Map<String, java.lang.Object>> metrics;
 
     /**
+     * If decision logging is enabled, this field contains a string that uniquely identifies the decision. The identifier will be included in the decision log event for this decision. Callers can use the identifier for correlation purposes.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("decision_id")
+    private Optional<? extends String> decisionId;
+
+    /**
      * Provenance information can be requested on individual API calls and are returned inline with the API response. To obtain provenance information on an API call, specify the `provenance=true` query parameter when executing the API call.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("provenance")
     private Optional<? extends Provenance> provenance;
-
-    /**
-     * The base or virtual document referred to by the URL path. If the path is undefined, this key will be omitted.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("result")
-    private Optional<? extends Result> result;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("http_status_code")
@@ -54,20 +54,20 @@ public class ResponsesSuccessfulPolicyResponse {
 
     @JsonCreator
     public ResponsesSuccessfulPolicyResponse(
-            @JsonProperty("decision_id") Optional<? extends String> decisionId,
-            @JsonProperty("metrics") Optional<? extends java.util.Map<String, java.lang.Object>> metrics,
-            @JsonProperty("provenance") Optional<? extends Provenance> provenance,
             @JsonProperty("result") Optional<? extends Result> result,
+            @JsonProperty("metrics") Optional<? extends java.util.Map<String, java.lang.Object>> metrics,
+            @JsonProperty("decision_id") Optional<? extends String> decisionId,
+            @JsonProperty("provenance") Optional<? extends Provenance> provenance,
             @JsonProperty("http_status_code") Optional<? extends String> httpStatusCode) {
-        Utils.checkNotNull(decisionId, "decisionId");
-        Utils.checkNotNull(metrics, "metrics");
-        Utils.checkNotNull(provenance, "provenance");
         Utils.checkNotNull(result, "result");
+        Utils.checkNotNull(metrics, "metrics");
+        Utils.checkNotNull(decisionId, "decisionId");
+        Utils.checkNotNull(provenance, "provenance");
         Utils.checkNotNull(httpStatusCode, "httpStatusCode");
-        this.decisionId = decisionId;
-        this.metrics = metrics;
-        this.provenance = provenance;
         this.result = result;
+        this.metrics = metrics;
+        this.decisionId = decisionId;
+        this.provenance = provenance;
         this.httpStatusCode = httpStatusCode;
     }
     
@@ -76,12 +76,12 @@ public class ResponsesSuccessfulPolicyResponse {
     }
 
     /**
-     * If decision logging is enabled, this field contains a string that uniquely identifies the decision. The identifier will be included in the decision log event for this decision. Callers can use the identifier for correlation purposes.
+     * The base or virtual document referred to by the URL path. If the path is undefined, this key will be omitted.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<String> decisionId() {
-        return (Optional<String>) decisionId;
+    public Optional<Result> result() {
+        return (Optional<Result>) result;
     }
 
     /**
@@ -94,21 +94,21 @@ public class ResponsesSuccessfulPolicyResponse {
     }
 
     /**
+     * If decision logging is enabled, this field contains a string that uniquely identifies the decision. The identifier will be included in the decision log event for this decision. Callers can use the identifier for correlation purposes.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> decisionId() {
+        return (Optional<String>) decisionId;
+    }
+
+    /**
      * Provenance information can be requested on individual API calls and are returned inline with the API response. To obtain provenance information on an API call, specify the `provenance=true` query parameter when executing the API call.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<Provenance> provenance() {
         return (Optional<Provenance>) provenance;
-    }
-
-    /**
-     * The base or virtual document referred to by the URL path. If the path is undefined, this key will be omitted.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<Result> result() {
-        return (Optional<Result>) result;
     }
 
     @SuppressWarnings("unchecked")
@@ -122,20 +122,20 @@ public class ResponsesSuccessfulPolicyResponse {
     }
 
     /**
-     * If decision logging is enabled, this field contains a string that uniquely identifies the decision. The identifier will be included in the decision log event for this decision. Callers can use the identifier for correlation purposes.
+     * The base or virtual document referred to by the URL path. If the path is undefined, this key will be omitted.
      */
-    public ResponsesSuccessfulPolicyResponse withDecisionId(String decisionId) {
-        Utils.checkNotNull(decisionId, "decisionId");
-        this.decisionId = Optional.ofNullable(decisionId);
+    public ResponsesSuccessfulPolicyResponse withResult(Result result) {
+        Utils.checkNotNull(result, "result");
+        this.result = Optional.ofNullable(result);
         return this;
     }
 
     /**
-     * If decision logging is enabled, this field contains a string that uniquely identifies the decision. The identifier will be included in the decision log event for this decision. Callers can use the identifier for correlation purposes.
+     * The base or virtual document referred to by the URL path. If the path is undefined, this key will be omitted.
      */
-    public ResponsesSuccessfulPolicyResponse withDecisionId(Optional<? extends String> decisionId) {
-        Utils.checkNotNull(decisionId, "decisionId");
-        this.decisionId = decisionId;
+    public ResponsesSuccessfulPolicyResponse withResult(Optional<? extends Result> result) {
+        Utils.checkNotNull(result, "result");
+        this.result = result;
         return this;
     }
 
@@ -158,6 +158,24 @@ public class ResponsesSuccessfulPolicyResponse {
     }
 
     /**
+     * If decision logging is enabled, this field contains a string that uniquely identifies the decision. The identifier will be included in the decision log event for this decision. Callers can use the identifier for correlation purposes.
+     */
+    public ResponsesSuccessfulPolicyResponse withDecisionId(String decisionId) {
+        Utils.checkNotNull(decisionId, "decisionId");
+        this.decisionId = Optional.ofNullable(decisionId);
+        return this;
+    }
+
+    /**
+     * If decision logging is enabled, this field contains a string that uniquely identifies the decision. The identifier will be included in the decision log event for this decision. Callers can use the identifier for correlation purposes.
+     */
+    public ResponsesSuccessfulPolicyResponse withDecisionId(Optional<? extends String> decisionId) {
+        Utils.checkNotNull(decisionId, "decisionId");
+        this.decisionId = decisionId;
+        return this;
+    }
+
+    /**
      * Provenance information can be requested on individual API calls and are returned inline with the API response. To obtain provenance information on an API call, specify the `provenance=true` query parameter when executing the API call.
      */
     public ResponsesSuccessfulPolicyResponse withProvenance(Provenance provenance) {
@@ -172,24 +190,6 @@ public class ResponsesSuccessfulPolicyResponse {
     public ResponsesSuccessfulPolicyResponse withProvenance(Optional<? extends Provenance> provenance) {
         Utils.checkNotNull(provenance, "provenance");
         this.provenance = provenance;
-        return this;
-    }
-
-    /**
-     * The base or virtual document referred to by the URL path. If the path is undefined, this key will be omitted.
-     */
-    public ResponsesSuccessfulPolicyResponse withResult(Result result) {
-        Utils.checkNotNull(result, "result");
-        this.result = Optional.ofNullable(result);
-        return this;
-    }
-
-    /**
-     * The base or virtual document referred to by the URL path. If the path is undefined, this key will be omitted.
-     */
-    public ResponsesSuccessfulPolicyResponse withResult(Optional<? extends Result> result) {
-        Utils.checkNotNull(result, "result");
-        this.result = result;
         return this;
     }
 
@@ -215,42 +215,42 @@ public class ResponsesSuccessfulPolicyResponse {
         }
         ResponsesSuccessfulPolicyResponse other = (ResponsesSuccessfulPolicyResponse) o;
         return 
-            java.util.Objects.deepEquals(this.decisionId, other.decisionId) &&
-            java.util.Objects.deepEquals(this.metrics, other.metrics) &&
-            java.util.Objects.deepEquals(this.provenance, other.provenance) &&
             java.util.Objects.deepEquals(this.result, other.result) &&
+            java.util.Objects.deepEquals(this.metrics, other.metrics) &&
+            java.util.Objects.deepEquals(this.decisionId, other.decisionId) &&
+            java.util.Objects.deepEquals(this.provenance, other.provenance) &&
             java.util.Objects.deepEquals(this.httpStatusCode, other.httpStatusCode);
     }
     
     @Override
     public int hashCode() {
         return java.util.Objects.hash(
-            decisionId,
-            metrics,
-            provenance,
             result,
+            metrics,
+            decisionId,
+            provenance,
             httpStatusCode);
     }
     
     @Override
     public String toString() {
         return Utils.toString(ResponsesSuccessfulPolicyResponse.class,
-                "decisionId", decisionId,
-                "metrics", metrics,
-                "provenance", provenance,
                 "result", result,
+                "metrics", metrics,
+                "decisionId", decisionId,
+                "provenance", provenance,
                 "httpStatusCode", httpStatusCode);
     }
     
     public final static class Builder {
  
-        private Optional<? extends String> decisionId = Optional.empty();
+        private Optional<? extends Result> result = Optional.empty();
  
         private Optional<? extends java.util.Map<String, java.lang.Object>> metrics = Optional.empty();
  
-        private Optional<? extends Provenance> provenance = Optional.empty();
+        private Optional<? extends String> decisionId = Optional.empty();
  
-        private Optional<? extends Result> result = Optional.empty();
+        private Optional<? extends Provenance> provenance = Optional.empty();
  
         private Optional<? extends String> httpStatusCode = Optional.empty();  
         
@@ -259,20 +259,20 @@ public class ResponsesSuccessfulPolicyResponse {
         }
 
         /**
-         * If decision logging is enabled, this field contains a string that uniquely identifies the decision. The identifier will be included in the decision log event for this decision. Callers can use the identifier for correlation purposes.
+         * The base or virtual document referred to by the URL path. If the path is undefined, this key will be omitted.
          */
-        public Builder decisionId(String decisionId) {
-            Utils.checkNotNull(decisionId, "decisionId");
-            this.decisionId = Optional.ofNullable(decisionId);
+        public Builder result(Result result) {
+            Utils.checkNotNull(result, "result");
+            this.result = Optional.ofNullable(result);
             return this;
         }
 
         /**
-         * If decision logging is enabled, this field contains a string that uniquely identifies the decision. The identifier will be included in the decision log event for this decision. Callers can use the identifier for correlation purposes.
+         * The base or virtual document referred to by the URL path. If the path is undefined, this key will be omitted.
          */
-        public Builder decisionId(Optional<? extends String> decisionId) {
-            Utils.checkNotNull(decisionId, "decisionId");
-            this.decisionId = decisionId;
+        public Builder result(Optional<? extends Result> result) {
+            Utils.checkNotNull(result, "result");
+            this.result = result;
             return this;
         }
 
@@ -295,6 +295,24 @@ public class ResponsesSuccessfulPolicyResponse {
         }
 
         /**
+         * If decision logging is enabled, this field contains a string that uniquely identifies the decision. The identifier will be included in the decision log event for this decision. Callers can use the identifier for correlation purposes.
+         */
+        public Builder decisionId(String decisionId) {
+            Utils.checkNotNull(decisionId, "decisionId");
+            this.decisionId = Optional.ofNullable(decisionId);
+            return this;
+        }
+
+        /**
+         * If decision logging is enabled, this field contains a string that uniquely identifies the decision. The identifier will be included in the decision log event for this decision. Callers can use the identifier for correlation purposes.
+         */
+        public Builder decisionId(Optional<? extends String> decisionId) {
+            Utils.checkNotNull(decisionId, "decisionId");
+            this.decisionId = decisionId;
+            return this;
+        }
+
+        /**
          * Provenance information can be requested on individual API calls and are returned inline with the API response. To obtain provenance information on an API call, specify the `provenance=true` query parameter when executing the API call.
          */
         public Builder provenance(Provenance provenance) {
@@ -312,24 +330,6 @@ public class ResponsesSuccessfulPolicyResponse {
             return this;
         }
 
-        /**
-         * The base or virtual document referred to by the URL path. If the path is undefined, this key will be omitted.
-         */
-        public Builder result(Result result) {
-            Utils.checkNotNull(result, "result");
-            this.result = Optional.ofNullable(result);
-            return this;
-        }
-
-        /**
-         * The base or virtual document referred to by the URL path. If the path is undefined, this key will be omitted.
-         */
-        public Builder result(Optional<? extends Result> result) {
-            Utils.checkNotNull(result, "result");
-            this.result = result;
-            return this;
-        }
-
         public Builder httpStatusCode(String httpStatusCode) {
             Utils.checkNotNull(httpStatusCode, "httpStatusCode");
             this.httpStatusCode = Optional.ofNullable(httpStatusCode);
@@ -344,10 +344,10 @@ public class ResponsesSuccessfulPolicyResponse {
         
         public ResponsesSuccessfulPolicyResponse build() {
             return new ResponsesSuccessfulPolicyResponse(
-                decisionId,
-                metrics,
-                provenance,
                 result,
+                metrics,
+                decisionId,
+                provenance,
                 httpStatusCode);
         }
     }
