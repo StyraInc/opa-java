@@ -2,17 +2,18 @@ speakeasyVersion: 1.320.0
 sources:
     openapi:
         sourceNamespace: openapi
-        sourceRevisionDigest: sha256:160b992f9f36d7ee99ccfcf3fe3cff8693343dfa470d499fcff0bce054c7a71e
-        sourceBlobDigest: sha256:8b9d7ab82b2a9b48852bb5b6818294594a9a7949678b919f272da8f6518825aa
+        sourceRevisionDigest: sha256:98226a6e6d4d22c7779c985aa9bee80ee3ed63437747701c250ca84bcf790953
+        sourceBlobDigest: sha256:9fc02a5a0aa6e3238a3cc0c5ad45da0ea06c3fa15dba2d44550bc8009f1da38f
         tags:
             - latest
+            - main
 targets:
     opa:
         source: openapi
         sourceNamespace: openapi
-        sourceRevisionDigest: sha256:160b992f9f36d7ee99ccfcf3fe3cff8693343dfa470d499fcff0bce054c7a71e
-        sourceBlobDigest: sha256:8b9d7ab82b2a9b48852bb5b6818294594a9a7949678b919f272da8f6518825aa
-        outLocation: /Users/cad/f/src/opa-java
+        sourceRevisionDigest: sha256:98226a6e6d4d22c7779c985aa9bee80ee3ed63437747701c250ca84bcf790953
+        sourceBlobDigest: sha256:9fc02a5a0aa6e3238a3cc0c5ad45da0ea06c3fa15dba2d44550bc8009f1da38f
+        outLocation: /github/workspace/repo
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
