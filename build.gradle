@@ -8,6 +8,7 @@
 // Additions to the plugins block can be made by setting the `additionalPlugins` property (an array 
 // of string where each string value is an additional line in the block) in gen.yaml.
 ////////////////////////////////////////////////////////////////////////////////////////////
+
 plugins {
     // Apply the java-library plugin for API and implementation separation.
     id 'java-library'
@@ -42,7 +43,7 @@ model {
 jar {
     dependsOn(":generatePomFileForMavenPublication")
 
-    into("META-INF/maven/com.styra/opa") {
+    into("META-INF/maven/com.styra.opa/openapi") {
         from("$buildDir/pom.xml")
     }
 }
@@ -75,9 +76,9 @@ publishing {
 
     publications {
         maven(MavenPublication) {
-            groupId = 'com.styra'
-            artifactId = 'opa'
-            version = '1.4.1'
+            groupId = 'com.styra.opa'
+            artifactId = 'openapi'
+            version = '1.4.2'
 
             from components.java
 
