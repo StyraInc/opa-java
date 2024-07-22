@@ -44,9 +44,9 @@ java:
       webhooks: models/webhooks
   inputModelSuffix: input
   license:
-    name: The MIT License (MIT)
-    shortName: MIT
-    url: https://mit-license.org/
+    name: The Apache License, Version 2.0
+    shortName: apache2
+    url: http://www.apache.org/licenses/LICENSE-2.0.txt
   maxMethodParams: 4
   ossrhURL: https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/
   outputModelSuffix: output

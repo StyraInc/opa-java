@@ -22,8 +22,8 @@ class SDKConfiguration {
     public String language = "java";
     public String openapiDocVersion = "0.2.0";
     public String sdkVersion = "1.4.1";
-    public String genVersion = "2.361.10";
-    public String userAgent = "speakeasy-sdk/java 1.4.1 2.361.10 0.2.0 com.styra.opa.openapi";
+    public String genVersion = "2.378.0";
+    public String userAgent = "speakeasy-sdk/java 1.4.1 2.378.0 0.2.0 com.styra.opa.openapi";
 
     private com.styra.opa.openapi.utils.Hooks _hooks = createHooks();
 
