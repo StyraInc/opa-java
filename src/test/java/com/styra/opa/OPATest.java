@@ -13,6 +13,7 @@ import org.testcontainers.images.builder.ImageFromDockerfile;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+import java.lang.reflect.Field;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -47,6 +48,9 @@ class OPATest {
     private String altAddress;
     private Map<String, String> headers = Map.ofEntries(entry("Authorization", "Bearer supersecret"));
 
+    private RecordingHandler recordingHandler;
+    private Logger logger;
+
     @Container
     // Checkstyle is disabled here because it wants opac to 'be private and
     // have accessor methods', which seems pointless and will probably mess up
@@ -69,16 +73,26 @@ class OPATest {
     //CHECKSTYLE:ON
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws Exception {
         address = "http://" + opac.getHost() + ":" + opac.getMappedPort(opaPort);
         altAddress = "http://" + opac.getHost() + ":" + opac.getMappedPort(altPort) + "/customprefix";
+
+        this.recordingHandler = new RecordingHandler();
+        this.recordingHandler.setLevel(ALL);
+        Field httpcLoggerField = OPALatencyMeasuringHTTPClient.class.getDeclaredField("logger");
+        httpcLoggerField.setAccessible(true);
+        this.logger = (Logger) httpcLoggerField.get(null);
+        this.logger.addHandler(this.recordingHandler);
+        this.logger.setLevel(ALL);
+        this.logger.setUseParentHandlers(false);
     }
 
     @AfterEach
-    public void dumpLogs() {
+    public void tearDown() {
         System.out.println("==== container logs from OPA container ====");
         final String logs = opac.getLogs();
         System.out.println(logs);
+        this.logger.removeHandler(this.recordingHandler);
     }
 
     @Test
@@ -258,16 +272,10 @@ class OPATest {
 
     @Test
     public void testLatencyMeasurement() {
-        Logger logger = Logger.getLogger("testLatencyMeasurementLogger");
-        RecordingHandler handlerObj = new RecordingHandler();
-        handlerObj.setLevel(ALL);
-        logger.addHandler(handlerObj);
-        logger.setLevel(ALL);
-        logger.setUseParentHandlers(false);
-
-        OPALatencyMeasuringHTTPClient httpc = new OPALatencyMeasuringHTTPClient(logger, headers);
+        OPALatencyMeasuringHTTPClient httpc = new OPALatencyMeasuringHTTPClient(headers);
         httpc.setLatencyMeasurementFormat("LATENCY MEASUREMENT #{0,number,#}#{1}#");
         httpc.setLatencyMeasurementLogLevel(INFO);
+
         OPAClient opa = new OPAClient(address, httpc);
         Map result = Map.ofEntries(entry("unit", "test"));
         Map expect = Map.ofEntries(entry("hello", "world"), entry("foo", Map.ofEntries(entry("bar", testIntegerA))));
@@ -284,7 +292,7 @@ class OPATest {
 
         assertEquals(expect, result);
 
-        List<LogRecord> recs = handlerObj.getSeenRecs();
+        List<LogRecord> recs = this.recordingHandler.getSeenRecs();
         List<String> logs = new ArrayList<String>();
         recs.forEach(elem -> logs.add(elem.getLevel().getName() + " " + elem.getMessage()));
 
@@ -296,14 +304,7 @@ class OPATest {
 
     @Test
     public void testLatencyMeasurementDefaults() {
-        Logger logger = Logger.getLogger("testLatencyMeasurementLogger");
-        RecordingHandler handlerObj = new RecordingHandler();
-        handlerObj.setLevel(ALL);
-        logger.addHandler(handlerObj);
-        logger.setLevel(ALL);
-        logger.setUseParentHandlers(false);
-
-        OPALatencyMeasuringHTTPClient httpc = new OPALatencyMeasuringHTTPClient(logger, headers);
+        OPALatencyMeasuringHTTPClient httpc = new OPALatencyMeasuringHTTPClient(headers);
         OPAClient opa = new OPAClient(address, httpc);
         Map result = Map.ofEntries(entry("unit", "test"));
         Map expect = Map.ofEntries(entry("hello", "world"), entry("foo", Map.ofEntries(entry("bar", testIntegerA))));
@@ -320,7 +321,7 @@ class OPATest {
 
         assertEquals(expect, result);
 
-        List<LogRecord> recs = handlerObj.getSeenRecs();
+        List<LogRecord> recs = this.recordingHandler.getSeenRecs();
         List<String> logs = new ArrayList<String>();
         recs.forEach(elem -> logs.add(elem.getLevel().getName() + " " + elem.getMessage()));
 

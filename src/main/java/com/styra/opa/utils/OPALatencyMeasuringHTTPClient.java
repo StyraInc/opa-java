@@ -13,13 +13,13 @@ import java.util.logging.Logger;
 import static java.util.logging.Level.FINE;
 
 /**
- * This HTTPClient implementation wraps OPAHTTPClient. In addition to
- * (optionally) injecting extra headers into the requests, it can also send log
- * messages to a java.util.logging.Logger instances with latency measurements.
+ * This HTTPClient implementation wraps OPAHTTPClient and has the same
+ * functionality, but also creates log messages indicating the latency for each
+ * request processed.
  */
 public class OPALatencyMeasuringHTTPClient extends OPAHTTPClient {
 
-    private Logger logger;
+    private static Logger logger = Logger.getLogger(OPALatencyMeasuringHTTPClient.class.getName());
 
     private String latencyMeasurementFormatString = "path=''{1}'' latency={0,number,#}ms";
 
@@ -27,9 +27,8 @@ public class OPALatencyMeasuringHTTPClient extends OPAHTTPClient {
 
     private Level latencyMeasurementLogLevel = FINE;
 
-    public OPALatencyMeasuringHTTPClient(Logger logger) {
+    public OPALatencyMeasuringHTTPClient() {
         super();
-        this.logger = logger;
     }
 
     /**
@@ -40,19 +39,18 @@ public class OPALatencyMeasuringHTTPClient extends OPAHTTPClient {
      * @param headers
      * @param headers
      */
-    public OPALatencyMeasuringHTTPClient(Logger logger, Map<String, String> headers) {
+    public OPALatencyMeasuringHTTPClient(Map<String, String> headers) {
         super(headers);
-        this.logger = logger;
         this.fmt = new MessageFormat(this.latencyMeasurementFormatString);
     }
 
     /**
-     * Modify the format in which the latency measurements are logged.
+     * Modify the format in which the latency measurements are logged, the
+     * default is "path=''{1}'' latency={0,number,#}ms".
      *
      * The format string should be compatible with java.text.MessageFormat.
      * The {0} argument will contain the measured request latency in ms, and
-     * the {1} argument will contain the URL path for the HTTP request. The
-     * default format is  "path=''{1}'' latency={0,number,#}ms"
+     * the {1} argument will contain the URL path for the HTTP request.
      *
      * @param newFormat
      */
@@ -62,7 +60,8 @@ public class OPALatencyMeasuringHTTPClient extends OPAHTTPClient {
     }
 
     /**
-     * Modify the log level at which latency measurements are recorded.
+     * Modify the log level at which latency measurements are recorded, the
+     * default is FINE.
      *
      * @param newLevel
      */
