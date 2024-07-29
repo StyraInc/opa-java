@@ -39,8 +39,6 @@ import static java.util.Map.entry;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        System.out.println(new App().getGreeting());
-
         // Create an OPA instance, this handles any state needed for interacting
         // with OPA, and can be re-used for multiple requests if needed.
         String opaURL = "http://localhost:8181";
