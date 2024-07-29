@@ -128,7 +128,7 @@ dependencies {
     testImplementation 'org.testcontainers:testcontainers:1.19.7'
     testImplementation 'org.testcontainers:junit-jupiter:1.19.7'
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.17.0'
-    implementation 'com.fasterxml.jackson.core:jackson-core:2.17.0'
+    api 'com.fasterxml.jackson.core:jackson-core:2.17.0'
     implementation 'org.apache.httpcomponents:httpcore:4.4.16'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.0'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.17.0'
