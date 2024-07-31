@@ -165,6 +165,9 @@ public class Application {
     public static void main(String[] args) throws Exception {
         try {
             OpaApiClient sdk = OpaApiClient.builder()
+                .security(Security.builder()
+                    .bearerAuth(&quot;&lt;YOUR_BEARER_TOKEN_HERE&gt;&quot;)
+                    .build())
                 .build();
 
             ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
@@ -276,6 +279,9 @@ public class Application {
     public static void main(String[] args) throws Exception {
         try {
             OpaApiClient sdk = OpaApiClient.builder()
+                .security(Security.builder()
+                    .bearerAuth(&quot;&lt;YOUR_BEARER_TOKEN_HERE&gt;&quot;)
+                    .build())
                 .build();
 
             ExecutePolicyRequest req = ExecutePolicyRequest.builder()
@@ -377,6 +383,9 @@ public class Application {
     public static void main(String[] args) throws Exception {
         try {
             OpaApiClient sdk = OpaApiClient.builder()
+                .security(Security.builder()
+                    .bearerAuth(&quot;&lt;YOUR_BEARER_TOKEN_HERE&gt;&quot;)
+                    .build())
                 .build();
 
             ExecutePolicyWithInputRequest req = ExecutePolicyWithInputRequest.builder()
@@ -481,6 +490,9 @@ public class Application {
     public static void main(String[] args) throws Exception {
         try {
             OpaApiClient sdk = OpaApiClient.builder()
+                .security(Security.builder()
+                    .bearerAuth(&quot;&lt;YOUR_BEARER_TOKEN_HERE&gt;&quot;)
+                    .build())
                 .build();
 
             ExecuteBatchPolicyWithInputRequest req = ExecuteBatchPolicyWithInputRequest.builder()
@@ -586,6 +598,9 @@ public class Application {
     public static void main(String[] args) throws Exception {
         try {
             OpaApiClient sdk = OpaApiClient.builder()
+                .security(Security.builder()
+                    .bearerAuth(&quot;&lt;YOUR_BEARER_TOKEN_HERE&gt;&quot;)
+                    .build())
                 .build();
 
             HealthResponse res = sdk.health()
