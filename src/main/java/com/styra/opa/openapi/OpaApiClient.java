@@ -78,6 +78,27 @@ public class OpaApiClient implements
         }
         
         /**
+         * Configures the SDK to use the provided security details.
+         *
+         * @param security The security details to use for all requests.
+         * @return The builder instance.
+         */
+        public Builder security(com.styra.opa.openapi.models.shared.Security security) {
+            this.sdkConfiguration.securitySource = SecuritySource.of(security);
+            return this;
+        }
+
+        /**
+         * Configures the SDK to use a custom security source.
+         * @param securitySource The security source to use for all requests.
+         * @return The builder instance.
+         */
+        public Builder securitySource(SecuritySource securitySource) {
+            this.sdkConfiguration.securitySource = securitySource;
+            return this;
+        }
+        
+        /**
          * Overrides the default server URL.
          *
          * @param serverUrl The server URL to use for all requests.
@@ -135,6 +156,9 @@ public class OpaApiClient implements
             if (sdkConfiguration.defaultClient == null) {
                 sdkConfiguration.defaultClient = new SpeakeasyHTTPClient();
             }
+	        if (sdkConfiguration.securitySource == null) {
+	    	    sdkConfiguration.securitySource = SecuritySource.of(null);
+	        }
             if (sdkConfiguration.serverUrl == null || sdkConfiguration.serverUrl.isBlank()) {
                 sdkConfiguration.serverUrl = SERVERS[0];
                 sdkConfiguration.serverIdx = 0;
@@ -220,6 +244,9 @@ public class OpaApiClient implements
                 request, 
                 null));
         _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
 
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
@@ -354,6 +381,9 @@ public class OpaApiClient implements
                 request, 
                 null));
         _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
 
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
@@ -497,6 +527,9 @@ public class OpaApiClient implements
                 null));
         _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
 
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
+
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -638,6 +671,9 @@ public class OpaApiClient implements
                 request, 
                 null));
         _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
 
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
@@ -808,6 +844,9 @@ public class OpaApiClient implements
                 com.styra.opa.openapi.models.operations.HealthRequest.class,
                 request, 
                 null));
+
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
 
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 

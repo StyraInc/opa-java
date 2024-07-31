@@ -7,6 +7,7 @@ package com.styra.opa.openapi;
 import com.styra.opa.openapi.utils.Hook.SdkInitData;
 import com.styra.opa.openapi.utils.HTTPClient;
 import com.styra.opa.openapi.utils.RetryConfig;
+import com.styra.opa.openapi.models.shared.Security;
 import java.util.Optional;
 
 class SDKConfiguration {
@@ -15,15 +16,14 @@ class SDKConfiguration {
     public Optional<SecuritySource> securitySource() {
         return Optional.ofNullable(securitySource);
     }
-    
     public HTTPClient defaultClient;
       public String serverUrl;
     public int serverIdx = 0;
     public String language = "java";
     public String openapiDocVersion = "0.2.0";
-    public String sdkVersion = "1.4.1";
-    public String genVersion = "2.380.1";
-    public String userAgent = "speakeasy-sdk/java 1.4.1 2.380.1 0.2.0 com.styra.opa.openapi";
+    public String sdkVersion = "1.5.0";
+    public String genVersion = "2.382.1";
+    public String userAgent = "speakeasy-sdk/java 1.5.0 2.382.1 0.2.0 com.styra.opa.openapi";
 
     private com.styra.opa.openapi.utils.Hooks _hooks = createHooks();
 

@@ -20,6 +20,9 @@ public class Application {
     public static void main(String[] args) throws Exception {
         try {
             OpaApiClient sdk = OpaApiClient.builder()
+                .security(Security.builder()
+                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
+                    .build())
                 .build();
 
             ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
@@ -70,6 +73,9 @@ public class Application {
     public static void main(String[] args) throws Exception {
         try {
             OpaApiClient sdk = OpaApiClient.builder()
+                .security(Security.builder()
+                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
+                    .build())
                 .build();
 
             ExecutePolicyWithInputRequest req = ExecutePolicyWithInputRequest.builder()
@@ -125,6 +131,9 @@ public class Application {
     public static void main(String[] args) throws Exception {
         try {
             OpaApiClient sdk = OpaApiClient.builder()
+                .security(Security.builder()
+                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
+                    .build())
                 .build();
 
             ExecuteBatchPolicyWithInputRequest req = ExecuteBatchPolicyWithInputRequest.builder()
