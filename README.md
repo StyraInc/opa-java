@@ -108,6 +108,9 @@ public class Application {
     public static void main(String[] args) throws Exception {
         try {
             OpaApiClient sdk = OpaApiClient.builder()
+                .security(Security.builder()
+                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
+                    .build())
                 .build();
 
             ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
@@ -160,6 +163,9 @@ public class Application {
     public static void main(String[] args) throws Exception {
         try {
             OpaApiClient sdk = OpaApiClient.builder()
+                .security(Security.builder()
+                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
+                    .build())
                 .build();
 
             ExecutePolicyWithInputRequest req = ExecutePolicyWithInputRequest.builder()
@@ -217,6 +223,9 @@ public class Application {
     public static void main(String[] args) throws Exception {
         try {
             OpaApiClient sdk = OpaApiClient.builder()
+                .security(Security.builder()
+                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
+                    .build())
                 .build();
 
             ExecuteBatchPolicyWithInputRequest req = ExecuteBatchPolicyWithInputRequest.builder()
@@ -300,6 +309,9 @@ public class Application {
         try {
             OpaApiClient sdk = OpaApiClient.builder()
                 .serverIndex(0)
+                .security(Security.builder()
+                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
+                    .build())
                 .build();
 
             ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
@@ -355,6 +367,9 @@ public class Application {
         try {
             OpaApiClient sdk = OpaApiClient.builder()
                 .serverURL("http://localhost:8181")
+                .security(Security.builder()
+                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
+                    .build())
                 .build();
 
             ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
@@ -419,6 +434,9 @@ public class Application {
     public static void main(String[] args) throws Exception {
         try {
             OpaApiClient sdk = OpaApiClient.builder()
+                .security(Security.builder()
+                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
+                    .build())
                 .build();
 
             ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
@@ -448,6 +466,72 @@ public class Application {
 }
 ```
 <!-- End Error Handling [errors] -->
+
+<!-- Start Authentication [security] -->
+## Authentication
+
+### Per-Client Security Schemes
+
+This SDK supports the following security scheme globally:
+
+| Name         | Type         | Scheme       |
+| ------------ | ------------ | ------------ |
+| `bearerAuth` | http         | HTTP Bearer  |
+
+You can set the security parameters through the `security` builder method when initializing the SDK client instance. For example:
+```java
+package hello.world;
+
+import com.styra.opa.openapi.OpaApiClient;
+import com.styra.opa.openapi.models.operations.*;
+import com.styra.opa.openapi.models.shared.*;
+import com.styra.opa.openapi.utils.EventStream;
+import java.math.BigDecimal;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.util.Optional;
+import org.openapitools.jackson.nullable.JsonNullable;
+import static java.util.Map.entry;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+        try {
+            OpaApiClient sdk = OpaApiClient.builder()
+                .security(Security.builder()
+                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
+                    .build())
+                .build();
+
+            ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
+                .pretty(false)
+                .acceptEncoding(GzipAcceptEncoding.GZIP)
+                .input(Input.of(8203.11d))
+                .call();
+
+            if (res.result().isPresent()) {
+                // handle response
+            }
+        } catch (com.styra.opa.openapi.models.errors.ClientError e) {
+            // handle exception
+            throw e;
+        } catch (com.styra.opa.openapi.models.errors.ServerError e) {
+            // handle exception
+            throw e;
+        } catch (com.styra.opa.openapi.models.errors.SDKError e) {
+            // handle exception
+            throw e;
+        } catch (Exception e) {
+            // handle exception
+            throw e;
+        }
+
+    }
+}
+```
+<!-- End Authentication [security] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 
