@@ -2,232 +2,232 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://styrainc.github.io/opa-java/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/maintenance/add-doc/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/maintenance/change-managed/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/maintenance/change-speakeasy/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/maintenance/custom-spec/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/maintenance/releases/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/errors/BatchServerError/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/errors/ClientError/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/errors/Errors/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/errors/Location/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/errors/ServerError/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/errors/ServerErrorErrors/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/errors/ServerErrorLocation/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/errors/UnhealthyServer/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/operations/ExecuteBatchPolicyWithInputRequest/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/operations/ExecuteBatchPolicyWithInputRequestBody/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/operations/ExecuteBatchPolicyWithInputResponse/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/operations/ExecuteDefaultPolicyWithInputRequest/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/operations/ExecuteDefaultPolicyWithInputResponse/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/operations/ExecutePolicyRequest/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/operations/ExecutePolicyResponse/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/operations/ExecutePolicyWithInputRequest/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/operations/ExecutePolicyWithInputRequestBody/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/operations/ExecutePolicyWithInputResponse/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/operations/HealthRequest/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/operations/HealthResponse/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/shared/BatchMixedResults/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/shared/BatchSuccessfulPolicyEvaluation/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/shared/Errors/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/shared/Explain/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/shared/GzipAcceptEncoding/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/shared/GzipContentEncoding/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/shared/HealthyServer/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/shared/Input/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/shared/Location/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/shared/Provenance/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/shared/Responses/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/shared/ResponsesSuccessfulPolicyResponse/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/shared/Result/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/shared/Revision/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/shared/Security/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/shared/ServerError/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/models/shared/SuccessfulPolicyResponse/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/sdks/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://styrainc.github.io/opa-java/sdks/opaapiclient/</loc>
-         <lastmod>2024-07-31</lastmod>
+         <lastmod>2024-08-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>

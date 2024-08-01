@@ -2013,6 +2013,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Instantiates an OPA API wrapper with a custom OPA URL.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/styra/opa/OPAClient.html#%3Cinit%3E(java.lang.String,com.styra.opa.openapi.utils.HTTPClient)">OPAClient(String, HTTPClient)</a></span> - Constructor for class com.styra.opa.<a href="com/styra/opa/OPAClient.html" title="class in com.styra.opa">OPAClient</a></dt>
+<dd>
+<div class="block">This constructor can be used to instantiate an OPAClient which uses a
+ custom HTTP client implementation for the underlying OpaApiClient.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/styra/opa/OPAClient.html#%3Cinit%3E(java.lang.String,java.util.Map)">OPAClient(String, Map&lt;String, String&gt;)</a></span> - Constructor for class com.styra.opa.<a href="com/styra/opa/OPAClient.html" title="class in com.styra.opa">OPAClient</a></dt>
 <dd>
 <div class="block">This constructor allows instantiating the OPA wrapper with additional
@@ -2040,6 +2045,19 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Instantiates a new HTTP client suitable for use with the Speakeasy SDK,
  but with additional headers included in every request.</div>
+</dd>
+<dt><a href="com/styra/opa/utils/OPALatencyMeasuringHTTPClient.html" title="class in com.styra.opa.utils"><span class="typeNameLink">OPALatencyMeasuringHTTPClient</span></a> - Class in <a href="com/styra/opa/utils/package-summary.html">com.styra.opa.utils</a></dt>
+<dd>
+<div class="block">This HTTPClient implementation wraps OPAHTTPClient and has the same
+ functionality, but also creates log messages indicating the latency for each
+ request processed.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/styra/opa/utils/OPALatencyMeasuringHTTPClient.html#%3Cinit%3E()">OPALatencyMeasuringHTTPClient()</a></span> - Constructor for class com.styra.opa.utils.<a href="com/styra/opa/utils/OPALatencyMeasuringHTTPClient.html" title="class in com.styra.opa.utils">OPALatencyMeasuringHTTPClient</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/styra/opa/utils/OPALatencyMeasuringHTTPClient.html#%3Cinit%3E(java.util.Map)">OPALatencyMeasuringHTTPClient(Map&lt;String, String&gt;)</a></span> - Constructor for class com.styra.opa.utils.<a href="com/styra/opa/utils/OPALatencyMeasuringHTTPClient.html" title="class in com.styra.opa.utils">OPALatencyMeasuringHTTPClient</a></dt>
+<dd>
+<div class="block">This constructor allows providing additional headers that should be
+ passed to OPAHTTPClient.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/styra/opa/openapi/utils/Hook.AfterErrorContextImpl.html#operationId()">operationId()</a></span> - Method in class com.styra.opa.openapi.utils.<a href="com/styra/opa/openapi/utils/Hook.AfterErrorContextImpl.html" title="class in com.styra.opa.openapi.utils">Hook.AfterErrorContextImpl</a></dt>
 <dd>&nbsp;</dd>
@@ -2583,6 +2601,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">This method implements compatibility with the
  com.styra.opa.sdk.utils.HTTPClient interface.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/styra/opa/utils/OPALatencyMeasuringHTTPClient.html#send(java.net.http.HttpRequest)">send(HttpRequest)</a></span> - Method in class com.styra.opa.utils.<a href="com/styra/opa/utils/OPALatencyMeasuringHTTPClient.html" title="class in com.styra.opa.utils">OPALatencyMeasuringHTTPClient</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/styra/opa/openapi/utils/BigDecimalString.BigDecimalStringSerializer.html#serialize(com.styra.opa.openapi.utils.BigDecimalString,com.fasterxml.jackson.core.JsonGenerator,com.fasterxml.jackson.databind.SerializerProvider)">serialize(BigDecimalString, JsonGenerator, SerializerProvider)</a></span> - Method in class com.styra.opa.openapi.utils.<a href="com/styra/opa/openapi/utils/BigDecimalString.BigDecimalStringSerializer.html" title="class in com.styra.opa.openapi.utils">BigDecimalString.BigDecimalStringSerializer</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/styra/opa/openapi/utils/BigIntegerString.BigIntegerStringSerializer.html#serialize(com.styra.opa.openapi.utils.BigIntegerString,com.fasterxml.jackson.core.JsonGenerator,com.fasterxml.jackson.databind.SerializerProvider)">serialize(BigIntegerString, JsonGenerator, SerializerProvider)</a></span> - Method in class com.styra.opa.openapi.utils.<a href="com/styra/opa/openapi/utils/BigIntegerString.BigIntegerStringSerializer.html" title="class in com.styra.opa.openapi.utils">BigIntegerString.BigIntegerStringSerializer</a></dt>
@@ -2651,6 +2671,16 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dd>
 <dt><span class="memberNameLink"><a href="com/styra/opa/openapi/utils/HTTPRequest.html#setBody(java.util.Optional)">setBody(Optional&lt;SerializedBody&gt;)</a></span> - Method in class com.styra.opa.openapi.utils.<a href="com/styra/opa/openapi/utils/HTTPRequest.html" title="class in com.styra.opa.openapi.utils">HTTPRequest</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/styra/opa/utils/OPALatencyMeasuringHTTPClient.html#setLatencyMeasurementFormat(java.lang.String)">setLatencyMeasurementFormat(String)</a></span> - Method in class com.styra.opa.utils.<a href="com/styra/opa/utils/OPALatencyMeasuringHTTPClient.html" title="class in com.styra.opa.utils">OPALatencyMeasuringHTTPClient</a></dt>
+<dd>
+<div class="block">Modify the format in which the latency measurements are logged, the
+ default is "path=''{1}'' latency={0,number,#}ms".</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/styra/opa/utils/OPALatencyMeasuringHTTPClient.html#setLatencyMeasurementLogLevel(java.util.logging.Level)">setLatencyMeasurementLogLevel(Level)</a></span> - Method in class com.styra.opa.utils.<a href="com/styra/opa/utils/OPALatencyMeasuringHTTPClient.html" title="class in com.styra.opa.utils">OPALatencyMeasuringHTTPClient</a></dt>
+<dd>
+<div class="block">Modify the log level at which latency measurements are recorded, the
+ default is FINE.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/styra/opa/openapi/utils/TypedObject.html#shape()">shape()</a></span> - Method in class com.styra.opa.openapi.utils.<a href="com/styra/opa/openapi/utils/TypedObject.html" title="class in com.styra.opa.openapi.utils">TypedObject</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/styra/opa/openapi/utils/Utils.TypeReferenceWithShape.html#shape()">shape()</a></span> - Method in class com.styra.opa.openapi.utils.<a href="com/styra/opa/openapi/utils/Utils.TypeReferenceWithShape.html" title="class in com.styra.opa.openapi.utils">Utils.TypeReferenceWithShape</a></dt>

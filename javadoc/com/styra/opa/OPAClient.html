@@ -177,6 +177,14 @@ extends java.lang.Object</pre>
 </td>
 </tr>
 <tr class="rowColor">
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String,com.styra.opa.openapi.utils.HTTPClient)">OPAClient</a></span>&#8203;(java.lang.String&nbsp;opaURL,
+         <a href="openapi/utils/HTTPClient.html" title="interface in com.styra.opa.openapi.utils">HTTPClient</a>&nbsp;httpclient)</code></th>
+<td class="colLast">
+<div class="block">This constructor can be used to instantiate an OPAClient which uses a
+ custom HTTP client implementation for the underlying OpaApiClient.</div>
+</td>
+</tr>
+<tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String,java.util.Map)">OPAClient</a></span>&#8203;(java.lang.String&nbsp;opaURL,
          java.util.Map&lt;java.lang.String,&#8203;java.lang.String&gt;&nbsp;headers)</code></th>
 <td class="colLast">
@@ -628,6 +636,23 @@ extends java.lang.Object</pre>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>opaURL</code> - URL at which OPA should be connected to.</dd>
+</dl>
+</li>
+</ul>
+<a id="&lt;init&gt;(java.lang.String,com.styra.opa.openapi.utils.HTTPClient)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>OPAClient</h4>
+<pre>public&nbsp;OPAClient&#8203;(java.lang.String&nbsp;opaURL,
+                 <a href="openapi/utils/HTTPClient.html" title="interface in com.styra.opa.openapi.utils">HTTPClient</a>&nbsp;httpclient)</pre>
+<div class="block">This constructor can be used to instantiate an OPAClient which uses a
+ custom HTTP client implementation for the underlying OpaApiClient.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>opaURL</code> - URL at which OPA should be connected to.</dd>
+<dd><code>httpclient</code> - custom HTTP client to use</dd>
 </dl>
 </li>
 </ul>
