@@ -8,6 +8,8 @@ import java.io.InputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.net.URI;
@@ -1022,5 +1024,26 @@ public final class Utils {
             hexChars[j * 2 + 1] = HEX_ARRAY[v & 0x0F];
         }
         return new String(hexChars);
+    }
+    
+    @SuppressWarnings("unchecked")
+    public static String discriminatorToString(Object o) {
+        // expects o to be either an Optional<String>, Enum (with a String value() method)
+        // or a String value
+        Class<?> cls = o.getClass();
+        if (cls.equals(Optional.class)) {
+            Optional<String> a = (Optional<String>) o;
+            return a.map(x -> discriminatorToString(x)).orElse(null);
+        } else if (cls.isEnum()) {
+            try {
+                Method m = cls.getMethod("value");
+                return (String) m.invoke(o);
+            } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
+                    | InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            return (String) o;
+        }
     }
 }
