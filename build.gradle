@@ -15,8 +15,8 @@ plugins {
     id 'maven-publish'
     id 'signing'
     id("java")
-    id "nebula.lint" version "17.8.0"
     id("checkstyle")
+    id "nebula.lint" version "17.8.0"
 }
 
 compileJava.options.encoding = "UTF-8"

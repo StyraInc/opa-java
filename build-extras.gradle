@@ -12,8 +12,13 @@ javadocJar {
 }
 
 tasks.withType(Javadoc) {
-  autoLintGradle.enabled = false
-  failOnError false
+    // NOTE: depending on weather or not fix-build-gradle has been run yet, we
+    // may not have the nebula.lint plugin installed. If it isn't present, we
+    // need the build to still pass to keep the automation happy.
+    if (project.hasProperty('autoLintGradle')) {
+        autoLintGradle.enabled = false
+    }
+    failOnError false
 }
 
 // https://discuss.gradle.org/t/how-to-exclude-checkstyle-task-from-build-task/6692/5
@@ -32,19 +37,21 @@ tasks.withType(Checkstyle) {
 }
 
 task lint {
-    autoLintGradle.enabled = true
     dependsOn checkstyleTest
     dependsOn checkstyleMain
-    gradleLint {
-        criticalRules=['all-dependency']
-        reportFormat = 'text'
-        excludedRules = [
-            // Enabling recommended-versions causes Gradle to complain about
-            // testcontainers, but applying the suggested fix (removing the version
-            // numbers from all but one of the testImplementation lines) causes
-            // gradle to fail in a more obscure way that I don't understand.
-            "recommended-versions"
-        ]
+    if (project.hasProperty('autoLintGradle')) {
+        autoLintGradle.enabled = true
+        gradleLint {
+            criticalRules=['all-dependency']
+            reportFormat = 'text'
+            excludedRules = [
+                // Enabling recommended-versions causes Gradle to complain about
+                // testcontainers, but applying the suggested fix (removing the version
+                // numbers from all but one of the testImplementation lines) causes
+                // gradle to fail in a more obscure way that I don't understand.
+                "recommended-versions"
+            ]
+        }
     }
 }
 
