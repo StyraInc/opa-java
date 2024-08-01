@@ -37,6 +37,51 @@ set -x
 
 trap 'rm -f build.gradle.tmp*' EXIT
 
+ensure_plugin() {
+	# This function ensures that the build.gradle file contains the
+	# specified plugin. For this function to be idempotent, then the
+	# replacement string MUST match the search regex.
+	#
+	# $1 . . . plugin string search regex
+	# $2 . . . replacement string
+	# $3 . . . build.gradle file to modify
+
+	pluginstring="$1"
+	replacestring="$2"
+	gradlefile="$3"
+
+	# p tracks weather or not we are inside of the plugin block
+	#
+	# s is the search regex
+	#
+	# r is the replacement string
+	#
+	# The general logic here is that we search for the plugins block, then 
+	# check if each line matches the search regex. If not, then we print it,
+	# but otherwise we skip to the next line. When we see the closing brace,
+	# we print out the replacement string.
+	awk -v r="$replacestring" -v s="$pluginstring" 'p==1 && $1 != "}" {if($0 ~ s) {next} else {print($0); next} } $1 == "plugins" && $2 == "{" && p!=1 {p=1} $1 == "}" && p == 1 {p=0; printf("    %s\n}\n", r); next} {print($0)}' < "$gradlefile" > "$gradlefile.tmp"
+	mv "$gradlefile.tmp" "$gradlefile"
+}
+
+# NOTE: the reason why we need to do this here in this way, rather than just
+# using the additionalPlugins in .speakeasy/gen.yaml is somewhat esoteric. When
+# the Speakeasy GitHub Action runs to generate a new build of the SDK, it will
+# try to compile the SDK that it generates to ensure that it works. Since
+# Gradle includes the nebula linting task as a dependency of every other task,
+# and there isn't a way to suppress the autoLintGradle task for normal builds,
+# it will always fail due to the linting errors in the generated build.gradle
+# file. The thing is, this very script uses fixGradleLint to fix those very
+# errors, so we have a chicken-and-egg problem. The script can't run until
+# SE's generation finishes, but SE's generation can't compile the code until
+# the script runs.
+#
+# The solution is to not use additionalPlugins for nebula.lint, that way the
+# generated build.gradle won't have it. We use this ensure_plugin shell
+# function to idemptently poke the right nebula.lint version back in AFTER SE's
+# generation workflow has already completed.
+ensure_plugin 'id "nebula.lint".*' 'id "nebula.lint" version "17.8.0"' './build.gradle'
+
 # Rewrite the artifact and group ID to be one level "up", so we publish
 # com.styra.opa rather than com.styra.opa.openapi.
 "$SED" 's#into("META-INF/maven/com.styra.opa/openapi")#into("META-INF/maven/com.styra/opa")#g' < build.gradle | \

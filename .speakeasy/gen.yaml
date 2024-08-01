@@ -22,9 +22,10 @@ java:
     - implementation:com.fasterxml.jackson.core:jackson-annotations:2.17.0
     - api:com.fasterxml.jackson.core:jackson-core:2.17.0
     - implementation:org.apache.httpcomponents:httpcore:4.4.16
+  # NOTE: nebula.lint is added by scripts/fix-build-gradle.sh, see NOTE there
+  # for details on how and why.
   additionalPlugins:
     - id("java")
-    - id "nebula.lint" version "17.8.0"
     - id("checkstyle")
   artifactID: openapi
   clientServerStatusCodesAsErrors: true
