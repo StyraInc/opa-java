@@ -29,6 +29,7 @@ public class OPALatencyMeasuringHTTPClient extends OPAHTTPClient {
 
     public OPALatencyMeasuringHTTPClient() {
         super();
+        this.fmt = new MessageFormat(this.latencyMeasurementFormatString);
     }
 
     /**
