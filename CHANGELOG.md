@@ -1,6 +1,6 @@
 # OPA Java SDK Changelog
 
-## v1.5.2 (unreleased)
+## v1.5.2
 
 * Fixed a bug where instantiating `OPALatencyMeasuringHTTPClient` with the default constructor could result in a null pointer exception while formatting messages.
 
