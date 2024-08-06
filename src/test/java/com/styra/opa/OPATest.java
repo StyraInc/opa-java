@@ -43,6 +43,8 @@ class OPATest {
     private int testIntegerA = 8;
     private int testIntegerB = 16;
     private double testDoubleA = 3.14159;
+    private long msInZeroSeconds; // implicit initialization to 0
+    private long msInOneSeconds = 1000;
 
     private String address;
     private String altAddress;
@@ -299,6 +301,12 @@ class OPATest {
         for (String msg : logs) {
             System.out.printf("DEBUG: log line: %s\n", msg);
             assertTrue(msg.matches("^INFO LATENCY MEASUREMENT #[0-9]+#/v1/data/policy/echo#$"));
+
+            // Sanity check that the measurement value is > 0 and < 1s. Even in
+            // CI, it shouldn't take over 1s to do a simple localhost request.
+            String latency = msg.replaceFirst("\\D*(\\d*).*", "$1");
+            assertTrue(Integer.parseInt(latency) > msInZeroSeconds);
+            assertTrue(Integer.parseInt(latency) < msInOneSeconds);
         }
     }
 

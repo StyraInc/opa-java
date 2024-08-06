@@ -19,6 +19,10 @@ import static java.util.logging.Level.FINE;
  */
 public class OPALatencyMeasuringHTTPClient extends OPAHTTPClient {
 
+    // Checkstyle wants this to not be a hard-coded magic number. You never
+    // know, maybe the length of a second will change one day?
+    private static final double MS_PER_NS = 0.000001;
+
     private static Logger logger = Logger.getLogger(OPALatencyMeasuringHTTPClient.class.getName());
 
     private String latencyMeasurementFormatString = "path=''{1}'' latency={0,number,#}ms";
@@ -80,9 +84,10 @@ public class OPALatencyMeasuringHTTPClient extends OPAHTTPClient {
         HttpResponse<InputStream> response = super.send(request);
         long endTime = System.nanoTime();
 
-        long sendLatency = endTime - startTime;
+        // convert ns -> ms
+        double sendLatency = (((double) endTime) - ((double) startTime)) * MS_PER_NS;
 
-        Object[] logArgs = {sendLatency, path};
+        Object[] logArgs = {(long) sendLatency, path};
 
         logger.log(latencyMeasurementLogLevel, fmt.format(logArgs));
 
