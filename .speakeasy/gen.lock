@@ -3,10 +3,10 @@ id: 47e8e950-a454-4ebb-9f78-86fda7dfa0c2
 management:
   docChecksum: a34bd1c885aa42eb3175940494581f67
   docVersion: 0.2.0
-  speakeasyVersion: 1.352.2
-  generationVersion: 2.385.2
-  releaseVersion: 1.5.2
-  configChecksum: 8fa1830a31c492ff0715e1868931d248
+  speakeasyVersion: 1.354.0
+  generationVersion: 2.386.2
+  releaseVersion: 1.5.3
+  configChecksum: 64798e8dfb7f95ceef7c914140804cea
   repoURL: https://github.com/StyraInc/opa-java.git
   published: true
 features:
