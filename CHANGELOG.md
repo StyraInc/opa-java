@@ -1,6 +1,6 @@
 # OPA Java SDK Changelog
 
-## v1.5.3 (unreleased)
+## v1.5.3
 
 * Marked jackson-databind as an `api` dependency in addition to jackson-core.
 * Fixed a bug where `OPALatencyMeasuringHTTPClient` would report results in ns rather than ms.
