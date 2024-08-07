@@ -5,8 +5,6 @@
 package com.styra.opa.openapi.utils;
 
 import java.util.Optional;
-import com.styra.opa.openapi.utils.Utils;
-
 
 public class RetryConfig {
 

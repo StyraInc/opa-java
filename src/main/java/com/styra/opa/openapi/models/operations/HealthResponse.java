@@ -4,19 +4,23 @@
 
 package com.styra.opa.openapi.models.operations;
 
+
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.styra.opa.openapi.models.shared.HealthyServer;
+import com.styra.opa.openapi.utils.Response;
 import com.styra.opa.openapi.utils.Utils;
 import java.io.InputStream;
-import java.lang.Deprecated;
-import java.math.BigDecimal;
-import java.math.BigInteger;
+import java.lang.Integer;
+import java.lang.Override;
+import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.net.http.HttpResponse;
+import java.util.Objects;
 import java.util.Optional;
 
-public class HealthResponse implements com.styra.opa.openapi.utils.Response {
+
+public class HealthResponse implements Response {
 
     /**
      * HTTP response content type for this operation
@@ -36,14 +40,14 @@ public class HealthResponse implements com.styra.opa.openapi.utils.Response {
     /**
      * OPA service is healthy. If the bundles option is specified then all configured bundles have been activated. If the plugins option is specified then all plugins are in an OK state.
      */
-    private Optional<? extends com.styra.opa.openapi.models.shared.HealthyServer> healthyServer;
+    private Optional<? extends HealthyServer> healthyServer;
 
     @JsonCreator
     public HealthResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends com.styra.opa.openapi.models.shared.HealthyServer> healthyServer) {
+            Optional<? extends HealthyServer> healthyServer) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
@@ -90,8 +94,8 @@ public class HealthResponse implements com.styra.opa.openapi.utils.Response {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<com.styra.opa.openapi.models.shared.HealthyServer> healthyServer() {
-        return (Optional<com.styra.opa.openapi.models.shared.HealthyServer>) healthyServer;
+    public Optional<HealthyServer> healthyServer() {
+        return (Optional<HealthyServer>) healthyServer;
     }
 
     public final static Builder builder() {
@@ -128,7 +132,7 @@ public class HealthResponse implements com.styra.opa.openapi.utils.Response {
     /**
      * OPA service is healthy. If the bundles option is specified then all configured bundles have been activated. If the plugins option is specified then all plugins are in an OK state.
      */
-    public HealthResponse withHealthyServer(com.styra.opa.openapi.models.shared.HealthyServer healthyServer) {
+    public HealthResponse withHealthyServer(HealthyServer healthyServer) {
         Utils.checkNotNull(healthyServer, "healthyServer");
         this.healthyServer = Optional.ofNullable(healthyServer);
         return this;
@@ -137,7 +141,7 @@ public class HealthResponse implements com.styra.opa.openapi.utils.Response {
     /**
      * OPA service is healthy. If the bundles option is specified then all configured bundles have been activated. If the plugins option is specified then all plugins are in an OK state.
      */
-    public HealthResponse withHealthyServer(Optional<? extends com.styra.opa.openapi.models.shared.HealthyServer> healthyServer) {
+    public HealthResponse withHealthyServer(Optional<? extends HealthyServer> healthyServer) {
         Utils.checkNotNull(healthyServer, "healthyServer");
         this.healthyServer = healthyServer;
         return this;
@@ -153,15 +157,15 @@ public class HealthResponse implements com.styra.opa.openapi.utils.Response {
         }
         HealthResponse other = (HealthResponse) o;
         return 
-            java.util.Objects.deepEquals(this.contentType, other.contentType) &&
-            java.util.Objects.deepEquals(this.statusCode, other.statusCode) &&
-            java.util.Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            java.util.Objects.deepEquals(this.healthyServer, other.healthyServer);
+            Objects.deepEquals(this.contentType, other.contentType) &&
+            Objects.deepEquals(this.statusCode, other.statusCode) &&
+            Objects.deepEquals(this.rawResponse, other.rawResponse) &&
+            Objects.deepEquals(this.healthyServer, other.healthyServer);
     }
     
     @Override
     public int hashCode() {
-        return java.util.Objects.hash(
+        return Objects.hash(
             contentType,
             statusCode,
             rawResponse,
@@ -185,7 +189,7 @@ public class HealthResponse implements com.styra.opa.openapi.utils.Response {
  
         private HttpResponse<InputStream> rawResponse;
  
-        private Optional<? extends com.styra.opa.openapi.models.shared.HealthyServer> healthyServer = Optional.empty();  
+        private Optional<? extends HealthyServer> healthyServer = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -221,7 +225,7 @@ public class HealthResponse implements com.styra.opa.openapi.utils.Response {
         /**
          * OPA service is healthy. If the bundles option is specified then all configured bundles have been activated. If the plugins option is specified then all plugins are in an OK state.
          */
-        public Builder healthyServer(com.styra.opa.openapi.models.shared.HealthyServer healthyServer) {
+        public Builder healthyServer(HealthyServer healthyServer) {
             Utils.checkNotNull(healthyServer, "healthyServer");
             this.healthyServer = Optional.ofNullable(healthyServer);
             return this;
@@ -230,7 +234,7 @@ public class HealthResponse implements com.styra.opa.openapi.utils.Response {
         /**
          * OPA service is healthy. If the bundles option is specified then all configured bundles have been activated. If the plugins option is specified then all plugins are in an OK state.
          */
-        public Builder healthyServer(Optional<? extends com.styra.opa.openapi.models.shared.HealthyServer> healthyServer) {
+        public Builder healthyServer(Optional<? extends HealthyServer> healthyServer) {
             Utils.checkNotNull(healthyServer, "healthyServer");
             this.healthyServer = healthyServer;
             return this;

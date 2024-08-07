@@ -5,18 +5,15 @@
 package com.styra.opa.openapi.models.errors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.styra.opa.openapi.utils.Utils;
-import java.io.InputStream;
-import java.lang.Deprecated;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.net.http.HttpResponse;
+import java.lang.Override;
+import java.lang.String;
+import java.lang.SuppressWarnings;
+import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -32,18 +29,18 @@ public class ServerError extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("errors")
-    private Optional<? extends java.util.List<ServerErrorErrors>> errors;
+    private Optional<? extends List<ServerErrorErrors>> errors;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("decision_id")
-    private Optional<? extends String> decisionId;
+    private Optional<String> decisionId;
 
     @JsonCreator
     public ServerError(
             @JsonProperty("code") String code,
             @JsonProperty("message") String message,
-            @JsonProperty("errors") Optional<? extends java.util.List<ServerErrorErrors>> errors,
-            @JsonProperty("decision_id") Optional<? extends String> decisionId) {
+            @JsonProperty("errors") Optional<? extends List<ServerErrorErrors>> errors,
+            @JsonProperty("decision_id") Optional<String> decisionId) {
         Utils.checkNotNull(code, "code");
         Utils.checkNotNull(message, "message");
         Utils.checkNotNull(errors, "errors");
@@ -68,11 +65,12 @@ public class ServerError extends RuntimeException {
         return message;
     }
 
-    public Optional<? extends java.util.List<ServerErrorErrors>> errors(){
-        return errors;
+    @SuppressWarnings("unchecked")
+    public Optional<List<ServerErrorErrors>> errors(){
+        return (Optional<List<ServerErrorErrors>>) errors;
     }
 
-    public Optional<? extends String> decisionId(){
+    public Optional<String> decisionId(){
         return decisionId;
     }
     
@@ -92,13 +90,13 @@ public class ServerError extends RuntimeException {
         return this;
     }
 
-    public ServerError withErrors(java.util.List<ServerErrorErrors> errors) {
+    public ServerError withErrors(List<ServerErrorErrors> errors) {
         Utils.checkNotNull(errors, "errors");
         this.errors = Optional.ofNullable(errors);
         return this;
     }
     
-    public ServerError withErrors(Optional<? extends java.util.List<ServerErrorErrors>> errors) {
+    public ServerError withErrors(Optional<? extends List<ServerErrorErrors>> errors) {
         Utils.checkNotNull(errors, "errors");
         this.errors = errors;
         return this;
@@ -110,7 +108,7 @@ public class ServerError extends RuntimeException {
         return this;
     }
     
-    public ServerError withDecisionId(Optional<? extends String> decisionId) {
+    public ServerError withDecisionId(Optional<String> decisionId) {
         Utils.checkNotNull(decisionId, "decisionId");
         this.decisionId = decisionId;
         return this;
@@ -126,10 +124,10 @@ public class ServerError extends RuntimeException {
         }
         ServerError other = (ServerError) o;
         return
-            java.util.Objects.deepEquals(this.code, other.code) &&
-            java.util.Objects.deepEquals(this.message, other.message) &&
-            java.util.Objects.deepEquals(this.errors, other.errors) &&
-            java.util.Objects.deepEquals(this.decisionId, other.decisionId);
+            Objects.deepEquals(this.code, other.code) &&
+            Objects.deepEquals(this.message, other.message) &&
+            Objects.deepEquals(this.errors, other.errors) &&
+            Objects.deepEquals(this.decisionId, other.decisionId);
     }
 
     @Override
@@ -156,9 +154,9 @@ public class ServerError extends RuntimeException {
 
         private String message;
 
-        private Optional<? extends java.util.List<ServerErrorErrors>> errors = Optional.empty();
+        private Optional<? extends List<ServerErrorErrors>> errors = Optional.empty();
 
-        private Optional<? extends String> decisionId = Optional.empty();
+        private Optional<String> decisionId = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -176,13 +174,13 @@ public class ServerError extends RuntimeException {
             return this;
         }
 
-        public Builder errors(java.util.List<ServerErrorErrors> errors) {
+        public Builder errors(List<ServerErrorErrors> errors) {
             Utils.checkNotNull(errors, "errors");
             this.errors = Optional.ofNullable(errors);
             return this;
         }
         
-        public Builder errors(Optional<? extends java.util.List<ServerErrorErrors>> errors) {
+        public Builder errors(Optional<? extends List<ServerErrorErrors>> errors) {
             Utils.checkNotNull(errors, "errors");
             this.errors = errors;
             return this;
@@ -194,7 +192,7 @@ public class ServerError extends RuntimeException {
             return this;
         }
         
-        public Builder decisionId(Optional<? extends String> decisionId) {
+        public Builder decisionId(Optional<String> decisionId) {
             Utils.checkNotNull(decisionId, "decisionId");
             this.decisionId = decisionId;
             return this;

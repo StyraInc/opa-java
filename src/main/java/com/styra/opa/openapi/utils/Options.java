@@ -6,8 +6,6 @@ package com.styra.opa.openapi.utils;
 
 import java.util.Optional;
 import java.util.List;
-import com.styra.opa.openapi.utils.Utils;
-
 
 public class Options {
 

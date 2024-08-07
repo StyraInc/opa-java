@@ -4,16 +4,16 @@
 
 package com.styra.opa.openapi.models.errors;
 
+
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.styra.opa.openapi.utils.Utils;
-import java.io.InputStream;
-import java.lang.Deprecated;
-import java.math.BigDecimal;
-import java.math.BigInteger;
+import java.lang.Long;
+import java.lang.Override;
+import java.lang.String;
+import java.util.Objects;
+
 
 public class ServerErrorLocation {
 
@@ -86,14 +86,14 @@ public class ServerErrorLocation {
         }
         ServerErrorLocation other = (ServerErrorLocation) o;
         return 
-            java.util.Objects.deepEquals(this.file, other.file) &&
-            java.util.Objects.deepEquals(this.row, other.row) &&
-            java.util.Objects.deepEquals(this.col, other.col);
+            Objects.deepEquals(this.file, other.file) &&
+            Objects.deepEquals(this.row, other.row) &&
+            Objects.deepEquals(this.col, other.col);
     }
     
     @Override
     public int hashCode() {
-        return java.util.Objects.hash(
+        return Objects.hash(
             file,
             row,
             col);

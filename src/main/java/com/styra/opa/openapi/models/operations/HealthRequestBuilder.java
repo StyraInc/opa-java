@@ -5,29 +5,24 @@
 package com.styra.opa.openapi.models.operations;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.styra.opa.openapi.models.errors.SDKError;
 import com.styra.opa.openapi.utils.LazySingletonValue;
 import com.styra.opa.openapi.utils.Utils;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
+import java.lang.Boolean;
+import java.lang.String;
+import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
-import org.openapitools.jackson.nullable.JsonNullable;
-
 
 public class HealthRequestBuilder {
 
-    private Optional<? extends Boolean> bundles = Utils.readDefaultOrConstValue(
+    private Optional<Boolean> bundles = Utils.readDefaultOrConstValue(
                             "bundles",
                             "false",
-                            new TypeReference<Optional<? extends Boolean>>() {});
-    private Optional<? extends Boolean> plugins = Utils.readDefaultOrConstValue(
+                            new TypeReference<Optional<Boolean>>() {});
+    private Optional<Boolean> plugins = Utils.readDefaultOrConstValue(
                             "plugins",
                             "false",
-                            new TypeReference<Optional<? extends Boolean>>() {});
-    private Optional<? extends java.util.List<String>> excludePlugin = Optional.empty();
+                            new TypeReference<Optional<Boolean>>() {});
+    private Optional<? extends List<String>> excludePlugin = Optional.empty();
     private final SDKMethodInterfaces.MethodCallHealth sdk;
 
     public HealthRequestBuilder(SDKMethodInterfaces.MethodCallHealth sdk) {
@@ -40,7 +35,7 @@ public class HealthRequestBuilder {
         return this;
     }
 
-    public HealthRequestBuilder bundles(Optional<? extends Boolean> bundles) {
+    public HealthRequestBuilder bundles(java.util.Optional<java.lang.Boolean> bundles) {
         Utils.checkNotNull(bundles, "bundles");
         this.bundles = bundles;
         return this;
@@ -52,19 +47,19 @@ public class HealthRequestBuilder {
         return this;
     }
 
-    public HealthRequestBuilder plugins(Optional<? extends Boolean> plugins) {
+    public HealthRequestBuilder plugins(java.util.Optional<java.lang.Boolean> plugins) {
         Utils.checkNotNull(plugins, "plugins");
         this.plugins = plugins;
         return this;
     }
                 
-    public HealthRequestBuilder excludePlugin(java.util.List<String> excludePlugin) {
+    public HealthRequestBuilder excludePlugin(java.util.List<java.lang.String> excludePlugin) {
         Utils.checkNotNull(excludePlugin, "excludePlugin");
         this.excludePlugin = Optional.of(excludePlugin);
         return this;
     }
 
-    public HealthRequestBuilder excludePlugin(Optional<? extends java.util.List<String>> excludePlugin) {
+    public HealthRequestBuilder excludePlugin(java.util.Optional<? extends java.util.List<java.lang.String>> excludePlugin) {
         Utils.checkNotNull(excludePlugin, "excludePlugin");
         this.excludePlugin = excludePlugin;
         return this;
@@ -84,15 +79,15 @@ public class HealthRequestBuilder {
             excludePlugin);
     }
 
-    private static final LazySingletonValue<Optional<? extends Boolean>> _SINGLETON_VALUE_Bundles =
+    private static final LazySingletonValue<Optional<Boolean>> _SINGLETON_VALUE_Bundles =
             new LazySingletonValue<>(
                     "bundles",
                     "false",
-                    new TypeReference<Optional<? extends Boolean>>() {});
+                    new TypeReference<Optional<Boolean>>() {});
 
-    private static final LazySingletonValue<Optional<? extends Boolean>> _SINGLETON_VALUE_Plugins =
+    private static final LazySingletonValue<Optional<Boolean>> _SINGLETON_VALUE_Plugins =
             new LazySingletonValue<>(
                     "plugins",
                     "false",
-                    new TypeReference<Optional<? extends Boolean>>() {});
+                    new TypeReference<Optional<Boolean>>() {});
 }

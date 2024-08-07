@@ -5,33 +5,54 @@
 package com.styra.opa.openapi;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.styra.opa.openapi.models.errors.BatchServerError;
+import com.styra.opa.openapi.models.errors.ClientError;
 import com.styra.opa.openapi.models.errors.SDKError;
+import com.styra.opa.openapi.models.errors.ServerError;
+import com.styra.opa.openapi.models.errors.UnhealthyServer;
+import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequest;
+import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequestBuilder;
+import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputResponse;
+import com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputRequest;
+import com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputRequestBuilder;
+import com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse;
+import com.styra.opa.openapi.models.operations.ExecutePolicyRequest;
+import com.styra.opa.openapi.models.operations.ExecutePolicyRequestBuilder;
+import com.styra.opa.openapi.models.operations.ExecutePolicyResponse;
+import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequest;
+import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequestBuilder;
+import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputResponse;
+import com.styra.opa.openapi.models.operations.HealthRequest;
+import com.styra.opa.openapi.models.operations.HealthRequestBuilder;
+import com.styra.opa.openapi.models.operations.HealthResponse;
 import com.styra.opa.openapi.models.operations.SDKMethodInterfaces.*;
+import com.styra.opa.openapi.models.shared.BatchMixedResults;
+import com.styra.opa.openapi.models.shared.BatchSuccessfulPolicyEvaluation;
+import com.styra.opa.openapi.models.shared.GzipAcceptEncoding;
+import com.styra.opa.openapi.models.shared.HealthyServer;
+import com.styra.opa.openapi.models.shared.Input;
+import com.styra.opa.openapi.models.shared.Result;
+import com.styra.opa.openapi.models.shared.SuccessfulPolicyResponse;
 import com.styra.opa.openapi.utils.HTTPClient;
 import com.styra.opa.openapi.utils.HTTPRequest;
 import com.styra.opa.openapi.utils.Hook.AfterErrorContextImpl;
 import com.styra.opa.openapi.utils.Hook.AfterSuccessContextImpl;
 import com.styra.opa.openapi.utils.Hook.BeforeRequestContextImpl;
-import com.styra.opa.openapi.utils.JSON;
-import com.styra.opa.openapi.utils.Retries.NonRetryableException;
 import com.styra.opa.openapi.utils.RetryConfig;
 import com.styra.opa.openapi.utils.SerializedBody;
 import com.styra.opa.openapi.utils.SpeakeasyHTTPClient;
+import com.styra.opa.openapi.utils.Utils.JsonShape;
 import com.styra.opa.openapi.utils.Utils;
 import java.io.InputStream;
-import java.math.BigDecimal;
-import java.math.BigInteger;
+import java.lang.Boolean;
+import java.lang.Exception;
+import java.lang.Object;
+import java.lang.String;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.nio.charset.StandardCharsets;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import org.apache.http.NameValuePair;
-import org.openapitools.jackson.nullable.JsonNullable;
 
 /**
  * https://docs.styra.com/enterprise-opa - Enterprise OPA documentation
@@ -116,7 +137,7 @@ public class OpaApiClient implements
          * @param params The parameters to use when templating the URL.
          * @return The builder instance.
          */
-        public Builder serverURL(String serverUrl, java.util.Map<String, String> params) {
+        public Builder serverURL(String serverUrl, Map<String, String> params) {
             this.sdkConfiguration.serverUrl = com.styra.opa.openapi.utils.Utils.templateUrl(serverUrl, params);
             return this;
         }
@@ -187,8 +208,8 @@ public class OpaApiClient implements
      * Execute the default decision  given an input
      * @return The call builder
      */
-    public com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputRequestBuilder executeDefaultPolicyWithInput() {
-        return new com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputRequestBuilder(this);
+    public ExecuteDefaultPolicyWithInputRequestBuilder executeDefaultPolicyWithInput() {
+        return new ExecuteDefaultPolicyWithInputRequestBuilder(this);
     }
 
     /**
@@ -197,10 +218,11 @@ public class OpaApiClient implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse executeDefaultPolicyWithInput(
-            com.styra.opa.openapi.models.shared.Input input) throws Exception {
+    public ExecuteDefaultPolicyWithInputResponse executeDefaultPolicyWithInput(
+            Input input) throws Exception {
         return executeDefaultPolicyWithInput(Optional.empty(), Optional.empty(), input);
     }
+    
     /**
      * Execute the default decision  given an input
      * @param pretty If parameter is `true`, response will formatted for humans.
@@ -209,12 +231,12 @@ public class OpaApiClient implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse executeDefaultPolicyWithInput(
-            Optional<? extends Boolean> pretty,
-            Optional<? extends com.styra.opa.openapi.models.shared.GzipAcceptEncoding> acceptEncoding,
-            com.styra.opa.openapi.models.shared.Input input) throws Exception {
-        com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputRequest request =
-            com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputRequest
+    public ExecuteDefaultPolicyWithInputResponse executeDefaultPolicyWithInput(
+            Optional<Boolean> pretty,
+            Optional<? extends GzipAcceptEncoding> acceptEncoding,
+            Input input) throws Exception {
+        ExecuteDefaultPolicyWithInputRequest request =
+            ExecuteDefaultPolicyWithInputRequest
                 .builder()
                 .pretty(pretty)
                 .acceptEncoding(acceptEncoding)
@@ -227,10 +249,15 @@ public class OpaApiClient implements
                 "/");
         
         HTTPRequest _req = new HTTPRequest(_url, "POST");
-        Object _convertedRequest = Utils.convertToShape(request, Utils.JsonShape.DEFAULT,
-            new TypeReference<java.lang.Object>() {});
+        Object _convertedRequest = Utils.convertToShape(
+                request, 
+                JsonShape.DEFAULT,
+                new TypeReference<Object>() {});
         SerializedBody _serializedRequestBody = Utils.serializeRequestBody(
-                _convertedRequest, "input", "json", false);
+                _convertedRequest, 
+                "input",
+                "json",
+                false);
         if (_serializedRequestBody == null) {
             throw new Exception("Request body is required");
         }
@@ -240,7 +267,7 @@ public class OpaApiClient implements
                 this.sdkConfiguration.userAgent);
 
         _req.addQueryParams(Utils.getQueryParams(
-                com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputRequest.class,
+                ExecuteDefaultPolicyWithInputRequest.class,
                 request, 
                 null));
         _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
@@ -252,7 +279,10 @@ public class OpaApiClient implements
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
-                  new BeforeRequestContextImpl("executeDefaultPolicyWithInput", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                  new BeforeRequestContextImpl(
+                      "executeDefaultPolicyWithInput", 
+                      Optional.of(List.of()), 
+                      sdkConfiguration.securitySource()),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -260,18 +290,28 @@ public class OpaApiClient implements
             if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "404", "4XX", "500", "5XX")) {
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
-                        new AfterErrorContextImpl("executeDefaultPolicyWithInput", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                        new AfterErrorContextImpl(
+                            "executeDefaultPolicyWithInput",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
-                        new AfterSuccessContextImpl("executeDefaultPolicyWithInput", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                        new AfterSuccessContextImpl(
+                            "executeDefaultPolicyWithInput",
+                            Optional.of(List.of()), 
+                            sdkConfiguration.securitySource()),
                          _httpRes);
             }
         } catch (Exception _e) {
             _httpRes = sdkConfiguration.hooks()
-                    .afterError(new AfterErrorContextImpl("executeDefaultPolicyWithInput", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()), 
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "executeDefaultPolicyWithInput",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -279,57 +319,57 @@ public class OpaApiClient implements
             .headers()
             .firstValue("Content-Type")
             .orElse("application/octet-stream");
-        com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse.Builder _resBuilder = 
-            com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse
+        ExecuteDefaultPolicyWithInputResponse.Builder _resBuilder = 
+            ExecuteDefaultPolicyWithInputResponse
                 .builder()
                 .contentType(_contentType)
                 .statusCode(_httpRes.statusCode())
                 .rawResponse(_httpRes);
 
-        com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse _res = _resBuilder.build();
+        ExecuteDefaultPolicyWithInputResponse _res = _resBuilder.build();
         
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             _res.withHeaders(_httpRes.headers().map());
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                com.styra.opa.openapi.models.shared.Result _out = Utils.mapper().readValue(
+                Result _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<com.styra.opa.openapi.models.shared.Result>() {});
-                _res.withResult(java.util.Optional.ofNullable(_out));
+                    new TypeReference<Result>() {});
+                _res.withResult(Optional.ofNullable(_out));
                 return _res;
             } else {
                 throw new SDKError(
                     _httpRes, 
                     _httpRes.statusCode(), 
                     "Unexpected content-type received: " + _contentType, 
-                    Utils.toByteArrayAndClose(_httpRes.body()));
+                    Utils.extractByteArrayFromBody(_httpRes));
             }
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "404")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                com.styra.opa.openapi.models.errors.ClientError _out = Utils.mapper().readValue(
+                ClientError _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<com.styra.opa.openapi.models.errors.ClientError>() {});
+                    new TypeReference<ClientError>() {});
                 throw _out;
             } else {
                 throw new SDKError(
                     _httpRes, 
                     _httpRes.statusCode(), 
                     "Unexpected content-type received: " + _contentType, 
-                    Utils.toByteArrayAndClose(_httpRes.body()));
+                    Utils.extractByteArrayFromBody(_httpRes));
             }
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "500")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                com.styra.opa.openapi.models.errors.ServerError _out = Utils.mapper().readValue(
+                ServerError _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<com.styra.opa.openapi.models.errors.ServerError>() {});
+                    new TypeReference<ServerError>() {});
                 throw _out;
             } else {
                 throw new SDKError(
                     _httpRes, 
                     _httpRes.statusCode(), 
                     "Unexpected content-type received: " + _contentType, 
-                    Utils.toByteArrayAndClose(_httpRes.body()));
+                    Utils.extractByteArrayFromBody(_httpRes));
             }
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX", "5XX")) {
@@ -338,13 +378,13 @@ public class OpaApiClient implements
                     _httpRes, 
                     _httpRes.statusCode(), 
                     "API error occurred", 
-                    Utils.toByteArrayAndClose(_httpRes.body()));
+                    Utils.extractByteArrayFromBody(_httpRes));
         }
         throw new SDKError(
             _httpRes, 
             _httpRes.statusCode(), 
             "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.toByteArrayAndClose(_httpRes.body()));
+            Utils.extractByteArrayFromBody(_httpRes));
     }
 
 
@@ -352,8 +392,8 @@ public class OpaApiClient implements
      * Execute a policy
      * @return The call builder
      */
-    public com.styra.opa.openapi.models.operations.ExecutePolicyRequestBuilder executePolicy() {
-        return new com.styra.opa.openapi.models.operations.ExecutePolicyRequestBuilder(this);
+    public ExecutePolicyRequestBuilder executePolicy() {
+        return new ExecutePolicyRequestBuilder(this);
     }
 
     /**
@@ -362,11 +402,11 @@ public class OpaApiClient implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public com.styra.opa.openapi.models.operations.ExecutePolicyResponse executePolicy(
-            com.styra.opa.openapi.models.operations.ExecutePolicyRequest request) throws Exception {
+    public ExecutePolicyResponse executePolicy(
+            ExecutePolicyRequest request) throws Exception {
         String _baseUrl = this.sdkConfiguration.serverUrl;
         String _url = Utils.generateURL(
-                com.styra.opa.openapi.models.operations.ExecutePolicyRequest.class,
+                ExecutePolicyRequest.class,
                 _baseUrl,
                 "/v1/data/{path}",
                 request, null);
@@ -377,7 +417,7 @@ public class OpaApiClient implements
                 this.sdkConfiguration.userAgent);
 
         _req.addQueryParams(Utils.getQueryParams(
-                com.styra.opa.openapi.models.operations.ExecutePolicyRequest.class,
+                ExecutePolicyRequest.class,
                 request, 
                 null));
         _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
@@ -389,7 +429,10 @@ public class OpaApiClient implements
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
-                  new BeforeRequestContextImpl("executePolicy", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                  new BeforeRequestContextImpl(
+                      "executePolicy", 
+                      Optional.of(List.of()), 
+                      sdkConfiguration.securitySource()),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -397,18 +440,28 @@ public class OpaApiClient implements
             if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "4XX", "500", "5XX")) {
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
-                        new AfterErrorContextImpl("executePolicy", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                        new AfterErrorContextImpl(
+                            "executePolicy",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
-                        new AfterSuccessContextImpl("executePolicy", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                        new AfterSuccessContextImpl(
+                            "executePolicy",
+                            Optional.of(List.of()), 
+                            sdkConfiguration.securitySource()),
                          _httpRes);
             }
         } catch (Exception _e) {
             _httpRes = sdkConfiguration.hooks()
-                    .afterError(new AfterErrorContextImpl("executePolicy", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()), 
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "executePolicy",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -416,57 +469,57 @@ public class OpaApiClient implements
             .headers()
             .firstValue("Content-Type")
             .orElse("application/octet-stream");
-        com.styra.opa.openapi.models.operations.ExecutePolicyResponse.Builder _resBuilder = 
-            com.styra.opa.openapi.models.operations.ExecutePolicyResponse
+        ExecutePolicyResponse.Builder _resBuilder = 
+            ExecutePolicyResponse
                 .builder()
                 .contentType(_contentType)
                 .statusCode(_httpRes.statusCode())
                 .rawResponse(_httpRes);
 
-        com.styra.opa.openapi.models.operations.ExecutePolicyResponse _res = _resBuilder.build();
+        ExecutePolicyResponse _res = _resBuilder.build();
         
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             _res.withHeaders(_httpRes.headers().map());
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                com.styra.opa.openapi.models.shared.SuccessfulPolicyResponse _out = Utils.mapper().readValue(
+                SuccessfulPolicyResponse _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<com.styra.opa.openapi.models.shared.SuccessfulPolicyResponse>() {});
-                _res.withSuccessfulPolicyResponse(java.util.Optional.ofNullable(_out));
+                    new TypeReference<SuccessfulPolicyResponse>() {});
+                _res.withSuccessfulPolicyResponse(Optional.ofNullable(_out));
                 return _res;
             } else {
                 throw new SDKError(
                     _httpRes, 
                     _httpRes.statusCode(), 
                     "Unexpected content-type received: " + _contentType, 
-                    Utils.toByteArrayAndClose(_httpRes.body()));
+                    Utils.extractByteArrayFromBody(_httpRes));
             }
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                com.styra.opa.openapi.models.errors.ClientError _out = Utils.mapper().readValue(
+                ClientError _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<com.styra.opa.openapi.models.errors.ClientError>() {});
+                    new TypeReference<ClientError>() {});
                 throw _out;
             } else {
                 throw new SDKError(
                     _httpRes, 
                     _httpRes.statusCode(), 
                     "Unexpected content-type received: " + _contentType, 
-                    Utils.toByteArrayAndClose(_httpRes.body()));
+                    Utils.extractByteArrayFromBody(_httpRes));
             }
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "500")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                com.styra.opa.openapi.models.errors.ServerError _out = Utils.mapper().readValue(
+                ServerError _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<com.styra.opa.openapi.models.errors.ServerError>() {});
+                    new TypeReference<ServerError>() {});
                 throw _out;
             } else {
                 throw new SDKError(
                     _httpRes, 
                     _httpRes.statusCode(), 
                     "Unexpected content-type received: " + _contentType, 
-                    Utils.toByteArrayAndClose(_httpRes.body()));
+                    Utils.extractByteArrayFromBody(_httpRes));
             }
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX", "5XX")) {
@@ -475,13 +528,13 @@ public class OpaApiClient implements
                     _httpRes, 
                     _httpRes.statusCode(), 
                     "API error occurred", 
-                    Utils.toByteArrayAndClose(_httpRes.body()));
+                    Utils.extractByteArrayFromBody(_httpRes));
         }
         throw new SDKError(
             _httpRes, 
             _httpRes.statusCode(), 
             "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.toByteArrayAndClose(_httpRes.body()));
+            Utils.extractByteArrayFromBody(_httpRes));
     }
 
 
@@ -489,8 +542,8 @@ public class OpaApiClient implements
      * Execute a policy given an input
      * @return The call builder
      */
-    public com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequestBuilder executePolicyWithInput() {
-        return new com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequestBuilder(this);
+    public ExecutePolicyWithInputRequestBuilder executePolicyWithInput() {
+        return new ExecutePolicyWithInputRequestBuilder(this);
     }
 
     /**
@@ -499,20 +552,25 @@ public class OpaApiClient implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public com.styra.opa.openapi.models.operations.ExecutePolicyWithInputResponse executePolicyWithInput(
-            com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequest request) throws Exception {
+    public ExecutePolicyWithInputResponse executePolicyWithInput(
+            ExecutePolicyWithInputRequest request) throws Exception {
         String _baseUrl = this.sdkConfiguration.serverUrl;
         String _url = Utils.generateURL(
-                com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequest.class,
+                ExecutePolicyWithInputRequest.class,
                 _baseUrl,
                 "/v1/data/{path}",
                 request, null);
         
         HTTPRequest _req = new HTTPRequest(_url, "POST");
-        Object _convertedRequest = Utils.convertToShape(request, Utils.JsonShape.DEFAULT,
-            new TypeReference<com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequest>() {});
+        Object _convertedRequest = Utils.convertToShape(
+                request, 
+                JsonShape.DEFAULT,
+                new TypeReference<ExecutePolicyWithInputRequest>() {});
         SerializedBody _serializedRequestBody = Utils.serializeRequestBody(
-                _convertedRequest, "requestBody", "json", false);
+                _convertedRequest, 
+                "requestBody",
+                "json",
+                false);
         if (_serializedRequestBody == null) {
             throw new Exception("Request body is required");
         }
@@ -522,7 +580,7 @@ public class OpaApiClient implements
                 this.sdkConfiguration.userAgent);
 
         _req.addQueryParams(Utils.getQueryParams(
-                com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequest.class,
+                ExecutePolicyWithInputRequest.class,
                 request, 
                 null));
         _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
@@ -534,7 +592,10 @@ public class OpaApiClient implements
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
-                  new BeforeRequestContextImpl("executePolicyWithInput", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                  new BeforeRequestContextImpl(
+                      "executePolicyWithInput", 
+                      Optional.of(List.of()), 
+                      sdkConfiguration.securitySource()),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -542,18 +603,28 @@ public class OpaApiClient implements
             if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "4XX", "500", "5XX")) {
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
-                        new AfterErrorContextImpl("executePolicyWithInput", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                        new AfterErrorContextImpl(
+                            "executePolicyWithInput",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
-                        new AfterSuccessContextImpl("executePolicyWithInput", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                        new AfterSuccessContextImpl(
+                            "executePolicyWithInput",
+                            Optional.of(List.of()), 
+                            sdkConfiguration.securitySource()),
                          _httpRes);
             }
         } catch (Exception _e) {
             _httpRes = sdkConfiguration.hooks()
-                    .afterError(new AfterErrorContextImpl("executePolicyWithInput", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()), 
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "executePolicyWithInput",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -561,57 +632,57 @@ public class OpaApiClient implements
             .headers()
             .firstValue("Content-Type")
             .orElse("application/octet-stream");
-        com.styra.opa.openapi.models.operations.ExecutePolicyWithInputResponse.Builder _resBuilder = 
-            com.styra.opa.openapi.models.operations.ExecutePolicyWithInputResponse
+        ExecutePolicyWithInputResponse.Builder _resBuilder = 
+            ExecutePolicyWithInputResponse
                 .builder()
                 .contentType(_contentType)
                 .statusCode(_httpRes.statusCode())
                 .rawResponse(_httpRes);
 
-        com.styra.opa.openapi.models.operations.ExecutePolicyWithInputResponse _res = _resBuilder.build();
+        ExecutePolicyWithInputResponse _res = _resBuilder.build();
         
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             _res.withHeaders(_httpRes.headers().map());
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                com.styra.opa.openapi.models.shared.SuccessfulPolicyResponse _out = Utils.mapper().readValue(
+                SuccessfulPolicyResponse _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<com.styra.opa.openapi.models.shared.SuccessfulPolicyResponse>() {});
-                _res.withSuccessfulPolicyResponse(java.util.Optional.ofNullable(_out));
+                    new TypeReference<SuccessfulPolicyResponse>() {});
+                _res.withSuccessfulPolicyResponse(Optional.ofNullable(_out));
                 return _res;
             } else {
                 throw new SDKError(
                     _httpRes, 
                     _httpRes.statusCode(), 
                     "Unexpected content-type received: " + _contentType, 
-                    Utils.toByteArrayAndClose(_httpRes.body()));
+                    Utils.extractByteArrayFromBody(_httpRes));
             }
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                com.styra.opa.openapi.models.errors.ClientError _out = Utils.mapper().readValue(
+                ClientError _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<com.styra.opa.openapi.models.errors.ClientError>() {});
+                    new TypeReference<ClientError>() {});
                 throw _out;
             } else {
                 throw new SDKError(
                     _httpRes, 
                     _httpRes.statusCode(), 
                     "Unexpected content-type received: " + _contentType, 
-                    Utils.toByteArrayAndClose(_httpRes.body()));
+                    Utils.extractByteArrayFromBody(_httpRes));
             }
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "500")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                com.styra.opa.openapi.models.errors.ServerError _out = Utils.mapper().readValue(
+                ServerError _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<com.styra.opa.openapi.models.errors.ServerError>() {});
+                    new TypeReference<ServerError>() {});
                 throw _out;
             } else {
                 throw new SDKError(
                     _httpRes, 
                     _httpRes.statusCode(), 
                     "Unexpected content-type received: " + _contentType, 
-                    Utils.toByteArrayAndClose(_httpRes.body()));
+                    Utils.extractByteArrayFromBody(_httpRes));
             }
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX", "5XX")) {
@@ -620,13 +691,13 @@ public class OpaApiClient implements
                     _httpRes, 
                     _httpRes.statusCode(), 
                     "API error occurred", 
-                    Utils.toByteArrayAndClose(_httpRes.body()));
+                    Utils.extractByteArrayFromBody(_httpRes));
         }
         throw new SDKError(
             _httpRes, 
             _httpRes.statusCode(), 
             "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.toByteArrayAndClose(_httpRes.body()));
+            Utils.extractByteArrayFromBody(_httpRes));
     }
 
 
@@ -634,8 +705,8 @@ public class OpaApiClient implements
      * Execute a policy given a batch of inputs
      * @return The call builder
      */
-    public com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequestBuilder executeBatchPolicyWithInput() {
-        return new com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequestBuilder(this);
+    public ExecuteBatchPolicyWithInputRequestBuilder executeBatchPolicyWithInput() {
+        return new ExecuteBatchPolicyWithInputRequestBuilder(this);
     }
 
     /**
@@ -644,20 +715,25 @@ public class OpaApiClient implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputResponse executeBatchPolicyWithInput(
-            com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequest request) throws Exception {
+    public ExecuteBatchPolicyWithInputResponse executeBatchPolicyWithInput(
+            ExecuteBatchPolicyWithInputRequest request) throws Exception {
         String _baseUrl = this.sdkConfiguration.serverUrl;
         String _url = Utils.generateURL(
-                com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequest.class,
+                ExecuteBatchPolicyWithInputRequest.class,
                 _baseUrl,
                 "/v1/batch/data/{path}",
                 request, null);
         
         HTTPRequest _req = new HTTPRequest(_url, "POST");
-        Object _convertedRequest = Utils.convertToShape(request, Utils.JsonShape.DEFAULT,
-            new TypeReference<com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequest>() {});
+        Object _convertedRequest = Utils.convertToShape(
+                request, 
+                JsonShape.DEFAULT,
+                new TypeReference<ExecuteBatchPolicyWithInputRequest>() {});
         SerializedBody _serializedRequestBody = Utils.serializeRequestBody(
-                _convertedRequest, "requestBody", "json", false);
+                _convertedRequest, 
+                "requestBody",
+                "json",
+                false);
         if (_serializedRequestBody == null) {
             throw new Exception("Request body is required");
         }
@@ -667,7 +743,7 @@ public class OpaApiClient implements
                 this.sdkConfiguration.userAgent);
 
         _req.addQueryParams(Utils.getQueryParams(
-                com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequest.class,
+                ExecuteBatchPolicyWithInputRequest.class,
                 request, 
                 null));
         _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
@@ -679,7 +755,10 @@ public class OpaApiClient implements
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
-                  new BeforeRequestContextImpl("executeBatchPolicyWithInput", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                  new BeforeRequestContextImpl(
+                      "executeBatchPolicyWithInput", 
+                      Optional.of(List.of()), 
+                      sdkConfiguration.securitySource()),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -687,18 +766,28 @@ public class OpaApiClient implements
             if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "4XX", "500", "5XX")) {
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
-                        new AfterErrorContextImpl("executeBatchPolicyWithInput", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                        new AfterErrorContextImpl(
+                            "executeBatchPolicyWithInput",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
-                        new AfterSuccessContextImpl("executeBatchPolicyWithInput", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                        new AfterSuccessContextImpl(
+                            "executeBatchPolicyWithInput",
+                            Optional.of(List.of()), 
+                            sdkConfiguration.securitySource()),
                          _httpRes);
             }
         } catch (Exception _e) {
             _httpRes = sdkConfiguration.hooks()
-                    .afterError(new AfterErrorContextImpl("executeBatchPolicyWithInput", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()), 
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "executeBatchPolicyWithInput",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -706,73 +795,73 @@ public class OpaApiClient implements
             .headers()
             .firstValue("Content-Type")
             .orElse("application/octet-stream");
-        com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputResponse.Builder _resBuilder = 
-            com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputResponse
+        ExecuteBatchPolicyWithInputResponse.Builder _resBuilder = 
+            ExecuteBatchPolicyWithInputResponse
                 .builder()
                 .contentType(_contentType)
                 .statusCode(_httpRes.statusCode())
                 .rawResponse(_httpRes);
 
-        com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputResponse _res = _resBuilder.build();
+        ExecuteBatchPolicyWithInputResponse _res = _resBuilder.build();
         
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             _res.withHeaders(_httpRes.headers().map());
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                com.styra.opa.openapi.models.shared.BatchSuccessfulPolicyEvaluation _out = Utils.mapper().readValue(
+                BatchSuccessfulPolicyEvaluation _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<com.styra.opa.openapi.models.shared.BatchSuccessfulPolicyEvaluation>() {});
-                _res.withBatchSuccessfulPolicyEvaluation(java.util.Optional.ofNullable(_out));
+                    new TypeReference<BatchSuccessfulPolicyEvaluation>() {});
+                _res.withBatchSuccessfulPolicyEvaluation(Optional.ofNullable(_out));
                 return _res;
             } else {
                 throw new SDKError(
                     _httpRes, 
                     _httpRes.statusCode(), 
                     "Unexpected content-type received: " + _contentType, 
-                    Utils.toByteArrayAndClose(_httpRes.body()));
+                    Utils.extractByteArrayFromBody(_httpRes));
             }
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "207")) {
             _res.withHeaders(_httpRes.headers().map());
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                com.styra.opa.openapi.models.shared.BatchMixedResults _out = Utils.mapper().readValue(
+                BatchMixedResults _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<com.styra.opa.openapi.models.shared.BatchMixedResults>() {});
-                _res.withBatchMixedResults(java.util.Optional.ofNullable(_out));
+                    new TypeReference<BatchMixedResults>() {});
+                _res.withBatchMixedResults(Optional.ofNullable(_out));
                 return _res;
             } else {
                 throw new SDKError(
                     _httpRes, 
                     _httpRes.statusCode(), 
                     "Unexpected content-type received: " + _contentType, 
-                    Utils.toByteArrayAndClose(_httpRes.body()));
+                    Utils.extractByteArrayFromBody(_httpRes));
             }
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                com.styra.opa.openapi.models.errors.ClientError _out = Utils.mapper().readValue(
+                ClientError _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<com.styra.opa.openapi.models.errors.ClientError>() {});
+                    new TypeReference<ClientError>() {});
                 throw _out;
             } else {
                 throw new SDKError(
                     _httpRes, 
                     _httpRes.statusCode(), 
                     "Unexpected content-type received: " + _contentType, 
-                    Utils.toByteArrayAndClose(_httpRes.body()));
+                    Utils.extractByteArrayFromBody(_httpRes));
             }
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "500")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                com.styra.opa.openapi.models.errors.BatchServerError _out = Utils.mapper().readValue(
+                BatchServerError _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<com.styra.opa.openapi.models.errors.BatchServerError>() {});
+                    new TypeReference<BatchServerError>() {});
                 throw _out;
             } else {
                 throw new SDKError(
                     _httpRes, 
                     _httpRes.statusCode(), 
                     "Unexpected content-type received: " + _contentType, 
-                    Utils.toByteArrayAndClose(_httpRes.body()));
+                    Utils.extractByteArrayFromBody(_httpRes));
             }
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX", "5XX")) {
@@ -781,13 +870,13 @@ public class OpaApiClient implements
                     _httpRes, 
                     _httpRes.statusCode(), 
                     "API error occurred", 
-                    Utils.toByteArrayAndClose(_httpRes.body()));
+                    Utils.extractByteArrayFromBody(_httpRes));
         }
         throw new SDKError(
             _httpRes, 
             _httpRes.statusCode(), 
             "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.toByteArrayAndClose(_httpRes.body()));
+            Utils.extractByteArrayFromBody(_httpRes));
     }
 
 
@@ -796,8 +885,8 @@ public class OpaApiClient implements
      * The health API endpoint executes a simple built-in policy query to verify that the server is operational. Optionally it can account for bundle activation as well (useful for “ready” checks at startup).
      * @return The call builder
      */
-    public com.styra.opa.openapi.models.operations.HealthRequestBuilder health() {
-        return new com.styra.opa.openapi.models.operations.HealthRequestBuilder(this);
+    public HealthRequestBuilder health() {
+        return new HealthRequestBuilder(this);
     }
 
     /**
@@ -806,9 +895,10 @@ public class OpaApiClient implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public com.styra.opa.openapi.models.operations.HealthResponse healthDirect() throws Exception {
+    public HealthResponse healthDirect() throws Exception {
         return health(Optional.empty(), Optional.empty(), Optional.empty());
     }
+    
     /**
      * Verify the server is operational
      * The health API endpoint executes a simple built-in policy query to verify that the server is operational. Optionally it can account for bundle activation as well (useful for “ready” checks at startup).
@@ -818,12 +908,12 @@ public class OpaApiClient implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public com.styra.opa.openapi.models.operations.HealthResponse health(
-            Optional<? extends Boolean> bundles,
-            Optional<? extends Boolean> plugins,
-            Optional<? extends java.util.List<String>> excludePlugin) throws Exception {
-        com.styra.opa.openapi.models.operations.HealthRequest request =
-            com.styra.opa.openapi.models.operations.HealthRequest
+    public HealthResponse health(
+            Optional<Boolean> bundles,
+            Optional<Boolean> plugins,
+            Optional<? extends List<String>> excludePlugin) throws Exception {
+        HealthRequest request =
+            HealthRequest
                 .builder()
                 .bundles(bundles)
                 .plugins(plugins)
@@ -841,7 +931,7 @@ public class OpaApiClient implements
                 this.sdkConfiguration.userAgent);
 
         _req.addQueryParams(Utils.getQueryParams(
-                com.styra.opa.openapi.models.operations.HealthRequest.class,
+                HealthRequest.class,
                 request, 
                 null));
 
@@ -852,7 +942,10 @@ public class OpaApiClient implements
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
-                  new BeforeRequestContextImpl("health", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                  new BeforeRequestContextImpl(
+                      "health", 
+                      Optional.of(List.of()), 
+                      sdkConfiguration.securitySource()),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -860,18 +953,28 @@ public class OpaApiClient implements
             if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX", "500", "5XX")) {
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
-                        new AfterErrorContextImpl("health", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                        new AfterErrorContextImpl(
+                            "health",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
-                        new AfterSuccessContextImpl("health", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                        new AfterSuccessContextImpl(
+                            "health",
+                            Optional.of(List.of()), 
+                            sdkConfiguration.securitySource()),
                          _httpRes);
             }
         } catch (Exception _e) {
             _httpRes = sdkConfiguration.hooks()
-                    .afterError(new AfterErrorContextImpl("health", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()), 
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "health",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -879,42 +982,42 @@ public class OpaApiClient implements
             .headers()
             .firstValue("Content-Type")
             .orElse("application/octet-stream");
-        com.styra.opa.openapi.models.operations.HealthResponse.Builder _resBuilder = 
-            com.styra.opa.openapi.models.operations.HealthResponse
+        HealthResponse.Builder _resBuilder = 
+            HealthResponse
                 .builder()
                 .contentType(_contentType)
                 .statusCode(_httpRes.statusCode())
                 .rawResponse(_httpRes);
 
-        com.styra.opa.openapi.models.operations.HealthResponse _res = _resBuilder.build();
+        HealthResponse _res = _resBuilder.build();
         
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                com.styra.opa.openapi.models.shared.HealthyServer _out = Utils.mapper().readValue(
+                HealthyServer _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<com.styra.opa.openapi.models.shared.HealthyServer>() {});
-                _res.withHealthyServer(java.util.Optional.ofNullable(_out));
+                    new TypeReference<HealthyServer>() {});
+                _res.withHealthyServer(Optional.ofNullable(_out));
                 return _res;
             } else {
                 throw new SDKError(
                     _httpRes, 
                     _httpRes.statusCode(), 
                     "Unexpected content-type received: " + _contentType, 
-                    Utils.toByteArrayAndClose(_httpRes.body()));
+                    Utils.extractByteArrayFromBody(_httpRes));
             }
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "500")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                com.styra.opa.openapi.models.errors.UnhealthyServer _out = Utils.mapper().readValue(
+                UnhealthyServer _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<com.styra.opa.openapi.models.errors.UnhealthyServer>() {});
+                    new TypeReference<UnhealthyServer>() {});
                 throw _out;
             } else {
                 throw new SDKError(
                     _httpRes, 
                     _httpRes.statusCode(), 
                     "Unexpected content-type received: " + _contentType, 
-                    Utils.toByteArrayAndClose(_httpRes.body()));
+                    Utils.extractByteArrayFromBody(_httpRes));
             }
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX", "5XX")) {
@@ -923,12 +1026,12 @@ public class OpaApiClient implements
                     _httpRes, 
                     _httpRes.statusCode(), 
                     "API error occurred", 
-                    Utils.toByteArrayAndClose(_httpRes.body()));
+                    Utils.extractByteArrayFromBody(_httpRes));
         }
         throw new SDKError(
             _httpRes, 
             _httpRes.statusCode(), 
             "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.toByteArrayAndClose(_httpRes.body()));
+            Utils.extractByteArrayFromBody(_httpRes));
     }
 }

@@ -5,29 +5,24 @@
 package com.styra.opa.openapi.models.errors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.styra.opa.openapi.utils.Utils;
-import java.io.InputStream;
-import java.lang.Deprecated;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.net.http.HttpResponse;
+import java.lang.Override;
+import java.lang.String;
+import java.util.Objects;
 import java.util.Optional;
 
 public class UnhealthyServer extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("code")
-    private Optional<? extends String> code;
+    private Optional<String> code;
 
     @JsonCreator
     public UnhealthyServer(
-            @JsonProperty("code") Optional<? extends String> code) {
+            @JsonProperty("code") Optional<String> code) {
         Utils.checkNotNull(code, "code");
         this.code = code;
     }
@@ -36,7 +31,7 @@ public class UnhealthyServer extends RuntimeException {
         this(Optional.empty());
     }
 
-    public Optional<? extends String> code(){
+    public Optional<String> code(){
         return code;
     }
     
@@ -50,7 +45,7 @@ public class UnhealthyServer extends RuntimeException {
         return this;
     }
     
-    public UnhealthyServer withCode(Optional<? extends String> code) {
+    public UnhealthyServer withCode(Optional<String> code) {
         Utils.checkNotNull(code, "code");
         this.code = code;
         return this;
@@ -66,7 +61,7 @@ public class UnhealthyServer extends RuntimeException {
         }
         UnhealthyServer other = (UnhealthyServer) o;
         return
-            java.util.Objects.deepEquals(this.code, other.code);
+            Objects.deepEquals(this.code, other.code);
     }
 
     @Override
@@ -83,7 +78,7 @@ public class UnhealthyServer extends RuntimeException {
 
     public final static class Builder {
 
-        private Optional<? extends String> code = Optional.empty();
+        private Optional<String> code = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -95,7 +90,7 @@ public class UnhealthyServer extends RuntimeException {
             return this;
         }
         
-        public Builder code(Optional<? extends String> code) {
+        public Builder code(Optional<String> code) {
             Utils.checkNotNull(code, "code");
             this.code = code;
             return this;

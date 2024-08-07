@@ -4,18 +4,7 @@
 
 package com.styra.opa.openapi.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.styra.opa.openapi.models.errors.SDKError;
-import com.styra.opa.openapi.utils.LazySingletonValue;
 import com.styra.opa.openapi.utils.Utils;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import java.util.stream.Stream;
-import org.openapitools.jackson.nullable.JsonNullable;
-
 
 public class ExecuteBatchPolicyWithInputRequestBuilder {
 
@@ -26,7 +15,7 @@ public class ExecuteBatchPolicyWithInputRequestBuilder {
         this.sdk = sdk;
     }
 
-    public ExecuteBatchPolicyWithInputRequestBuilder request(ExecuteBatchPolicyWithInputRequest request) {
+    public ExecuteBatchPolicyWithInputRequestBuilder request(com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequest request) {
         Utils.checkNotNull(request, "request");
         this.request = request;
         return this;

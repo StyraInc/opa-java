@@ -4,16 +4,17 @@
 
 package com.styra.opa.openapi.models.operations;
 
+
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.styra.opa.openapi.models.shared.Input;
 import com.styra.opa.openapi.utils.Utils;
-import java.io.InputStream;
-import java.lang.Deprecated;
-import java.math.BigDecimal;
-import java.math.BigInteger;
+import java.lang.Override;
+import java.lang.String;
+import java.util.Map;
+import java.util.Objects;
+
 /**
  * ExecuteBatchPolicyWithInputRequestBody - The batch of inputs
  */
@@ -21,17 +22,17 @@ import java.math.BigInteger;
 public class ExecuteBatchPolicyWithInputRequestBody {
 
     @JsonProperty("inputs")
-    private java.util.Map<String, com.styra.opa.openapi.models.shared.Input> inputs;
+    private Map<String, Input> inputs;
 
     @JsonCreator
     public ExecuteBatchPolicyWithInputRequestBody(
-            @JsonProperty("inputs") java.util.Map<String, com.styra.opa.openapi.models.shared.Input> inputs) {
+            @JsonProperty("inputs") Map<String, Input> inputs) {
         inputs = Utils.emptyMapIfNull(inputs);
         this.inputs = inputs;
     }
 
     @JsonIgnore
-    public java.util.Map<String, com.styra.opa.openapi.models.shared.Input> inputs() {
+    public Map<String, Input> inputs() {
         return inputs;
     }
 
@@ -39,7 +40,7 @@ public class ExecuteBatchPolicyWithInputRequestBody {
         return new Builder();
     }
 
-    public ExecuteBatchPolicyWithInputRequestBody withInputs(java.util.Map<String, com.styra.opa.openapi.models.shared.Input> inputs) {
+    public ExecuteBatchPolicyWithInputRequestBody withInputs(Map<String, Input> inputs) {
         Utils.checkNotNull(inputs, "inputs");
         this.inputs = inputs;
         return this;
@@ -55,12 +56,12 @@ public class ExecuteBatchPolicyWithInputRequestBody {
         }
         ExecuteBatchPolicyWithInputRequestBody other = (ExecuteBatchPolicyWithInputRequestBody) o;
         return 
-            java.util.Objects.deepEquals(this.inputs, other.inputs);
+            Objects.deepEquals(this.inputs, other.inputs);
     }
     
     @Override
     public int hashCode() {
-        return java.util.Objects.hash(
+        return Objects.hash(
             inputs);
     }
     
@@ -72,13 +73,13 @@ public class ExecuteBatchPolicyWithInputRequestBody {
     
     public final static class Builder {
  
-        private java.util.Map<String, com.styra.opa.openapi.models.shared.Input> inputs;  
+        private Map<String, Input> inputs;  
         
         private Builder() {
           // force use of static builder() method
         }
 
-        public Builder inputs(java.util.Map<String, com.styra.opa.openapi.models.shared.Input> inputs) {
+        public Builder inputs(Map<String, Input> inputs) {
             Utils.checkNotNull(inputs, "inputs");
             this.inputs = inputs;
             return this;

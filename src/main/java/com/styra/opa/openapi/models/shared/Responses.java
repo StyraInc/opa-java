@@ -4,97 +4,21 @@
 
 package com.styra.opa.openapi.models.shared;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.styra.opa.openapi.utils.Utils;
-import java.io.InputStream;
-import java.lang.Deprecated;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 
-import java.time.OffsetDateTime;
-import java.time.LocalDate;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.styra.opa.openapi.utils.TypedObject;
-import com.styra.opa.openapi.utils.Utils.JsonShape;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import java.lang.String;
 
 
-@JsonDeserialize(using = Responses._Deserializer.class)
-public class Responses {
+@JsonTypeInfo(use = Id.NAME, property = "http_status_code", include = As.EXISTING_PROPERTY, visible = true)
+@JsonSubTypes({
+    @Type(value = ResponsesSuccessfulPolicyResponse.class, name="SuccessfulPolicyResponse"),
+    @Type(value = ServerError.class, name="500")})
+public interface Responses {
 
-    @com.fasterxml.jackson.annotation.JsonValue
-    private TypedObject value;
-    
-    private Responses(TypedObject value) {
-        this.value = value;
-    }
+    String httpStatusCode();
 
-    public static Responses of(ResponsesSuccessfulPolicyResponse value) {
-        Utils.checkNotNull(value, "value");
-        return new Responses(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<ResponsesSuccessfulPolicyResponse>(){}));
-    }
-
-    public static Responses of(ServerError value) {
-        Utils.checkNotNull(value, "value");
-        return new Responses(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<ServerError>(){}));
-    }
-    
-    /**
-     * Returns an instance of one of these types:
-     * <ul>
-     * <li>{@code ResponsesSuccessfulPolicyResponse}</li>
-     * <li>{@code ServerError}</li>
-     * </ul>
-     * 
-     * <p>Use {@code instanceof} to determine what type is returned. For example:
-     * 
-     * <pre>
-     * if (obj.value() instanceof String) {
-     *     String answer = (String) obj.value();
-     *     System.out.println("answer=" + answer);
-     * }
-     * </pre>
-     * 
-     * @return value of oneOf type
-     **/ 
-    public java.lang.Object value() {
-        return value.value();
-    }    
-    
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Responses other = (Responses) o;
-        return java.util.Objects.deepEquals(this.value.value(), other.value.value()); 
-    }
-    
-    @Override
-    public int hashCode() {
-        return java.util.Objects.hash(value.value());
-    }
-    
-    @SuppressWarnings("serial")
-    public static final class _Deserializer extends com.styra.opa.openapi.utils.OneOfDeserializer<Responses> {
-
-        public _Deserializer() {
-            super(Responses.class,
-                  Utils.TypeReferenceWithShape.of(new TypeReference<ResponsesSuccessfulPolicyResponse>() {}, Utils.JsonShape.DEFAULT),
-                  Utils.TypeReferenceWithShape.of(new TypeReference<ServerError>() {}, Utils.JsonShape.DEFAULT));
-        }
-    }
-    
-    @Override
-    public String toString() {
-        return Utils.toString(Responses.class,
-                "value", value);
-    }
- 
 }
