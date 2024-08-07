@@ -48,6 +48,8 @@ class OPATest {
 
     private String address;
     private String altAddress;
+    private String eopaAddress;
+    private String eopaAltAddress;
     private Map<String, String> headers = Map.ofEntries(entry("Authorization", "Bearer supersecret"));
 
     private RecordingHandler recordingHandler;
@@ -74,10 +76,26 @@ class OPATest {
         .withCommand("run -s --authentication=token --authorization=basic --bundle /policy");
     //CHECKSTYLE:ON
 
+    @Container
+    //CHECKSTYLE:OFF
+    public GenericContainer<?> eopac = new GenericContainer<>(
+            new ImageFromDockerfile()
+                .withFileFromClasspath("Dockerfile", "eopa.Dockerfile")
+                .withFileFromClasspath("nginx.conf", "nginx.conf")
+                .withFileFromClasspath("entrypoint.sh", "entrypoint.sh")
+        )
+        .withExposedPorts(opaPort, altPort)
+        .withFileSystemBind("./testdata/simple", "/policy", BindMode.READ_ONLY)
+        .withCommand("run -s --authentication=token --authorization=basic --bundle /policy")
+        .withEnv("EOPA_LICENSE_KEY", System.getenv("EOPA_LICENSE_KEY"));
+    //CHECKSTYLE:ON
+
     @BeforeEach
     public void setUp() throws Exception {
         address = "http://" + opac.getHost() + ":" + opac.getMappedPort(opaPort);
         altAddress = "http://" + opac.getHost() + ":" + opac.getMappedPort(altPort) + "/customprefix";
+        eopaAddress = "http://" + eopac.getHost() + ":" + eopac.getMappedPort(opaPort);
+        eopaAltAddress = "http://" + eopac.getHost() + ":" + eopac.getMappedPort(altPort) + "/customprefix";
 
         this.recordingHandler = new RecordingHandler();
         this.recordingHandler.setLevel(ALL);
@@ -94,6 +112,11 @@ class OPATest {
         System.out.println("==== container logs from OPA container ====");
         final String logs = opac.getLogs();
         System.out.println(logs);
+
+        System.out.println("==== container logs from EOPA container ====");
+        final String eopalogs = eopac.getLogs();
+        System.out.println(eopalogs);
+
         this.logger.removeHandler(this.recordingHandler);
     }
 
@@ -122,6 +145,29 @@ class OPATest {
     }
 
     @Test
+    public void testEOPAHealth() {
+        // This test just makes sure that we can reach the OPAClient health endpoint
+        // and that it returns the expected {} value.
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest req = HttpRequest.newBuilder().uri(URI.create(eopaAddress + "/health")).build();
+        HttpResponse<String> resp = null;
+
+        try {
+            resp = client.send(req, HttpResponse.BodyHandlers.ofString());
+        //CHECKSTYLE:OFF
+        } catch (Exception e) {
+            //CHECKSTYLE:ON
+            System.out.println("exception: " + e);
+            assertNull(e);
+        }
+
+        String body = resp.body();
+
+        assertEquals("{}\n", body);
+    }
+
+    @Test
     public void testOPAHealthAlternate() {
         // This makes sure that we can also successfully reach the OPA health
         // API on the "alternate", reverse-proxy based OPA that has a URL
@@ -134,6 +180,30 @@ class OPATest {
         try {
             resp = client.send(req, HttpResponse.BodyHandlers.ofString());
         // This is a unit test, I will catch whatever exceptions I want.
+        //CHECKSTYLE:OFF
+        } catch (Exception e) {
+            //CHECKSTYLE:ON
+            System.out.println("exception: " + e);
+            assertNull(e);
+        }
+
+        String body = resp.body();
+
+        assertEquals("{}\n", body);
+    }
+
+    @Test
+    public void testEOPAHealthAlternate() {
+        // This makes sure that we can also successfully reach the OPA health
+        // API on the "alternate", reverse-proxy based OPA that has a URL
+        // prefix.
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest req = HttpRequest.newBuilder().uri(URI.create(eopaAltAddress + "/health")).build();
+        HttpResponse<String> resp = null;
+
+        try {
+            resp = client.send(req, HttpResponse.BodyHandlers.ofString());
         //CHECKSTYLE:OFF
         } catch (Exception e) {
             //CHECKSTYLE:ON
@@ -465,6 +535,49 @@ class OPATest {
     }
 
     @Test
+    public void testObjectRoundtripDeferred() {
+        OPAClient opa = new OPAClient(address, headers);
+
+        Map<String, String> sampleMap1 = Map.ofEntries(entry("hello", "world"));
+        Map<String, String> sampleMap2 = Map.ofEntries(entry("hello", "world"));
+
+        SampleObject<Double> input = new SampleObject<Double>();
+        input.setBoolProperty(true);
+        input.setIntProperty(testIntegerA);
+        input.setCustomProperty(testDoubleA);
+        input.setAnnotatedProperty(testIntegerB);
+        input.setMapProperty(sampleMap1);
+
+        SampleObject<Double> expect = new SampleObject<Double>();
+        expect.setBoolProperty(true);
+        expect.setIntProperty(testIntegerA);
+        expect.setCustomProperty(testDoubleA);
+        expect.setAnnotatedProperty(testIntegerB);
+        expect.setMapProperty(sampleMap2);
+
+        SampleObject<Double> actual = new SampleObject<Double>();
+        OPAResult res = opa.evaluateDeferred("policy/echo", input);
+
+        try {
+            actual = res.get(new TypeReference<SampleObject<Double>>() {});
+        } catch (OPAException e) {
+            System.out.println("exception: " + e);
+            assertNull(e);
+        }
+
+        assertEquals(input.getBoolProperty(), expect.getBoolProperty());
+        assertEquals(input.getIntProperty(), expect.getIntProperty());
+        assertEquals(input.getCustomProperty(), expect.getCustomProperty());
+        assertEquals(input.getAnnotatedProperty(), expect.getAnnotatedProperty());
+        assertEquals(input.getMapProperty(), expect.getMapProperty());
+        assertEquals(expect.getBoolProperty(), actual.getBoolProperty());
+        assertEquals(expect.getIntProperty(), actual.getIntProperty());
+        assertEquals(expect.getCustomProperty(), actual.getCustomProperty());
+        assertEquals(expect.getAnnotatedProperty(), actual.getAnnotatedProperty());
+        assertEquals(expect.getMapProperty(), actual.getMapProperty());
+    }
+
+    @Test
     public void testOPADefaultPathWithInput() {
         OPAClient opa = new OPAClient(address, headers);
         Map<String, java.lang.Object> input = Map.ofEntries(entry("hello", "world"));
@@ -483,6 +596,166 @@ class OPATest {
 
         assertEquals(expect, result);
     }
+
+        @Test
+    public void testEOPAEvaluateBatch() {
+        OPAClient opa = new OPAClient(eopaAddress, headers);
+        Map<String, Object> input = Map.ofEntries(
+            entry("job1", Map.ofEntries(entry("aaa", "111"))),
+            entry("job2", Map.ofEntries(entry("bbb", "222")))
+        );
+        Map<String, OPAResult> result = Map.ofEntries();
+        Map<String, Object> expect = Map.ofEntries(
+            entry("job1", Map.ofEntries(entry("aaa", "111"))),
+            entry("job2", Map.ofEntries(entry("bbb", "222")))
+        );
+
+        try {
+            result = opa.evaluateBatch("policy/echo", input);
+        } catch (OPAException e) {
+            System.out.println("exception: " + e);
+            assertNull(e);
+        }
+
+        for (Map.Entry<String, OPAResult> entry: result.entrySet()) {
+            assertTrue(entry.getValue().success());
+            try {
+                Map<String, Object> v = entry.getValue().get();
+                assertEquals(expect.get(entry.getKey()), v);
+            } catch (OPAException e) {
+                System.out.println("exception: " + e);
+                assertNull(e);
+            }
+        }
+    }
+
+    @Test
+    public void testEOPAEvaluateBatchFallback() {
+        OPAClient opa = new OPAClient(eopaAddress, headers);
+        opa.forceBatchFallback(true);
+        Map<String, Object> input = Map.ofEntries(
+            entry("job1", Map.ofEntries(entry("aaa", "111"))),
+            entry("job2", Map.ofEntries(entry("bbb", "222")))
+        );
+        Map<String,  OPAResult> result = Map.ofEntries();
+        Map<String, Object> expect = Map.ofEntries(
+            entry("job1", Map.ofEntries(entry("aaa", "111"))),
+            entry("job2", Map.ofEntries(entry("bbb", "222")))
+        );
+
+        try {
+            result = opa.evaluateBatch("policy/echo", input);
+        } catch (OPAException e) {
+            System.out.println("exception: " + e);
+            assertNull(e);
+        }
+
+        for (Map.Entry<String, OPAResult> entry: result.entrySet()) {
+            assertTrue(entry.getValue().success());
+            try {
+                Map<String, Object> v = entry.getValue().get();
+                assertEquals(expect.get(entry.getKey()), v);
+            } catch (OPAException e) {
+                System.out.println("exception: " + e);
+                assertNull(e);
+            }
+        }
+    }
+
+    @Test
+    public void testOPAEvaluateBatchFallback() {
+        OPAClient opa = new OPAClient(address, headers);
+        // This test intentionally does not exercise batch API support
+        // detection.
+        opa.forceBatchFallback(true);
+        Map<String, Object> input = Map.ofEntries(
+            entry("job1", Map.ofEntries(entry("aaa", "111"))),
+            entry("job2", Map.ofEntries(entry("bbb", "222")))
+        );
+        Map<String,  OPAResult> result = Map.ofEntries();
+        Map<String, Object> expect = Map.ofEntries(
+            entry("job1", Map.ofEntries(entry("aaa", "111"))),
+            entry("job2", Map.ofEntries(entry("bbb", "222")))
+        );
+
+        try {
+            result = opa.evaluateBatch("policy/echo", input);
+        } catch (OPAException e) {
+            System.out.println("exception: " + e);
+            assertNull(e);
+        }
+
+        for (Map.Entry<String, OPAResult> entry: result.entrySet()) {
+            assertTrue(entry.getValue().success());
+            try {
+                Map<String, Object> v = entry.getValue().get();
+                assertEquals(expect.get(entry.getKey()), v);
+            } catch (OPAException e) {
+                System.out.println("exception: " + e);
+                assertNull(e);
+            }
+        }
+    }
+
+    @Test
+    public void testOPAEvaluateBatchFallbackAutodetect() {
+        // The OPA client should automatically detect that OPA does not support
+        // EOPA's batch API, and should use the fallback mode automatically.
+        OPAClient opa = new OPAClient(address, headers);
+        Map<String, Object> input = Map.ofEntries(
+            entry("job1", Map.ofEntries(entry("aaa", "111"))),
+            entry("job2", Map.ofEntries(entry("bbb", "222")))
+        );
+        Map<String,  OPAResult> result = Map.ofEntries();
+        Map<String, Object> expect = Map.ofEntries(
+            entry("job1", Map.ofEntries(entry("aaa", "111"))),
+            entry("job2", Map.ofEntries(entry("bbb", "222")))
+        );
+
+        try {
+            result = opa.evaluateBatch("policy/echo", input);
+        } catch (OPAException e) {
+            System.out.println("exception: " + e);
+            assertNull(e);
+        }
+
+        for (Map.Entry<String, OPAResult> entry: result.entrySet()) {
+            assertTrue(entry.getValue().success());
+            try {
+                Map<String, Object> v = entry.getValue().get();
+                assertEquals(expect.get(entry.getKey()), v);
+            } catch (OPAException e) {
+                System.out.println("exception: " + e);
+                assertNull(e);
+            }
+        }
+    }
+
+    //@Test
+    //public void testEOPAEvaluateBatchMixed() {
+    //    OPAClient opa = new OPAClient(eopaAddress, headers);
+    //    Map<String, Object> input = Map.ofEntries(
+    //        entry("job1", Map.ofEntries(entry("aaa", "111"), entry("bbb", "111"))),
+    //        entry("job2", Map.ofEntries(entry("bbb", "222")))
+    //    );
+    //    Map<String, OPAResult> result = Map.ofEntries();
+    //    Map<String, Object> expect = Map.ofEntries(
+    //        entry("job1", Map.ofEntries(entry("aaa", "111"))),
+    //        entry("job2", Map.ofEntries(entry("bbb", "222")))
+    //    );
+    //
+    //    TypeReference<Map<String, Object>> tr = new TypeReference <Map<String, Object>>() {};
+    //
+    //    try {
+    //        result = opa.evaluateBatch("condfail/p", input, tr);
+    //    } catch (OPAException e) {
+    //        e.printStackTrace(System.out);
+    //        System.out.println("exception: " + e);
+    //        assertNull(e);
+    //    }
+    //
+    //    assertEquals(expect, result);
+    //}
 
 }
 

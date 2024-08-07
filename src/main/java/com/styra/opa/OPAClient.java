@@ -4,6 +4,17 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.styra.opa.openapi.OpaApiClient;
+import com.styra.opa.openapi.models.errors.SDKError;
+import com.styra.opa.openapi.models.errors.ServerError;
+import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequest;
+import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequestBody;
+import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputResponse;
+import com.styra.opa.openapi.models.shared.BatchMixedResults;
+import com.styra.opa.openapi.models.shared.BatchSuccessfulPolicyEvaluation;
+import com.styra.opa.openapi.models.shared.Responses;
+import com.styra.opa.openapi.models.shared.ResponsesSuccessfulPolicyResponse;
+import com.styra.opa.openapi.models.shared.Result;
+import com.styra.opa.openapi.models.shared.SuccessfulPolicyResponse;
 import com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputRequest;
 import com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse;
 import com.styra.opa.openapi.models.operations.ExecutePolicyRequest;
@@ -18,6 +29,9 @@ import com.styra.opa.utils.OPAHTTPClient;
 
 import java.util.Map;
 import java.util.Optional;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.HashMap;
 
 /**
  * The OPA class contains all the functionality and configuration needed to
@@ -44,6 +58,10 @@ public class OPAClient {
     private boolean policyRequestMetrics;
     private boolean policyRequestInstrument;
     private boolean policyRequestStrictBuiltinErrors;
+
+    // The first time a batch request fails, we trip this and subsequently
+    // always use the fallback method.
+    private boolean enableBatchFallback = false;
 
     /**
      * Default OPA server URL to connect to.
@@ -111,6 +129,20 @@ public class OPAClient {
 
     private Optional<Input> defaultInput() {
         return Optional.empty();
+    }
+
+    /**
+     * Bypass batch mode support detection and force the API client to
+     * enable or disable fallback mode.
+     *
+     * If newEnableBatchFallback is 'true', then fallback mode is always used.
+     * If it is 'false', then batch support detection will be reset, though
+     * subsequent batch evaluation calls may detect if the batch API is not
+     * supported and re-enable the fallback later. You should not need to use
+     * this method during normal usage.
+     */
+    public void forceBatchFallback(boolean newEnableBatchFallback) {
+        this.enableBatchFallback = newEnableBatchFallback;
     }
 
     /**
@@ -700,5 +732,174 @@ public class OPAClient {
         } else {
             return null;
         }
+    }
+
+    /**
+     * This method performs a scalar policy evaluation similar to evaluate(),
+     * but does not immediately handle the result, instead packing it into an
+     * OPAResult similar to how the batch evaluation methods work. This means
+     * that final output type conversion as well as throwing of any exceptions
+     * that occurred during policy evaluation is delayed until OPAResult.get()
+     * is used.
+     *
+     * @param path
+     * @param input
+     * @return
+     */
+    public OPAResult evaluateDeferred(
+            String path,
+            java.util.Map<String, Object> input) {
+        return evaluateMachineryDeferred(Optional.of(Input.of(input)), Optional.of(path));
+    }
+
+    public OPAResult evaluateDeferred(String path, String input) {
+        return evaluateMachineryDeferred(Optional.of(Input.of(input)), Optional.of(path));
+    }
+
+    public OPAResult evaluateDeferred(String path, boolean input) {
+        return evaluateMachineryDeferred(Optional.of(Input.of(input)), Optional.of(path));
+    }
+
+    public OPAResult evaluateDeferred(String path, double input) {
+        return evaluateMachineryDeferred(Optional.of(Input.of(input)), Optional.of(path));
+    }
+
+    public OPAResult evaluateDeferred(String path, java.util.List<Object> input) {
+        return evaluateMachineryDeferred(Optional.of(Input.of(input)), Optional.of(path));
+    }
+
+    public OPAResult evaluateDeferred(String path, Object input) {
+        ObjectMapper om = new ObjectMapper();
+        Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {});
+        return evaluateMachineryDeferred(Optional.of(Input.of(iMap)), Optional.of(path));
+    }
+
+    public OPAResult evaluateDeferred(
+            java.util.Map<String, Object> input) {
+        return evaluateMachineryDeferred(Optional.of(Input.of(input)), Optional.empty());
+    }
+
+    private OPAResult evaluateMachineryDeferred(Optional<Input> input, Optional<String> path) {
+        try {
+            Object out = executePolicy(input, path);
+            return new OPAResult(out);
+        } catch (OPAException e) {
+            return new OPAResult(null, e);
+        }
+    }
+
+
+    public Map<String, OPAResult> evaluateBatch(String path, Map<String, Object> input) throws OPAException {
+
+        HashMap<String, Input> iMap = new HashMap<String, Input>();
+        ObjectMapper om = new ObjectMapper();
+        for (Map.Entry<String, Object> entry : input.entrySet()) {
+            Input converted = Input.of(om.convertValue(entry.getValue(), new TypeReference<Map<String, Object>>() {}));
+            iMap.put(entry.getKey(), converted);
+        }
+
+        return executePolicyBatch(iMap, path, true);
+    }
+
+    private Map<String, OPAResult> executePolicyBatch(Map<String, Input> inputs, String path, boolean rejectMixed) throws OPAException {
+
+        if (this.enableBatchFallback) {
+            return this.executePolicyBatchFallback(inputs, path, rejectMixed);
+        }
+
+        ExecuteBatchPolicyWithInputRequestBody rb = new ExecuteBatchPolicyWithInputRequestBody(inputs);
+        ExecuteBatchPolicyWithInputRequest req = new ExecuteBatchPolicyWithInputRequest(path, rb);
+        ExecuteBatchPolicyWithInputResponse resp = null;
+
+        try {
+            resp = sdk.executeBatchPolicyWithInput(req);
+        //CHECKSTYLE:OFF
+        } catch (Exception e) {
+            if (e instanceof SDKError) {
+                if (((SDKError) e).code() == 404) {
+                    this.enableBatchFallback = true;
+                    return this.executePolicyBatchFallback(inputs, path, rejectMixed);
+                }
+            }
+
+            //CHECKSTYLE:ON
+            String msg = String.format(
+                "batch executing policy at '%s' with failed due to exception '%s'",
+                path,
+                e
+            );
+            throw new OPAException(msg, e);
+        }
+
+        HashMap<String, OPAResult> out = new HashMap<String, OPAResult>();
+        Optional<BatchMixedResults> mrbox = resp.batchMixedResults();
+        Optional<BatchSuccessfulPolicyEvaluation> sbox = resp.batchSuccessfulPolicyEvaluation();
+
+        if (mrbox.isPresent() && mrbox.get().responses().isPresent()) {
+            Optional<Map<String, Responses>> respsbox = mrbox.get().responses();
+            Map<String, Responses> resps = respsbox.get();
+
+            for (Map.Entry<String, Responses> entry : resps.entrySet()) {
+                Object responsesValue = entry.getValue();
+                if ((!(responsesValue instanceof ServerError)) && (!(responsesValue instanceof ResponsesSuccessfulPolicyResponse))) {
+                    // If this ever happens, then the SE-generated code has
+                    // changed in an incompatible way.
+                    throw new OPAException(String.format("unexpected response type '%s', this should never happen", responsesValue.getClass().getSimpleName()));
+                }
+
+                if ((responsesValue instanceof ServerError) && (rejectMixed)) {
+                        throw new OPAException("OPA error in batch response", (ServerError) responsesValue);
+                }
+
+                if ((responsesValue instanceof ServerError) && (!rejectMixed)) {
+                    out.put(entry.getKey(), new OPAResult(null, new OPAException("OPA error in batch response", (ServerError) responsesValue)));
+                    continue;
+                }
+
+                if (responsesValue instanceof ResponsesSuccessfulPolicyResponse) {
+                    Optional<Result> resultBox = ((ResponsesSuccessfulPolicyResponse) responsesValue).result();
+                    if (!resultBox.isPresent()) {
+                        continue;
+                    }
+                    Object resultValue = resultBox.get().value();
+                    out.put(entry.getKey(), new OPAResult(resultValue));
+                }
+            }
+        }
+
+        if (sbox.isPresent() && sbox.get().responses().isPresent()) {
+            Optional<Map<String, SuccessfulPolicyResponse>> respsbox = sbox.get().responses();
+            Map<String, SuccessfulPolicyResponse> resps = respsbox.get();
+
+            for (Map.Entry<String, SuccessfulPolicyResponse> entry : resps.entrySet()) {
+                Optional<Result> resultBox = entry.getValue().result();
+                if (!resultBox.isPresent()) {
+                    continue;
+                }
+                Object resultValue = resultBox.get().value();
+                out.put(entry.getKey(), new OPAResult(resultValue));
+            }
+        }
+
+        return out;
+    }
+
+    private Map<String, OPAResult> executePolicyBatchFallback(Map<String, Input> inputs, String path, boolean rejectMixed) throws OPAException {
+
+        HashMap<String, OPAResult> out = new HashMap<String, OPAResult>();
+
+        for (Map.Entry<String, Input> entry : inputs.entrySet()) {
+            try {
+                Object result = this.executePolicy(Optional.of(entry.getValue()), Optional.of(path));
+                out.put(entry.getKey(), new OPAResult(result));
+            } catch (OPAException e) {
+                if (rejectMixed) {
+                    throw new OPAException(String.format("OPA error in batch response (fallback mode)", e));
+                }
+                out.put(entry.getKey(), new OPAResult(null, e));
+            }
+        }
+
+        return out;
     }
 }
