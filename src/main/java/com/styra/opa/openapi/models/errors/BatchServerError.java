@@ -5,34 +5,31 @@
 package com.styra.opa.openapi.models.errors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.styra.opa.openapi.utils.Utils;
-import java.io.InputStream;
-import java.lang.Deprecated;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.net.http.HttpResponse;
+import java.lang.Override;
+import java.lang.String;
+import java.lang.SuppressWarnings;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 public class BatchServerError extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("batch_decision_id")
-    private Optional<? extends String> batchDecisionId;
+    private Optional<String> batchDecisionId;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("responses")
-    private Optional<? extends java.util.Map<String, ServerError>> responses;
+    private Optional<? extends Map<String, ServerError>> responses;
 
     @JsonCreator
     public BatchServerError(
-            @JsonProperty("batch_decision_id") Optional<? extends String> batchDecisionId,
-            @JsonProperty("responses") Optional<? extends java.util.Map<String, ServerError>> responses) {
+            @JsonProperty("batch_decision_id") Optional<String> batchDecisionId,
+            @JsonProperty("responses") Optional<? extends Map<String, ServerError>> responses) {
         Utils.checkNotNull(batchDecisionId, "batchDecisionId");
         Utils.checkNotNull(responses, "responses");
         this.batchDecisionId = batchDecisionId;
@@ -43,12 +40,13 @@ public class BatchServerError extends RuntimeException {
         this(Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends String> batchDecisionId(){
+    public Optional<String> batchDecisionId(){
         return batchDecisionId;
     }
 
-    public Optional<? extends java.util.Map<String, ServerError>> responses(){
-        return responses;
+    @SuppressWarnings("unchecked")
+    public Optional<Map<String, ServerError>> responses(){
+        return (Optional<Map<String, ServerError>>) responses;
     }
     
     public final static Builder builder() {
@@ -61,19 +59,19 @@ public class BatchServerError extends RuntimeException {
         return this;
     }
     
-    public BatchServerError withBatchDecisionId(Optional<? extends String> batchDecisionId) {
+    public BatchServerError withBatchDecisionId(Optional<String> batchDecisionId) {
         Utils.checkNotNull(batchDecisionId, "batchDecisionId");
         this.batchDecisionId = batchDecisionId;
         return this;
     }
 
-    public BatchServerError withResponses(java.util.Map<String, ServerError> responses) {
+    public BatchServerError withResponses(Map<String, ServerError> responses) {
         Utils.checkNotNull(responses, "responses");
         this.responses = Optional.ofNullable(responses);
         return this;
     }
     
-    public BatchServerError withResponses(Optional<? extends java.util.Map<String, ServerError>> responses) {
+    public BatchServerError withResponses(Optional<? extends Map<String, ServerError>> responses) {
         Utils.checkNotNull(responses, "responses");
         this.responses = responses;
         return this;
@@ -89,8 +87,8 @@ public class BatchServerError extends RuntimeException {
         }
         BatchServerError other = (BatchServerError) o;
         return
-            java.util.Objects.deepEquals(this.batchDecisionId, other.batchDecisionId) &&
-            java.util.Objects.deepEquals(this.responses, other.responses);
+            Objects.deepEquals(this.batchDecisionId, other.batchDecisionId) &&
+            Objects.deepEquals(this.responses, other.responses);
     }
 
     @Override
@@ -109,9 +107,9 @@ public class BatchServerError extends RuntimeException {
 
     public final static class Builder {
 
-        private Optional<? extends String> batchDecisionId = Optional.empty();
+        private Optional<String> batchDecisionId = Optional.empty();
 
-        private Optional<? extends java.util.Map<String, ServerError>> responses = Optional.empty();
+        private Optional<? extends Map<String, ServerError>> responses = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -123,19 +121,19 @@ public class BatchServerError extends RuntimeException {
             return this;
         }
         
-        public Builder batchDecisionId(Optional<? extends String> batchDecisionId) {
+        public Builder batchDecisionId(Optional<String> batchDecisionId) {
             Utils.checkNotNull(batchDecisionId, "batchDecisionId");
             this.batchDecisionId = batchDecisionId;
             return this;
         }
 
-        public Builder responses(java.util.Map<String, ServerError> responses) {
+        public Builder responses(Map<String, ServerError> responses) {
             Utils.checkNotNull(responses, "responses");
             this.responses = Optional.ofNullable(responses);
             return this;
         }
         
-        public Builder responses(Optional<? extends java.util.Map<String, ServerError>> responses) {
+        public Builder responses(Optional<? extends Map<String, ServerError>> responses) {
             Utils.checkNotNull(responses, "responses");
             this.responses = responses;
             return this;

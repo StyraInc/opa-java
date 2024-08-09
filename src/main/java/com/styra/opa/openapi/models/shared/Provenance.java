@@ -4,22 +4,21 @@
 
 package com.styra.opa.openapi.models.shared;
 
+
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.styra.opa.openapi.utils.Utils;
-import java.io.InputStream;
-import java.lang.Deprecated;
-import java.math.BigDecimal;
-import java.math.BigInteger;
+import java.lang.Override;
+import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
+
 /**
  * Provenance - Provenance information can be requested on individual API calls and are returned inline with the API response. To obtain provenance information on an API call, specify the `provenance=true` query parameter when executing the API call.
  */
@@ -28,31 +27,31 @@ public class Provenance {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("version")
-    private Optional<? extends String> version;
+    private Optional<String> version;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("build_commit")
-    private Optional<? extends String> buildCommit;
+    private Optional<String> buildCommit;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("build_timestamp")
-    private Optional<? extends OffsetDateTime> buildTimestamp;
+    private Optional<OffsetDateTime> buildTimestamp;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("build_host")
-    private Optional<? extends String> buildHost;
+    private Optional<String> buildHost;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("bundles")
-    private Optional<? extends java.util.Map<String, Revision>> bundles;
+    private Optional<? extends Map<String, Revision>> bundles;
 
     @JsonCreator
     public Provenance(
-            @JsonProperty("version") Optional<? extends String> version,
-            @JsonProperty("build_commit") Optional<? extends String> buildCommit,
-            @JsonProperty("build_timestamp") Optional<? extends OffsetDateTime> buildTimestamp,
-            @JsonProperty("build_host") Optional<? extends String> buildHost,
-            @JsonProperty("bundles") Optional<? extends java.util.Map<String, Revision>> bundles) {
+            @JsonProperty("version") Optional<String> version,
+            @JsonProperty("build_commit") Optional<String> buildCommit,
+            @JsonProperty("build_timestamp") Optional<OffsetDateTime> buildTimestamp,
+            @JsonProperty("build_host") Optional<String> buildHost,
+            @JsonProperty("bundles") Optional<? extends Map<String, Revision>> bundles) {
         Utils.checkNotNull(version, "version");
         Utils.checkNotNull(buildCommit, "buildCommit");
         Utils.checkNotNull(buildTimestamp, "buildTimestamp");
@@ -69,34 +68,30 @@ public class Provenance {
         this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<String> version() {
-        return (Optional<String>) version;
+        return version;
     }
 
-    @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<String> buildCommit() {
-        return (Optional<String>) buildCommit;
+        return buildCommit;
     }
 
-    @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<OffsetDateTime> buildTimestamp() {
-        return (Optional<OffsetDateTime>) buildTimestamp;
+        return buildTimestamp;
     }
 
-    @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<String> buildHost() {
-        return (Optional<String>) buildHost;
+        return buildHost;
     }
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<java.util.Map<String, Revision>> bundles() {
-        return (Optional<java.util.Map<String, Revision>>) bundles;
+    public Optional<Map<String, Revision>> bundles() {
+        return (Optional<Map<String, Revision>>) bundles;
     }
 
     public final static Builder builder() {
@@ -109,7 +104,7 @@ public class Provenance {
         return this;
     }
 
-    public Provenance withVersion(Optional<? extends String> version) {
+    public Provenance withVersion(Optional<String> version) {
         Utils.checkNotNull(version, "version");
         this.version = version;
         return this;
@@ -121,7 +116,7 @@ public class Provenance {
         return this;
     }
 
-    public Provenance withBuildCommit(Optional<? extends String> buildCommit) {
+    public Provenance withBuildCommit(Optional<String> buildCommit) {
         Utils.checkNotNull(buildCommit, "buildCommit");
         this.buildCommit = buildCommit;
         return this;
@@ -133,7 +128,7 @@ public class Provenance {
         return this;
     }
 
-    public Provenance withBuildTimestamp(Optional<? extends OffsetDateTime> buildTimestamp) {
+    public Provenance withBuildTimestamp(Optional<OffsetDateTime> buildTimestamp) {
         Utils.checkNotNull(buildTimestamp, "buildTimestamp");
         this.buildTimestamp = buildTimestamp;
         return this;
@@ -145,19 +140,19 @@ public class Provenance {
         return this;
     }
 
-    public Provenance withBuildHost(Optional<? extends String> buildHost) {
+    public Provenance withBuildHost(Optional<String> buildHost) {
         Utils.checkNotNull(buildHost, "buildHost");
         this.buildHost = buildHost;
         return this;
     }
 
-    public Provenance withBundles(java.util.Map<String, Revision> bundles) {
+    public Provenance withBundles(Map<String, Revision> bundles) {
         Utils.checkNotNull(bundles, "bundles");
         this.bundles = Optional.ofNullable(bundles);
         return this;
     }
 
-    public Provenance withBundles(Optional<? extends java.util.Map<String, Revision>> bundles) {
+    public Provenance withBundles(Optional<? extends Map<String, Revision>> bundles) {
         Utils.checkNotNull(bundles, "bundles");
         this.bundles = bundles;
         return this;
@@ -173,16 +168,16 @@ public class Provenance {
         }
         Provenance other = (Provenance) o;
         return 
-            java.util.Objects.deepEquals(this.version, other.version) &&
-            java.util.Objects.deepEquals(this.buildCommit, other.buildCommit) &&
-            java.util.Objects.deepEquals(this.buildTimestamp, other.buildTimestamp) &&
-            java.util.Objects.deepEquals(this.buildHost, other.buildHost) &&
-            java.util.Objects.deepEquals(this.bundles, other.bundles);
+            Objects.deepEquals(this.version, other.version) &&
+            Objects.deepEquals(this.buildCommit, other.buildCommit) &&
+            Objects.deepEquals(this.buildTimestamp, other.buildTimestamp) &&
+            Objects.deepEquals(this.buildHost, other.buildHost) &&
+            Objects.deepEquals(this.bundles, other.bundles);
     }
     
     @Override
     public int hashCode() {
-        return java.util.Objects.hash(
+        return Objects.hash(
             version,
             buildCommit,
             buildTimestamp,
@@ -202,15 +197,15 @@ public class Provenance {
     
     public final static class Builder {
  
-        private Optional<? extends String> version = Optional.empty();
+        private Optional<String> version = Optional.empty();
  
-        private Optional<? extends String> buildCommit = Optional.empty();
+        private Optional<String> buildCommit = Optional.empty();
  
-        private Optional<? extends OffsetDateTime> buildTimestamp = Optional.empty();
+        private Optional<OffsetDateTime> buildTimestamp = Optional.empty();
  
-        private Optional<? extends String> buildHost = Optional.empty();
+        private Optional<String> buildHost = Optional.empty();
  
-        private Optional<? extends java.util.Map<String, Revision>> bundles = Optional.empty();  
+        private Optional<? extends Map<String, Revision>> bundles = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -222,7 +217,7 @@ public class Provenance {
             return this;
         }
 
-        public Builder version(Optional<? extends String> version) {
+        public Builder version(Optional<String> version) {
             Utils.checkNotNull(version, "version");
             this.version = version;
             return this;
@@ -234,7 +229,7 @@ public class Provenance {
             return this;
         }
 
-        public Builder buildCommit(Optional<? extends String> buildCommit) {
+        public Builder buildCommit(Optional<String> buildCommit) {
             Utils.checkNotNull(buildCommit, "buildCommit");
             this.buildCommit = buildCommit;
             return this;
@@ -246,7 +241,7 @@ public class Provenance {
             return this;
         }
 
-        public Builder buildTimestamp(Optional<? extends OffsetDateTime> buildTimestamp) {
+        public Builder buildTimestamp(Optional<OffsetDateTime> buildTimestamp) {
             Utils.checkNotNull(buildTimestamp, "buildTimestamp");
             this.buildTimestamp = buildTimestamp;
             return this;
@@ -258,19 +253,19 @@ public class Provenance {
             return this;
         }
 
-        public Builder buildHost(Optional<? extends String> buildHost) {
+        public Builder buildHost(Optional<String> buildHost) {
             Utils.checkNotNull(buildHost, "buildHost");
             this.buildHost = buildHost;
             return this;
         }
 
-        public Builder bundles(java.util.Map<String, Revision> bundles) {
+        public Builder bundles(Map<String, Revision> bundles) {
             Utils.checkNotNull(bundles, "bundles");
             this.bundles = Optional.ofNullable(bundles);
             return this;
         }
 
-        public Builder bundles(Optional<? extends java.util.Map<String, Revision>> bundles) {
+        public Builder bundles(Optional<? extends Map<String, Revision>> bundles) {
             Utils.checkNotNull(bundles, "bundles");
             this.bundles = bundles;
             return this;

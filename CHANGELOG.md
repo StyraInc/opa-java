@@ -1,5 +1,9 @@
 # OPA Java SDK Changelog
 
+## v1.6.0
+
+* Fixed omission of jackson-databind dependency type change to `api`, which was supposed to go out with 1.5.3.
+
 ## v1.5.3
 
 * Marked jackson-databind as an `api` dependency in addition to jackson-core.

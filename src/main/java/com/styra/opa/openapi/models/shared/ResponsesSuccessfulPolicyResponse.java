@@ -4,19 +4,21 @@
 
 package com.styra.opa.openapi.models.shared;
 
+
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.styra.opa.openapi.utils.Utils;
-import java.io.InputStream;
-import java.lang.Deprecated;
-import java.math.BigDecimal;
-import java.math.BigInteger;
+import java.lang.Object;
+import java.lang.Override;
+import java.lang.String;
+import java.lang.SuppressWarnings;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
+
 
 public class ResponsesSuccessfulPolicyResponse {
 
@@ -32,14 +34,14 @@ public class ResponsesSuccessfulPolicyResponse {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("metrics")
-    private Optional<? extends java.util.Map<String, java.lang.Object>> metrics;
+    private Optional<? extends Map<String, Object>> metrics;
 
     /**
      * If decision logging is enabled, this field contains a string that uniquely identifies the decision. The identifier will be included in the decision log event for this decision. Callers can use the identifier for correlation purposes.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("decision_id")
-    private Optional<? extends String> decisionId;
+    private Optional<String> decisionId;
 
     /**
      * Provenance information can be requested on individual API calls and are returned inline with the API response. To obtain provenance information on an API call, specify the `provenance=true` query parameter when executing the API call.
@@ -50,15 +52,15 @@ public class ResponsesSuccessfulPolicyResponse {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("http_status_code")
-    private Optional<? extends String> httpStatusCode;
+    private Optional<String> httpStatusCode;
 
     @JsonCreator
     public ResponsesSuccessfulPolicyResponse(
             @JsonProperty("result") Optional<? extends Result> result,
-            @JsonProperty("metrics") Optional<? extends java.util.Map<String, java.lang.Object>> metrics,
-            @JsonProperty("decision_id") Optional<? extends String> decisionId,
+            @JsonProperty("metrics") Optional<? extends Map<String, Object>> metrics,
+            @JsonProperty("decision_id") Optional<String> decisionId,
             @JsonProperty("provenance") Optional<? extends Provenance> provenance,
-            @JsonProperty("http_status_code") Optional<? extends String> httpStatusCode) {
+            @JsonProperty("http_status_code") Optional<String> httpStatusCode) {
         Utils.checkNotNull(result, "result");
         Utils.checkNotNull(metrics, "metrics");
         Utils.checkNotNull(decisionId, "decisionId");
@@ -89,17 +91,16 @@ public class ResponsesSuccessfulPolicyResponse {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<java.util.Map<String, java.lang.Object>> metrics() {
-        return (Optional<java.util.Map<String, java.lang.Object>>) metrics;
+    public Optional<Map<String, Object>> metrics() {
+        return (Optional<Map<String, Object>>) metrics;
     }
 
     /**
      * If decision logging is enabled, this field contains a string that uniquely identifies the decision. The identifier will be included in the decision log event for this decision. Callers can use the identifier for correlation purposes.
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<String> decisionId() {
-        return (Optional<String>) decisionId;
+        return decisionId;
     }
 
     /**
@@ -111,10 +112,9 @@ public class ResponsesSuccessfulPolicyResponse {
         return (Optional<Provenance>) provenance;
     }
 
-    @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<String> httpStatusCode() {
-        return (Optional<String>) httpStatusCode;
+        return httpStatusCode;
     }
 
     public final static Builder builder() {
@@ -142,7 +142,7 @@ public class ResponsesSuccessfulPolicyResponse {
     /**
      * If query metrics are enabled, this field contains query performance metrics collected during the parse, compile, and evaluation steps.
      */
-    public ResponsesSuccessfulPolicyResponse withMetrics(java.util.Map<String, java.lang.Object> metrics) {
+    public ResponsesSuccessfulPolicyResponse withMetrics(Map<String, Object> metrics) {
         Utils.checkNotNull(metrics, "metrics");
         this.metrics = Optional.ofNullable(metrics);
         return this;
@@ -151,7 +151,7 @@ public class ResponsesSuccessfulPolicyResponse {
     /**
      * If query metrics are enabled, this field contains query performance metrics collected during the parse, compile, and evaluation steps.
      */
-    public ResponsesSuccessfulPolicyResponse withMetrics(Optional<? extends java.util.Map<String, java.lang.Object>> metrics) {
+    public ResponsesSuccessfulPolicyResponse withMetrics(Optional<? extends Map<String, Object>> metrics) {
         Utils.checkNotNull(metrics, "metrics");
         this.metrics = metrics;
         return this;
@@ -169,7 +169,7 @@ public class ResponsesSuccessfulPolicyResponse {
     /**
      * If decision logging is enabled, this field contains a string that uniquely identifies the decision. The identifier will be included in the decision log event for this decision. Callers can use the identifier for correlation purposes.
      */
-    public ResponsesSuccessfulPolicyResponse withDecisionId(Optional<? extends String> decisionId) {
+    public ResponsesSuccessfulPolicyResponse withDecisionId(Optional<String> decisionId) {
         Utils.checkNotNull(decisionId, "decisionId");
         this.decisionId = decisionId;
         return this;
@@ -199,7 +199,7 @@ public class ResponsesSuccessfulPolicyResponse {
         return this;
     }
 
-    public ResponsesSuccessfulPolicyResponse withHttpStatusCode(Optional<? extends String> httpStatusCode) {
+    public ResponsesSuccessfulPolicyResponse withHttpStatusCode(Optional<String> httpStatusCode) {
         Utils.checkNotNull(httpStatusCode, "httpStatusCode");
         this.httpStatusCode = httpStatusCode;
         return this;
@@ -215,16 +215,16 @@ public class ResponsesSuccessfulPolicyResponse {
         }
         ResponsesSuccessfulPolicyResponse other = (ResponsesSuccessfulPolicyResponse) o;
         return 
-            java.util.Objects.deepEquals(this.result, other.result) &&
-            java.util.Objects.deepEquals(this.metrics, other.metrics) &&
-            java.util.Objects.deepEquals(this.decisionId, other.decisionId) &&
-            java.util.Objects.deepEquals(this.provenance, other.provenance) &&
-            java.util.Objects.deepEquals(this.httpStatusCode, other.httpStatusCode);
+            Objects.deepEquals(this.result, other.result) &&
+            Objects.deepEquals(this.metrics, other.metrics) &&
+            Objects.deepEquals(this.decisionId, other.decisionId) &&
+            Objects.deepEquals(this.provenance, other.provenance) &&
+            Objects.deepEquals(this.httpStatusCode, other.httpStatusCode);
     }
     
     @Override
     public int hashCode() {
-        return java.util.Objects.hash(
+        return Objects.hash(
             result,
             metrics,
             decisionId,
@@ -246,13 +246,13 @@ public class ResponsesSuccessfulPolicyResponse {
  
         private Optional<? extends Result> result = Optional.empty();
  
-        private Optional<? extends java.util.Map<String, java.lang.Object>> metrics = Optional.empty();
+        private Optional<? extends Map<String, Object>> metrics = Optional.empty();
  
-        private Optional<? extends String> decisionId = Optional.empty();
+        private Optional<String> decisionId = Optional.empty();
  
         private Optional<? extends Provenance> provenance = Optional.empty();
  
-        private Optional<? extends String> httpStatusCode = Optional.empty();  
+        private Optional<String> httpStatusCode = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -279,7 +279,7 @@ public class ResponsesSuccessfulPolicyResponse {
         /**
          * If query metrics are enabled, this field contains query performance metrics collected during the parse, compile, and evaluation steps.
          */
-        public Builder metrics(java.util.Map<String, java.lang.Object> metrics) {
+        public Builder metrics(Map<String, Object> metrics) {
             Utils.checkNotNull(metrics, "metrics");
             this.metrics = Optional.ofNullable(metrics);
             return this;
@@ -288,7 +288,7 @@ public class ResponsesSuccessfulPolicyResponse {
         /**
          * If query metrics are enabled, this field contains query performance metrics collected during the parse, compile, and evaluation steps.
          */
-        public Builder metrics(Optional<? extends java.util.Map<String, java.lang.Object>> metrics) {
+        public Builder metrics(Optional<? extends Map<String, Object>> metrics) {
             Utils.checkNotNull(metrics, "metrics");
             this.metrics = metrics;
             return this;
@@ -306,7 +306,7 @@ public class ResponsesSuccessfulPolicyResponse {
         /**
          * If decision logging is enabled, this field contains a string that uniquely identifies the decision. The identifier will be included in the decision log event for this decision. Callers can use the identifier for correlation purposes.
          */
-        public Builder decisionId(Optional<? extends String> decisionId) {
+        public Builder decisionId(Optional<String> decisionId) {
             Utils.checkNotNull(decisionId, "decisionId");
             this.decisionId = decisionId;
             return this;
@@ -336,7 +336,7 @@ public class ResponsesSuccessfulPolicyResponse {
             return this;
         }
 
-        public Builder httpStatusCode(Optional<? extends String> httpStatusCode) {
+        public Builder httpStatusCode(Optional<String> httpStatusCode) {
             Utils.checkNotNull(httpStatusCode, "httpStatusCode");
             this.httpStatusCode = httpStatusCode;
             return this;

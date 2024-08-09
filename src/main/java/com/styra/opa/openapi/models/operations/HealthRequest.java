@@ -4,18 +4,21 @@
 
 package com.styra.opa.openapi.models.operations;
 
+
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.styra.opa.openapi.utils.LazySingletonValue;
 import com.styra.opa.openapi.utils.SpeakeasyMetadata;
 import com.styra.opa.openapi.utils.Utils;
-import java.io.InputStream;
-import java.lang.Deprecated;
-import java.math.BigDecimal;
-import java.math.BigInteger;
+import java.lang.Boolean;
+import java.lang.Override;
+import java.lang.String;
+import java.lang.SuppressWarnings;
+import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+
 
 public class HealthRequest {
 
@@ -23,25 +26,25 @@ public class HealthRequest {
      * Boolean parameter to account for bundle activation status in response. This includes any discovery bundles or bundles defined in the loaded discovery configuration.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=bundles")
-    private Optional<? extends Boolean> bundles;
+    private Optional<Boolean> bundles;
 
     /**
      * Boolean parameter to account for plugin status in response.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=plugins")
-    private Optional<? extends Boolean> plugins;
+    private Optional<Boolean> plugins;
 
     /**
      * String parameter to exclude a plugin from status checks. Can be added multiple times. Does nothing if plugins is not true. This parameter is useful for special use cases where a plugin depends on the server being fully initialized before it can fully initialize itself.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=exclude-plugin")
-    private Optional<? extends java.util.List<String>> excludePlugin;
+    private Optional<? extends List<String>> excludePlugin;
 
     @JsonCreator
     public HealthRequest(
-            Optional<? extends Boolean> bundles,
-            Optional<? extends Boolean> plugins,
-            Optional<? extends java.util.List<String>> excludePlugin) {
+            Optional<Boolean> bundles,
+            Optional<Boolean> plugins,
+            Optional<? extends List<String>> excludePlugin) {
         Utils.checkNotNull(bundles, "bundles");
         Utils.checkNotNull(plugins, "plugins");
         Utils.checkNotNull(excludePlugin, "excludePlugin");
@@ -57,19 +60,17 @@ public class HealthRequest {
     /**
      * Boolean parameter to account for bundle activation status in response. This includes any discovery bundles or bundles defined in the loaded discovery configuration.
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<Boolean> bundles() {
-        return (Optional<Boolean>) bundles;
+        return bundles;
     }
 
     /**
      * Boolean parameter to account for plugin status in response.
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<Boolean> plugins() {
-        return (Optional<Boolean>) plugins;
+        return plugins;
     }
 
     /**
@@ -77,8 +78,8 @@ public class HealthRequest {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<java.util.List<String>> excludePlugin() {
-        return (Optional<java.util.List<String>>) excludePlugin;
+    public Optional<List<String>> excludePlugin() {
+        return (Optional<List<String>>) excludePlugin;
     }
 
     public final static Builder builder() {
@@ -97,7 +98,7 @@ public class HealthRequest {
     /**
      * Boolean parameter to account for bundle activation status in response. This includes any discovery bundles or bundles defined in the loaded discovery configuration.
      */
-    public HealthRequest withBundles(Optional<? extends Boolean> bundles) {
+    public HealthRequest withBundles(Optional<Boolean> bundles) {
         Utils.checkNotNull(bundles, "bundles");
         this.bundles = bundles;
         return this;
@@ -115,7 +116,7 @@ public class HealthRequest {
     /**
      * Boolean parameter to account for plugin status in response.
      */
-    public HealthRequest withPlugins(Optional<? extends Boolean> plugins) {
+    public HealthRequest withPlugins(Optional<Boolean> plugins) {
         Utils.checkNotNull(plugins, "plugins");
         this.plugins = plugins;
         return this;
@@ -124,7 +125,7 @@ public class HealthRequest {
     /**
      * String parameter to exclude a plugin from status checks. Can be added multiple times. Does nothing if plugins is not true. This parameter is useful for special use cases where a plugin depends on the server being fully initialized before it can fully initialize itself.
      */
-    public HealthRequest withExcludePlugin(java.util.List<String> excludePlugin) {
+    public HealthRequest withExcludePlugin(List<String> excludePlugin) {
         Utils.checkNotNull(excludePlugin, "excludePlugin");
         this.excludePlugin = Optional.ofNullable(excludePlugin);
         return this;
@@ -133,7 +134,7 @@ public class HealthRequest {
     /**
      * String parameter to exclude a plugin from status checks. Can be added multiple times. Does nothing if plugins is not true. This parameter is useful for special use cases where a plugin depends on the server being fully initialized before it can fully initialize itself.
      */
-    public HealthRequest withExcludePlugin(Optional<? extends java.util.List<String>> excludePlugin) {
+    public HealthRequest withExcludePlugin(Optional<? extends List<String>> excludePlugin) {
         Utils.checkNotNull(excludePlugin, "excludePlugin");
         this.excludePlugin = excludePlugin;
         return this;
@@ -149,14 +150,14 @@ public class HealthRequest {
         }
         HealthRequest other = (HealthRequest) o;
         return 
-            java.util.Objects.deepEquals(this.bundles, other.bundles) &&
-            java.util.Objects.deepEquals(this.plugins, other.plugins) &&
-            java.util.Objects.deepEquals(this.excludePlugin, other.excludePlugin);
+            Objects.deepEquals(this.bundles, other.bundles) &&
+            Objects.deepEquals(this.plugins, other.plugins) &&
+            Objects.deepEquals(this.excludePlugin, other.excludePlugin);
     }
     
     @Override
     public int hashCode() {
-        return java.util.Objects.hash(
+        return Objects.hash(
             bundles,
             plugins,
             excludePlugin);
@@ -172,11 +173,11 @@ public class HealthRequest {
     
     public final static class Builder {
  
-        private Optional<? extends Boolean> bundles;
+        private Optional<Boolean> bundles;
  
-        private Optional<? extends Boolean> plugins;
+        private Optional<Boolean> plugins;
  
-        private Optional<? extends java.util.List<String>> excludePlugin = Optional.empty();  
+        private Optional<? extends List<String>> excludePlugin = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -194,7 +195,7 @@ public class HealthRequest {
         /**
          * Boolean parameter to account for bundle activation status in response. This includes any discovery bundles or bundles defined in the loaded discovery configuration.
          */
-        public Builder bundles(Optional<? extends Boolean> bundles) {
+        public Builder bundles(Optional<Boolean> bundles) {
             Utils.checkNotNull(bundles, "bundles");
             this.bundles = bundles;
             return this;
@@ -212,7 +213,7 @@ public class HealthRequest {
         /**
          * Boolean parameter to account for plugin status in response.
          */
-        public Builder plugins(Optional<? extends Boolean> plugins) {
+        public Builder plugins(Optional<Boolean> plugins) {
             Utils.checkNotNull(plugins, "plugins");
             this.plugins = plugins;
             return this;
@@ -221,7 +222,7 @@ public class HealthRequest {
         /**
          * String parameter to exclude a plugin from status checks. Can be added multiple times. Does nothing if plugins is not true. This parameter is useful for special use cases where a plugin depends on the server being fully initialized before it can fully initialize itself.
          */
-        public Builder excludePlugin(java.util.List<String> excludePlugin) {
+        public Builder excludePlugin(List<String> excludePlugin) {
             Utils.checkNotNull(excludePlugin, "excludePlugin");
             this.excludePlugin = Optional.ofNullable(excludePlugin);
             return this;
@@ -230,7 +231,7 @@ public class HealthRequest {
         /**
          * String parameter to exclude a plugin from status checks. Can be added multiple times. Does nothing if plugins is not true. This parameter is useful for special use cases where a plugin depends on the server being fully initialized before it can fully initialize itself.
          */
-        public Builder excludePlugin(Optional<? extends java.util.List<String>> excludePlugin) {
+        public Builder excludePlugin(Optional<? extends List<String>> excludePlugin) {
             Utils.checkNotNull(excludePlugin, "excludePlugin");
             this.excludePlugin = excludePlugin;
             return this;
@@ -249,17 +250,17 @@ public class HealthRequest {
                 excludePlugin);
         }
 
-        private static final LazySingletonValue<Optional<? extends Boolean>> _SINGLETON_VALUE_Bundles =
+        private static final LazySingletonValue<Optional<Boolean>> _SINGLETON_VALUE_Bundles =
                 new LazySingletonValue<>(
                         "bundles",
                         "false",
-                        new TypeReference<Optional<? extends Boolean>>() {});
+                        new TypeReference<Optional<Boolean>>() {});
 
-        private static final LazySingletonValue<Optional<? extends Boolean>> _SINGLETON_VALUE_Plugins =
+        private static final LazySingletonValue<Optional<Boolean>> _SINGLETON_VALUE_Plugins =
                 new LazySingletonValue<>(
                         "plugins",
                         "false",
-                        new TypeReference<Optional<? extends Boolean>>() {});
+                        new TypeReference<Optional<Boolean>>() {});
     }
 }
 

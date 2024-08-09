@@ -23,17 +23,12 @@ Execute the default decision  given an input
 package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
-import com.styra.opa.openapi.models.operations.*;
-import com.styra.opa.openapi.models.shared.*;
-import com.styra.opa.openapi.utils.EventStream;
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import com.styra.opa.openapi.models.errors.SDKError;
+import com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse;
+import com.styra.opa.openapi.models.shared.GzipAcceptEncoding;
+import com.styra.opa.openapi.models.shared.Input;
+import com.styra.opa.openapi.models.shared.Security;
+import java.lang.Exception;
 
 public class Application {
 
@@ -60,7 +55,7 @@ public class Application {
         } catch (com.styra.opa.openapi.models.errors.ServerError e) {
             // handle exception
             throw e;
-        } catch (com.styra.opa.openapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -76,14 +71,14 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                     | Type                                                                                                                                                                                                          | Required                                                                                                                                                                                                      | Description                                                                                                                                                                                                   |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `pretty`                                                                                                                                                                                                      | *Optional<? extends Boolean>*                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                            | If parameter is `true`, response will formatted for humans.                                                                                                                                                   |
-| `acceptEncoding`                                                                                                                                                                                              | [Optional<? extends com.styra.opa.openapi.models.shared.GzipAcceptEncoding>](../../models/shared/GzipAcceptEncoding.md)                                                                                       | :heavy_minus_sign:                                                                                                                                                                                            | Indicates the server should respond with a gzip encoded body. The server will send the compressed response only if its length is above `server.encoding.gzip.min_length` value. See the configuration section |
-| `input`                                                                                                                                                                                                       | [com.styra.opa.openapi.models.shared.Input](../../models/shared/Input.md)                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                            | The input document                                                                                                                                                                                            |
+| `pretty`                                                                                                                                                                                                      | *Optional<Boolean>*                                                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                            | If parameter is `true`, response will formatted for humans.                                                                                                                                                   |
+| `acceptEncoding`                                                                                                                                                                                              | [Optional<GzipAcceptEncoding>](../../models/shared/GzipAcceptEncoding.md)                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                            | Indicates the server should respond with a gzip encoded body. The server will send the compressed response only if its length is above `server.encoding.gzip.min_length` value. See the configuration section |
+| `input`                                                                                                                                                                                                       | [Input](../../models/shared/Input.md)                                                                                                                                                                         | :heavy_check_mark:                                                                                                                                                                                            | The input document                                                                                                                                                                                            |
 
 
 ### Response
 
-**[com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse](../../models/operations/ExecuteDefaultPolicyWithInputResponse.md)**
+**[ExecuteDefaultPolicyWithInputResponse](../../models/operations/ExecuteDefaultPolicyWithInputResponse.md)**
 ### Errors
 
 | Error Object              | Status Code               | Content Type              |
@@ -102,17 +97,11 @@ Execute a policy
 package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
-import com.styra.opa.openapi.models.operations.*;
-import com.styra.opa.openapi.models.shared.*;
-import com.styra.opa.openapi.utils.EventStream;
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import com.styra.opa.openapi.models.errors.SDKError;
+import com.styra.opa.openapi.models.operations.ExecutePolicyRequest;
+import com.styra.opa.openapi.models.operations.ExecutePolicyResponse;
+import com.styra.opa.openapi.models.shared.Security;
+import java.lang.Exception;
 
 public class Application {
 
@@ -141,7 +130,7 @@ public class Application {
         } catch (com.styra.opa.openapi.models.errors.ServerError e) {
             // handle exception
             throw e;
-        } catch (com.styra.opa.openapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -155,14 +144,14 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                       | Type                                                                                                            | Required                                                                                                        | Description                                                                                                     |
-| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                       | [com.styra.opa.openapi.models.operations.ExecutePolicyRequest](../../models/operations/ExecutePolicyRequest.md) | :heavy_check_mark:                                                                                              | The request object to use for the request.                                                                      |
+| Parameter                                                               | Type                                                                    | Required                                                                | Description                                                             |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `request`                                                               | [ExecutePolicyRequest](../../models/operations/ExecutePolicyRequest.md) | :heavy_check_mark:                                                      | The request object to use for the request.                              |
 
 
 ### Response
 
-**[com.styra.opa.openapi.models.operations.ExecutePolicyResponse](../../models/operations/ExecutePolicyResponse.md)**
+**[ExecutePolicyResponse](../../models/operations/ExecutePolicyResponse.md)**
 ### Errors
 
 | Error Object              | Status Code               | Content Type              |
@@ -181,17 +170,13 @@ Execute a policy given an input
 package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
-import com.styra.opa.openapi.models.operations.*;
-import com.styra.opa.openapi.models.shared.*;
-import com.styra.opa.openapi.utils.EventStream;
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import com.styra.opa.openapi.models.errors.SDKError;
+import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequest;
+import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequestBody;
+import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputResponse;
+import com.styra.opa.openapi.models.shared.Input;
+import com.styra.opa.openapi.models.shared.Security;
+import java.lang.Exception;
 
 public class Application {
 
@@ -223,7 +208,7 @@ public class Application {
         } catch (com.styra.opa.openapi.models.errors.ServerError e) {
             // handle exception
             throw e;
-        } catch (com.styra.opa.openapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -237,14 +222,14 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                                         | Type                                                                                                                              | Required                                                                                                                          | Description                                                                                                                       |
-| --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                                         | [com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequest](../../models/operations/ExecutePolicyWithInputRequest.md) | :heavy_check_mark:                                                                                                                | The request object to use for the request.                                                                                        |
+| Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `request`                                                                                 | [ExecutePolicyWithInputRequest](../../models/operations/ExecutePolicyWithInputRequest.md) | :heavy_check_mark:                                                                        | The request object to use for the request.                                                |
 
 
 ### Response
 
-**[com.styra.opa.openapi.models.operations.ExecutePolicyWithInputResponse](../../models/operations/ExecutePolicyWithInputResponse.md)**
+**[ExecutePolicyWithInputResponse](../../models/operations/ExecutePolicyWithInputResponse.md)**
 ### Errors
 
 | Error Object              | Status Code               | Content Type              |
@@ -263,17 +248,14 @@ Execute a policy given a batch of inputs
 package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
-import com.styra.opa.openapi.models.operations.*;
-import com.styra.opa.openapi.models.shared.*;
-import com.styra.opa.openapi.utils.EventStream;
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import com.styra.opa.openapi.models.errors.SDKError;
+import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequest;
+import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequestBody;
+import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputResponse;
+import com.styra.opa.openapi.models.shared.Input;
+import com.styra.opa.openapi.models.shared.Security;
+import java.lang.Exception;
+import java.util.Map;
 
 public class Application {
 
@@ -288,8 +270,8 @@ public class Application {
             ExecuteBatchPolicyWithInputRequest req = ExecuteBatchPolicyWithInputRequest.builder()
                 .path("app/rbac")
                 .requestBody(ExecuteBatchPolicyWithInputRequestBody.builder()
-                        .inputs(java.util.Map.ofEntries(
-                                entry("key", Input.of("<value>"))))
+                        .inputs(Map.ofEntries(
+                                Map.entry("key", Input.of("<value>"))))
                         .build())
                 .build();
 
@@ -306,7 +288,7 @@ public class Application {
         } catch (com.styra.opa.openapi.models.errors.BatchServerError e) {
             // handle exception
             throw e;
-        } catch (com.styra.opa.openapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -320,14 +302,14 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                                                   | Type                                                                                                                                        | Required                                                                                                                                    | Description                                                                                                                                 |
-| ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                                                   | [com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequest](../../models/operations/ExecuteBatchPolicyWithInputRequest.md) | :heavy_check_mark:                                                                                                                          | The request object to use for the request.                                                                                                  |
+| Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `request`                                                                                           | [ExecuteBatchPolicyWithInputRequest](../../models/operations/ExecuteBatchPolicyWithInputRequest.md) | :heavy_check_mark:                                                                                  | The request object to use for the request.                                                          |
 
 
 ### Response
 
-**[com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputResponse](../../models/operations/ExecuteBatchPolicyWithInputResponse.md)**
+**[ExecuteBatchPolicyWithInputResponse](../../models/operations/ExecuteBatchPolicyWithInputResponse.md)**
 ### Errors
 
 | Error Object                   | Status Code                    | Content Type                   |
@@ -346,17 +328,11 @@ The health API endpoint executes a simple built-in policy query to verify that t
 package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
-import com.styra.opa.openapi.models.operations.*;
-import com.styra.opa.openapi.models.shared.*;
-import com.styra.opa.openapi.utils.EventStream;
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import com.styra.opa.openapi.models.errors.SDKError;
+import com.styra.opa.openapi.models.operations.HealthResponse;
+import com.styra.opa.openapi.models.shared.Security;
+import java.lang.Exception;
+import java.util.List;
 
 public class Application {
 
@@ -371,7 +347,7 @@ public class Application {
             HealthResponse res = sdk.health()
                 .bundles(false)
                 .plugins(false)
-                .excludePlugin(java.util.List.of(
+                .excludePlugin(List.of(
                     "<value>"))
                 .call();
 
@@ -381,7 +357,7 @@ public class Application {
         } catch (com.styra.opa.openapi.models.errors.UnhealthyServer e) {
             // handle exception
             throw e;
-        } catch (com.styra.opa.openapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -397,14 +373,14 @@ public class Application {
 
 | Parameter                                                                                                                                                                                                                                                                     | Type                                                                                                                                                                                                                                                                          | Required                                                                                                                                                                                                                                                                      | Description                                                                                                                                                                                                                                                                   |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `bundles`                                                                                                                                                                                                                                                                     | *Optional<? extends Boolean>*                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                            | Boolean parameter to account for bundle activation status in response. This includes any discovery bundles or bundles defined in the loaded discovery configuration.                                                                                                          |
-| `plugins`                                                                                                                                                                                                                                                                     | *Optional<? extends Boolean>*                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                            | Boolean parameter to account for plugin status in response.                                                                                                                                                                                                                   |
+| `bundles`                                                                                                                                                                                                                                                                     | *Optional<Boolean>*                                                                                                                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                                                                            | Boolean parameter to account for bundle activation status in response. This includes any discovery bundles or bundles defined in the loaded discovery configuration.                                                                                                          |
+| `plugins`                                                                                                                                                                                                                                                                     | *Optional<Boolean>*                                                                                                                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                                                                            | Boolean parameter to account for plugin status in response.                                                                                                                                                                                                                   |
 | `excludePlugin`                                                                                                                                                                                                                                                               | List<*String*>                                                                                                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                                                                                                            | String parameter to exclude a plugin from status checks. Can be added multiple times. Does nothing if plugins is not true. This parameter is useful for special use cases where a plugin depends on the server being fully initialized before it can fully initialize itself. |
 
 
 ### Response
 
-**[com.styra.opa.openapi.models.operations.HealthResponse](../../models/operations/HealthResponse.md)**
+**[HealthResponse](../../models/operations/HealthResponse.md)**
 ### Errors
 
 | Error Object                  | Status Code                   | Content Type                  |

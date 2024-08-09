@@ -91,17 +91,12 @@ public class App {
 package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
-import com.styra.opa.openapi.models.operations.*;
-import com.styra.opa.openapi.models.shared.*;
-import com.styra.opa.openapi.utils.EventStream;
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import com.styra.opa.openapi.models.errors.SDKError;
+import com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse;
+import com.styra.opa.openapi.models.shared.GzipAcceptEncoding;
+import com.styra.opa.openapi.models.shared.Input;
+import com.styra.opa.openapi.models.shared.Security;
+import java.lang.Exception;
 
 public class Application {
 
@@ -128,7 +123,7 @@ public class Application {
         } catch (com.styra.opa.openapi.models.errors.ServerError e) {
             // handle exception
             throw e;
-        } catch (com.styra.opa.openapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -146,17 +141,13 @@ public class Application {
 package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
-import com.styra.opa.openapi.models.operations.*;
-import com.styra.opa.openapi.models.shared.*;
-import com.styra.opa.openapi.utils.EventStream;
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import com.styra.opa.openapi.models.errors.SDKError;
+import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequest;
+import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequestBody;
+import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputResponse;
+import com.styra.opa.openapi.models.shared.Input;
+import com.styra.opa.openapi.models.shared.Security;
+import java.lang.Exception;
 
 public class Application {
 
@@ -188,7 +179,7 @@ public class Application {
         } catch (com.styra.opa.openapi.models.errors.ServerError e) {
             // handle exception
             throw e;
-        } catch (com.styra.opa.openapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -206,17 +197,14 @@ public class Application {
 package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
-import com.styra.opa.openapi.models.operations.*;
-import com.styra.opa.openapi.models.shared.*;
-import com.styra.opa.openapi.utils.EventStream;
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import com.styra.opa.openapi.models.errors.SDKError;
+import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequest;
+import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequestBody;
+import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputResponse;
+import com.styra.opa.openapi.models.shared.Input;
+import com.styra.opa.openapi.models.shared.Security;
+import java.lang.Exception;
+import java.util.Map;
 
 public class Application {
 
@@ -231,8 +219,8 @@ public class Application {
             ExecuteBatchPolicyWithInputRequest req = ExecuteBatchPolicyWithInputRequest.builder()
                 .path("app/rbac")
                 .requestBody(ExecuteBatchPolicyWithInputRequestBody.builder()
-                        .inputs(java.util.Map.ofEntries(
-                                entry("key", Input.of("<value>"))))
+                        .inputs(Map.ofEntries(
+                                Map.entry("key", Input.of("<value>"))))
                         .build())
                 .build();
 
@@ -249,7 +237,7 @@ public class Application {
         } catch (com.styra.opa.openapi.models.errors.BatchServerError e) {
             // handle exception
             throw e;
-        } catch (com.styra.opa.openapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -291,17 +279,12 @@ You can override the default server globally by passing a server index to the `s
 package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
-import com.styra.opa.openapi.models.operations.*;
-import com.styra.opa.openapi.models.shared.*;
-import com.styra.opa.openapi.utils.EventStream;
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import com.styra.opa.openapi.models.errors.SDKError;
+import com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse;
+import com.styra.opa.openapi.models.shared.GzipAcceptEncoding;
+import com.styra.opa.openapi.models.shared.Input;
+import com.styra.opa.openapi.models.shared.Security;
+import java.lang.Exception;
 
 public class Application {
 
@@ -329,7 +312,7 @@ public class Application {
         } catch (com.styra.opa.openapi.models.errors.ServerError e) {
             // handle exception
             throw e;
-        } catch (com.styra.opa.openapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -349,17 +332,12 @@ The default server can also be overridden globally by passing a URL to the `serv
 package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
-import com.styra.opa.openapi.models.operations.*;
-import com.styra.opa.openapi.models.shared.*;
-import com.styra.opa.openapi.utils.EventStream;
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import com.styra.opa.openapi.models.errors.SDKError;
+import com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse;
+import com.styra.opa.openapi.models.shared.GzipAcceptEncoding;
+import com.styra.opa.openapi.models.shared.Input;
+import com.styra.opa.openapi.models.shared.Security;
+import java.lang.Exception;
 
 public class Application {
 
@@ -387,7 +365,7 @@ public class Application {
         } catch (com.styra.opa.openapi.models.errors.ServerError e) {
             // handle exception
             throw e;
-        } catch (com.styra.opa.openapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -417,17 +395,12 @@ Handling errors in this SDK should largely match your expectations.  All operati
 package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
-import com.styra.opa.openapi.models.operations.*;
-import com.styra.opa.openapi.models.shared.*;
-import com.styra.opa.openapi.utils.EventStream;
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import com.styra.opa.openapi.models.errors.SDKError;
+import com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse;
+import com.styra.opa.openapi.models.shared.GzipAcceptEncoding;
+import com.styra.opa.openapi.models.shared.Input;
+import com.styra.opa.openapi.models.shared.Security;
+import java.lang.Exception;
 
 public class Application {
 
@@ -454,7 +427,7 @@ public class Application {
         } catch (com.styra.opa.openapi.models.errors.ServerError e) {
             // handle exception
             throw e;
-        } catch (com.styra.opa.openapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -483,17 +456,12 @@ You can set the security parameters through the `security` builder method when i
 package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
-import com.styra.opa.openapi.models.operations.*;
-import com.styra.opa.openapi.models.shared.*;
-import com.styra.opa.openapi.utils.EventStream;
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import com.styra.opa.openapi.models.errors.SDKError;
+import com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse;
+import com.styra.opa.openapi.models.shared.GzipAcceptEncoding;
+import com.styra.opa.openapi.models.shared.Input;
+import com.styra.opa.openapi.models.shared.Security;
+import java.lang.Exception;
 
 public class Application {
 
@@ -520,7 +488,7 @@ public class Application {
         } catch (com.styra.opa.openapi.models.errors.ServerError e) {
             // handle exception
             throw e;
-        } catch (com.styra.opa.openapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
