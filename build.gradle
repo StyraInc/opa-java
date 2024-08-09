@@ -78,7 +78,7 @@ publishing {
         maven(MavenPublication) {
             groupId = 'com.styra'
             artifactId = 'opa'
-            version = '1.5.3'
+            version = '1.6.0'
 
             from components.java
 
@@ -130,7 +130,7 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.17.0'
     api 'com.fasterxml.jackson.core:jackson-core:2.17.0'
     implementation 'org.apache.httpcomponents:httpcore:4.4.16'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.0'
+    api 'com.fasterxml.jackson.core:jackson-databind:2.17.0'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.17.0'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.17.0'
     implementation 'org.openapitools:jackson-databind-nullable:0.2.6'

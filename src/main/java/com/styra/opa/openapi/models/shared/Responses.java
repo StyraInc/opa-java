@@ -4,28 +4,25 @@
 
 package com.styra.opa.openapi.models.shared;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.styra.opa.openapi.utils.Utils;
-import java.io.InputStream;
-import java.lang.Deprecated;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 
-import java.time.OffsetDateTime;
-import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.styra.opa.openapi.utils.OneOfDeserializer;
 import com.styra.opa.openapi.utils.TypedObject;
 import com.styra.opa.openapi.utils.Utils.JsonShape;
+import com.styra.opa.openapi.utils.Utils.TypeReferenceWithShape;
+import com.styra.opa.openapi.utils.Utils;
+import java.lang.Override;
+import java.lang.String;
+import java.lang.SuppressWarnings;
+import java.util.Objects;
 
 
 @JsonDeserialize(using = Responses._Deserializer.class)
 public class Responses {
 
-    @com.fasterxml.jackson.annotation.JsonValue
+    @JsonValue
     private TypedObject value;
     
     private Responses(TypedObject value) {
@@ -45,8 +42,8 @@ public class Responses {
     /**
      * Returns an instance of one of these types:
      * <ul>
-     * <li>{@code ResponsesSuccessfulPolicyResponse}</li>
-     * <li>{@code ServerError}</li>
+     * <li>{@code com.styra.opa.openapi.models.shared.ResponsesSuccessfulPolicyResponse}</li>
+     * <li>{@code com.styra.opa.openapi.models.shared.ServerError}</li>
      * </ul>
      * 
      * <p>Use {@code instanceof} to determine what type is returned. For example:
@@ -73,21 +70,21 @@ public class Responses {
             return false;
         }
         Responses other = (Responses) o;
-        return java.util.Objects.deepEquals(this.value.value(), other.value.value()); 
+        return Objects.deepEquals(this.value.value(), other.value.value()); 
     }
     
     @Override
     public int hashCode() {
-        return java.util.Objects.hash(value.value());
+        return Objects.hash(value.value());
     }
     
     @SuppressWarnings("serial")
-    public static final class _Deserializer extends com.styra.opa.openapi.utils.OneOfDeserializer<Responses> {
+    public static final class _Deserializer extends OneOfDeserializer<Responses> {
 
         public _Deserializer() {
             super(Responses.class,
-                  Utils.TypeReferenceWithShape.of(new TypeReference<ResponsesSuccessfulPolicyResponse>() {}, Utils.JsonShape.DEFAULT),
-                  Utils.TypeReferenceWithShape.of(new TypeReference<ServerError>() {}, Utils.JsonShape.DEFAULT));
+                  TypeReferenceWithShape.of(new TypeReference<com.styra.opa.openapi.models.shared.ResponsesSuccessfulPolicyResponse>() {}, JsonShape.DEFAULT),
+                  TypeReferenceWithShape.of(new TypeReference<com.styra.opa.openapi.models.shared.ServerError>() {}, JsonShape.DEFAULT));
         }
     }
     

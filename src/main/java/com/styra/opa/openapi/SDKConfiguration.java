@@ -4,10 +4,12 @@
 
 package com.styra.opa.openapi;
 
-import com.styra.opa.openapi.utils.Hook.SdkInitData;
+import com.styra.opa.openapi.hooks.SDKHooks;
 import com.styra.opa.openapi.utils.HTTPClient;
+import com.styra.opa.openapi.utils.Hook.SdkInitData;
+import com.styra.opa.openapi.utils.Hooks;
 import com.styra.opa.openapi.utils.RetryConfig;
-import com.styra.opa.openapi.models.shared.Security;
+import java.lang.String;
 import java.util.Optional;
 
 class SDKConfiguration {
@@ -17,26 +19,26 @@ class SDKConfiguration {
         return Optional.ofNullable(securitySource);
     }
     public HTTPClient defaultClient;
-      public String serverUrl;
+    public String serverUrl;
     public int serverIdx = 0;
     public String language = "java";
     public String openapiDocVersion = "0.2.0";
-    public String sdkVersion = "1.5.3";
-    public String genVersion = "2.386.2";
-    public String userAgent = "speakeasy-sdk/java 1.5.3 2.386.2 0.2.0 com.styra.opa.openapi";
+    public String sdkVersion = "1.6.0";
+    public String genVersion = "2.392.0";
+    public String userAgent = "speakeasy-sdk/java 1.6.0 2.392.0 0.2.0 com.styra.opa.openapi";
 
-    private com.styra.opa.openapi.utils.Hooks _hooks = createHooks();
+    private Hooks _hooks = createHooks();
 
-    private static com.styra.opa.openapi.utils.Hooks createHooks() {
-        com.styra.opa.openapi.utils.Hooks hooks = new com.styra.opa.openapi.utils.Hooks();
+    private static Hooks createHooks() {
+        Hooks hooks = new Hooks();
         return hooks;
     }
     
-    public com.styra.opa.openapi.utils.Hooks hooks() {
+    public Hooks hooks() {
         return _hooks;
     }
 
-    public void setHooks(com.styra.opa.openapi.utils.Hooks hooks) {
+    public void setHooks(Hooks hooks) {
         this._hooks = hooks;
     }
 
@@ -44,7 +46,7 @@ class SDKConfiguration {
      * Initializes state (for example hooks).
      **/
     public void initialize() {
-        com.styra.opa.openapi.hooks.SDKHooks.initialize(_hooks);
+        SDKHooks.initialize(_hooks);
         // apply the sdk init hook immediately
         SdkInitData data = _hooks.sdkInit(new SdkInitData(serverUrl, defaultClient));
         this.serverUrl = data.baseUrl();

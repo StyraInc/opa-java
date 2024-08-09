@@ -4,19 +4,21 @@
 
 package com.styra.opa.openapi.models.shared;
 
+
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.styra.opa.openapi.utils.Utils;
-import java.io.InputStream;
-import java.lang.Deprecated;
-import java.math.BigDecimal;
-import java.math.BigInteger;
+import java.lang.Object;
+import java.lang.Override;
+import java.lang.String;
+import java.lang.SuppressWarnings;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
+
 
 public class SuccessfulPolicyResponse {
 
@@ -32,14 +34,14 @@ public class SuccessfulPolicyResponse {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("metrics")
-    private Optional<? extends java.util.Map<String, java.lang.Object>> metrics;
+    private Optional<? extends Map<String, Object>> metrics;
 
     /**
      * If decision logging is enabled, this field contains a string that uniquely identifies the decision. The identifier will be included in the decision log event for this decision. Callers can use the identifier for correlation purposes.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("decision_id")
-    private Optional<? extends String> decisionId;
+    private Optional<String> decisionId;
 
     /**
      * Provenance information can be requested on individual API calls and are returned inline with the API response. To obtain provenance information on an API call, specify the `provenance=true` query parameter when executing the API call.
@@ -51,8 +53,8 @@ public class SuccessfulPolicyResponse {
     @JsonCreator
     public SuccessfulPolicyResponse(
             @JsonProperty("result") Optional<? extends Result> result,
-            @JsonProperty("metrics") Optional<? extends java.util.Map<String, java.lang.Object>> metrics,
-            @JsonProperty("decision_id") Optional<? extends String> decisionId,
+            @JsonProperty("metrics") Optional<? extends Map<String, Object>> metrics,
+            @JsonProperty("decision_id") Optional<String> decisionId,
             @JsonProperty("provenance") Optional<? extends Provenance> provenance) {
         Utils.checkNotNull(result, "result");
         Utils.checkNotNull(metrics, "metrics");
@@ -82,17 +84,16 @@ public class SuccessfulPolicyResponse {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<java.util.Map<String, java.lang.Object>> metrics() {
-        return (Optional<java.util.Map<String, java.lang.Object>>) metrics;
+    public Optional<Map<String, Object>> metrics() {
+        return (Optional<Map<String, Object>>) metrics;
     }
 
     /**
      * If decision logging is enabled, this field contains a string that uniquely identifies the decision. The identifier will be included in the decision log event for this decision. Callers can use the identifier for correlation purposes.
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<String> decisionId() {
-        return (Optional<String>) decisionId;
+        return decisionId;
     }
 
     /**
@@ -129,7 +130,7 @@ public class SuccessfulPolicyResponse {
     /**
      * If query metrics are enabled, this field contains query performance metrics collected during the parse, compile, and evaluation steps.
      */
-    public SuccessfulPolicyResponse withMetrics(java.util.Map<String, java.lang.Object> metrics) {
+    public SuccessfulPolicyResponse withMetrics(Map<String, Object> metrics) {
         Utils.checkNotNull(metrics, "metrics");
         this.metrics = Optional.ofNullable(metrics);
         return this;
@@ -138,7 +139,7 @@ public class SuccessfulPolicyResponse {
     /**
      * If query metrics are enabled, this field contains query performance metrics collected during the parse, compile, and evaluation steps.
      */
-    public SuccessfulPolicyResponse withMetrics(Optional<? extends java.util.Map<String, java.lang.Object>> metrics) {
+    public SuccessfulPolicyResponse withMetrics(Optional<? extends Map<String, Object>> metrics) {
         Utils.checkNotNull(metrics, "metrics");
         this.metrics = metrics;
         return this;
@@ -156,7 +157,7 @@ public class SuccessfulPolicyResponse {
     /**
      * If decision logging is enabled, this field contains a string that uniquely identifies the decision. The identifier will be included in the decision log event for this decision. Callers can use the identifier for correlation purposes.
      */
-    public SuccessfulPolicyResponse withDecisionId(Optional<? extends String> decisionId) {
+    public SuccessfulPolicyResponse withDecisionId(Optional<String> decisionId) {
         Utils.checkNotNull(decisionId, "decisionId");
         this.decisionId = decisionId;
         return this;
@@ -190,15 +191,15 @@ public class SuccessfulPolicyResponse {
         }
         SuccessfulPolicyResponse other = (SuccessfulPolicyResponse) o;
         return 
-            java.util.Objects.deepEquals(this.result, other.result) &&
-            java.util.Objects.deepEquals(this.metrics, other.metrics) &&
-            java.util.Objects.deepEquals(this.decisionId, other.decisionId) &&
-            java.util.Objects.deepEquals(this.provenance, other.provenance);
+            Objects.deepEquals(this.result, other.result) &&
+            Objects.deepEquals(this.metrics, other.metrics) &&
+            Objects.deepEquals(this.decisionId, other.decisionId) &&
+            Objects.deepEquals(this.provenance, other.provenance);
     }
     
     @Override
     public int hashCode() {
-        return java.util.Objects.hash(
+        return Objects.hash(
             result,
             metrics,
             decisionId,
@@ -218,9 +219,9 @@ public class SuccessfulPolicyResponse {
  
         private Optional<? extends Result> result = Optional.empty();
  
-        private Optional<? extends java.util.Map<String, java.lang.Object>> metrics = Optional.empty();
+        private Optional<? extends Map<String, Object>> metrics = Optional.empty();
  
-        private Optional<? extends String> decisionId = Optional.empty();
+        private Optional<String> decisionId = Optional.empty();
  
         private Optional<? extends Provenance> provenance = Optional.empty();  
         
@@ -249,7 +250,7 @@ public class SuccessfulPolicyResponse {
         /**
          * If query metrics are enabled, this field contains query performance metrics collected during the parse, compile, and evaluation steps.
          */
-        public Builder metrics(java.util.Map<String, java.lang.Object> metrics) {
+        public Builder metrics(Map<String, Object> metrics) {
             Utils.checkNotNull(metrics, "metrics");
             this.metrics = Optional.ofNullable(metrics);
             return this;
@@ -258,7 +259,7 @@ public class SuccessfulPolicyResponse {
         /**
          * If query metrics are enabled, this field contains query performance metrics collected during the parse, compile, and evaluation steps.
          */
-        public Builder metrics(Optional<? extends java.util.Map<String, java.lang.Object>> metrics) {
+        public Builder metrics(Optional<? extends Map<String, Object>> metrics) {
             Utils.checkNotNull(metrics, "metrics");
             this.metrics = metrics;
             return this;
@@ -276,7 +277,7 @@ public class SuccessfulPolicyResponse {
         /**
          * If decision logging is enabled, this field contains a string that uniquely identifies the decision. The identifier will be included in the decision log event for this decision. Callers can use the identifier for correlation purposes.
          */
-        public Builder decisionId(Optional<? extends String> decisionId) {
+        public Builder decisionId(Optional<String> decisionId) {
             Utils.checkNotNull(decisionId, "decisionId");
             this.decisionId = decisionId;
             return this;

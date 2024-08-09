@@ -4,16 +4,16 @@
 
 package com.styra.opa.openapi.models.operations;
 
+
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.styra.opa.openapi.models.shared.Input;
 import com.styra.opa.openapi.utils.Utils;
-import java.io.InputStream;
-import java.lang.Deprecated;
-import java.math.BigDecimal;
-import java.math.BigInteger;
+import java.lang.Override;
+import java.lang.String;
+import java.util.Objects;
+
 /**
  * ExecutePolicyWithInputRequestBody - The input document
  */
@@ -24,11 +24,11 @@ public class ExecutePolicyWithInputRequestBody {
      * Arbitrary JSON used within your policies by accessing `input`
      */
     @JsonProperty("input")
-    private com.styra.opa.openapi.models.shared.Input input;
+    private Input input;
 
     @JsonCreator
     public ExecutePolicyWithInputRequestBody(
-            @JsonProperty("input") com.styra.opa.openapi.models.shared.Input input) {
+            @JsonProperty("input") Input input) {
         Utils.checkNotNull(input, "input");
         this.input = input;
     }
@@ -37,7 +37,7 @@ public class ExecutePolicyWithInputRequestBody {
      * Arbitrary JSON used within your policies by accessing `input`
      */
     @JsonIgnore
-    public com.styra.opa.openapi.models.shared.Input input() {
+    public Input input() {
         return input;
     }
 
@@ -48,7 +48,7 @@ public class ExecutePolicyWithInputRequestBody {
     /**
      * Arbitrary JSON used within your policies by accessing `input`
      */
-    public ExecutePolicyWithInputRequestBody withInput(com.styra.opa.openapi.models.shared.Input input) {
+    public ExecutePolicyWithInputRequestBody withInput(Input input) {
         Utils.checkNotNull(input, "input");
         this.input = input;
         return this;
@@ -64,12 +64,12 @@ public class ExecutePolicyWithInputRequestBody {
         }
         ExecutePolicyWithInputRequestBody other = (ExecutePolicyWithInputRequestBody) o;
         return 
-            java.util.Objects.deepEquals(this.input, other.input);
+            Objects.deepEquals(this.input, other.input);
     }
     
     @Override
     public int hashCode() {
-        return java.util.Objects.hash(
+        return Objects.hash(
             input);
     }
     
@@ -81,7 +81,7 @@ public class ExecutePolicyWithInputRequestBody {
     
     public final static class Builder {
  
-        private com.styra.opa.openapi.models.shared.Input input;  
+        private Input input;  
         
         private Builder() {
           // force use of static builder() method
@@ -90,7 +90,7 @@ public class ExecutePolicyWithInputRequestBody {
         /**
          * Arbitrary JSON used within your policies by accessing `input`
          */
-        public Builder input(com.styra.opa.openapi.models.shared.Input input) {
+        public Builder input(Input input) {
             Utils.checkNotNull(input, "input");
             this.input = input;
             return this;

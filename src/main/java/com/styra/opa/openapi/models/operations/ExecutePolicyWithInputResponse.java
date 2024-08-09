@@ -4,19 +4,25 @@
 
 package com.styra.opa.openapi.models.operations;
 
+
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.styra.opa.openapi.models.shared.SuccessfulPolicyResponse;
+import com.styra.opa.openapi.utils.Response;
 import com.styra.opa.openapi.utils.Utils;
 import java.io.InputStream;
-import java.lang.Deprecated;
-import java.math.BigDecimal;
-import java.math.BigInteger;
+import java.lang.Integer;
+import java.lang.Override;
+import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.net.http.HttpResponse;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
-public class ExecutePolicyWithInputResponse implements com.styra.opa.openapi.utils.Response {
+
+public class ExecutePolicyWithInputResponse implements Response {
 
     /**
      * HTTP response content type for this operation
@@ -38,17 +44,17 @@ public class ExecutePolicyWithInputResponse implements com.styra.opa.openapi.uti
      * The server also returns 200 if the path refers to an undefined document. In this case, the response will not contain a result property.
      * 
      */
-    private Optional<? extends com.styra.opa.openapi.models.shared.SuccessfulPolicyResponse> successfulPolicyResponse;
+    private Optional<? extends SuccessfulPolicyResponse> successfulPolicyResponse;
 
-    private java.util.Map<String, java.util.List<String>> headers;
+    private Map<String, List<String>> headers;
 
     @JsonCreator
     public ExecutePolicyWithInputResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends com.styra.opa.openapi.models.shared.SuccessfulPolicyResponse> successfulPolicyResponse,
-            java.util.Map<String, java.util.List<String>> headers) {
+            Optional<? extends SuccessfulPolicyResponse> successfulPolicyResponse,
+            Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
@@ -65,7 +71,7 @@ public class ExecutePolicyWithInputResponse implements com.styra.opa.openapi.uti
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            java.util.Map<String, java.util.List<String>> headers) {
+            Map<String, List<String>> headers) {
         this(contentType, statusCode, rawResponse, Optional.empty(), headers);
     }
 
@@ -100,12 +106,12 @@ public class ExecutePolicyWithInputResponse implements com.styra.opa.openapi.uti
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<com.styra.opa.openapi.models.shared.SuccessfulPolicyResponse> successfulPolicyResponse() {
-        return (Optional<com.styra.opa.openapi.models.shared.SuccessfulPolicyResponse>) successfulPolicyResponse;
+    public Optional<SuccessfulPolicyResponse> successfulPolicyResponse() {
+        return (Optional<SuccessfulPolicyResponse>) successfulPolicyResponse;
     }
 
     @JsonIgnore
-    public java.util.Map<String, java.util.List<String>> headers() {
+    public Map<String, List<String>> headers() {
         return headers;
     }
 
@@ -145,7 +151,7 @@ public class ExecutePolicyWithInputResponse implements com.styra.opa.openapi.uti
      * The server also returns 200 if the path refers to an undefined document. In this case, the response will not contain a result property.
      * 
      */
-    public ExecutePolicyWithInputResponse withSuccessfulPolicyResponse(com.styra.opa.openapi.models.shared.SuccessfulPolicyResponse successfulPolicyResponse) {
+    public ExecutePolicyWithInputResponse withSuccessfulPolicyResponse(SuccessfulPolicyResponse successfulPolicyResponse) {
         Utils.checkNotNull(successfulPolicyResponse, "successfulPolicyResponse");
         this.successfulPolicyResponse = Optional.ofNullable(successfulPolicyResponse);
         return this;
@@ -156,13 +162,13 @@ public class ExecutePolicyWithInputResponse implements com.styra.opa.openapi.uti
      * The server also returns 200 if the path refers to an undefined document. In this case, the response will not contain a result property.
      * 
      */
-    public ExecutePolicyWithInputResponse withSuccessfulPolicyResponse(Optional<? extends com.styra.opa.openapi.models.shared.SuccessfulPolicyResponse> successfulPolicyResponse) {
+    public ExecutePolicyWithInputResponse withSuccessfulPolicyResponse(Optional<? extends SuccessfulPolicyResponse> successfulPolicyResponse) {
         Utils.checkNotNull(successfulPolicyResponse, "successfulPolicyResponse");
         this.successfulPolicyResponse = successfulPolicyResponse;
         return this;
     }
 
-    public ExecutePolicyWithInputResponse withHeaders(java.util.Map<String, java.util.List<String>> headers) {
+    public ExecutePolicyWithInputResponse withHeaders(Map<String, List<String>> headers) {
         Utils.checkNotNull(headers, "headers");
         this.headers = headers;
         return this;
@@ -178,16 +184,16 @@ public class ExecutePolicyWithInputResponse implements com.styra.opa.openapi.uti
         }
         ExecutePolicyWithInputResponse other = (ExecutePolicyWithInputResponse) o;
         return 
-            java.util.Objects.deepEquals(this.contentType, other.contentType) &&
-            java.util.Objects.deepEquals(this.statusCode, other.statusCode) &&
-            java.util.Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            java.util.Objects.deepEquals(this.successfulPolicyResponse, other.successfulPolicyResponse) &&
-            java.util.Objects.deepEquals(this.headers, other.headers);
+            Objects.deepEquals(this.contentType, other.contentType) &&
+            Objects.deepEquals(this.statusCode, other.statusCode) &&
+            Objects.deepEquals(this.rawResponse, other.rawResponse) &&
+            Objects.deepEquals(this.successfulPolicyResponse, other.successfulPolicyResponse) &&
+            Objects.deepEquals(this.headers, other.headers);
     }
     
     @Override
     public int hashCode() {
-        return java.util.Objects.hash(
+        return Objects.hash(
             contentType,
             statusCode,
             rawResponse,
@@ -213,9 +219,9 @@ public class ExecutePolicyWithInputResponse implements com.styra.opa.openapi.uti
  
         private HttpResponse<InputStream> rawResponse;
  
-        private Optional<? extends com.styra.opa.openapi.models.shared.SuccessfulPolicyResponse> successfulPolicyResponse = Optional.empty();
+        private Optional<? extends SuccessfulPolicyResponse> successfulPolicyResponse = Optional.empty();
  
-        private java.util.Map<String, java.util.List<String>> headers;  
+        private Map<String, List<String>> headers;  
         
         private Builder() {
           // force use of static builder() method
@@ -253,7 +259,7 @@ public class ExecutePolicyWithInputResponse implements com.styra.opa.openapi.uti
          * The server also returns 200 if the path refers to an undefined document. In this case, the response will not contain a result property.
          * 
          */
-        public Builder successfulPolicyResponse(com.styra.opa.openapi.models.shared.SuccessfulPolicyResponse successfulPolicyResponse) {
+        public Builder successfulPolicyResponse(SuccessfulPolicyResponse successfulPolicyResponse) {
             Utils.checkNotNull(successfulPolicyResponse, "successfulPolicyResponse");
             this.successfulPolicyResponse = Optional.ofNullable(successfulPolicyResponse);
             return this;
@@ -264,13 +270,13 @@ public class ExecutePolicyWithInputResponse implements com.styra.opa.openapi.uti
          * The server also returns 200 if the path refers to an undefined document. In this case, the response will not contain a result property.
          * 
          */
-        public Builder successfulPolicyResponse(Optional<? extends com.styra.opa.openapi.models.shared.SuccessfulPolicyResponse> successfulPolicyResponse) {
+        public Builder successfulPolicyResponse(Optional<? extends SuccessfulPolicyResponse> successfulPolicyResponse) {
             Utils.checkNotNull(successfulPolicyResponse, "successfulPolicyResponse");
             this.successfulPolicyResponse = successfulPolicyResponse;
             return this;
         }
 
-        public Builder headers(java.util.Map<String, java.util.List<String>> headers) {
+        public Builder headers(Map<String, List<String>> headers) {
             Utils.checkNotNull(headers, "headers");
             this.headers = headers;
             return this;

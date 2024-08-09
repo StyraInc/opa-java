@@ -5,18 +5,15 @@
 package com.styra.opa.openapi.models.errors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.styra.opa.openapi.utils.Utils;
-import java.io.InputStream;
-import java.lang.Deprecated;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.net.http.HttpResponse;
+import java.lang.Override;
+import java.lang.String;
+import java.lang.SuppressWarnings;
+import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -32,13 +29,13 @@ public class ClientError extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("errors")
-    private Optional<? extends java.util.List<Errors>> errors;
+    private Optional<? extends List<Errors>> errors;
 
     @JsonCreator
     public ClientError(
             @JsonProperty("code") String code,
             @JsonProperty("message") String message,
-            @JsonProperty("errors") Optional<? extends java.util.List<Errors>> errors) {
+            @JsonProperty("errors") Optional<? extends List<Errors>> errors) {
         Utils.checkNotNull(code, "code");
         Utils.checkNotNull(message, "message");
         Utils.checkNotNull(errors, "errors");
@@ -61,8 +58,9 @@ public class ClientError extends RuntimeException {
         return message;
     }
 
-    public Optional<? extends java.util.List<Errors>> errors(){
-        return errors;
+    @SuppressWarnings("unchecked")
+    public Optional<List<Errors>> errors(){
+        return (Optional<List<Errors>>) errors;
     }
     
     public final static Builder builder() {
@@ -81,13 +79,13 @@ public class ClientError extends RuntimeException {
         return this;
     }
 
-    public ClientError withErrors(java.util.List<Errors> errors) {
+    public ClientError withErrors(List<Errors> errors) {
         Utils.checkNotNull(errors, "errors");
         this.errors = Optional.ofNullable(errors);
         return this;
     }
     
-    public ClientError withErrors(Optional<? extends java.util.List<Errors>> errors) {
+    public ClientError withErrors(Optional<? extends List<Errors>> errors) {
         Utils.checkNotNull(errors, "errors");
         this.errors = errors;
         return this;
@@ -103,9 +101,9 @@ public class ClientError extends RuntimeException {
         }
         ClientError other = (ClientError) o;
         return
-            java.util.Objects.deepEquals(this.code, other.code) &&
-            java.util.Objects.deepEquals(this.message, other.message) &&
-            java.util.Objects.deepEquals(this.errors, other.errors);
+            Objects.deepEquals(this.code, other.code) &&
+            Objects.deepEquals(this.message, other.message) &&
+            Objects.deepEquals(this.errors, other.errors);
     }
 
     @Override
@@ -130,7 +128,7 @@ public class ClientError extends RuntimeException {
 
         private String message;
 
-        private Optional<? extends java.util.List<Errors>> errors = Optional.empty();
+        private Optional<? extends List<Errors>> errors = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -148,13 +146,13 @@ public class ClientError extends RuntimeException {
             return this;
         }
 
-        public Builder errors(java.util.List<Errors> errors) {
+        public Builder errors(List<Errors> errors) {
             Utils.checkNotNull(errors, "errors");
             this.errors = Optional.ofNullable(errors);
             return this;
         }
         
-        public Builder errors(Optional<? extends java.util.List<Errors>> errors) {
+        public Builder errors(Optional<? extends List<Errors>> errors) {
             Utils.checkNotNull(errors, "errors");
             this.errors = errors;
             return this;
