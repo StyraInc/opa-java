@@ -182,7 +182,7 @@ extends java.lang.Object</pre>
 <tr class="rowColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.util.Optional,java.util.Optional,java.util.Optional,java.util.Optional)">SuccessfulPolicyResponse</a></span>&#8203;(java.util.Optional&lt;? extends <a href="Result.html" title="class in com.styra.opa.openapi.models.shared">Result</a>&gt;&nbsp;result,
                         java.util.Optional&lt;? extends java.util.Map&lt;java.lang.String,&#8203;java.lang.Object&gt;&gt;&nbsp;metrics,
-                        java.util.Optional&lt;? extends java.lang.String&gt;&nbsp;decisionId,
+                        java.util.Optional&lt;java.lang.String&gt;&nbsp;decisionId,
                         java.util.Optional&lt;? extends <a href="Provenance.html" title="class in com.styra.opa.openapi.models.shared">Provenance</a>&gt;&nbsp;provenance)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -261,7 +261,7 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code><a href="SuccessfulPolicyResponse.html" title="class in com.styra.opa.openapi.models.shared">SuccessfulPolicyResponse</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withDecisionId(java.util.Optional)">withDecisionId</a></span>&#8203;(java.util.Optional&lt;? extends java.lang.String&gt;&nbsp;decisionId)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withDecisionId(java.util.Optional)">withDecisionId</a></span>&#8203;(java.util.Optional&lt;java.lang.String&gt;&nbsp;decisionId)</code></th>
 <td class="colLast">
 <div class="block">If decision logging is enabled, this field contains a string that uniquely identifies the decision.</div>
 </td>
@@ -340,7 +340,7 @@ extends java.lang.Object</pre>
 <h4>SuccessfulPolicyResponse</h4>
 <pre>public&nbsp;SuccessfulPolicyResponse&#8203;(java.util.Optional&lt;? extends <a href="Result.html" title="class in com.styra.opa.openapi.models.shared">Result</a>&gt;&nbsp;result,
                                 java.util.Optional&lt;? extends java.util.Map&lt;java.lang.String,&#8203;java.lang.Object&gt;&gt;&nbsp;metrics,
-                                java.util.Optional&lt;? extends java.lang.String&gt;&nbsp;decisionId,
+                                java.util.Optional&lt;java.lang.String&gt;&nbsp;decisionId,
                                 java.util.Optional&lt;? extends <a href="Provenance.html" title="class in com.styra.opa.openapi.models.shared">Provenance</a>&gt;&nbsp;provenance)</pre>
 </li>
 </ul>
@@ -468,7 +468,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>withDecisionId</h4>
-<pre class="methodSignature">public&nbsp;<a href="SuccessfulPolicyResponse.html" title="class in com.styra.opa.openapi.models.shared">SuccessfulPolicyResponse</a>&nbsp;withDecisionId&#8203;(java.util.Optional&lt;? extends java.lang.String&gt;&nbsp;decisionId)</pre>
+<pre class="methodSignature">public&nbsp;<a href="SuccessfulPolicyResponse.html" title="class in com.styra.opa.openapi.models.shared">SuccessfulPolicyResponse</a>&nbsp;withDecisionId&#8203;(java.util.Optional&lt;java.lang.String&gt;&nbsp;decisionId)</pre>
 <div class="block">If decision logging is enabled, this field contains a string that uniquely identifies the decision. The identifier will be included in the decision log event for this decision. Callers can use the identifier for correlation purposes.</div>
 </li>
 </ul>

@@ -125,35 +125,35 @@
 <tbody>
 <tr>
 <td><code>result</code></td>
-<td><a href="../Result/">Optional&lt;? extends com.styra.opa.openapi.models.shared.Result&gt;</a></td>
+<td><a href="../Result/">Optional<Result></a></td>
 <td>:heavy_minus_sign:</td>
 <td>The base or virtual document referred to by the URL path. If the path is undefined, this key will be omitted.</td>
 <td></td>
 </tr>
 <tr>
 <td><code>metrics</code></td>
-<td>Map<String, *java.lang.Object*></td>
+<td>Map<String, *Object*></td>
 <td>:heavy_minus_sign:</td>
 <td>If query metrics are enabled, this field contains query performance metrics collected during the parse, compile, and evaluation steps.</td>
 <td></td>
 </tr>
 <tr>
 <td><code>decisionId</code></td>
-<td><em>Optional&lt;? extends String&gt;</em></td>
+<td><em>Optional<String></em></td>
 <td>:heavy_minus_sign:</td>
 <td>If decision logging is enabled, this field contains a string that uniquely identifies the decision. The identifier will be included in the decision log event for this decision. Callers can use the identifier for correlation purposes.</td>
 <td></td>
 </tr>
 <tr>
 <td><code>provenance</code></td>
-<td><a href="../Provenance/">Optional&lt;? extends com.styra.opa.openapi.models.shared.Provenance&gt;</a></td>
+<td><a href="../Provenance/">Optional<Provenance></a></td>
 <td>:heavy_minus_sign:</td>
 <td>Provenance information can be requested on individual API calls and are returned inline with the API response. To obtain provenance information on an API call, specify the <code>provenance=true</code> query parameter when executing the API call.</td>
 <td></td>
 </tr>
 <tr>
 <td><code>httpStatusCode</code></td>
-<td><em>Optional&lt;? extends String&gt;</em></td>
+<td><em>Optional<String></em></td>
 <td>:heavy_minus_sign:</td>
 <td>N/A</td>
 <td>200</td>

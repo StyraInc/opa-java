@@ -148,17 +148,12 @@
 <pre><code class="language-java">package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
-import com.styra.opa.openapi.models.operations.*;
-import com.styra.opa.openapi.models.shared.*;
-import com.styra.opa.openapi.utils.EventStream;
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import com.styra.opa.openapi.models.errors.SDKError;
+import com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse;
+import com.styra.opa.openapi.models.shared.GzipAcceptEncoding;
+import com.styra.opa.openapi.models.shared.Input;
+import com.styra.opa.openapi.models.shared.Security;
+import java.lang.Exception;
 
 public class Application {
 
@@ -185,7 +180,7 @@ public class Application {
         } catch (com.styra.opa.openapi.models.errors.ServerError e) {
             // handle exception
             throw e;
-        } catch (com.styra.opa.openapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -209,26 +204,26 @@ public class Application {
 <tbody>
 <tr>
 <td><code>pretty</code></td>
-<td><em>Optional&lt;? extends Boolean&gt;</em></td>
+<td><em>Optional<Boolean></em></td>
 <td>:heavy_minus_sign:</td>
 <td>If parameter is <code>true</code>, response will formatted for humans.</td>
 </tr>
 <tr>
 <td><code>acceptEncoding</code></td>
-<td><a href="../../models/shared/GzipAcceptEncoding/">Optional&lt;? extends com.styra.opa.openapi.models.shared.GzipAcceptEncoding&gt;</a></td>
+<td><a href="../../models/shared/GzipAcceptEncoding/">Optional<GzipAcceptEncoding></a></td>
 <td>:heavy_minus_sign:</td>
 <td>Indicates the server should respond with a gzip encoded body. The server will send the compressed response only if its length is above <code>server.encoding.gzip.min_length</code> value. See the configuration section</td>
 </tr>
 <tr>
 <td><code>input</code></td>
-<td><a href="../../models/shared/Input/">com.styra.opa.openapi.models.shared.Input</a></td>
+<td><a href="../../models/shared/Input/">Input</a></td>
 <td>:heavy_check_mark:</td>
 <td>The input document</td>
 </tr>
 </tbody>
 </table>
 <h3 id="response">Response</h3>
-<p><strong><a href="../../models/operations/ExecuteDefaultPolicyWithInputResponse/">com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse</a></strong></p>
+<p><strong><a href="../../models/operations/ExecuteDefaultPolicyWithInputResponse/">ExecuteDefaultPolicyWithInputResponse</a></strong></p>
 <h3 id="errors">Errors</h3>
 <table>
 <thead>
@@ -262,17 +257,11 @@ public class Application {
 <pre><code class="language-java">package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
-import com.styra.opa.openapi.models.operations.*;
-import com.styra.opa.openapi.models.shared.*;
-import com.styra.opa.openapi.utils.EventStream;
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import com.styra.opa.openapi.models.errors.SDKError;
+import com.styra.opa.openapi.models.operations.ExecutePolicyRequest;
+import com.styra.opa.openapi.models.operations.ExecutePolicyResponse;
+import com.styra.opa.openapi.models.shared.Security;
+import java.lang.Exception;
 
 public class Application {
 
@@ -301,7 +290,7 @@ public class Application {
         } catch (com.styra.opa.openapi.models.errors.ServerError e) {
             // handle exception
             throw e;
-        } catch (com.styra.opa.openapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -325,14 +314,14 @@ public class Application {
 <tbody>
 <tr>
 <td><code>request</code></td>
-<td><a href="../../models/operations/ExecutePolicyRequest/">com.styra.opa.openapi.models.operations.ExecutePolicyRequest</a></td>
+<td><a href="../../models/operations/ExecutePolicyRequest/">ExecutePolicyRequest</a></td>
 <td>:heavy_check_mark:</td>
 <td>The request object to use for the request.</td>
 </tr>
 </tbody>
 </table>
 <h3 id="response_1">Response</h3>
-<p><strong><a href="../../models/operations/ExecutePolicyResponse/">com.styra.opa.openapi.models.operations.ExecutePolicyResponse</a></strong></p>
+<p><strong><a href="../../models/operations/ExecutePolicyResponse/">ExecutePolicyResponse</a></strong></p>
 <h3 id="errors_1">Errors</h3>
 <table>
 <thead>
@@ -366,17 +355,13 @@ public class Application {
 <pre><code class="language-java">package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
-import com.styra.opa.openapi.models.operations.*;
-import com.styra.opa.openapi.models.shared.*;
-import com.styra.opa.openapi.utils.EventStream;
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import com.styra.opa.openapi.models.errors.SDKError;
+import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequest;
+import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequestBody;
+import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputResponse;
+import com.styra.opa.openapi.models.shared.Input;
+import com.styra.opa.openapi.models.shared.Security;
+import java.lang.Exception;
 
 public class Application {
 
@@ -408,7 +393,7 @@ public class Application {
         } catch (com.styra.opa.openapi.models.errors.ServerError e) {
             // handle exception
             throw e;
-        } catch (com.styra.opa.openapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -432,14 +417,14 @@ public class Application {
 <tbody>
 <tr>
 <td><code>request</code></td>
-<td><a href="../../models/operations/ExecutePolicyWithInputRequest/">com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequest</a></td>
+<td><a href="../../models/operations/ExecutePolicyWithInputRequest/">ExecutePolicyWithInputRequest</a></td>
 <td>:heavy_check_mark:</td>
 <td>The request object to use for the request.</td>
 </tr>
 </tbody>
 </table>
 <h3 id="response_2">Response</h3>
-<p><strong><a href="../../models/operations/ExecutePolicyWithInputResponse/">com.styra.opa.openapi.models.operations.ExecutePolicyWithInputResponse</a></strong></p>
+<p><strong><a href="../../models/operations/ExecutePolicyWithInputResponse/">ExecutePolicyWithInputResponse</a></strong></p>
 <h3 id="errors_2">Errors</h3>
 <table>
 <thead>
@@ -473,17 +458,14 @@ public class Application {
 <pre><code class="language-java">package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
-import com.styra.opa.openapi.models.operations.*;
-import com.styra.opa.openapi.models.shared.*;
-import com.styra.opa.openapi.utils.EventStream;
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import com.styra.opa.openapi.models.errors.SDKError;
+import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequest;
+import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequestBody;
+import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputResponse;
+import com.styra.opa.openapi.models.shared.Input;
+import com.styra.opa.openapi.models.shared.Security;
+import java.lang.Exception;
+import java.util.Map;
 
 public class Application {
 
@@ -498,8 +480,8 @@ public class Application {
             ExecuteBatchPolicyWithInputRequest req = ExecuteBatchPolicyWithInputRequest.builder()
                 .path(&quot;app/rbac&quot;)
                 .requestBody(ExecuteBatchPolicyWithInputRequestBody.builder()
-                        .inputs(java.util.Map.ofEntries(
-                                entry(&quot;key&quot;, Input.of(&quot;&lt;value&gt;&quot;))))
+                        .inputs(Map.ofEntries(
+                                Map.entry(&quot;key&quot;, Input.of(&quot;&lt;value&gt;&quot;))))
                         .build())
                 .build();
 
@@ -516,7 +498,7 @@ public class Application {
         } catch (com.styra.opa.openapi.models.errors.BatchServerError e) {
             // handle exception
             throw e;
-        } catch (com.styra.opa.openapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -540,14 +522,14 @@ public class Application {
 <tbody>
 <tr>
 <td><code>request</code></td>
-<td><a href="../../models/operations/ExecuteBatchPolicyWithInputRequest/">com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequest</a></td>
+<td><a href="../../models/operations/ExecuteBatchPolicyWithInputRequest/">ExecuteBatchPolicyWithInputRequest</a></td>
 <td>:heavy_check_mark:</td>
 <td>The request object to use for the request.</td>
 </tr>
 </tbody>
 </table>
 <h3 id="response_3">Response</h3>
-<p><strong><a href="../../models/operations/ExecuteBatchPolicyWithInputResponse/">com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputResponse</a></strong></p>
+<p><strong><a href="../../models/operations/ExecuteBatchPolicyWithInputResponse/">ExecuteBatchPolicyWithInputResponse</a></strong></p>
 <h3 id="errors_3">Errors</h3>
 <table>
 <thead>
@@ -581,17 +563,11 @@ public class Application {
 <pre><code class="language-java">package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
-import com.styra.opa.openapi.models.operations.*;
-import com.styra.opa.openapi.models.shared.*;
-import com.styra.opa.openapi.utils.EventStream;
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import com.styra.opa.openapi.models.errors.SDKError;
+import com.styra.opa.openapi.models.operations.HealthResponse;
+import com.styra.opa.openapi.models.shared.Security;
+import java.lang.Exception;
+import java.util.List;
 
 public class Application {
 
@@ -606,7 +582,7 @@ public class Application {
             HealthResponse res = sdk.health()
                 .bundles(false)
                 .plugins(false)
-                .excludePlugin(java.util.List.of(
+                .excludePlugin(List.of(
                     &quot;&lt;value&gt;&quot;))
                 .call();
 
@@ -616,7 +592,7 @@ public class Application {
         } catch (com.styra.opa.openapi.models.errors.UnhealthyServer e) {
             // handle exception
             throw e;
-        } catch (com.styra.opa.openapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -640,13 +616,13 @@ public class Application {
 <tbody>
 <tr>
 <td><code>bundles</code></td>
-<td><em>Optional&lt;? extends Boolean&gt;</em></td>
+<td><em>Optional<Boolean></em></td>
 <td>:heavy_minus_sign:</td>
 <td>Boolean parameter to account for bundle activation status in response. This includes any discovery bundles or bundles defined in the loaded discovery configuration.</td>
 </tr>
 <tr>
 <td><code>plugins</code></td>
-<td><em>Optional&lt;? extends Boolean&gt;</em></td>
+<td><em>Optional<Boolean></em></td>
 <td>:heavy_minus_sign:</td>
 <td>Boolean parameter to account for plugin status in response.</td>
 </tr>
@@ -659,7 +635,7 @@ public class Application {
 </tbody>
 </table>
 <h3 id="response_4">Response</h3>
-<p><strong><a href="../../models/operations/HealthResponse/">com.styra.opa.openapi.models.operations.HealthResponse</a></strong></p>
+<p><strong><a href="../../models/operations/HealthResponse/">HealthResponse</a></strong></p>
 <h3 id="errors_4">Errors</h3>
 <table>
 <thead>
