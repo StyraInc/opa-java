@@ -6,13 +6,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.styra.opa.openapi.OpaApiClient;
 import com.styra.opa.openapi.models.errors.SDKError;
 import com.styra.opa.openapi.models.errors.ServerError;
+import com.styra.opa.openapi.models.shared.ServerErrorWithStatusCode;
 import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequest;
 import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequestBody;
 import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputResponse;
 import com.styra.opa.openapi.models.shared.BatchMixedResults;
 import com.styra.opa.openapi.models.shared.BatchSuccessfulPolicyEvaluation;
 import com.styra.opa.openapi.models.shared.Responses;
-import com.styra.opa.openapi.models.shared.ResponsesSuccessfulPolicyResponse;
+import com.styra.opa.openapi.models.shared.SuccessfulPolicyResponseWithStatusCode;
 import com.styra.opa.openapi.models.shared.Result;
 import com.styra.opa.openapi.models.shared.SuccessfulPolicyResponse;
 import com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputRequest;
@@ -798,7 +799,8 @@ public class OPAClient {
             iMap.put(entry.getKey(), converted);
         }
 
-        return executePolicyBatch(iMap, path, true);
+        // TODO: expose rejectMixed
+        return executePolicyBatch(iMap, path, false);
     }
 
     private Map<String, OPAResult> executePolicyBatch(Map<String, Input> inputs, String path, boolean rejectMixed) throws OPAException {
@@ -841,23 +843,23 @@ public class OPAClient {
 
             for (Map.Entry<String, Responses> entry : resps.entrySet()) {
                 Object responsesValue = entry.getValue();
-                if ((!(responsesValue instanceof ServerError)) && (!(responsesValue instanceof ResponsesSuccessfulPolicyResponse))) {
+                if ((!(responsesValue instanceof ServerErrorWithStatusCode)) && (!(responsesValue instanceof SuccessfulPolicyResponseWithStatusCode))) {
                     // If this ever happens, then the SE-generated code has
                     // changed in an incompatible way.
                     throw new OPAException(String.format("unexpected response type '%s', this should never happen", responsesValue.getClass().getSimpleName()));
                 }
 
-                if ((responsesValue instanceof ServerError) && (rejectMixed)) {
-                        throw new OPAException("OPA error in batch response", (ServerError) responsesValue);
+                if ((responsesValue instanceof ServerErrorWithStatusCode) && (rejectMixed)) {
+                        throw new OPAException("OPA error in batch response", convertStatusCodeError((ServerErrorWithStatusCode) responsesValue));
                 }
 
-                if ((responsesValue instanceof ServerError) && (!rejectMixed)) {
-                    out.put(entry.getKey(), new OPAResult(null, new OPAException("OPA error in batch response", (ServerError) responsesValue)));
+                if ((responsesValue instanceof ServerErrorWithStatusCode) && (!rejectMixed)) {
+                    out.put(entry.getKey(), new OPAResult(null, new OPAException("OPA error in batch response", convertStatusCodeError((ServerErrorWithStatusCode) responsesValue))));
                     continue;
                 }
 
-                if (responsesValue instanceof ResponsesSuccessfulPolicyResponse) {
-                    Optional<Result> resultBox = ((ResponsesSuccessfulPolicyResponse) responsesValue).result();
+                if (responsesValue instanceof SuccessfulPolicyResponseWithStatusCode) {
+                    Optional<Result> resultBox = ((SuccessfulPolicyResponseWithStatusCode) responsesValue).result();
                     if (!resultBox.isPresent()) {
                         continue;
                     }
@@ -902,4 +904,26 @@ public class OPAClient {
 
         return out;
     }
+
+    /**
+     * Creates a ServerError from a ServerErrorWithStatusCode, because the
+     * former is throwable and the latter is not.
+     *
+     * @param err
+     * @return
+     */
+    private static ServerError convertStatusCodeError(ServerErrorWithStatusCode err) {
+        // TODO: need to convert error list type
+        //return new ServerError(
+        //    err.code(),
+        //    err.message(),
+        //    err.errors(),
+        //    err.decisionId()
+        //);
+        return new ServerError(
+            err.code(),
+            err.message()
+        );
+    }
+
 }

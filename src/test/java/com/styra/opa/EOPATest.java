@@ -202,6 +202,9 @@ class EOPATest {
         }
     }
 
+    // TODO: once rejectMixed is properly exposed, we should test if its true
+    // and if its false
+
     @Test
     public void testEOPAEvaluateBatchMixed() {
         OPAClient opa = new OPAClient(eopaAddress, headers);
@@ -210,6 +213,8 @@ class EOPATest {
             entry("job2", Map.ofEntries(entry("bbb", "222")))
         );
         Map<String, OPAResult> result = Map.ofEntries();
+
+        // TODO: need to correctly represent and test for the failure case
         Map<String, Object> expect = Map.ofEntries(
             entry("job1", Map.ofEntries(entry("aaa", "111"))),
             entry("job2", Map.ofEntries(entry("bbb", "222")))

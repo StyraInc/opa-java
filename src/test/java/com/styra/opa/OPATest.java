@@ -527,6 +527,8 @@ class OPATest {
         assertEquals(expect, result);
     }
 
+    // TODO: should test opa batch fallback with mixed results
+
     @Test
     public void testOPAEvaluateBatchFallback() {
         OPAClient opa = new OPAClient(address, headers);
