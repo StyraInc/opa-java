@@ -6,16 +6,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.styra.opa.openapi.OpaApiClient;
 import com.styra.opa.openapi.models.errors.SDKError;
 import com.styra.opa.openapi.models.errors.ServerError;
-import com.styra.opa.openapi.models.shared.ServerErrorWithStatusCode;
+import com.styra.opa.openapi.models.errors.ServerErrorErrors;
+import com.styra.opa.openapi.models.errors.ServerErrorLocation;
 import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequest;
 import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequestBody;
 import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputResponse;
-import com.styra.opa.openapi.models.shared.BatchMixedResults;
-import com.styra.opa.openapi.models.shared.BatchSuccessfulPolicyEvaluation;
-import com.styra.opa.openapi.models.shared.Responses;
-import com.styra.opa.openapi.models.shared.SuccessfulPolicyResponseWithStatusCode;
-import com.styra.opa.openapi.models.shared.Result;
-import com.styra.opa.openapi.models.shared.SuccessfulPolicyResponse;
 import com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputRequest;
 import com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse;
 import com.styra.opa.openapi.models.operations.ExecutePolicyRequest;
@@ -23,16 +18,26 @@ import com.styra.opa.openapi.models.operations.ExecutePolicyResponse;
 import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequest;
 import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequestBody;
 import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputResponse;
+import com.styra.opa.openapi.models.shared.BatchMixedResults;
+import com.styra.opa.openapi.models.shared.BatchSuccessfulPolicyEvaluation;
+import com.styra.opa.openapi.models.shared.Errors;
 import com.styra.opa.openapi.models.shared.Explain;
 import com.styra.opa.openapi.models.shared.Input;
+import com.styra.opa.openapi.models.shared.Location;
+import com.styra.opa.openapi.models.shared.Responses;
+import com.styra.opa.openapi.models.shared.Result;
+import com.styra.opa.openapi.models.shared.ServerErrorWithStatusCode;
+import com.styra.opa.openapi.models.shared.SuccessfulPolicyResponse;
+import com.styra.opa.openapi.models.shared.SuccessfulPolicyResponseWithStatusCode;
 import com.styra.opa.openapi.utils.HTTPClient;
 import com.styra.opa.utils.OPAHTTPClient;
 
-import java.util.Map;
-import java.util.Optional;
-import java.util.List;
-import java.util.Map.Entry;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Optional;
 
 /**
  * The OPA class contains all the functionality and configuration needed to
@@ -62,7 +67,7 @@ public class OPAClient {
 
     // The first time a batch request fails, we trip this and subsequently
     // always use the fallback method.
-    private boolean enableBatchFallback = false;
+    private boolean enableBatchFallback; // implicitly initialized to false
 
     /**
      * Default OPA server URL to connect to.
@@ -740,7 +745,7 @@ public class OPAClient {
      * but does not immediately handle the result, instead packing it into an
      * OPAResult similar to how the batch evaluation methods work. This means
      * that final output type conversion as well as throwing of any exceptions
-     * that occurred during policy evaluation is delayed until OPAResult.get()
+     * that occurred during policy evaluation is deferred until OPAResult.get()
      * is used.
      *
      * @param path
@@ -789,21 +794,50 @@ public class OPAClient {
         }
     }
 
-
+    /**
+     * Shorthand for evaluateBatch(path, input, true).
+     *
+     * @param path
+     * @param input
+     * @return
+     * @throws OPAException
+     */
     public Map<String, OPAResult> evaluateBatch(String path, Map<String, Object> input) throws OPAException {
+        return evaluateBatch(path, input, true);
+    }
 
-        HashMap<String, Input> iMap = new HashMap<String, Input>();
+    /**
+     * Evaluate a batch of multiple different inputs and paths at once using
+     * Enterprise OPA's batch API. If this method is used while connected to a
+     * standard OPA, it will transparently fall back to sequential scalar
+     * evaluation calls.
+     *
+     * @param path
+     * @param input
+     * @param rejectMixed if true, any request in the batch failing causes an exception to be thrown immediately
+     * @return
+     * @throws OPAException
+     */
+    public Map<String, OPAResult> evaluateBatch(
+        String path,
+        Map<String, Object> input,
+        boolean rejectMixed
+    ) throws OPAException {
+        Map<String, Input> iMap = new HashMap<String, Input>();
         ObjectMapper om = new ObjectMapper();
         for (Map.Entry<String, Object> entry : input.entrySet()) {
             Input converted = Input.of(om.convertValue(entry.getValue(), new TypeReference<Map<String, Object>>() {}));
             iMap.put(entry.getKey(), converted);
         }
 
-        // TODO: expose rejectMixed
-        return executePolicyBatch(iMap, path, false);
+        return executePolicyBatch(iMap, path, rejectMixed);
     }
 
-    private Map<String, OPAResult> executePolicyBatch(Map<String, Input> inputs, String path, boolean rejectMixed) throws OPAException {
+    private Map<String, OPAResult> executePolicyBatch(
+        Map<String, Input> inputs,
+        String path,
+        boolean rejectMixed
+    ) throws OPAException {
 
         if (this.enableBatchFallback) {
             return this.executePolicyBatchFallback(inputs, path, rejectMixed);
@@ -833,7 +867,7 @@ public class OPAClient {
             throw new OPAException(msg, e);
         }
 
-        HashMap<String, OPAResult> out = new HashMap<String, OPAResult>();
+        Map<String, OPAResult> out = new HashMap<String, OPAResult>();
         Optional<BatchMixedResults> mrbox = resp.batchMixedResults();
         Optional<BatchSuccessfulPolicyEvaluation> sbox = resp.batchSuccessfulPolicyEvaluation();
 
@@ -843,18 +877,38 @@ public class OPAClient {
 
             for (Map.Entry<String, Responses> entry : resps.entrySet()) {
                 Object responsesValue = entry.getValue();
-                if ((!(responsesValue instanceof ServerErrorWithStatusCode)) && (!(responsesValue instanceof SuccessfulPolicyResponseWithStatusCode))) {
+                if (
+                        !(responsesValue instanceof ServerErrorWithStatusCode)
+                        && !(responsesValue instanceof SuccessfulPolicyResponseWithStatusCode)
+                ) {
                     // If this ever happens, then the SE-generated code has
                     // changed in an incompatible way.
-                    throw new OPAException(String.format("unexpected response type '%s', this should never happen", responsesValue.getClass().getSimpleName()));
+                    throw new OPAException(
+                        String.format(
+                            "unexpected response type '%s', this should never happen",
+                            responsesValue.getClass().getSimpleName()
+                        )
+                    );
                 }
 
-                if ((responsesValue instanceof ServerErrorWithStatusCode) && (rejectMixed)) {
-                        throw new OPAException("OPA error in batch response", convertStatusCodeError((ServerErrorWithStatusCode) responsesValue));
+                if (responsesValue instanceof ServerErrorWithStatusCode && rejectMixed) {
+                    throw new OPAException(
+                        "OPA error in batch response",
+                        convertStatusCodeError((ServerErrorWithStatusCode) responsesValue)
+                    );
                 }
 
-                if ((responsesValue instanceof ServerErrorWithStatusCode) && (!rejectMixed)) {
-                    out.put(entry.getKey(), new OPAResult(null, new OPAException("OPA error in batch response", convertStatusCodeError((ServerErrorWithStatusCode) responsesValue))));
+                if (responsesValue instanceof ServerErrorWithStatusCode && !rejectMixed) {
+                    out.put(
+                        entry.getKey(),
+                        new OPAResult(
+                            null,
+                            new OPAException(
+                                "OPA error in batch response",
+                                convertStatusCodeError((ServerErrorWithStatusCode) responsesValue)
+                            )
+                        )
+                    );
                     continue;
                 }
 
@@ -886,9 +940,11 @@ public class OPAClient {
         return out;
     }
 
-    private Map<String, OPAResult> executePolicyBatchFallback(Map<String, Input> inputs, String path, boolean rejectMixed) throws OPAException {
-
-        HashMap<String, OPAResult> out = new HashMap<String, OPAResult>();
+    private Map<String, OPAResult> executePolicyBatchFallback(
+        Map<String, Input> inputs,
+        String path, boolean rejectMixed
+    ) throws OPAException {
+        Map<String, OPAResult> out = new HashMap<String, OPAResult>();
 
         for (Map.Entry<String, Input> entry : inputs.entrySet()) {
             try {
@@ -905,6 +961,26 @@ public class OPAClient {
         return out;
     }
 
+    private static Optional<ServerErrorLocation> convertErrorLocation(Optional<Location> loc) {
+        if (loc.isPresent()) {
+            return Optional.of(new ServerErrorLocation(loc.get().file(), loc.get().row(), loc.get().col()));
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    private static Optional<List<ServerErrorErrors>> convertErrorList(Optional<List<Errors>> errs) {
+        if (errs.isPresent()) {
+            ArrayList<ServerErrorErrors> out = new ArrayList<ServerErrorErrors>();
+            for (Errors e : errs.get()) {
+                out.add(new ServerErrorErrors(e.code(), e.message(), convertErrorLocation(e.location())));
+            }
+            return Optional.of(out);
+        } else {
+            return Optional.empty();
+        }
+    }
+
     /**
      * Creates a ServerError from a ServerErrorWithStatusCode, because the
      * former is throwable and the latter is not.
@@ -913,16 +989,11 @@ public class OPAClient {
      * @return
      */
     private static ServerError convertStatusCodeError(ServerErrorWithStatusCode err) {
-        // TODO: need to convert error list type
-        //return new ServerError(
-        //    err.code(),
-        //    err.message(),
-        //    err.errors(),
-        //    err.decisionId()
-        //);
         return new ServerError(
             err.code(),
-            err.message()
+            err.message(),
+            convertErrorList(err.errors()),
+            err.decisionId()
         );
     }
 

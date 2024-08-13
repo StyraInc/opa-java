@@ -85,7 +85,6 @@ public class OPAResult {
         return typedResult;
     }
 
-
     /**
      * Returns true if and only if this result contains a non-null value AND ta
      * null exception. In other words, if this method returns true, then get()

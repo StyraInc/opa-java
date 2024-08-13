@@ -527,8 +527,6 @@ class OPATest {
         assertEquals(expect, result);
     }
 
-    // TODO: should test opa batch fallback with mixed results
-
     @Test
     public void testOPAEvaluateBatchFallback() {
         OPAClient opa = new OPAClient(address, headers);
@@ -597,5 +595,68 @@ class OPATest {
             }
         }
     }
+
+    @Test
+    public void testOPAEvaluateBatchFallbackMixed() {
+        OPAClient opa = new OPAClient(address, headers);
+        Map<String, Object> input = Map.ofEntries(
+            entry("job1", Map.ofEntries(entry("aaa", "111"), entry("bbb", "111"))),
+            entry("job2", Map.ofEntries(entry("bbb", "222")))
+        );
+        Map<String, OPAResult> result = Map.ofEntries();
+
+        Map<String, OPAResult> expect = Map.ofEntries(
+            entry("job1", new OPAResult(null, new OPAException("unit test"))),
+            entry("job2", new OPAResult(Map.ofEntries(entry("222", "bbb")), null))
+        );
+
+        TypeReference<Map<String, Object>> tr = new TypeReference<Map<String, Object>>() {};
+
+        try {
+            result = opa.evaluateBatch("condfail/p", input, false);
+        } catch (OPAException e) {
+            e.printStackTrace(System.out);
+            System.out.println("exception: " + e);
+            assertNull(e);
+        }
+
+        for (Map.Entry<String, OPAResult> entry: result.entrySet()) {
+            OPAResult actual = entry.getValue();
+            String key = entry.getKey();
+            OPAResult expected = expect.get(key);
+            assertEquals(actual.success(), expected.success());
+            assertEquals(actual.getValue(), expected.getValue());
+        }
+    }
+
+    @Test
+    public void testOPAEvaluateBatchFallbackMixedReject() {
+        // Tests a that when rejectMixed=true, the entire batch fails at once.
+
+        OPAClient opa = new OPAClient(address, headers);
+        Map<String, Object> input = Map.ofEntries(
+            entry("job1", Map.ofEntries(entry("aaa", "111"), entry("bbb", "111"))),
+            entry("job2", Map.ofEntries(entry("bbb", "222")))
+        );
+        Map<String, OPAResult> result = Map.ofEntries();
+
+        Map<String, OPAResult> expect = Map.ofEntries(
+            entry("job1", new OPAResult(null, new OPAException("unit test"))),
+            entry("job2", new OPAResult(Map.ofEntries(entry("222", "bbb")), null))
+        );
+
+        TypeReference<Map<String, Object>> tr = new TypeReference<Map<String, Object>>() {};
+
+        OPAException err = null;
+
+        try {
+            result = opa.evaluateBatch("condfail/p", input, true);
+        } catch (OPAException e) {
+            err = e;
+        }
+
+        assertTrue(err != null);
+    }
+
 }
 

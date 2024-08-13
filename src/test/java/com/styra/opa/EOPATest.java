@@ -1,8 +1,6 @@
 package com.styra.opa;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.styra.opa.openapi.utils.HTTPClient;
-import com.styra.opa.utils.OPAHTTPClient;
 import com.styra.opa.utils.OPALatencyMeasuringHTTPClient;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,15 +16,11 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 import static java.util.Map.entry;
 import static java.util.logging.Level.ALL;
-import static java.util.logging.Level.INFO;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -137,7 +131,7 @@ class EOPATest {
         assertEquals("{}\n", body);
     }
 
-        @Test
+    @Test
     public void testEOPAEvaluateBatch() {
         OPAClient opa = new OPAClient(eopaAddress, headers);
         Map<String, Object> input = Map.ofEntries(
@@ -202,9 +196,6 @@ class EOPATest {
         }
     }
 
-    // TODO: once rejectMixed is properly exposed, we should test if its true
-    // and if its false
-
     @Test
     public void testEOPAEvaluateBatchMixed() {
         OPAClient opa = new OPAClient(eopaAddress, headers);
@@ -214,16 +205,15 @@ class EOPATest {
         );
         Map<String, OPAResult> result = Map.ofEntries();
 
-        // TODO: need to correctly represent and test for the failure case
-        Map<String, Object> expect = Map.ofEntries(
-            entry("job1", Map.ofEntries(entry("aaa", "111"))),
-            entry("job2", Map.ofEntries(entry("bbb", "222")))
+        Map<String, OPAResult> expect = Map.ofEntries(
+            entry("job1", new OPAResult(null, new OPAException("unit test"))),
+            entry("job2", new OPAResult(Map.ofEntries(entry("222", "bbb")), null))
         );
 
-        TypeReference<Map<String, Object>> tr = new TypeReference <Map<String, Object>>() {};
+        TypeReference<Map<String, Object>> tr = new TypeReference<Map<String, Object>>() {};
 
         try {
-            result = opa.evaluateBatch("condfail/p", input);
+            result = opa.evaluateBatch("condfail/p", input, false);
         } catch (OPAException e) {
             e.printStackTrace(System.out);
             System.out.println("exception: " + e);
@@ -231,15 +221,41 @@ class EOPATest {
         }
 
         for (Map.Entry<String, OPAResult> entry: result.entrySet()) {
-            assertTrue(entry.getValue().success());
-            try {
-                Map<String, Object> v = entry.getValue().get();
-                assertEquals(expect.get(entry.getKey()), v);
-            } catch (OPAException e) {
-                System.out.println("exception: " + e);
-                assertNull(e);
-            }
+            OPAResult actual = entry.getValue();
+            String key = entry.getKey();
+            OPAResult expected = expect.get(key);
+            assertEquals(actual.success(), expected.success());
+            assertEquals(actual.getValue(), expected.getValue());
         }
+    }
+
+    @Test
+    public void testEOPAEvaluateBatchMixedReject() {
+        // Tests a that when rejectMixed=true, the entire batch fails at once.
+
+        OPAClient opa = new OPAClient(eopaAddress, headers);
+        Map<String, Object> input = Map.ofEntries(
+            entry("job1", Map.ofEntries(entry("aaa", "111"), entry("bbb", "111"))),
+            entry("job2", Map.ofEntries(entry("bbb", "222")))
+        );
+        Map<String, OPAResult> result = Map.ofEntries();
+
+        Map<String, OPAResult> expect = Map.ofEntries(
+            entry("job1", new OPAResult(null, new OPAException("unit test"))),
+            entry("job2", new OPAResult(Map.ofEntries(entry("222", "bbb")), null))
+        );
+
+        TypeReference<Map<String, Object>> tr = new TypeReference<Map<String, Object>>() {};
+
+        OPAException err = null;
+
+        try {
+            result = opa.evaluateBatch("condfail/p", input, true);
+        } catch (OPAException e) {
+            err = e;
+        }
+
+        assertTrue(err != null);
     }
 
 }
