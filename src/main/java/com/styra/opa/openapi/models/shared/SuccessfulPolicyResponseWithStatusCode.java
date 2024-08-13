@@ -20,7 +20,11 @@ import java.util.Objects;
 import java.util.Optional;
 
 
-public class ResponsesSuccessfulPolicyResponse {
+public class SuccessfulPolicyResponseWithStatusCode implements Responses {
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("http_status_code")
+    private Optional<String> httpStatusCode;
 
     /**
      * The base or virtual document referred to by the URL path. If the path is undefined, this key will be omitted.
@@ -50,31 +54,33 @@ public class ResponsesSuccessfulPolicyResponse {
     @JsonProperty("provenance")
     private Optional<? extends Provenance> provenance;
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("http_status_code")
-    private Optional<String> httpStatusCode;
-
     @JsonCreator
-    public ResponsesSuccessfulPolicyResponse(
+    public SuccessfulPolicyResponseWithStatusCode(
+            @JsonProperty("http_status_code") Optional<String> httpStatusCode,
             @JsonProperty("result") Optional<? extends Result> result,
             @JsonProperty("metrics") Optional<? extends Map<String, Object>> metrics,
             @JsonProperty("decision_id") Optional<String> decisionId,
-            @JsonProperty("provenance") Optional<? extends Provenance> provenance,
-            @JsonProperty("http_status_code") Optional<String> httpStatusCode) {
+            @JsonProperty("provenance") Optional<? extends Provenance> provenance) {
+        Utils.checkNotNull(httpStatusCode, "httpStatusCode");
         Utils.checkNotNull(result, "result");
         Utils.checkNotNull(metrics, "metrics");
         Utils.checkNotNull(decisionId, "decisionId");
         Utils.checkNotNull(provenance, "provenance");
-        Utils.checkNotNull(httpStatusCode, "httpStatusCode");
+        this.httpStatusCode = httpStatusCode;
         this.result = result;
         this.metrics = metrics;
         this.decisionId = decisionId;
         this.provenance = provenance;
-        this.httpStatusCode = httpStatusCode;
     }
     
-    public ResponsesSuccessfulPolicyResponse() {
+    public SuccessfulPolicyResponseWithStatusCode() {
         this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+    }
+
+    @JsonIgnore
+    @Override
+    public String httpStatusCode() {
+        return Utils.discriminatorToString(httpStatusCode);
     }
 
     /**
@@ -112,19 +118,26 @@ public class ResponsesSuccessfulPolicyResponse {
         return (Optional<Provenance>) provenance;
     }
 
-    @JsonIgnore
-    public Optional<String> httpStatusCode() {
-        return httpStatusCode;
-    }
-
     public final static Builder builder() {
         return new Builder();
+    }
+
+    public SuccessfulPolicyResponseWithStatusCode withHttpStatusCode(String httpStatusCode) {
+        Utils.checkNotNull(httpStatusCode, "httpStatusCode");
+        this.httpStatusCode = Optional.ofNullable(httpStatusCode);
+        return this;
+    }
+
+    public SuccessfulPolicyResponseWithStatusCode withHttpStatusCode(Optional<String> httpStatusCode) {
+        Utils.checkNotNull(httpStatusCode, "httpStatusCode");
+        this.httpStatusCode = httpStatusCode;
+        return this;
     }
 
     /**
      * The base or virtual document referred to by the URL path. If the path is undefined, this key will be omitted.
      */
-    public ResponsesSuccessfulPolicyResponse withResult(Result result) {
+    public SuccessfulPolicyResponseWithStatusCode withResult(Result result) {
         Utils.checkNotNull(result, "result");
         this.result = Optional.ofNullable(result);
         return this;
@@ -133,7 +146,7 @@ public class ResponsesSuccessfulPolicyResponse {
     /**
      * The base or virtual document referred to by the URL path. If the path is undefined, this key will be omitted.
      */
-    public ResponsesSuccessfulPolicyResponse withResult(Optional<? extends Result> result) {
+    public SuccessfulPolicyResponseWithStatusCode withResult(Optional<? extends Result> result) {
         Utils.checkNotNull(result, "result");
         this.result = result;
         return this;
@@ -142,7 +155,7 @@ public class ResponsesSuccessfulPolicyResponse {
     /**
      * If query metrics are enabled, this field contains query performance metrics collected during the parse, compile, and evaluation steps.
      */
-    public ResponsesSuccessfulPolicyResponse withMetrics(Map<String, Object> metrics) {
+    public SuccessfulPolicyResponseWithStatusCode withMetrics(Map<String, Object> metrics) {
         Utils.checkNotNull(metrics, "metrics");
         this.metrics = Optional.ofNullable(metrics);
         return this;
@@ -151,7 +164,7 @@ public class ResponsesSuccessfulPolicyResponse {
     /**
      * If query metrics are enabled, this field contains query performance metrics collected during the parse, compile, and evaluation steps.
      */
-    public ResponsesSuccessfulPolicyResponse withMetrics(Optional<? extends Map<String, Object>> metrics) {
+    public SuccessfulPolicyResponseWithStatusCode withMetrics(Optional<? extends Map<String, Object>> metrics) {
         Utils.checkNotNull(metrics, "metrics");
         this.metrics = metrics;
         return this;
@@ -160,7 +173,7 @@ public class ResponsesSuccessfulPolicyResponse {
     /**
      * If decision logging is enabled, this field contains a string that uniquely identifies the decision. The identifier will be included in the decision log event for this decision. Callers can use the identifier for correlation purposes.
      */
-    public ResponsesSuccessfulPolicyResponse withDecisionId(String decisionId) {
+    public SuccessfulPolicyResponseWithStatusCode withDecisionId(String decisionId) {
         Utils.checkNotNull(decisionId, "decisionId");
         this.decisionId = Optional.ofNullable(decisionId);
         return this;
@@ -169,7 +182,7 @@ public class ResponsesSuccessfulPolicyResponse {
     /**
      * If decision logging is enabled, this field contains a string that uniquely identifies the decision. The identifier will be included in the decision log event for this decision. Callers can use the identifier for correlation purposes.
      */
-    public ResponsesSuccessfulPolicyResponse withDecisionId(Optional<String> decisionId) {
+    public SuccessfulPolicyResponseWithStatusCode withDecisionId(Optional<String> decisionId) {
         Utils.checkNotNull(decisionId, "decisionId");
         this.decisionId = decisionId;
         return this;
@@ -178,7 +191,7 @@ public class ResponsesSuccessfulPolicyResponse {
     /**
      * Provenance information can be requested on individual API calls and are returned inline with the API response. To obtain provenance information on an API call, specify the `provenance=true` query parameter when executing the API call.
      */
-    public ResponsesSuccessfulPolicyResponse withProvenance(Provenance provenance) {
+    public SuccessfulPolicyResponseWithStatusCode withProvenance(Provenance provenance) {
         Utils.checkNotNull(provenance, "provenance");
         this.provenance = Optional.ofNullable(provenance);
         return this;
@@ -187,21 +200,9 @@ public class ResponsesSuccessfulPolicyResponse {
     /**
      * Provenance information can be requested on individual API calls and are returned inline with the API response. To obtain provenance information on an API call, specify the `provenance=true` query parameter when executing the API call.
      */
-    public ResponsesSuccessfulPolicyResponse withProvenance(Optional<? extends Provenance> provenance) {
+    public SuccessfulPolicyResponseWithStatusCode withProvenance(Optional<? extends Provenance> provenance) {
         Utils.checkNotNull(provenance, "provenance");
         this.provenance = provenance;
-        return this;
-    }
-
-    public ResponsesSuccessfulPolicyResponse withHttpStatusCode(String httpStatusCode) {
-        Utils.checkNotNull(httpStatusCode, "httpStatusCode");
-        this.httpStatusCode = Optional.ofNullable(httpStatusCode);
-        return this;
-    }
-
-    public ResponsesSuccessfulPolicyResponse withHttpStatusCode(Optional<String> httpStatusCode) {
-        Utils.checkNotNull(httpStatusCode, "httpStatusCode");
-        this.httpStatusCode = httpStatusCode;
         return this;
     }
     
@@ -213,36 +214,38 @@ public class ResponsesSuccessfulPolicyResponse {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        ResponsesSuccessfulPolicyResponse other = (ResponsesSuccessfulPolicyResponse) o;
+        SuccessfulPolicyResponseWithStatusCode other = (SuccessfulPolicyResponseWithStatusCode) o;
         return 
+            Objects.deepEquals(this.httpStatusCode, other.httpStatusCode) &&
             Objects.deepEquals(this.result, other.result) &&
             Objects.deepEquals(this.metrics, other.metrics) &&
             Objects.deepEquals(this.decisionId, other.decisionId) &&
-            Objects.deepEquals(this.provenance, other.provenance) &&
-            Objects.deepEquals(this.httpStatusCode, other.httpStatusCode);
+            Objects.deepEquals(this.provenance, other.provenance);
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
+            httpStatusCode,
             result,
             metrics,
             decisionId,
-            provenance,
-            httpStatusCode);
+            provenance);
     }
     
     @Override
     public String toString() {
-        return Utils.toString(ResponsesSuccessfulPolicyResponse.class,
+        return Utils.toString(SuccessfulPolicyResponseWithStatusCode.class,
+                "httpStatusCode", httpStatusCode,
                 "result", result,
                 "metrics", metrics,
                 "decisionId", decisionId,
-                "provenance", provenance,
-                "httpStatusCode", httpStatusCode);
+                "provenance", provenance);
     }
     
     public final static class Builder {
+ 
+        private Optional<String> httpStatusCode = Optional.empty();
  
         private Optional<? extends Result> result = Optional.empty();
  
@@ -250,12 +253,22 @@ public class ResponsesSuccessfulPolicyResponse {
  
         private Optional<String> decisionId = Optional.empty();
  
-        private Optional<? extends Provenance> provenance = Optional.empty();
- 
-        private Optional<String> httpStatusCode = Optional.empty();  
+        private Optional<? extends Provenance> provenance = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
+        }
+
+        public Builder httpStatusCode(String httpStatusCode) {
+            Utils.checkNotNull(httpStatusCode, "httpStatusCode");
+            this.httpStatusCode = Optional.ofNullable(httpStatusCode);
+            return this;
+        }
+
+        public Builder httpStatusCode(Optional<String> httpStatusCode) {
+            Utils.checkNotNull(httpStatusCode, "httpStatusCode");
+            this.httpStatusCode = httpStatusCode;
+            return this;
         }
 
         /**
@@ -329,26 +342,14 @@ public class ResponsesSuccessfulPolicyResponse {
             this.provenance = provenance;
             return this;
         }
-
-        public Builder httpStatusCode(String httpStatusCode) {
-            Utils.checkNotNull(httpStatusCode, "httpStatusCode");
-            this.httpStatusCode = Optional.ofNullable(httpStatusCode);
-            return this;
-        }
-
-        public Builder httpStatusCode(Optional<String> httpStatusCode) {
-            Utils.checkNotNull(httpStatusCode, "httpStatusCode");
-            this.httpStatusCode = httpStatusCode;
-            return this;
-        }
         
-        public ResponsesSuccessfulPolicyResponse build() {
-            return new ResponsesSuccessfulPolicyResponse(
+        public SuccessfulPolicyResponseWithStatusCode build() {
+            return new SuccessfulPolicyResponseWithStatusCode(
+                httpStatusCode,
                 result,
                 metrics,
                 decisionId,
-                provenance,
-                httpStatusCode);
+                provenance);
         }
     }
 }
