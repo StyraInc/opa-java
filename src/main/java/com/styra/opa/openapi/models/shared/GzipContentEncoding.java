@@ -4,7 +4,6 @@
 
 package com.styra.opa.openapi.models.shared;
 
-
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.lang.String;
 
