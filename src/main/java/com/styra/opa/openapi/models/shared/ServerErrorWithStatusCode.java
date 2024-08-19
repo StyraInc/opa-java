@@ -19,7 +19,11 @@ import java.util.Objects;
 import java.util.Optional;
 
 
-public class ServerError {
+public class ServerErrorWithStatusCode implements Responses {
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("http_status_code")
+    private Optional<String> httpStatusCode;
 
     @JsonProperty("code")
     private String code;
@@ -35,33 +39,35 @@ public class ServerError {
     @JsonProperty("decision_id")
     private Optional<String> decisionId;
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("http_status_code")
-    private Optional<String> httpStatusCode;
-
     @JsonCreator
-    public ServerError(
+    public ServerErrorWithStatusCode(
+            @JsonProperty("http_status_code") Optional<String> httpStatusCode,
             @JsonProperty("code") String code,
             @JsonProperty("message") String message,
             @JsonProperty("errors") Optional<? extends List<Errors>> errors,
-            @JsonProperty("decision_id") Optional<String> decisionId,
-            @JsonProperty("http_status_code") Optional<String> httpStatusCode) {
+            @JsonProperty("decision_id") Optional<String> decisionId) {
+        Utils.checkNotNull(httpStatusCode, "httpStatusCode");
         Utils.checkNotNull(code, "code");
         Utils.checkNotNull(message, "message");
         Utils.checkNotNull(errors, "errors");
         Utils.checkNotNull(decisionId, "decisionId");
-        Utils.checkNotNull(httpStatusCode, "httpStatusCode");
+        this.httpStatusCode = httpStatusCode;
         this.code = code;
         this.message = message;
         this.errors = errors;
         this.decisionId = decisionId;
-        this.httpStatusCode = httpStatusCode;
     }
     
-    public ServerError(
+    public ServerErrorWithStatusCode(
             String code,
             String message) {
-        this(code, message, Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), code, message, Optional.empty(), Optional.empty());
+    }
+
+    @JsonIgnore
+    @Override
+    public String httpStatusCode() {
+        return Utils.discriminatorToString(httpStatusCode);
     }
 
     @JsonIgnore
@@ -85,60 +91,55 @@ public class ServerError {
         return decisionId;
     }
 
-    @JsonIgnore
-    public Optional<String> httpStatusCode() {
-        return httpStatusCode;
-    }
-
     public final static Builder builder() {
         return new Builder();
     }
 
-    public ServerError withCode(String code) {
-        Utils.checkNotNull(code, "code");
-        this.code = code;
-        return this;
-    }
-
-    public ServerError withMessage(String message) {
-        Utils.checkNotNull(message, "message");
-        this.message = message;
-        return this;
-    }
-
-    public ServerError withErrors(List<Errors> errors) {
-        Utils.checkNotNull(errors, "errors");
-        this.errors = Optional.ofNullable(errors);
-        return this;
-    }
-
-    public ServerError withErrors(Optional<? extends List<Errors>> errors) {
-        Utils.checkNotNull(errors, "errors");
-        this.errors = errors;
-        return this;
-    }
-
-    public ServerError withDecisionId(String decisionId) {
-        Utils.checkNotNull(decisionId, "decisionId");
-        this.decisionId = Optional.ofNullable(decisionId);
-        return this;
-    }
-
-    public ServerError withDecisionId(Optional<String> decisionId) {
-        Utils.checkNotNull(decisionId, "decisionId");
-        this.decisionId = decisionId;
-        return this;
-    }
-
-    public ServerError withHttpStatusCode(String httpStatusCode) {
+    public ServerErrorWithStatusCode withHttpStatusCode(String httpStatusCode) {
         Utils.checkNotNull(httpStatusCode, "httpStatusCode");
         this.httpStatusCode = Optional.ofNullable(httpStatusCode);
         return this;
     }
 
-    public ServerError withHttpStatusCode(Optional<String> httpStatusCode) {
+    public ServerErrorWithStatusCode withHttpStatusCode(Optional<String> httpStatusCode) {
         Utils.checkNotNull(httpStatusCode, "httpStatusCode");
         this.httpStatusCode = httpStatusCode;
+        return this;
+    }
+
+    public ServerErrorWithStatusCode withCode(String code) {
+        Utils.checkNotNull(code, "code");
+        this.code = code;
+        return this;
+    }
+
+    public ServerErrorWithStatusCode withMessage(String message) {
+        Utils.checkNotNull(message, "message");
+        this.message = message;
+        return this;
+    }
+
+    public ServerErrorWithStatusCode withErrors(List<Errors> errors) {
+        Utils.checkNotNull(errors, "errors");
+        this.errors = Optional.ofNullable(errors);
+        return this;
+    }
+
+    public ServerErrorWithStatusCode withErrors(Optional<? extends List<Errors>> errors) {
+        Utils.checkNotNull(errors, "errors");
+        this.errors = errors;
+        return this;
+    }
+
+    public ServerErrorWithStatusCode withDecisionId(String decisionId) {
+        Utils.checkNotNull(decisionId, "decisionId");
+        this.decisionId = Optional.ofNullable(decisionId);
+        return this;
+    }
+
+    public ServerErrorWithStatusCode withDecisionId(Optional<String> decisionId) {
+        Utils.checkNotNull(decisionId, "decisionId");
+        this.decisionId = decisionId;
         return this;
     }
     
@@ -150,36 +151,38 @@ public class ServerError {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        ServerError other = (ServerError) o;
+        ServerErrorWithStatusCode other = (ServerErrorWithStatusCode) o;
         return 
+            Objects.deepEquals(this.httpStatusCode, other.httpStatusCode) &&
             Objects.deepEquals(this.code, other.code) &&
             Objects.deepEquals(this.message, other.message) &&
             Objects.deepEquals(this.errors, other.errors) &&
-            Objects.deepEquals(this.decisionId, other.decisionId) &&
-            Objects.deepEquals(this.httpStatusCode, other.httpStatusCode);
+            Objects.deepEquals(this.decisionId, other.decisionId);
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
+            httpStatusCode,
             code,
             message,
             errors,
-            decisionId,
-            httpStatusCode);
+            decisionId);
     }
     
     @Override
     public String toString() {
-        return Utils.toString(ServerError.class,
+        return Utils.toString(ServerErrorWithStatusCode.class,
+                "httpStatusCode", httpStatusCode,
                 "code", code,
                 "message", message,
                 "errors", errors,
-                "decisionId", decisionId,
-                "httpStatusCode", httpStatusCode);
+                "decisionId", decisionId);
     }
     
     public final static class Builder {
+ 
+        private Optional<String> httpStatusCode = Optional.empty();
  
         private String code;
  
@@ -187,12 +190,22 @@ public class ServerError {
  
         private Optional<? extends List<Errors>> errors = Optional.empty();
  
-        private Optional<String> decisionId = Optional.empty();
- 
-        private Optional<String> httpStatusCode = Optional.empty();  
+        private Optional<String> decisionId = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
+        }
+
+        public Builder httpStatusCode(String httpStatusCode) {
+            Utils.checkNotNull(httpStatusCode, "httpStatusCode");
+            this.httpStatusCode = Optional.ofNullable(httpStatusCode);
+            return this;
+        }
+
+        public Builder httpStatusCode(Optional<String> httpStatusCode) {
+            Utils.checkNotNull(httpStatusCode, "httpStatusCode");
+            this.httpStatusCode = httpStatusCode;
+            return this;
         }
 
         public Builder code(String code) {
@@ -230,26 +243,14 @@ public class ServerError {
             this.decisionId = decisionId;
             return this;
         }
-
-        public Builder httpStatusCode(String httpStatusCode) {
-            Utils.checkNotNull(httpStatusCode, "httpStatusCode");
-            this.httpStatusCode = Optional.ofNullable(httpStatusCode);
-            return this;
-        }
-
-        public Builder httpStatusCode(Optional<String> httpStatusCode) {
-            Utils.checkNotNull(httpStatusCode, "httpStatusCode");
-            this.httpStatusCode = httpStatusCode;
-            return this;
-        }
         
-        public ServerError build() {
-            return new ServerError(
+        public ServerErrorWithStatusCode build() {
+            return new ServerErrorWithStatusCode(
+                httpStatusCode,
                 code,
                 message,
                 errors,
-                decisionId,
-                httpStatusCode);
+                decisionId);
         }
     }
 }

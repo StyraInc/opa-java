@@ -106,12 +106,12 @@ public class Result {
     public static final class _Deserializer extends OneOfDeserializer<Result> {
 
         public _Deserializer() {
-            super(Result.class,
-                  TypeReferenceWithShape.of(new TypeReference<java.lang.Boolean>() {}, JsonShape.DEFAULT),
-                  TypeReferenceWithShape.of(new TypeReference<java.lang.String>() {}, JsonShape.DEFAULT),
-                  TypeReferenceWithShape.of(new TypeReference<java.lang.Double>() {}, JsonShape.DEFAULT),
+            super(Result.class, false,
+                  TypeReferenceWithShape.of(new TypeReference<java.util.Map<java.lang.String, java.lang.Object>>() {}, JsonShape.DEFAULT),
                   TypeReferenceWithShape.of(new TypeReference<java.util.List<java.lang.Object>>() {}, JsonShape.DEFAULT),
-                  TypeReferenceWithShape.of(new TypeReference<java.util.Map<java.lang.String, java.lang.Object>>() {}, JsonShape.DEFAULT));
+                  TypeReferenceWithShape.of(new TypeReference<java.lang.Double>() {}, JsonShape.DEFAULT),
+                  TypeReferenceWithShape.of(new TypeReference<java.lang.String>() {}, JsonShape.DEFAULT),
+                  TypeReferenceWithShape.of(new TypeReference<java.lang.Boolean>() {}, JsonShape.DEFAULT));
         }
     }
     
