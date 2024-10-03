@@ -20,11 +20,11 @@ import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequestBody
 import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputResponse;
 import com.styra.opa.openapi.models.shared.BatchMixedResults;
 import com.styra.opa.openapi.models.shared.BatchSuccessfulPolicyEvaluation;
-import com.styra.opa.openapi.models.shared.Errors;
 import com.styra.opa.openapi.models.shared.Explain;
 import com.styra.opa.openapi.models.shared.Input;
-import com.styra.opa.openapi.models.shared.Location;
 import com.styra.opa.openapi.models.shared.Responses;
+import com.styra.opa.openapi.models.shared.ResponsesErrors;
+import com.styra.opa.openapi.models.shared.ResponsesLocation;
 import com.styra.opa.openapi.models.shared.Result;
 import com.styra.opa.openapi.models.shared.ServerErrorWithStatusCode;
 import com.styra.opa.openapi.models.shared.SuccessfulPolicyResponse;
@@ -80,7 +80,7 @@ public class OPAClient {
      * suitable value for most sidecar style deployments of OPA.
      */
     public OPAClient() {
-        this.sdk = OpaApiClient.builder().serverURL(sdkServerURL).build();
+        this.sdk = OpaApiClient.builder().client(new OPAHTTPClient()).serverURL(sdkServerURL).build();
     }
 
     /**
@@ -90,7 +90,7 @@ public class OPAClient {
      */
     public OPAClient(String opaURL) {
         this.sdkServerURL = opaURL;
-        this.sdk = OpaApiClient.builder().serverURL(opaURL).build();
+        this.sdk = OpaApiClient.builder().client(new OPAHTTPClient()).serverURL(opaURL).build();
     }
 
     /**
@@ -961,7 +961,7 @@ public class OPAClient {
         return out;
     }
 
-    private static Optional<ServerErrorLocation> convertErrorLocation(Optional<Location> loc) {
+    private static Optional<ServerErrorLocation> convertErrorLocation(Optional<ResponsesLocation> loc) {
         if (loc.isPresent()) {
             return Optional.of(new ServerErrorLocation(loc.get().file(), loc.get().row(), loc.get().col()));
         } else {
@@ -969,10 +969,10 @@ public class OPAClient {
         }
     }
 
-    private static Optional<List<ServerErrorErrors>> convertErrorList(Optional<List<Errors>> errs) {
+    private static Optional<List<ServerErrorErrors>> convertErrorList(Optional<List<ResponsesErrors>> errs) {
         if (errs.isPresent()) {
             ArrayList<ServerErrorErrors> out = new ArrayList<ServerErrorErrors>();
-            for (Errors e : errs.get()) {
+            for (ResponsesErrors e : errs.get()) {
                 out.add(new ServerErrorErrors(e.code(), e.message(), convertErrorLocation(e.location())));
             }
             return Optional.of(out);

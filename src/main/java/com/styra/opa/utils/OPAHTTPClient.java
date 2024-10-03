@@ -7,6 +7,7 @@ import com.styra.opa.openapi.utils.HTTPClient;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -53,7 +54,6 @@ public class OPAHTTPClient implements HTTPClient {
     public HttpResponse<InputStream> send(HttpRequest request)
             throws IOException, InterruptedException, URISyntaxException {
 
-
         // At this point, the HTTP request has already been built, so there
         // is no way to add a new header, see:
         //
@@ -62,7 +62,23 @@ public class OPAHTTPClient implements HTTPClient {
         // Consequentially, we need to make a new builder and copy all of the
         // existing request data into it.
 
-        Builder b = HttpRequest.newBuilder(request.uri());
+        // Explicitly expand path separators in the URI, as the SE SDK
+        // sometimes escapes them as %2F. `/` is not a legal character to appear in
+        // a Rego package path or rule head, so we can simply re-expand those path
+        // elements.
+
+        URI oldURI = request.uri();
+        URI newURI = new URI(
+            oldURI.getScheme(),
+            oldURI.getUserInfo(),
+            oldURI.getHost(),
+            oldURI.getPort(),
+            oldURI.getPath().replaceAll("%2F", "/"),
+            oldURI.getQuery(),
+            oldURI.getFragment()
+        );
+
+        Builder b = HttpRequest.newBuilder(newURI);
         b.method(
                 request.method(),
                 request.bodyPublisher().orElse(HttpRequest.BodyPublishers.noBody()));
