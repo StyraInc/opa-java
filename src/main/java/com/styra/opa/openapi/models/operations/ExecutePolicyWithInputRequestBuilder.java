@@ -15,7 +15,7 @@ public class ExecutePolicyWithInputRequestBuilder {
         this.sdk = sdk;
     }
 
-    public ExecutePolicyWithInputRequestBuilder request(com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequest request) {
+    public ExecutePolicyWithInputRequestBuilder request(ExecutePolicyWithInputRequest request) {
         Utils.checkNotNull(request, "request");
         this.request = request;
         return this;

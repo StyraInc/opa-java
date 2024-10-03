@@ -15,7 +15,7 @@ public class ExecuteBatchPolicyWithInputRequestBuilder {
         this.sdk = sdk;
     }
 
-    public ExecuteBatchPolicyWithInputRequestBuilder request(com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequest request) {
+    public ExecuteBatchPolicyWithInputRequestBuilder request(ExecuteBatchPolicyWithInputRequest request) {
         Utils.checkNotNull(request, "request");
         this.request = request;
         return this;

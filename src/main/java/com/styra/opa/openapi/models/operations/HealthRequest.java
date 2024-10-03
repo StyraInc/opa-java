@@ -243,8 +243,7 @@ public class HealthRequest {
             }
             if (plugins == null) {
                 plugins = _SINGLETON_VALUE_Plugins.value();
-            }
-            return new HealthRequest(
+            }            return new HealthRequest(
                 bundles,
                 plugins,
                 excludePlugin);

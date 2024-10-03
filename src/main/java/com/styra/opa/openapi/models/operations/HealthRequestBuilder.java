@@ -35,7 +35,7 @@ public class HealthRequestBuilder {
         return this;
     }
 
-    public HealthRequestBuilder bundles(java.util.Optional<java.lang.Boolean> bundles) {
+    public HealthRequestBuilder bundles(Optional<Boolean> bundles) {
         Utils.checkNotNull(bundles, "bundles");
         this.bundles = bundles;
         return this;
@@ -47,19 +47,19 @@ public class HealthRequestBuilder {
         return this;
     }
 
-    public HealthRequestBuilder plugins(java.util.Optional<java.lang.Boolean> plugins) {
+    public HealthRequestBuilder plugins(Optional<Boolean> plugins) {
         Utils.checkNotNull(plugins, "plugins");
         this.plugins = plugins;
         return this;
     }
                 
-    public HealthRequestBuilder excludePlugin(java.util.List<java.lang.String> excludePlugin) {
+    public HealthRequestBuilder excludePlugin(List<String> excludePlugin) {
         Utils.checkNotNull(excludePlugin, "excludePlugin");
         this.excludePlugin = Optional.of(excludePlugin);
         return this;
     }
 
-    public HealthRequestBuilder excludePlugin(java.util.Optional<? extends java.util.List<java.lang.String>> excludePlugin) {
+    public HealthRequestBuilder excludePlugin(Optional<? extends List<String>> excludePlugin) {
         Utils.checkNotNull(excludePlugin, "excludePlugin");
         this.excludePlugin = excludePlugin;
         return this;
@@ -72,7 +72,6 @@ public class HealthRequestBuilder {
         if (plugins == null) {
             plugins = _SINGLETON_VALUE_Plugins.value();
         }
-
         return sdk.health(
             bundles,
             plugins,

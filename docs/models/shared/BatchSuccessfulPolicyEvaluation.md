@@ -1,5 +1,9 @@
 # BatchSuccessfulPolicyEvaluation
 
+All batched policy executions succeeded.
+The server also returns 200 if the path refers to an undefined document. In this case, responses will be empty.
+
+
 
 ## Fields
 
