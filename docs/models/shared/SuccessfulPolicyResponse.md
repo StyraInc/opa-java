@@ -1,5 +1,9 @@
 # SuccessfulPolicyResponse
 
+Success.
+The server also returns 200 if the path refers to an undefined document. In this case, the response will not contain a result property.
+
+
 
 ## Fields
 

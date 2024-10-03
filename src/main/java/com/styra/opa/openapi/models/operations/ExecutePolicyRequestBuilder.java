@@ -15,7 +15,7 @@ public class ExecutePolicyRequestBuilder {
         this.sdk = sdk;
     }
 
-    public ExecutePolicyRequestBuilder request(com.styra.opa.openapi.models.operations.ExecutePolicyRequest request) {
+    public ExecutePolicyRequestBuilder request(ExecutePolicyRequest request) {
         Utils.checkNotNull(request, "request");
         this.request = request;
         return this;

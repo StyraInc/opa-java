@@ -7,6 +7,7 @@ package com.styra.opa.openapi.models.operations;
 import com.styra.opa.openapi.models.shared.GzipAcceptEncoding;
 import com.styra.opa.openapi.models.shared.Input;
 import java.lang.Boolean;
+import java.lang.Exception;
 import java.lang.String;
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +16,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallExecuteDefaultPolicyWithInput {
-        com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse executeDefaultPolicyWithInput(
+        ExecuteDefaultPolicyWithInputResponse executeDefaultPolicyWithInput(
             Optional<Boolean> pretty,
             Optional<? extends GzipAcceptEncoding> acceptEncoding,
             Input input) throws Exception;
@@ -23,25 +24,25 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallExecutePolicy {
-        com.styra.opa.openapi.models.operations.ExecutePolicyResponse executePolicy(
+        ExecutePolicyResponse executePolicy(
             ExecutePolicyRequest request) throws Exception;
     }
 
 
     public interface MethodCallExecutePolicyWithInput {
-        com.styra.opa.openapi.models.operations.ExecutePolicyWithInputResponse executePolicyWithInput(
+        ExecutePolicyWithInputResponse executePolicyWithInput(
             ExecutePolicyWithInputRequest request) throws Exception;
     }
 
 
     public interface MethodCallExecuteBatchPolicyWithInput {
-        com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputResponse executeBatchPolicyWithInput(
+        ExecuteBatchPolicyWithInputResponse executeBatchPolicyWithInput(
             ExecuteBatchPolicyWithInputRequest request) throws Exception;
     }
 
 
     public interface MethodCallHealth {
-        com.styra.opa.openapi.models.operations.HealthResponse health(
+        HealthResponse health(
             Optional<Boolean> bundles,
             Optional<Boolean> plugins,
             Optional<? extends List<String>> excludePlugin) throws Exception;

@@ -6,6 +6,7 @@ package com.styra.opa.openapi;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.styra.opa.openapi.models.errors.BatchServerError;
+import com.styra.opa.openapi.models.errors.ClientError1;
 import com.styra.opa.openapi.models.errors.ClientError;
 import com.styra.opa.openapi.models.errors.SDKError;
 import com.styra.opa.openapi.models.errors.ServerError;
@@ -138,7 +139,7 @@ public class OpaApiClient implements
          * @return The builder instance.
          */
         public Builder serverURL(String serverUrl, Map<String, String> params) {
-            this.sdkConfiguration.serverUrl = com.styra.opa.openapi.utils.Utils.templateUrl(serverUrl, params);
+            this.sdkConfiguration.serverUrl = Utils.templateUrl(serverUrl, params);
             return this;
         }
         
@@ -264,7 +265,7 @@ public class OpaApiClient implements
         _req.setBody(Optional.ofNullable(_serializedRequestBody));
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
-                this.sdkConfiguration.userAgent);
+                SDKConfiguration.USER_AGENT);
 
         _req.addQueryParams(Utils.getQueryParams(
                 ExecuteDefaultPolicyWithInputRequest.class,
@@ -414,7 +415,7 @@ public class OpaApiClient implements
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
-                this.sdkConfiguration.userAgent);
+                SDKConfiguration.USER_AGENT);
 
         _req.addQueryParams(Utils.getQueryParams(
                 ExecutePolicyRequest.class,
@@ -496,9 +497,9 @@ public class OpaApiClient implements
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                ClientError _out = Utils.mapper().readValue(
+                ClientError1 _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<ClientError>() {});
+                    new TypeReference<ClientError1>() {});
                 throw _out;
             } else {
                 throw new SDKError(
@@ -577,7 +578,7 @@ public class OpaApiClient implements
         _req.setBody(Optional.ofNullable(_serializedRequestBody));
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
-                this.sdkConfiguration.userAgent);
+                SDKConfiguration.USER_AGENT);
 
         _req.addQueryParams(Utils.getQueryParams(
                 ExecutePolicyWithInputRequest.class,
@@ -659,9 +660,9 @@ public class OpaApiClient implements
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                ClientError _out = Utils.mapper().readValue(
+                ClientError1 _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<ClientError>() {});
+                    new TypeReference<ClientError1>() {});
                 throw _out;
             } else {
                 throw new SDKError(
@@ -740,7 +741,7 @@ public class OpaApiClient implements
         _req.setBody(Optional.ofNullable(_serializedRequestBody));
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
-                this.sdkConfiguration.userAgent);
+                SDKConfiguration.USER_AGENT);
 
         _req.addQueryParams(Utils.getQueryParams(
                 ExecuteBatchPolicyWithInputRequest.class,
@@ -838,9 +839,9 @@ public class OpaApiClient implements
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                ClientError _out = Utils.mapper().readValue(
+                ClientError1 _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<ClientError>() {});
+                    new TypeReference<ClientError1>() {});
                 throw _out;
             } else {
                 throw new SDKError(
@@ -928,7 +929,7 @@ public class OpaApiClient implements
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
-                this.sdkConfiguration.userAgent);
+                SDKConfiguration.USER_AGENT);
 
         _req.addQueryParams(Utils.getQueryParams(
                 HealthRequest.class,

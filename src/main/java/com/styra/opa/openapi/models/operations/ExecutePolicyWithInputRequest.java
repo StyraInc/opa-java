@@ -616,8 +616,7 @@ public class ExecutePolicyWithInputRequest {
         public ExecutePolicyWithInputRequest build() {
             if (path == null) {
                 path = _SINGLETON_VALUE_Path.value();
-            }
-            return new ExecutePolicyWithInputRequest(
+            }            return new ExecutePolicyWithInputRequest(
                 path,
                 contentEncoding,
                 acceptEncoding,

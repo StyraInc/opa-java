@@ -19,6 +19,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * BatchMixedResults - Mixed success and failures.
+ */
 
 public class BatchMixedResults {
 

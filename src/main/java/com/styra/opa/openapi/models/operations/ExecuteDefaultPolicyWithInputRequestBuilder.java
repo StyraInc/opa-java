@@ -27,25 +27,25 @@ public class ExecuteDefaultPolicyWithInputRequestBuilder {
         return this;
     }
 
-    public ExecuteDefaultPolicyWithInputRequestBuilder pretty(java.util.Optional<java.lang.Boolean> pretty) {
+    public ExecuteDefaultPolicyWithInputRequestBuilder pretty(Optional<Boolean> pretty) {
         Utils.checkNotNull(pretty, "pretty");
         this.pretty = pretty;
         return this;
     }
                 
-    public ExecuteDefaultPolicyWithInputRequestBuilder acceptEncoding(com.styra.opa.openapi.models.shared.GzipAcceptEncoding acceptEncoding) {
+    public ExecuteDefaultPolicyWithInputRequestBuilder acceptEncoding(GzipAcceptEncoding acceptEncoding) {
         Utils.checkNotNull(acceptEncoding, "acceptEncoding");
         this.acceptEncoding = Optional.of(acceptEncoding);
         return this;
     }
 
-    public ExecuteDefaultPolicyWithInputRequestBuilder acceptEncoding(java.util.Optional<? extends com.styra.opa.openapi.models.shared.GzipAcceptEncoding> acceptEncoding) {
+    public ExecuteDefaultPolicyWithInputRequestBuilder acceptEncoding(Optional<? extends GzipAcceptEncoding> acceptEncoding) {
         Utils.checkNotNull(acceptEncoding, "acceptEncoding");
         this.acceptEncoding = acceptEncoding;
         return this;
     }
 
-    public ExecuteDefaultPolicyWithInputRequestBuilder input(com.styra.opa.openapi.models.shared.Input input) {
+    public ExecuteDefaultPolicyWithInputRequestBuilder input(Input input) {
         Utils.checkNotNull(input, "input");
         this.input = input;
         return this;
