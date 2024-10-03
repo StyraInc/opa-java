@@ -148,7 +148,8 @@
 <pre><code class="language-java">package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
-import com.styra.opa.openapi.models.errors.SDKError;
+import com.styra.opa.openapi.models.errors.ClientError;
+import com.styra.opa.openapi.models.errors.ServerError;
 import com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse;
 import com.styra.opa.openapi.models.shared.GzipAcceptEncoding;
 import com.styra.opa.openapi.models.shared.Input;
@@ -157,37 +158,23 @@ import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            OpaApiClient sdk = OpaApiClient.builder()
+    public static void main(String[] args) throws ClientError, ServerError, Exception {
+
+        OpaApiClient sdk = OpaApiClient.builder()
                 .security(Security.builder()
                     .bearerAuth(&quot;&lt;YOUR_BEARER_TOKEN_HERE&gt;&quot;)
                     .build())
-                .build();
+            .build();
 
-            ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
+        ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
                 .pretty(false)
                 .acceptEncoding(GzipAcceptEncoding.GZIP)
-                .input(Input.of(8203.11d))
+                .input(Input.of(4963.69d))
                 .call();
 
-            if (res.result().isPresent()) {
-                // handle response
-            }
-        } catch (com.styra.opa.openapi.models.errors.ClientError e) {
-            // handle exception
-            throw e;
-        } catch (com.styra.opa.openapi.models.errors.ServerError e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.result().isPresent()) {
+            // handle response
         }
-
     }
 }
 </code></pre>
@@ -228,7 +215,7 @@ public class Application {
 <table>
 <thead>
 <tr>
-<th>Error Object</th>
+<th>Error Type</th>
 <th>Status Code</th>
 <th>Content Type</th>
 </tr>
@@ -236,7 +223,7 @@ public class Application {
 <tbody>
 <tr>
 <td>models/errors/ClientError</td>
-<td>400,404</td>
+<td>400, 404</td>
 <td>application/json</td>
 </tr>
 <tr>
@@ -246,8 +233,8 @@ public class Application {
 </tr>
 <tr>
 <td>models/errors/SDKError</td>
-<td>4xx-5xx</td>
-<td>*\/*</td>
+<td>4XX, 5XX</td>
+<td>*/*</td>
 </tr>
 </tbody>
 </table>
@@ -257,7 +244,8 @@ public class Application {
 <pre><code class="language-java">package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
-import com.styra.opa.openapi.models.errors.SDKError;
+import com.styra.opa.openapi.models.errors.ClientError1;
+import com.styra.opa.openapi.models.errors.ServerError;
 import com.styra.opa.openapi.models.operations.ExecutePolicyRequest;
 import com.styra.opa.openapi.models.operations.ExecutePolicyResponse;
 import com.styra.opa.openapi.models.shared.Security;
@@ -265,39 +253,25 @@ import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            OpaApiClient sdk = OpaApiClient.builder()
+    public static void main(String[] args) throws ClientError1, ServerError, Exception {
+
+        OpaApiClient sdk = OpaApiClient.builder()
                 .security(Security.builder()
                     .bearerAuth(&quot;&lt;YOUR_BEARER_TOKEN_HERE&gt;&quot;)
                     .build())
-                .build();
+            .build();
 
-            ExecutePolicyRequest req = ExecutePolicyRequest.builder()
+        ExecutePolicyRequest req = ExecutePolicyRequest.builder()
                 .path(&quot;app/rbac&quot;)
                 .build();
 
-            ExecutePolicyResponse res = sdk.executePolicy()
+        ExecutePolicyResponse res = sdk.executePolicy()
                 .request(req)
                 .call();
 
-            if (res.successfulPolicyResponse().isPresent()) {
-                // handle response
-            }
-        } catch (com.styra.opa.openapi.models.errors.ClientError e) {
-            // handle exception
-            throw e;
-        } catch (com.styra.opa.openapi.models.errors.ServerError e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.successfulPolicyResponse().isPresent()) {
+            // handle response
         }
-
     }
 }
 </code></pre>
@@ -326,14 +300,14 @@ public class Application {
 <table>
 <thead>
 <tr>
-<th>Error Object</th>
+<th>Error Type</th>
 <th>Status Code</th>
 <th>Content Type</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>models/errors/ClientError</td>
+<td>models/errors/ClientError1</td>
 <td>400</td>
 <td>application/json</td>
 </tr>
@@ -344,8 +318,8 @@ public class Application {
 </tr>
 <tr>
 <td>models/errors/SDKError</td>
-<td>4xx-5xx</td>
-<td>*\/*</td>
+<td>4XX, 5XX</td>
+<td>*/*</td>
 </tr>
 </tbody>
 </table>
@@ -355,7 +329,8 @@ public class Application {
 <pre><code class="language-java">package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
-import com.styra.opa.openapi.models.errors.SDKError;
+import com.styra.opa.openapi.models.errors.ClientError1;
+import com.styra.opa.openapi.models.errors.ServerError;
 import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequest;
 import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequestBody;
 import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputResponse;
@@ -365,42 +340,28 @@ import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            OpaApiClient sdk = OpaApiClient.builder()
+    public static void main(String[] args) throws ClientError1, ServerError, Exception {
+
+        OpaApiClient sdk = OpaApiClient.builder()
                 .security(Security.builder()
                     .bearerAuth(&quot;&lt;YOUR_BEARER_TOKEN_HERE&gt;&quot;)
                     .build())
-                .build();
+            .build();
 
-            ExecutePolicyWithInputRequest req = ExecutePolicyWithInputRequest.builder()
+        ExecutePolicyWithInputRequest req = ExecutePolicyWithInputRequest.builder()
                 .path(&quot;app/rbac&quot;)
                 .requestBody(ExecutePolicyWithInputRequestBody.builder()
-                        .input(Input.of(false))
-                        .build())
+                    .input(Input.of(false))
+                    .build())
                 .build();
 
-            ExecutePolicyWithInputResponse res = sdk.executePolicyWithInput()
+        ExecutePolicyWithInputResponse res = sdk.executePolicyWithInput()
                 .request(req)
                 .call();
 
-            if (res.successfulPolicyResponse().isPresent()) {
-                // handle response
-            }
-        } catch (com.styra.opa.openapi.models.errors.ClientError e) {
-            // handle exception
-            throw e;
-        } catch (com.styra.opa.openapi.models.errors.ServerError e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.successfulPolicyResponse().isPresent()) {
+            // handle response
         }
-
     }
 }
 </code></pre>
@@ -429,14 +390,14 @@ public class Application {
 <table>
 <thead>
 <tr>
-<th>Error Object</th>
+<th>Error Type</th>
 <th>Status Code</th>
 <th>Content Type</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>models/errors/ClientError</td>
+<td>models/errors/ClientError1</td>
 <td>400</td>
 <td>application/json</td>
 </tr>
@@ -447,8 +408,8 @@ public class Application {
 </tr>
 <tr>
 <td>models/errors/SDKError</td>
-<td>4xx-5xx</td>
-<td>*\/*</td>
+<td>4XX, 5XX</td>
+<td>*/*</td>
 </tr>
 </tbody>
 </table>
@@ -458,7 +419,8 @@ public class Application {
 <pre><code class="language-java">package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
-import com.styra.opa.openapi.models.errors.SDKError;
+import com.styra.opa.openapi.models.errors.BatchServerError;
+import com.styra.opa.openapi.models.errors.ClientError1;
 import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequest;
 import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequestBody;
 import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputResponse;
@@ -469,43 +431,29 @@ import java.util.Map;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            OpaApiClient sdk = OpaApiClient.builder()
+    public static void main(String[] args) throws ClientError1, BatchServerError, Exception {
+
+        OpaApiClient sdk = OpaApiClient.builder()
                 .security(Security.builder()
                     .bearerAuth(&quot;&lt;YOUR_BEARER_TOKEN_HERE&gt;&quot;)
                     .build())
-                .build();
+            .build();
 
-            ExecuteBatchPolicyWithInputRequest req = ExecuteBatchPolicyWithInputRequest.builder()
+        ExecuteBatchPolicyWithInputRequest req = ExecuteBatchPolicyWithInputRequest.builder()
                 .path(&quot;app/rbac&quot;)
                 .requestBody(ExecuteBatchPolicyWithInputRequestBody.builder()
-                        .inputs(Map.ofEntries(
-                                Map.entry(&quot;key&quot;, Input.of(&quot;&lt;value&gt;&quot;))))
-                        .build())
+                    .inputs(Map.ofEntries(
+                        Map.entry(&quot;key&quot;, Input.of(&quot;&lt;value&gt;&quot;))))
+                    .build())
                 .build();
 
-            ExecuteBatchPolicyWithInputResponse res = sdk.executeBatchPolicyWithInput()
+        ExecuteBatchPolicyWithInputResponse res = sdk.executeBatchPolicyWithInput()
                 .request(req)
                 .call();
 
-            if (res.batchSuccessfulPolicyEvaluation().isPresent()) {
-                // handle response
-            }
-        } catch (com.styra.opa.openapi.models.errors.ClientError e) {
-            // handle exception
-            throw e;
-        } catch (com.styra.opa.openapi.models.errors.BatchServerError e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.batchSuccessfulPolicyEvaluation().isPresent()) {
+            // handle response
         }
-
     }
 }
 </code></pre>
@@ -534,14 +482,14 @@ public class Application {
 <table>
 <thead>
 <tr>
-<th>Error Object</th>
+<th>Error Type</th>
 <th>Status Code</th>
 <th>Content Type</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>models/errors/ClientError</td>
+<td>models/errors/ClientError1</td>
 <td>400</td>
 <td>application/json</td>
 </tr>
@@ -552,8 +500,8 @@ public class Application {
 </tr>
 <tr>
 <td>models/errors/SDKError</td>
-<td>4xx-5xx</td>
-<td>*\/*</td>
+<td>4XX, 5XX</td>
+<td>*/*</td>
 </tr>
 </tbody>
 </table>
@@ -563,7 +511,7 @@ public class Application {
 <pre><code class="language-java">package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
-import com.styra.opa.openapi.models.errors.SDKError;
+import com.styra.opa.openapi.models.errors.UnhealthyServer;
 import com.styra.opa.openapi.models.operations.HealthResponse;
 import com.styra.opa.openapi.models.shared.Security;
 import java.lang.Exception;
@@ -571,35 +519,24 @@ import java.util.List;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            OpaApiClient sdk = OpaApiClient.builder()
+    public static void main(String[] args) throws UnhealthyServer, Exception {
+
+        OpaApiClient sdk = OpaApiClient.builder()
                 .security(Security.builder()
                     .bearerAuth(&quot;&lt;YOUR_BEARER_TOKEN_HERE&gt;&quot;)
                     .build())
-                .build();
+            .build();
 
-            HealthResponse res = sdk.health()
+        HealthResponse res = sdk.health()
                 .bundles(false)
                 .plugins(false)
                 .excludePlugin(List.of(
                     &quot;&lt;value&gt;&quot;))
                 .call();
 
-            if (res.healthyServer().isPresent()) {
-                // handle response
-            }
-        } catch (com.styra.opa.openapi.models.errors.UnhealthyServer e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.healthyServer().isPresent()) {
+            // handle response
         }
-
     }
 }
 </code></pre>
@@ -640,7 +577,7 @@ public class Application {
 <table>
 <thead>
 <tr>
-<th>Error Object</th>
+<th>Error Type</th>
 <th>Status Code</th>
 <th>Content Type</th>
 </tr>
@@ -653,8 +590,8 @@ public class Application {
 </tr>
 <tr>
 <td>models/errors/SDKError</td>
-<td>4xx-5xx</td>
-<td>*\/*</td>
+<td>4XX, 5XX</td>
+<td>*/*</td>
 </tr>
 </tbody>
 </table></div>
