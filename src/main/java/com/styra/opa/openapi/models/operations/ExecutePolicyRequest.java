@@ -515,8 +515,7 @@ public class ExecutePolicyRequest {
         public ExecutePolicyRequest build() {
             if (path == null) {
                 path = _SINGLETON_VALUE_Path.value();
-            }
-            return new ExecutePolicyRequest(
+            }            return new ExecutePolicyRequest(
                 path,
                 acceptEncoding,
                 pretty,

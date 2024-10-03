@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.styra.opa.openapi.models.shared.ServerError;
 import com.styra.opa.openapi.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
@@ -16,6 +17,10 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * BatchServerError - Server Error. All requests returned a 500 error.
+ * 
+ */
 public class BatchServerError extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)

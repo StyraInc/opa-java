@@ -616,8 +616,7 @@ public class ExecuteBatchPolicyWithInputRequest {
         public ExecuteBatchPolicyWithInputRequest build() {
             if (path == null) {
                 path = _SINGLETON_VALUE_Path.value();
-            }
-            return new ExecuteBatchPolicyWithInputRequest(
+            }            return new ExecuteBatchPolicyWithInputRequest(
                 path,
                 contentEncoding,
                 acceptEncoding,

@@ -19,6 +19,11 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * BatchSuccessfulPolicyEvaluation - All batched policy executions succeeded.
+ * The server also returns 200 if the path refers to an undefined document. In this case, responses will be empty.
+ * 
+ */
 
 public class BatchSuccessfulPolicyEvaluation {
 

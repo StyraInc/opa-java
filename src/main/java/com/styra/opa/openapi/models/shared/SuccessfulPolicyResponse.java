@@ -19,6 +19,11 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * SuccessfulPolicyResponse - Success.
+ * The server also returns 200 if the path refers to an undefined document. In this case, the response will not contain a result property.
+ * 
+ */
 
 public class SuccessfulPolicyResponse {
 

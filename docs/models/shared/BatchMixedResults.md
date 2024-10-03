@@ -1,5 +1,7 @@
 # BatchMixedResults
 
+Mixed success and failures.
+
 
 ## Fields
 
