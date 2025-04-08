@@ -1,0 +1,12 @@
+overlay: 1.0.0
+info:
+  title: Overlay to fix the Speakeasy path encoding
+  version: 0.0.1
+actions:
+  - target: "$.components.parameters.policyPath"
+    description: |
+      Support path encoding
+      https://www.speakeasy.com/docs/languages/java/param-encoding#allowreserved. 
+      Fix https://github.com/StyraInc/opa-java/issues/77
+    update:
+      x-speakeasy-param-encoding-override: allowReserved
