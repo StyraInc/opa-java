@@ -1,19 +1,20 @@
-speakeasyVersion: 1.376.0
+speakeasyVersion: 1.531.0
 sources:
     openapi:
         sourceNamespace: openapi
-        sourceRevisionDigest: sha256:89b83eaab457a2ec77f662a88b35e45c6f4f67507c2daf85e486a9dfb847ec1e
-        sourceBlobDigest: sha256:f76f9d1e8be466eef2d0e9612845ce19f9a5f507682e92d7a4355b3b13eaa921
+        sourceRevisionDigest: sha256:d6919d2bcf6107a3a276070c0051ac0816663cb6d213186840da2f4ae4cd8e13
+        sourceBlobDigest: sha256:fc6e2df14a721c45f2d4277c775c9ac01fc7ef2a51ed40c09d41e8e361084690
         tags:
             - latest
-            - main
+            - 0.2.0
 targets:
     opa:
         source: openapi
         sourceNamespace: openapi
-        sourceRevisionDigest: sha256:89b83eaab457a2ec77f662a88b35e45c6f4f67507c2daf85e486a9dfb847ec1e
-        sourceBlobDigest: sha256:f76f9d1e8be466eef2d0e9612845ce19f9a5f507682e92d7a4355b3b13eaa921
-        outLocation: /github/workspace/repo
+        sourceRevisionDigest: sha256:d6919d2bcf6107a3a276070c0051ac0816663cb6d213186840da2f4ae4cd8e13
+        sourceBlobDigest: sha256:fc6e2df14a721c45f2d4277c775c9ac01fc7ef2a51ed40c09d41e8e361084690
+        codeSamplesNamespace: openapi-java-code-samples
+        codeSamplesRevisionDigest: sha256:22cec36ccd6696f7f32df6ad1aa74c27e1a386d8a5d4fc26516e4dd87049d631
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -21,6 +22,8 @@ workflow:
         openapi:
             inputs:
                 - location: https://raw.githubusercontent.com/StyraInc/enterprise-opa/main/openapi/openapi.yaml
+            overlays:
+                - location: .speakeasy/overlay.yaml
             registry:
                 location: registry.speakeasyapi.dev/styra/styra/openapi
     targets:
@@ -34,3 +37,9 @@ workflow:
                     gpgSecretKey: $JAVA_GPG_SECRET_KEY
                     gpgPassPhrase: $JAVA_GPG_PASSPHRASE
                     useSonatypeLegacy: true
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/styra/styra/openapi-java-code-samples
+                labelOverride:
+                    fixedValue: Java (SDK)
+                blocking: false

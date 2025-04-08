@@ -90,13 +90,19 @@ For more information about the API: [Enterprise OPA documentation](https://docs.
 
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
+<!-- $toc-max-depth=2 -->
+* [OPA Java SDK](#opa-java-sdk)
+  * [SDK Installation](#sdk-installation)
+  * [SDK Example Usage (high-level)](#sdk-example-usage-high-level)
+* [OPA OpenApi SDK (low-level)](#opa-openapi-sdk-low-level)
+  * [SDK Example Usage](#sdk-example-usage)
+  * [Available Resources and Operations](#available-resources-and-operations)
+  * [Server Selection](#server-selection)
+  * [Error Handling](#error-handling)
+  * [Authentication](#authentication)
+  * [Development](#development)
+  * [Community](#community)
 
-* [SDK Installation](#sdk-installation)
-* [SDK Example Usage](#sdk-example-usage)
-* [Available Resources and Operations](#available-resources-and-operations)
-* [Error Handling](#error-handling)
-* [Server Selection](#server-selection)
-* [Authentication](#authentication)
 <!-- End Table of Contents [toc] -->
 
 <!-- Start SDK Example Usage [usage] -->
@@ -111,9 +117,7 @@ import com.styra.opa.openapi.OpaApiClient;
 import com.styra.opa.openapi.models.errors.ClientError;
 import com.styra.opa.openapi.models.errors.ServerError;
 import com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse;
-import com.styra.opa.openapi.models.shared.GzipAcceptEncoding;
 import com.styra.opa.openapi.models.shared.Input;
-import com.styra.opa.openapi.models.shared.Security;
 import java.lang.Exception;
 
 public class Application {
@@ -121,15 +125,10 @@ public class Application {
     public static void main(String[] args) throws ClientError, ServerError, Exception {
 
         OpaApiClient sdk = OpaApiClient.builder()
-                .security(Security.builder()
-                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
-                    .build())
             .build();
 
         ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
-                .pretty(false)
-                .acceptEncoding(GzipAcceptEncoding.GZIP)
-                .input(Input.of(4963.69d))
+                .input(Input.of(4963.69))
                 .call();
 
         if (res.result().isPresent()) {
@@ -145,29 +144,23 @@ public class Application {
 package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
-import com.styra.opa.openapi.models.errors.ClientError1;
+import com.styra.opa.openapi.models.errors.ClientError;
 import com.styra.opa.openapi.models.errors.ServerError;
-import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequest;
-import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequestBody;
-import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputResponse;
+import com.styra.opa.openapi.models.operations.*;
 import com.styra.opa.openapi.models.shared.Input;
-import com.styra.opa.openapi.models.shared.Security;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws ClientError1, ServerError, Exception {
+    public static void main(String[] args) throws ClientError, ServerError, Exception {
 
         OpaApiClient sdk = OpaApiClient.builder()
-                .security(Security.builder()
-                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
-                    .build())
             .build();
 
         ExecutePolicyWithInputRequest req = ExecutePolicyWithInputRequest.builder()
                 .path("app/rbac")
                 .requestBody(ExecutePolicyWithInputRequestBody.builder()
-                    .input(Input.of(false))
+                    .input(Input.of(true))
                     .build())
                 .build();
 
@@ -189,30 +182,24 @@ package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
 import com.styra.opa.openapi.models.errors.BatchServerError;
-import com.styra.opa.openapi.models.errors.ClientError1;
-import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequest;
-import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequestBody;
-import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputResponse;
+import com.styra.opa.openapi.models.errors.ClientError;
+import com.styra.opa.openapi.models.operations.*;
 import com.styra.opa.openapi.models.shared.Input;
-import com.styra.opa.openapi.models.shared.Security;
 import java.lang.Exception;
 import java.util.Map;
 
 public class Application {
 
-    public static void main(String[] args) throws ClientError1, BatchServerError, Exception {
+    public static void main(String[] args) throws ClientError, BatchServerError, Exception {
 
         OpaApiClient sdk = OpaApiClient.builder()
-                .security(Security.builder()
-                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
-                    .build())
             .build();
 
         ExecuteBatchPolicyWithInputRequest req = ExecuteBatchPolicyWithInputRequest.builder()
                 .path("app/rbac")
                 .requestBody(ExecuteBatchPolicyWithInputRequestBody.builder()
                     .inputs(Map.ofEntries(
-                        Map.entry("key", Input.of("<value>"))))
+                        Map.entry("key", Input.of(6919.52))))
                     .build())
                 .build();
 
@@ -240,6 +227,7 @@ public class Application {
 * [executePolicy](docs/sdks/opaapiclient/README.md#executepolicy) - Execute a policy
 * [executePolicyWithInput](docs/sdks/opaapiclient/README.md#executepolicywithinput) - Execute a policy given an input
 * [executeBatchPolicyWithInput](docs/sdks/opaapiclient/README.md#executebatchpolicywithinput) - Execute a policy given a batch of inputs
+* [compileQueryWithPartialEvaluation](docs/sdks/opaapiclient/README.md#compilequerywithpartialevaluation) - Partially evaluate a query
 * [health](docs/sdks/opaapiclient/README.md#health) - Verify the server is operational
 
 </details>
@@ -248,56 +236,9 @@ public class Application {
 <!-- Start Server Selection [server] -->
 ## Server Selection
 
-### Select Server by Index
-
-You can override the default server globally by passing a server index to the `serverIndex` builder method when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
-
-| # | Server | Variables |
-| - | ------ | --------- |
-| 0 | `http://localhost:8181` | None |
-
-#### Example
-
-```java
-package hello.world;
-
-import com.styra.opa.openapi.OpaApiClient;
-import com.styra.opa.openapi.models.errors.ClientError;
-import com.styra.opa.openapi.models.errors.ServerError;
-import com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse;
-import com.styra.opa.openapi.models.shared.GzipAcceptEncoding;
-import com.styra.opa.openapi.models.shared.Input;
-import com.styra.opa.openapi.models.shared.Security;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws ClientError, ServerError, Exception {
-
-        OpaApiClient sdk = OpaApiClient.builder()
-                .serverIndex(0)
-                .security(Security.builder()
-                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
-                    .build())
-            .build();
-
-        ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
-                .pretty(false)
-                .acceptEncoding(GzipAcceptEncoding.GZIP)
-                .input(Input.of(4963.69d))
-                .call();
-
-        if (res.result().isPresent()) {
-            // handle response
-        }
-    }
-}
-```
-
-
 ### Override Server URL Per-Client
 
-The default server can also be overridden globally by passing a URL to the `serverURL` builder method when initializing the SDK client instance. For example:
+The default server can be overridden globally using the `.serverURL(String serverUrl)` builder method when initializing the SDK client instance. For example:
 ```java
 package hello.world;
 
@@ -305,9 +246,7 @@ import com.styra.opa.openapi.OpaApiClient;
 import com.styra.opa.openapi.models.errors.ClientError;
 import com.styra.opa.openapi.models.errors.ServerError;
 import com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse;
-import com.styra.opa.openapi.models.shared.GzipAcceptEncoding;
 import com.styra.opa.openapi.models.shared.Input;
-import com.styra.opa.openapi.models.shared.Security;
 import java.lang.Exception;
 
 public class Application {
@@ -316,15 +255,10 @@ public class Application {
 
         OpaApiClient sdk = OpaApiClient.builder()
                 .serverURL("http://localhost:8181")
-                .security(Security.builder()
-                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
-                    .build())
             .build();
 
         ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
-                .pretty(false)
-                .acceptEncoding(GzipAcceptEncoding.GZIP)
-                .input(Input.of(4963.69d))
+                .input(Input.of(4963.69))
                 .call();
 
         if (res.result().isPresent()) {
@@ -342,11 +276,11 @@ Handling errors in this SDK should largely match your expectations. All operatio
 
 By default, an API error will throw a `models/errors/SDKError` exception. When custom error responses are specified for an operation, the SDK may also throw their associated exception. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `executeDefaultPolicyWithInput` method throws the following exceptions:
 
-| Error Type                | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| models/errors/ClientError | 400, 404                  | application/json          |
-| models/errors/ServerError | 500                       | application/json          |
-| models/errors/SDKError    | 4XX, 5XX                  | \*/\*                     |
+| Error Type                | Status Code | Content Type     |
+| ------------------------- | ----------- | ---------------- |
+| models/errors/ClientError | 400, 404    | application/json |
+| models/errors/ServerError | 500         | application/json |
+| models/errors/SDKError    | 4XX, 5XX    | \*/\*            |
 
 ### Example
 
@@ -357,9 +291,7 @@ import com.styra.opa.openapi.OpaApiClient;
 import com.styra.opa.openapi.models.errors.ClientError;
 import com.styra.opa.openapi.models.errors.ServerError;
 import com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse;
-import com.styra.opa.openapi.models.shared.GzipAcceptEncoding;
 import com.styra.opa.openapi.models.shared.Input;
-import com.styra.opa.openapi.models.shared.Security;
 import java.lang.Exception;
 
 public class Application {
@@ -367,15 +299,10 @@ public class Application {
     public static void main(String[] args) throws ClientError, ServerError, Exception {
 
         OpaApiClient sdk = OpaApiClient.builder()
-                .security(Security.builder()
-                    .bearerAuth("<YOUR_BEARER_TOKEN_HERE>")
-                    .build())
             .build();
 
         ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
-                .pretty(false)
-                .acceptEncoding(GzipAcceptEncoding.GZIP)
-                .input(Input.of(4963.69d))
+                .input(Input.of(4963.69))
                 .call();
 
         if (res.result().isPresent()) {
@@ -393,9 +320,9 @@ public class Application {
 
 This SDK supports the following security scheme globally:
 
-| Name         | Type         | Scheme       |
-| ------------ | ------------ | ------------ |
-| `bearerAuth` | http         | HTTP Bearer  |
+| Name         | Type | Scheme      |
+| ------------ | ---- | ----------- |
+| `bearerAuth` | http | HTTP Bearer |
 
 You can set the security parameters through the `security` builder method when initializing the SDK client instance. For example:
 ```java
@@ -405,7 +332,6 @@ import com.styra.opa.openapi.OpaApiClient;
 import com.styra.opa.openapi.models.errors.ClientError;
 import com.styra.opa.openapi.models.errors.ServerError;
 import com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse;
-import com.styra.opa.openapi.models.shared.GzipAcceptEncoding;
 import com.styra.opa.openapi.models.shared.Input;
 import com.styra.opa.openapi.models.shared.Security;
 import java.lang.Exception;
@@ -421,9 +347,7 @@ public class Application {
             .build();
 
         ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
-                .pretty(false)
-                .acceptEncoding(GzipAcceptEncoding.GZIP)
-                .input(Input.of(4963.69d))
+                .input(Input.of(4963.69))
                 .call();
 
         if (res.result().isPresent()) {
