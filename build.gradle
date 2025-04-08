@@ -16,7 +16,6 @@ plugins {
     id 'signing'
     id("java")
     id("checkstyle")
-    id "nebula.lint" version "17.8.0"
 }
 
 compileJava.options.encoding = "UTF-8"
@@ -41,10 +40,13 @@ model {
     }
 }
 
+version = "${version}"
+group = "${groupId}"
+
 jar {
     dependsOn(":generatePomFileForMavenPublication")
 
-    into("META-INF/maven/com.styra/opa") {
+    into("META-INF/maven/com.styra.opa/openapi") {
         from("$buildDir/pom.xml")
     }
 }
@@ -63,15 +65,12 @@ tasks.withType(Javadoc) {
   options.addStringOption('Xdoclint:none', '-quiet')
 }
 
-group = "com.styra"
-version = "1.8.0"
-
 sourcesJar {
-    archiveBaseName = "opa"
+    archiveBaseName = "${artifactId}"
 }
 
 javadocJar {
-    archiveBaseName = "opa"
+    archiveBaseName = "${artifactId}"
 }
 
 
@@ -89,9 +88,11 @@ publishing {
 
     publications {
         maven(MavenPublication) {
-            groupId = 'com.styra'
-            artifactId = 'opa'
-            version = '1.8.0'
+            // note that properties can't yet be used below!
+            // https://github.com/gradle/gradle/issues/18619
+            groupId = "com.styra.opa"
+            artifactId = "openapi"
+            version = "2.0.0"
 
             from components.java
 
@@ -134,6 +135,8 @@ if (!project.hasProperty('skip.signing')) {
     }
 }
 
+
+
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
     runtimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
@@ -144,14 +147,10 @@ dependencies {
     api 'com.fasterxml.jackson.core:jackson-core:2.17.0'
     implementation 'org.apache.httpcomponents:httpcore:4.4.16'
     api 'com.fasterxml.jackson.core:jackson-databind:2.17.0'
-    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.17.2'
-    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.17.2'
-    implementation 'org.openapitools:jackson-databind-nullable:0.2.6'
-    implementation 'org.apache.httpcomponents:httpclient:4.5.14'
-    implementation 'org.apache.httpcomponents:httpmime:4.5.14'
-    implementation 'commons-io:commons-io:2.15.1'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.18.2'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.18.2'
+    api('org.openapitools:jackson-databind-nullable:0.2.6') {exclude group: 'com.fasterxml.jackson.core', module: 'jackson-databind'}
+    implementation 'commons-io:commons-io:2.18.0'
 }
-
-
 
 apply from: 'build-extras.gradle'
