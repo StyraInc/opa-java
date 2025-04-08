@@ -20,11 +20,11 @@ import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequestBody
 import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputResponse;
 import com.styra.opa.openapi.models.shared.BatchMixedResults;
 import com.styra.opa.openapi.models.shared.BatchSuccessfulPolicyEvaluation;
+import com.styra.opa.openapi.models.shared.Errors;
 import com.styra.opa.openapi.models.shared.Explain;
 import com.styra.opa.openapi.models.shared.Input;
-import com.styra.opa.openapi.models.shared.Responses;
-import com.styra.opa.openapi.models.shared.Errors;
 import com.styra.opa.openapi.models.shared.Location;
+import com.styra.opa.openapi.models.shared.Responses;
 import com.styra.opa.openapi.models.shared.Result;
 import com.styra.opa.openapi.models.shared.ServerErrorWithStatusCode;
 import com.styra.opa.openapi.models.shared.SuccessfulPolicyResponse;
@@ -97,7 +97,7 @@ public class OPAClient {
      * This constructor can be used to instantiate an OPAClient which uses a
      * custom HTTP client implementation for the underlying OpaApiClient.
      *
-     * @param opaURL URL at which OPA should be connected to.
+     * @param opaURL     URL at which OPA should be connected to.
      * @param httpclient custom HTTP client to use
      */
     public OPAClient(String opaURL, HTTPClient httpclient) {
@@ -109,9 +109,10 @@ public class OPAClient {
      * This constructor allows instantiating the OPA wrapper with additional
      * HTTP headers to be injected into every request. This is intended to be
      * used with OPA bearer token authentication, which you can learn more
-     * about here: https://www.openpolicyagent.org/docs/latest/rest-api/#authentication
+     * about here:
+     * https://www.openpolicyagent.org/docs/latest/rest-api/#authentication
      *
-     * @param opaURL URL at which OPA should be connected to.
+     * @param opaURL  URL at which OPA should be connected to.
      * @param headers additional HTTP headers to inject into each request.
      */
     public OPAClient(String opaURL, Map<String, String> headers) {
@@ -159,9 +160,10 @@ public class OPAClient {
      * any valid JSON value to be used as the input document.
      *
      * @param input Input document for OPA query.
-     * @param path Path to rule head to query, for example to access a rule
-     * head "allow" in a Rego file that starts with "package main", you would
-     * provide the value "main/allow".
+     * @param path  Path to rule head to query, for example to access a rule
+     *              head "allow" in a Rego file that starts with "package main", you
+     *              would
+     *              provide the value "main/allow".
      * @return
      * @throws OPAException
      */
@@ -187,7 +189,8 @@ public class OPAClient {
 
     public boolean check(String path, java.lang.Object input) throws OPAException {
         ObjectMapper om = new ObjectMapper();
-        Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {});
+        Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {
+        });
         return evaluate(path, iMap);
     }
 
@@ -211,7 +214,8 @@ public class OPAClient {
 
     public boolean check(java.lang.Object input) throws OPAException {
         ObjectMapper om = new ObjectMapper();
-        Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {});
+        Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {
+        });
         return evaluate(iMap);
     }
 
@@ -255,16 +259,18 @@ public class OPAClient {
      * with the default path. This is to simplify accessing the default path
      * without an input.
      *
-     * @param input Input document for OPA query.
-     * @param path Path to rule head to query, for example to access a rule
-     * head "allow" in a Rego file that starts with "package main", you would
-     * provide the value "main/allow".
+     * @param input       Input document for OPA query.
+     * @param path        Path to rule head to query, for example to access a rule
+     *                    head "allow" in a Rego file that starts with "package
+     *                    main", you would
+     *                    provide the value "main/allow".
      * @param toValueType May optionally be used to provide an alternative
-     * type for output conversion. This is especially useful when reading
-     * the result of an OPA request into an object.
+     *                    type for output conversion. This is especially useful when
+     *                    reading
+     *                    the result of an OPA request into an object.
      * @return The return value is automatically coerced to have a type
-     * matching the type parameter T using
-     * com.fasterxml.jackson.databind.ObjectMapper.
+     *         matching the type parameter T using
+     *         com.fasterxml.jackson.databind.ObjectMapper.
      * @throws OPAException
      */
     public <T> T evaluate(String path, java.util.Map<String, Object> input, Class<T> toValueType) throws OPAException {
@@ -289,7 +295,8 @@ public class OPAClient {
 
     public <T> T evaluate(String path, java.lang.Object input, Class<T> toValueType) throws OPAException {
         ObjectMapper om = new ObjectMapper();
-        Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {});
+        Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {
+        });
         return evaluateMachinery(Optional.of(Input.of(iMap)), Optional.of(path), toValueType);
     }
 
@@ -326,7 +333,8 @@ public class OPAClient {
 
     public <T> T evaluate(java.lang.Object input, Class<T> toValueType) throws OPAException {
         ObjectMapper om = new ObjectMapper();
-        Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {});
+        Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {
+        });
         return evaluateMachinery(Optional.of(Input.of(iMap)), Optional.empty(), toValueType);
     }
 
@@ -354,7 +362,8 @@ public class OPAClient {
 
     public <T> T evaluate(String path, java.lang.Object input, JavaType toValueType) throws OPAException {
         ObjectMapper om = new ObjectMapper();
-        Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {});
+        Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {
+        });
         return evaluateMachinery(Optional.of(Input.of(iMap)), Optional.of(path), toValueType);
     }
 
@@ -391,7 +400,8 @@ public class OPAClient {
 
     public <T> T evaluate(java.lang.Object input, JavaType toValueType) throws OPAException {
         ObjectMapper om = new ObjectMapper();
-        Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {});
+        Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {
+        });
         return evaluateMachinery(Optional.of(Input.of(iMap)), Optional.empty(), toValueType);
     }
 
@@ -422,7 +432,8 @@ public class OPAClient {
 
     public <T> T evaluate(String path, java.lang.Object input, TypeReference<T> toValueType) throws OPAException {
         ObjectMapper om = new ObjectMapper();
-        Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {});
+        Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {
+        });
         return evaluateMachinery(Optional.of(Input.of(iMap)), Optional.of(path), toValueType);
     }
 
@@ -461,7 +472,8 @@ public class OPAClient {
 
     public <T> T evaluate(java.lang.Object input, TypeReference<T> toValueType) throws OPAException {
         ObjectMapper om = new ObjectMapper();
-        Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {});
+        Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {
+        });
         return evaluateMachinery(Optional.of(Input.of(iMap)), Optional.empty(), toValueType);
     }
 
@@ -489,7 +501,8 @@ public class OPAClient {
 
     public <T> T evaluate(String path, java.lang.Object input) throws OPAException {
         ObjectMapper om = new ObjectMapper();
-        Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {});
+        Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {
+        });
         return evaluateMachinery(Optional.of(Input.of(iMap)), Optional.of(path));
     }
 
@@ -523,41 +536,42 @@ public class OPAClient {
 
     public <T> T evaluate(java.lang.Object input) throws OPAException {
         ObjectMapper om = new ObjectMapper();
-        Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {});
+        Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {
+        });
         return evaluateMachinery(Optional.of(Input.of(iMap)), Optional.empty());
     }
 
     private ExecutePolicyWithInputRequest makeRequestForEvaluateWithInput(Input input, String path) {
         return ExecutePolicyWithInputRequest.builder()
-            .path(path)
-            .requestBody(ExecutePolicyWithInputRequestBody.builder()
-                    .input(input).build())
-            .pretty(policyRequestPretty)
-            .provenance(policyRequestProvenance)
-            .explain(policyRequestExplain)
-            .metrics(policyRequestMetrics)
-            .instrument(policyRequestInstrument)
-            .strictBuiltinErrors(policyRequestStrictBuiltinErrors)
-            .build();
+                .path(path)
+                .requestBody(ExecutePolicyWithInputRequestBody.builder()
+                        .input(input).build())
+                .pretty(policyRequestPretty)
+                .provenance(policyRequestProvenance)
+                .explain(policyRequestExplain)
+                .metrics(policyRequestMetrics)
+                .instrument(policyRequestInstrument)
+                .strictBuiltinErrors(policyRequestStrictBuiltinErrors)
+                .build();
     }
 
     private ExecutePolicyRequest makeRequestForEvaluate(String path) {
         return ExecutePolicyRequest.builder()
-            .path(path)
-            .pretty(policyRequestPretty)
-            .provenance(policyRequestProvenance)
-            .explain(policyRequestExplain)
-            .metrics(policyRequestMetrics)
-            .instrument(policyRequestInstrument)
-            .strictBuiltinErrors(policyRequestStrictBuiltinErrors)
-            .build();
+                .path(path)
+                .pretty(policyRequestPretty)
+                .provenance(policyRequestProvenance)
+                .explain(policyRequestExplain)
+                .metrics(policyRequestMetrics)
+                .instrument(policyRequestInstrument)
+                .strictBuiltinErrors(policyRequestStrictBuiltinErrors)
+                .build();
     }
 
     private ExecuteDefaultPolicyWithInputRequest makeRequestForDefaultEvaluate(Input input) {
         return ExecuteDefaultPolicyWithInputRequest.builder()
-            .input(input)
-            .pretty(policyRequestPretty)
-            .build();
+                .input(input)
+                .pretty(policyRequestPretty)
+                .build();
     }
 
     /**
@@ -582,18 +596,17 @@ public class OPAClient {
 
             try {
                 res = sdk.executePolicyWithInput()
-                    .request(req)
-                    .call();
+                        .request(req)
+                        .call();
 
-            //CHECKSTYLE:OFF
+                // CHECKSTYLE:OFF
             } catch (Exception e) {
-                //CHECKSTYLE:ON
+                // CHECKSTYLE:ON
                 e.printStackTrace(System.out);
                 String msg = String.format(
-                    "executing policy at '%s' with failed due to exception '%s'",
-                    path,
-                    e
-                );
+                        "executing policy at '%s' with failed due to exception '%s'",
+                        path,
+                        e);
                 throw new OPAException(msg, e);
             }
 
@@ -603,9 +616,8 @@ public class OPAClient {
                     return out;
                 } else {
                     String msg = String.format(
-                        "executing policy at '%s' succeeded, but OPA did not reply with a result",
-                        path
-                    );
+                            "executing policy at '%s' succeeded, but OPA did not reply with a result",
+                            path);
                     throw new OPAException(msg);
                 }
             }
@@ -618,12 +630,12 @@ public class OPAClient {
 
             try {
                 res = sdk.executePolicy()
-                    .request(req)
-                    .call();
+                        .request(req)
+                        .call();
 
-            //CHECKSTYLE:OFF
+                // CHECKSTYLE:OFF
             } catch (Exception e) {
-                //CHECKSTYLE:ON
+                // CHECKSTYLE:ON
                 e.printStackTrace(System.out);
                 String msg = String.format("executing policy at '%s' with failed due to exception '%s'", path, e);
                 throw new OPAException(msg, e);
@@ -635,9 +647,8 @@ public class OPAClient {
                     return out;
                 } else {
                     String msg = String.format(
-                        "executing policy at '%s' succeeded, but OPA did not reply with a result",
-                        path
-                    );
+                            "executing policy at '%s' succeeded, but OPA did not reply with a result",
+                            path);
                     throw new OPAException(msg);
                 }
             }
@@ -653,15 +664,14 @@ public class OPAClient {
 
             try {
                 res = sdk.executeDefaultPolicyWithInput(
-                    Optional.of(
-                        policyRequestPretty),
+                        Optional.of(
+                                policyRequestPretty),
                         Optional.empty(),
-                        input.get()
-                );
+                        input.get());
 
-            //CHECKSTYLE:OFF
+                // CHECKSTYLE:OFF
             } catch (Exception e) {
-                //CHECKSTYLE:ON
+                // CHECKSTYLE:ON
                 String msg = String.format("executing default policy with failed due to exception '%s'", e);
                 throw new OPAException(msg, e);
             }
@@ -688,7 +698,8 @@ public class OPAClient {
         Object out = executePolicy(input, path);
         if (out != null) {
             ObjectMapper mapper = new ObjectMapper();
-            T typedResult = mapper.convertValue(out, new TypeReference<T>() {});
+            T typedResult = mapper.convertValue(out, new TypeReference<T>() {
+            });
             return typedResult;
         } else {
             return null;
@@ -696,10 +707,9 @@ public class OPAClient {
     }
 
     private <T> T evaluateMachinery(
-        Optional<Input> input,
-        Optional<String> path,
-        Class<T> toValueType
-    ) throws OPAException {
+            Optional<Input> input,
+            Optional<String> path,
+            Class<T> toValueType) throws OPAException {
         Object out = executePolicy(input, path);
         if (out != null) {
             ObjectMapper mapper = new ObjectMapper();
@@ -711,10 +721,9 @@ public class OPAClient {
     }
 
     private <T> T evaluateMachinery(
-        Optional<Input> input,
-        Optional<String> path,
-        JavaType toValueType
-    ) throws OPAException {
+            Optional<Input> input,
+            Optional<String> path,
+            JavaType toValueType) throws OPAException {
         Object out = executePolicy(input, path);
         if (out != null) {
             ObjectMapper mapper = new ObjectMapper();
@@ -726,10 +735,9 @@ public class OPAClient {
     }
 
     private <T> T evaluateMachinery(
-        Optional<Input> input,
-        Optional<String> path,
-        TypeReference<T> toValueType
-    ) throws OPAException {
+            Optional<Input> input,
+            Optional<String> path,
+            TypeReference<T> toValueType) throws OPAException {
         Object out = executePolicy(input, path);
         if (out != null) {
             ObjectMapper mapper = new ObjectMapper();
@@ -776,7 +784,8 @@ public class OPAClient {
 
     public OPAResult evaluateDeferred(String path, Object input) {
         ObjectMapper om = new ObjectMapper();
-        Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {});
+        Map<String, Object> iMap = om.convertValue(input, new TypeReference<Map<String, Object>>() {
+        });
         return evaluateMachineryDeferred(Optional.of(Input.of(iMap)), Optional.of(path));
     }
 
@@ -814,19 +823,20 @@ public class OPAClient {
      *
      * @param path
      * @param input
-     * @param rejectMixed if true, any request in the batch failing causes an exception to be thrown immediately
+     * @param rejectMixed if true, any request in the batch failing causes an
+     *                    exception to be thrown immediately
      * @return
      * @throws OPAException
      */
     public Map<String, OPAResult> evaluateBatch(
-        String path,
-        Map<String, Object> input,
-        boolean rejectMixed
-    ) throws OPAException {
+            String path,
+            Map<String, Object> input,
+            boolean rejectMixed) throws OPAException {
         Map<String, Input> iMap = new HashMap<String, Input>();
         ObjectMapper om = new ObjectMapper();
         for (Map.Entry<String, Object> entry : input.entrySet()) {
-            Input converted = Input.of(om.convertValue(entry.getValue(), new TypeReference<Map<String, Object>>() {}));
+            Input converted = Input.of(om.convertValue(entry.getValue(), new TypeReference<Map<String, Object>>() {
+            }));
             iMap.put(entry.getKey(), converted);
         }
 
@@ -834,10 +844,9 @@ public class OPAClient {
     }
 
     private Map<String, OPAResult> executePolicyBatch(
-        Map<String, Input> inputs,
-        String path,
-        boolean rejectMixed
-    ) throws OPAException {
+            Map<String, Input> inputs,
+            String path,
+            boolean rejectMixed) throws OPAException {
 
         if (this.enableBatchFallback) {
             return this.executePolicyBatchFallback(inputs, path, rejectMixed);
@@ -849,7 +858,7 @@ public class OPAClient {
 
         try {
             resp = sdk.executeBatchPolicyWithInput(req);
-        //CHECKSTYLE:OFF
+            // CHECKSTYLE:OFF
         } catch (Exception e) {
             if (e instanceof SDKError) {
                 if (((SDKError) e).code() == 404) {
@@ -858,12 +867,11 @@ public class OPAClient {
                 }
             }
 
-            //CHECKSTYLE:ON
+            // CHECKSTYLE:ON
             String msg = String.format(
-                "batch executing policy at '%s' with failed due to exception '%s'",
-                path,
-                e
-            );
+                    "batch executing policy at '%s' with failed due to exception '%s'",
+                    path,
+                    e);
             throw new OPAException(msg, e);
         }
 
@@ -877,38 +885,30 @@ public class OPAClient {
 
             for (Map.Entry<String, Responses> entry : resps.entrySet()) {
                 Object responsesValue = entry.getValue();
-                if (
-                        !(responsesValue instanceof ServerErrorWithStatusCode)
-                        && !(responsesValue instanceof SuccessfulPolicyResponseWithStatusCode)
-                ) {
+                if (!(responsesValue instanceof ServerErrorWithStatusCode)
+                        && !(responsesValue instanceof SuccessfulPolicyResponseWithStatusCode)) {
                     // If this ever happens, then the SE-generated code has
                     // changed in an incompatible way.
                     throw new OPAException(
-                        String.format(
-                            "unexpected response type '%s', this should never happen",
-                            responsesValue.getClass().getSimpleName()
-                        )
-                    );
+                            String.format(
+                                    "unexpected response type '%s', this should never happen",
+                                    responsesValue.getClass().getSimpleName()));
                 }
 
                 if (responsesValue instanceof ServerErrorWithStatusCode && rejectMixed) {
                     throw new OPAException(
-                        "OPA error in batch response",
-                        convertStatusCodeError((ServerErrorWithStatusCode) responsesValue)
-                    );
+                            "OPA error in batch response",
+                            convertStatusCodeError((ServerErrorWithStatusCode) responsesValue));
                 }
 
                 if (responsesValue instanceof ServerErrorWithStatusCode && !rejectMixed) {
                     out.put(
-                        entry.getKey(),
-                        new OPAResult(
-                            null,
-                            new OPAException(
-                                "OPA error in batch response",
-                                convertStatusCodeError((ServerErrorWithStatusCode) responsesValue)
-                            )
-                        )
-                    );
+                            entry.getKey(),
+                            new OPAResult(
+                                    null,
+                                    new OPAException(
+                                            "OPA error in batch response",
+                                            convertStatusCodeError((ServerErrorWithStatusCode) responsesValue))));
                     continue;
                 }
 
@@ -941,9 +941,8 @@ public class OPAClient {
     }
 
     private Map<String, OPAResult> executePolicyBatchFallback(
-        Map<String, Input> inputs,
-        String path, boolean rejectMixed
-    ) throws OPAException {
+            Map<String, Input> inputs,
+            String path, boolean rejectMixed) throws OPAException {
         Map<String, OPAResult> out = new HashMap<String, OPAResult>();
 
         for (Map.Entry<String, Input> entry : inputs.entrySet()) {
@@ -990,11 +989,10 @@ public class OPAClient {
      */
     private static ServerError convertStatusCodeError(ServerErrorWithStatusCode err) {
         return new ServerError(
-            err.code(),
-            err.message(),
-            convertErrorList(err.errors()),
-            err.decisionId()
-        );
+                err.code(),
+                err.message(),
+                convertErrorList(err.errors()),
+                err.decisionId());
     }
 
 }
