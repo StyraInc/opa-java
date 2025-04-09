@@ -16,7 +16,6 @@ plugins {
     id 'signing'
     id("java")
     id("checkstyle")
-    id "nebula.lint" version "17.8.0"
 }
 
 compileJava.options.encoding = "UTF-8"
@@ -47,7 +46,7 @@ group = "${groupId}"
 jar {
     dependsOn(":generatePomFileForMavenPublication")
 
-    into("META-INF/maven/com.styra/opa") {
+    into("META-INF/maven/com.styra.opa/openapi") {
         from("$buildDir/pom.xml")
     }
 }
@@ -93,7 +92,7 @@ publishing {
             // https://github.com/gradle/gradle/issues/18619
             groupId = "com.styra.opa"
             artifactId = "openapi"
-            version = "2.0.2"
+            version = "2.0.3"
 
             from components.java
 
@@ -146,6 +145,7 @@ dependencies {
     testImplementation 'org.testcontainers:junit-jupiter:1.20.1'
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.17.0'
     api 'com.fasterxml.jackson.core:jackson-core:2.17.0'
+    implementation 'org.apache.httpcomponents:httpcore:4.4.16'
     api 'com.fasterxml.jackson.core:jackson-databind:2.17.0'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.18.2'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.18.2'
