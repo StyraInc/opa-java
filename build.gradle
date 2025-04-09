@@ -91,9 +91,9 @@ publishing {
         maven(MavenPublication) {
             // note that properties can't yet be used below!
             // https://github.com/gradle/gradle/issues/18619
-            groupId = "com.styra.opa"
-            artifactId = "openapi"
-            version = "2.0.2"
+            groupId = "com.styra"
+            artifactId = "opa"
+            version = "2.0.3"
 
             from components.java
 
