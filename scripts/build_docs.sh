@@ -22,7 +22,7 @@ OUTPUT_DIR="$(realpath "$OUTPUT_DIR")"
 TEMP="$(mktemp -d)"
 trap "rm -rf '$TEMP'" EXIT
 
-./gradlew build javadoc -x test -x lint
+./gradlew build javadoc -x test -x autoLintGradle -x lint
 
 cp -R ./docs/site/* "$TEMP"
 cp -R ./docs/models "$TEMP/docs/"
