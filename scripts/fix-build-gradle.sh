@@ -86,8 +86,8 @@ ensure_plugin 'id "nebula.lint".*' 'id "nebula.lint" version "17.8.0"' './build.
 # com.styra.opa rather than com.styra.opa.openapi.
 "$SED" 's#into("META-INF/maven/com.styra.opa/openapi")#into("META-INF/maven/com.styra/opa")#g' < build.gradle | \
 	"$SED" 's#group = "com.styra.opa"#group = "com.styra"#g' | \
-	"$SED" "s#groupId = 'com.styra.opa'#groupId = 'com.styra'#g" | \
-	"$SED" "s#artifactId = 'openapi'#artifactId = 'opa'#g" | \
+	"$SED" 's#groupId = "com.styra.opa"#groupId = "com.styra"#g' | \
+	"$SED" 's#artifactId = "openapi"#artifactId = "opa"#g' | \
 	"$SED" 's#archiveBaseName = "openapi"#archiveBaseName = "opa"#g' | \
 	"$SED" 's#libs/openapi-#libs/opa-#g' > build.gradle.tmp
 
