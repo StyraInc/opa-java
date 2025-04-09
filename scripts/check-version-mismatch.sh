@@ -11,7 +11,7 @@ GEN_YAML_VERSION="$(opa eval -f raw -I 'input.java.version' < .speakeasy/gen.yam
 
 RELEASES_MD_VERSION="$(awk '/^### Generated/ {s=1} s==1 && /java v[0-9]/ {s=0; print}' < RELEASES.md  | tail -n1 | cut -d'[' -f 2 | cut -d']' -f 1 | cut -d' ' -f2 | tr -d 'v')"
 
-BUILD_GRADLE_VERSION="$(awk '$1 == "version"' < build.gradle | cut -d'"' -f2 | head -n 1)"
+BUILD_GRADLE_VERSION="$(awk '$1 == "version"' < build.gradle | cut -d'"' -f2 | tail -n 1)"
 
 SDK_VERSION="$(awk '$3 == "sdkVersion"' < src/main/java/com/styra/opa/openapi/SDKConfiguration.java | cut -d'"' -f2)"
 
