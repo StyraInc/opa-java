@@ -52,7 +52,6 @@ java:
     shortName: apache2
     url: http://www.apache.org/licenses/LICENSE-2.0.txt
   maxMethodParams: 4
-  ossrhURL: https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/
   outputModelSuffix: output
   projectName: api
   templateVersion: v2
