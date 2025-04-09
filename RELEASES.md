@@ -360,17 +360,6 @@ Based on:
 ### Releases
 - [Maven Central v1.8.0] https://central.sonatype.com/artifact/com.styra.opa/openapi/1.8.0 - .
 
-## 2025-04-09
-### Changes
-Based on:
-- OpenAPI Doc
-- Speakeasy CLI 1.531.0 https://github.com/speakeasy-api/speakeasy
-- Fixing Path Encoding
-### Generated
-- [java v2.0.1] .
-### Releases
-- [Maven Central v2.0.1] https://central.sonatype.com/artifact/com.styra.opa/openapi/2.0.1 - .
-
 
 ## 2025-04-09 17:42:15
 ### Changes
