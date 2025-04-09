@@ -119,6 +119,10 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            <li class="nav-item" data-bs-level="2"><a href="#compilequerywithpartialevaluation" class="nav-link">compileQueryWithPartialEvaluation</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
             <li class="nav-item" data-bs-level="2"><a href="#health" class="nav-link">health</a>
               <ul class="nav flex-column">
               </ul>
@@ -140,6 +144,7 @@
 <li><a href="#executepolicy">executePolicy</a> - Execute a policy</li>
 <li><a href="#executepolicywithinput">executePolicyWithInput</a> - Execute a policy given an input</li>
 <li><a href="#executebatchpolicywithinput">executeBatchPolicyWithInput</a> - Execute a policy given a batch of inputs</li>
+<li><a href="#compilequerywithpartialevaluation">compileQueryWithPartialEvaluation</a> - Partially evaluate a query</li>
 <li><a href="#health">health</a> - Verify the server is operational</li>
 </ul>
 <h2 id="executedefaultpolicywithinput">executeDefaultPolicyWithInput</h2>
@@ -151,9 +156,7 @@ import com.styra.opa.openapi.OpaApiClient;
 import com.styra.opa.openapi.models.errors.ClientError;
 import com.styra.opa.openapi.models.errors.ServerError;
 import com.styra.opa.openapi.models.operations.ExecuteDefaultPolicyWithInputResponse;
-import com.styra.opa.openapi.models.shared.GzipAcceptEncoding;
 import com.styra.opa.openapi.models.shared.Input;
-import com.styra.opa.openapi.models.shared.Security;
 import java.lang.Exception;
 
 public class Application {
@@ -161,15 +164,10 @@ public class Application {
     public static void main(String[] args) throws ClientError, ServerError, Exception {
 
         OpaApiClient sdk = OpaApiClient.builder()
-                .security(Security.builder()
-                    .bearerAuth(&quot;&lt;YOUR_BEARER_TOKEN_HERE&gt;&quot;)
-                    .build())
             .build();
 
         ExecuteDefaultPolicyWithInputResponse res = sdk.executeDefaultPolicyWithInput()
-                .pretty(false)
-                .acceptEncoding(GzipAcceptEncoding.GZIP)
-                .input(Input.of(4963.69d))
+                .input(Input.of(4963.69))
                 .call();
 
         if (res.result().isPresent()) {
@@ -191,13 +189,13 @@ public class Application {
 <tbody>
 <tr>
 <td><code>pretty</code></td>
-<td><em>Optional<Boolean></em></td>
+<td><em>Optional\<Boolean></em></td>
 <td>:heavy_minus_sign:</td>
 <td>If parameter is <code>true</code>, response will formatted for humans.</td>
 </tr>
 <tr>
 <td><code>acceptEncoding</code></td>
-<td><a href="../../models/shared/GzipAcceptEncoding/">Optional<GzipAcceptEncoding></a></td>
+<td><a href="../../models/shared/GzipAcceptEncoding/">Optional\<GzipAcceptEncoding></a></td>
 <td>:heavy_minus_sign:</td>
 <td>Indicates the server should respond with a gzip encoded body. The server will send the compressed response only if its length is above <code>server.encoding.gzip.min_length</code> value. See the configuration section</td>
 </tr>
@@ -244,21 +242,17 @@ public class Application {
 <pre><code class="language-java">package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
-import com.styra.opa.openapi.models.errors.ClientError1;
+import com.styra.opa.openapi.models.errors.ClientError;
 import com.styra.opa.openapi.models.errors.ServerError;
 import com.styra.opa.openapi.models.operations.ExecutePolicyRequest;
 import com.styra.opa.openapi.models.operations.ExecutePolicyResponse;
-import com.styra.opa.openapi.models.shared.Security;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws ClientError1, ServerError, Exception {
+    public static void main(String[] args) throws ClientError, ServerError, Exception {
 
         OpaApiClient sdk = OpaApiClient.builder()
-                .security(Security.builder()
-                    .bearerAuth(&quot;&lt;YOUR_BEARER_TOKEN_HERE&gt;&quot;)
-                    .build())
             .build();
 
         ExecutePolicyRequest req = ExecutePolicyRequest.builder()
@@ -307,7 +301,7 @@ public class Application {
 </thead>
 <tbody>
 <tr>
-<td>models/errors/ClientError1</td>
+<td>models/errors/ClientError</td>
 <td>400</td>
 <td>application/json</td>
 </tr>
@@ -329,29 +323,23 @@ public class Application {
 <pre><code class="language-java">package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
-import com.styra.opa.openapi.models.errors.ClientError1;
+import com.styra.opa.openapi.models.errors.ClientError;
 import com.styra.opa.openapi.models.errors.ServerError;
-import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequest;
-import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputRequestBody;
-import com.styra.opa.openapi.models.operations.ExecutePolicyWithInputResponse;
+import com.styra.opa.openapi.models.operations.*;
 import com.styra.opa.openapi.models.shared.Input;
-import com.styra.opa.openapi.models.shared.Security;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws ClientError1, ServerError, Exception {
+    public static void main(String[] args) throws ClientError, ServerError, Exception {
 
         OpaApiClient sdk = OpaApiClient.builder()
-                .security(Security.builder()
-                    .bearerAuth(&quot;&lt;YOUR_BEARER_TOKEN_HERE&gt;&quot;)
-                    .build())
             .build();
 
         ExecutePolicyWithInputRequest req = ExecutePolicyWithInputRequest.builder()
                 .path(&quot;app/rbac&quot;)
                 .requestBody(ExecutePolicyWithInputRequestBody.builder()
-                    .input(Input.of(false))
+                    .input(Input.of(true))
                     .build())
                 .build();
 
@@ -397,7 +385,7 @@ public class Application {
 </thead>
 <tbody>
 <tr>
-<td>models/errors/ClientError1</td>
+<td>models/errors/ClientError</td>
 <td>400</td>
 <td>application/json</td>
 </tr>
@@ -420,30 +408,24 @@ public class Application {
 
 import com.styra.opa.openapi.OpaApiClient;
 import com.styra.opa.openapi.models.errors.BatchServerError;
-import com.styra.opa.openapi.models.errors.ClientError1;
-import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequest;
-import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputRequestBody;
-import com.styra.opa.openapi.models.operations.ExecuteBatchPolicyWithInputResponse;
+import com.styra.opa.openapi.models.errors.ClientError;
+import com.styra.opa.openapi.models.operations.*;
 import com.styra.opa.openapi.models.shared.Input;
-import com.styra.opa.openapi.models.shared.Security;
 import java.lang.Exception;
 import java.util.Map;
 
 public class Application {
 
-    public static void main(String[] args) throws ClientError1, BatchServerError, Exception {
+    public static void main(String[] args) throws ClientError, BatchServerError, Exception {
 
         OpaApiClient sdk = OpaApiClient.builder()
-                .security(Security.builder()
-                    .bearerAuth(&quot;&lt;YOUR_BEARER_TOKEN_HERE&gt;&quot;)
-                    .build())
             .build();
 
         ExecuteBatchPolicyWithInputRequest req = ExecuteBatchPolicyWithInputRequest.builder()
                 .path(&quot;app/rbac&quot;)
                 .requestBody(ExecuteBatchPolicyWithInputRequestBody.builder()
                     .inputs(Map.ofEntries(
-                        Map.entry(&quot;key&quot;, Input.of(&quot;&lt;value&gt;&quot;))))
+                        Map.entry(&quot;key&quot;, Input.of(6919.52))))
                     .build())
                 .build();
 
@@ -489,7 +471,7 @@ public class Application {
 </thead>
 <tbody>
 <tr>
-<td>models/errors/ClientError1</td>
+<td>models/errors/ClientError</td>
 <td>400</td>
 <td>application/json</td>
 </tr>
@@ -505,36 +487,39 @@ public class Application {
 </tr>
 </tbody>
 </table>
-<h2 id="health">health</h2>
-<p>The health API endpoint executes a simple built-in policy query to verify that the server is operational. Optionally it can account for bundle activation as well (useful for “ready” checks at startup).</p>
+<h2 id="compilequerywithpartialevaluation">compileQueryWithPartialEvaluation</h2>
+<p>Partially evaluate a query</p>
 <h3 id="example-usage_4">Example Usage</h3>
 <pre><code class="language-java">package hello.world;
 
 import com.styra.opa.openapi.OpaApiClient;
-import com.styra.opa.openapi.models.errors.UnhealthyServer;
-import com.styra.opa.openapi.models.operations.HealthResponse;
-import com.styra.opa.openapi.models.shared.Security;
+import com.styra.opa.openapi.models.errors.ClientError;
+import com.styra.opa.openapi.models.errors.ServerError;
+import com.styra.opa.openapi.models.operations.*;
+import com.styra.opa.openapi.models.shared.Input;
 import java.lang.Exception;
 import java.util.List;
 
 public class Application {
 
-    public static void main(String[] args) throws UnhealthyServer, Exception {
+    public static void main(String[] args) throws ClientError, ServerError, Exception {
 
         OpaApiClient sdk = OpaApiClient.builder()
-                .security(Security.builder()
-                    .bearerAuth(&quot;&lt;YOUR_BEARER_TOKEN_HERE&gt;&quot;)
-                    .build())
             .build();
 
-        HealthResponse res = sdk.health()
-                .bundles(false)
-                .plugins(false)
-                .excludePlugin(List.of(
-                    &quot;&lt;value&gt;&quot;))
+        CompileQueryWithPartialEvaluationRequest req = CompileQueryWithPartialEvaluationRequest.builder()
+                .path(&quot;app/rbac&quot;)
+                .requestBody(CompileQueryWithPartialEvaluationRequestBody.builder()
+                    .input(Input.of(List.of(
+                    )))
+                    .build())
+                .build();
+
+        CompileQueryWithPartialEvaluationResponse res = sdk.compileQueryWithPartialEvaluation()
+                .request(req)
                 .call();
 
-        if (res.healthyServer().isPresent()) {
+        if (res.compileResultJSON().isPresent()) {
             // handle response
         }
     }
@@ -552,28 +537,102 @@ public class Application {
 </thead>
 <tbody>
 <tr>
+<td><code>request</code></td>
+<td><a href="../../models/operations/CompileQueryWithPartialEvaluationRequest/">CompileQueryWithPartialEvaluationRequest</a></td>
+<td>:heavy_check_mark:</td>
+<td>The request object to use for the request.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="response_4">Response</h3>
+<p><strong><a href="../../models/operations/CompileQueryWithPartialEvaluationResponse/">CompileQueryWithPartialEvaluationResponse</a></strong></p>
+<h3 id="errors_4">Errors</h3>
+<table>
+<thead>
+<tr>
+<th>Error Type</th>
+<th>Status Code</th>
+<th>Content Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>models/errors/ClientError</td>
+<td>400</td>
+<td>application/json</td>
+</tr>
+<tr>
+<td>models/errors/ServerError</td>
+<td>500</td>
+<td>application/json</td>
+</tr>
+<tr>
+<td>models/errors/SDKError</td>
+<td>4XX, 5XX</td>
+<td>*/*</td>
+</tr>
+</tbody>
+</table>
+<h2 id="health">health</h2>
+<p>The health API endpoint executes a simple built-in policy query to verify that the server is operational. Optionally it can account for bundle activation as well (useful for “ready” checks at startup).</p>
+<h3 id="example-usage_5">Example Usage</h3>
+<pre><code class="language-java">package hello.world;
+
+import com.styra.opa.openapi.OpaApiClient;
+import com.styra.opa.openapi.models.errors.UnhealthyServer;
+import com.styra.opa.openapi.models.operations.HealthResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws UnhealthyServer, Exception {
+
+        OpaApiClient sdk = OpaApiClient.builder()
+            .build();
+
+        HealthResponse res = sdk.health()
+                .call();
+
+        if (res.healthyServer().isPresent()) {
+            // handle response
+        }
+    }
+}
+</code></pre>
+<h3 id="parameters_5">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td><code>bundles</code></td>
-<td><em>Optional<Boolean></em></td>
+<td><em>Optional\<Boolean></em></td>
 <td>:heavy_minus_sign:</td>
 <td>Boolean parameter to account for bundle activation status in response. This includes any discovery bundles or bundles defined in the loaded discovery configuration.</td>
 </tr>
 <tr>
 <td><code>plugins</code></td>
-<td><em>Optional<Boolean></em></td>
+<td><em>Optional\<Boolean></em></td>
 <td>:heavy_minus_sign:</td>
 <td>Boolean parameter to account for plugin status in response.</td>
 </tr>
 <tr>
 <td><code>excludePlugin</code></td>
-<td>List&lt;<em>String</em>&gt;</td>
+<td>List\&lt;<em>String</em>&gt;</td>
 <td>:heavy_minus_sign:</td>
 <td>String parameter to exclude a plugin from status checks. Can be added multiple times. Does nothing if plugins is not true. This parameter is useful for special use cases where a plugin depends on the server being fully initialized before it can fully initialize itself.</td>
 </tr>
 </tbody>
 </table>
-<h3 id="response_4">Response</h3>
+<h3 id="response_5">Response</h3>
 <p><strong><a href="../../models/operations/HealthResponse/">HealthResponse</a></strong></p>
-<h3 id="errors_4">Errors</h3>
+<h3 id="errors_5">Errors</h3>
 <table>
 <thead>
 <tr>
