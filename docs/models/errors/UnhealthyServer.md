@@ -5,6 +5,8 @@ OPA service is not healthy. If the bundles option is specified this can mean any
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `code`             | *Optional<String>* | :heavy_minus_sign: | N/A                |
+| Field               | Type                | Required            | Description         |
+| ------------------- | ------------------- | ------------------- | ------------------- |
+| `code`              | *String*            | :heavy_check_mark:  | N/A                 |
+| `error`             | *Optional\<String>* | :heavy_minus_sign:  | N/A                 |
+| `message`           | *Optional\<String>* | :heavy_minus_sign:  | N/A                 |

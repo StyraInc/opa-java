@@ -1,0 +1,14 @@
+# CompileOptions
+
+Additional options to use during partial evaluation. Only the disableInlining option is currently supported in OPA. Enterprise OPA may support additional options.
+
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `disableInlining`                                                                             | List\<*String*>                                                                               | :heavy_minus_sign:                                                                            | A list of paths to exclude from partial evaluation inlining.                                  |
+| `targetDialects`                                                                              | List\<[TargetDialects](../../models/shared/TargetDialects.md)>                                | :heavy_minus_sign:                                                                            | The output targets for partial evaluation. Different targets will have different constraints. |
+| `targetSQLTableMappings`                                                                      | [Optional\<TargetSQLTableMappings>](../../models/shared/TargetSQLTableMappings.md)            | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `maskRule`                                                                                    | *Optional\<String>*                                                                           | :heavy_minus_sign:                                                                            | The Rego rule to evaluate for generating column masks.                                        |
+| `additionalProperties`                                                                        | Map\<String, *Object*>                                                                        | :heavy_minus_sign:                                                                            | N/A                                                                                           |
