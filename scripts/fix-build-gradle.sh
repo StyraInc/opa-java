@@ -100,6 +100,11 @@ mv build.gradle.tmp build.gradle
 # Update settings.gradle to set the root project name.
 "$SED" -i "s/rootProject[.]name = 'openapi'/rootProject.name = 'opa'/g" ./settings.gradle
 
+# Update gradle.properties to set the groupId and artifactId
+"$SED" -i "s/groupId=com.styra.opa/groupId=com.styra/g" ./gradle.properties
+"$SED" -i "s/artifactId=openapi/artifactId=opa/g" ./gradle.properties
+
+
 # Check for any suspicious strings that might indicate a bad group or artifact
 # ID. If this check fails, most likely the generated build.gradle has changed
 # in a way that the sed pipeline above failed to account for.
