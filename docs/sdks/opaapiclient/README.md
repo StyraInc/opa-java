@@ -270,9 +270,8 @@ public class Application {
 
         CompileQueryWithPartialEvaluationRequest req = CompileQueryWithPartialEvaluationRequest.builder()
                 .path("app/rbac")
-                .requestBody(CompileQueryWithPartialEvaluationRequestBody.builder()
-                    .input(Input.of(List.of(
-                    )))
+                .requestBody(CompileQueryWithPartialEvaluationRequestApplicationJSONRequestBody.builder()
+                    .input(Input.of(List.of()))
                     .build())
                 .build();
 

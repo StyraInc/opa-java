@@ -15,7 +15,7 @@ generation:
     oAuth2ClientCredentialsEnabled: false
     oAuth2PasswordEnabled: false
 java:
-  version: 2.0.3
+  version: 2.1.0
   additionalDependencies:
     - testImplementation:org.junit.jupiter:junit-jupiter-api:5.8.2
     - runtimeOnly:org.junit.jupiter:junit-jupiter-engine:5.8.2
