@@ -1,4 +1,4 @@
-# CompileQueryWithPartialEvaluationRequestBody
+# CompileQueryWithPartialEvaluationRequestApplicationJSONRequestBody
 
 The query, input, and other settings for partial evaluation.
 

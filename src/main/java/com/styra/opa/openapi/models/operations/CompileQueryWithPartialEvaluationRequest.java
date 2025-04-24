@@ -67,7 +67,7 @@ public class CompileQueryWithPartialEvaluationRequest {
      * The query, input, and other settings for partial evaluation.
      */
     @SpeakeasyMetadata("request:mediaType=application/json")
-    private CompileQueryWithPartialEvaluationRequestBody requestBody;
+    private CompileQueryWithPartialEvaluationRequestApplicationJSONRequestBody requestBody;
 
     @JsonCreator
     public CompileQueryWithPartialEvaluationRequest(
@@ -78,7 +78,7 @@ public class CompileQueryWithPartialEvaluationRequest {
             Optional<? extends Explain> explain,
             Optional<Boolean> metrics,
             Optional<Boolean> instrument,
-            CompileQueryWithPartialEvaluationRequestBody requestBody) {
+            CompileQueryWithPartialEvaluationRequestApplicationJSONRequestBody requestBody) {
         Utils.checkNotNull(path, "path");
         Utils.checkNotNull(acceptEncoding, "acceptEncoding");
         Utils.checkNotNull(contentEncoding, "contentEncoding");
@@ -99,7 +99,7 @@ public class CompileQueryWithPartialEvaluationRequest {
     
     public CompileQueryWithPartialEvaluationRequest(
             String path,
-            CompileQueryWithPartialEvaluationRequestBody requestBody) {
+            CompileQueryWithPartialEvaluationRequestApplicationJSONRequestBody requestBody) {
         this(path, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), requestBody);
     }
 
@@ -166,7 +166,7 @@ public class CompileQueryWithPartialEvaluationRequest {
      * The query, input, and other settings for partial evaluation.
      */
     @JsonIgnore
-    public CompileQueryWithPartialEvaluationRequestBody requestBody() {
+    public CompileQueryWithPartialEvaluationRequestApplicationJSONRequestBody requestBody() {
         return requestBody;
     }
 
@@ -294,7 +294,7 @@ public class CompileQueryWithPartialEvaluationRequest {
     /**
      * The query, input, and other settings for partial evaluation.
      */
-    public CompileQueryWithPartialEvaluationRequest withRequestBody(CompileQueryWithPartialEvaluationRequestBody requestBody) {
+    public CompileQueryWithPartialEvaluationRequest withRequestBody(CompileQueryWithPartialEvaluationRequestApplicationJSONRequestBody requestBody) {
         Utils.checkNotNull(requestBody, "requestBody");
         this.requestBody = requestBody;
         return this;
@@ -363,7 +363,7 @@ public class CompileQueryWithPartialEvaluationRequest {
  
         private Optional<Boolean> instrument = Optional.empty();
  
-        private CompileQueryWithPartialEvaluationRequestBody requestBody;
+        private CompileQueryWithPartialEvaluationRequestApplicationJSONRequestBody requestBody;
         
         private Builder() {
           // force use of static builder() method
@@ -489,7 +489,7 @@ public class CompileQueryWithPartialEvaluationRequest {
         /**
          * The query, input, and other settings for partial evaluation.
          */
-        public Builder requestBody(CompileQueryWithPartialEvaluationRequestBody requestBody) {
+        public Builder requestBody(CompileQueryWithPartialEvaluationRequestApplicationJSONRequestBody requestBody) {
             Utils.checkNotNull(requestBody, "requestBody");
             this.requestBody = requestBody;
             return this;

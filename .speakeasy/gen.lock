@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 47e8e950-a454-4ebb-9f78-86fda7dfa0c2
 management:
-  docChecksum: 18350f32468931bfa9ce235545a99b77
+  docChecksum: ca9ad9e851531525c769e96478915350
   docVersion: 0.2.0
-  speakeasyVersion: 1.531.0
-  generationVersion: 2.568.2
-  releaseVersion: 2.0.3
-  configChecksum: 03d94440697f0e2af34c20070714d3a8
+  speakeasyVersion: 1.538.0
+  generationVersion: 2.591.1
+  releaseVersion: 2.1.0
+  configChecksum: 8cbddf87386b2196e86563d6228b4b1e
   repoURL: https://github.com/StyraInc/opa-java.git
   published: true
 features:
@@ -15,7 +15,7 @@ features:
     additionalDependencies: 0.1.0
     additionalProperties: 0.0.1
     constsAndDefaults: 0.1.1
-    core: 3.36.3
+    core: 3.37.1
     examples: 2.81.5
     flattening: 2.81.1
     globalSecurity: 2.82.8
@@ -36,7 +36,7 @@ generatedFiles:
   - docs/models/errors/ServerErrorLocation.md
   - docs/models/errors/UnhealthyServer.md
   - docs/models/operations/CompileQueryWithPartialEvaluationRequest.md
-  - docs/models/operations/CompileQueryWithPartialEvaluationRequestBody.md
+  - docs/models/operations/CompileQueryWithPartialEvaluationRequestApplicationJSONRequestBody.md
   - docs/models/operations/CompileQueryWithPartialEvaluationResponse.md
   - docs/models/operations/ExecuteBatchPolicyWithInputRequest.md
   - docs/models/operations/ExecuteBatchPolicyWithInputRequestBody.md
@@ -112,7 +112,7 @@ generatedFiles:
   - src/main/java/com/styra/opa/openapi/models/errors/ServerErrorLocation.java
   - src/main/java/com/styra/opa/openapi/models/errors/UnhealthyServer.java
   - src/main/java/com/styra/opa/openapi/models/operations/CompileQueryWithPartialEvaluationRequest.java
-  - src/main/java/com/styra/opa/openapi/models/operations/CompileQueryWithPartialEvaluationRequestBody.java
+  - src/main/java/com/styra/opa/openapi/models/operations/CompileQueryWithPartialEvaluationRequestApplicationJSONRequestBody.java
   - src/main/java/com/styra/opa/openapi/models/operations/CompileQueryWithPartialEvaluationRequestBuilder.java
   - src/main/java/com/styra/opa/openapi/models/operations/CompileQueryWithPartialEvaluationResponse.java
   - src/main/java/com/styra/opa/openapi/models/operations/ExecuteBatchPolicyWithInputRequest.java
@@ -230,6 +230,15 @@ examples:
         header: {}
       requestBody:
         application/json: {"input": []}
+        application/vnd.styra.multitarget+json: {"input": []}
+        application/vnd.styra.ucast.all+json: {"input": []}
+        application/vnd.styra.ucast.minimal+json: {"input": []}
+        application/vnd.styra.ucast.linq+json: {"input": []}
+        application/vnd.styra.ucast.prisma+json: {"input": []}
+        application/vnd.styra.sql.sqlserver+json: {"input": []}
+        application/vnd.styra.sql.mysql+json: {"input": []}
+        application/vnd.styra.sql.postgresql+json: {"input": []}
+        application/vnd.styra.sql.sqlite+json: {"input": []}
       responses:
         "200":
           application/json: {}

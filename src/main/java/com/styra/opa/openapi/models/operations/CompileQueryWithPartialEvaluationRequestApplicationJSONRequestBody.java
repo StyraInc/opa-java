@@ -19,11 +19,11 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * CompileQueryWithPartialEvaluationRequestBody
+ * CompileQueryWithPartialEvaluationRequestApplicationJSONRequestBody
  * 
  * <p>The query, input, and other settings for partial evaluation.
  */
-public class CompileQueryWithPartialEvaluationRequestBody {
+public class CompileQueryWithPartialEvaluationRequestApplicationJSONRequestBody {
 
     /**
      * Additional options to use during partial evaluation. Only the disableInlining option is currently supported in OPA. Enterprise OPA may support additional options.
@@ -47,7 +47,7 @@ public class CompileQueryWithPartialEvaluationRequestBody {
     private Optional<? extends Input> input;
 
     @JsonCreator
-    public CompileQueryWithPartialEvaluationRequestBody(
+    public CompileQueryWithPartialEvaluationRequestApplicationJSONRequestBody(
             @JsonProperty("options") Optional<? extends CompileOptions> options,
             @JsonProperty("unknowns") Optional<? extends List<String>> unknowns,
             @JsonProperty("input") Optional<? extends Input> input) {
@@ -59,7 +59,7 @@ public class CompileQueryWithPartialEvaluationRequestBody {
         this.input = input;
     }
     
-    public CompileQueryWithPartialEvaluationRequestBody() {
+    public CompileQueryWithPartialEvaluationRequestApplicationJSONRequestBody() {
         this(Optional.empty(), Optional.empty(), Optional.empty());
     }
 
@@ -97,7 +97,7 @@ public class CompileQueryWithPartialEvaluationRequestBody {
     /**
      * Additional options to use during partial evaluation. Only the disableInlining option is currently supported in OPA. Enterprise OPA may support additional options.
      */
-    public CompileQueryWithPartialEvaluationRequestBody withOptions(CompileOptions options) {
+    public CompileQueryWithPartialEvaluationRequestApplicationJSONRequestBody withOptions(CompileOptions options) {
         Utils.checkNotNull(options, "options");
         this.options = Optional.ofNullable(options);
         return this;
@@ -106,7 +106,7 @@ public class CompileQueryWithPartialEvaluationRequestBody {
     /**
      * Additional options to use during partial evaluation. Only the disableInlining option is currently supported in OPA. Enterprise OPA may support additional options.
      */
-    public CompileQueryWithPartialEvaluationRequestBody withOptions(Optional<? extends CompileOptions> options) {
+    public CompileQueryWithPartialEvaluationRequestApplicationJSONRequestBody withOptions(Optional<? extends CompileOptions> options) {
         Utils.checkNotNull(options, "options");
         this.options = options;
         return this;
@@ -115,7 +115,7 @@ public class CompileQueryWithPartialEvaluationRequestBody {
     /**
      * The terms to treat as unknown during partial evaluation.
      */
-    public CompileQueryWithPartialEvaluationRequestBody withUnknowns(List<String> unknowns) {
+    public CompileQueryWithPartialEvaluationRequestApplicationJSONRequestBody withUnknowns(List<String> unknowns) {
         Utils.checkNotNull(unknowns, "unknowns");
         this.unknowns = Optional.ofNullable(unknowns);
         return this;
@@ -124,7 +124,7 @@ public class CompileQueryWithPartialEvaluationRequestBody {
     /**
      * The terms to treat as unknown during partial evaluation.
      */
-    public CompileQueryWithPartialEvaluationRequestBody withUnknowns(Optional<? extends List<String>> unknowns) {
+    public CompileQueryWithPartialEvaluationRequestApplicationJSONRequestBody withUnknowns(Optional<? extends List<String>> unknowns) {
         Utils.checkNotNull(unknowns, "unknowns");
         this.unknowns = unknowns;
         return this;
@@ -133,7 +133,7 @@ public class CompileQueryWithPartialEvaluationRequestBody {
     /**
      * Arbitrary JSON used within your policies by accessing `input`
      */
-    public CompileQueryWithPartialEvaluationRequestBody withInput(Input input) {
+    public CompileQueryWithPartialEvaluationRequestApplicationJSONRequestBody withInput(Input input) {
         Utils.checkNotNull(input, "input");
         this.input = Optional.ofNullable(input);
         return this;
@@ -142,7 +142,7 @@ public class CompileQueryWithPartialEvaluationRequestBody {
     /**
      * Arbitrary JSON used within your policies by accessing `input`
      */
-    public CompileQueryWithPartialEvaluationRequestBody withInput(Optional<? extends Input> input) {
+    public CompileQueryWithPartialEvaluationRequestApplicationJSONRequestBody withInput(Optional<? extends Input> input) {
         Utils.checkNotNull(input, "input");
         this.input = input;
         return this;
@@ -157,7 +157,7 @@ public class CompileQueryWithPartialEvaluationRequestBody {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CompileQueryWithPartialEvaluationRequestBody other = (CompileQueryWithPartialEvaluationRequestBody) o;
+        CompileQueryWithPartialEvaluationRequestApplicationJSONRequestBody other = (CompileQueryWithPartialEvaluationRequestApplicationJSONRequestBody) o;
         return 
             Objects.deepEquals(this.options, other.options) &&
             Objects.deepEquals(this.unknowns, other.unknowns) &&
@@ -174,7 +174,7 @@ public class CompileQueryWithPartialEvaluationRequestBody {
     
     @Override
     public String toString() {
-        return Utils.toString(CompileQueryWithPartialEvaluationRequestBody.class,
+        return Utils.toString(CompileQueryWithPartialEvaluationRequestApplicationJSONRequestBody.class,
                 "options", options,
                 "unknowns", unknowns,
                 "input", input);
@@ -246,8 +246,8 @@ public class CompileQueryWithPartialEvaluationRequestBody {
             return this;
         }
         
-        public CompileQueryWithPartialEvaluationRequestBody build() {
-            return new CompileQueryWithPartialEvaluationRequestBody(
+        public CompileQueryWithPartialEvaluationRequestApplicationJSONRequestBody build() {
+            return new CompileQueryWithPartialEvaluationRequestApplicationJSONRequestBody(
                 options,
                 unknowns,
                 input);
