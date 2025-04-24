@@ -1,5 +1,11 @@
 name: "04 - Publish to Maven Central and GitHub Release"
 "on":
+  workflow_dispatch:
+    inputs:
+      force:
+        description: Force publish
+        type: boolean
+        default: false
   push:
     branches:
       - main
