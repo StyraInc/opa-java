@@ -94,9 +94,9 @@ The latency measuring client supports customizing the format of the log messages
 Add the call to `setLatencyMeasurementFormat` to turn JSON format the latency log.
 
 ```java
-        OPALatencyMeasuringHTTPClient httpc = new OPALatencyMeasuringHTTPClient();
-        httpc.setLatencyMeasurementLogLevel(Level.INFO);
-        httpc.setLatencyMeasurementFormat("'{'\"type\": \"latency-measurement\", \"path\": \"{1}\", \"latency\": {0,number,#}'}'");
+OPALatencyMeasuringHTTPClient httpc = new OPALatencyMeasuringHTTPClient();
+httpc.setLatencyMeasurementLogLevel(Level.INFO);
+httpc.setLatencyMeasurementFormat("'{'\"type\": \"latency-measurement\", \"path\": \"{1}\", \"latency\": {0,number,#}'}'");
 ```
 
 > [!NOTE]

@@ -134,6 +134,5 @@ Some areas you should investigate if you are seeing this type of problem include
 - Make certain the `toValueType` parameter to your `evaluate()` call correctly reflects the type you are assigning `evaluate()`'s return to.
 - If you are calling `evaluate()` without an explicit `toValueType`, try adding one. Type erasure can cause deserialization to fail when `evaluate()` is called in this way.
 
-:::tip
-An easy way to have OPA dump human-readable decision logs to the console is to add the `--log-format=text --log-level=error --set decision_logs.console=true` arguments to your `opa run -s` command. This is especially useful for checking the inputs OPA is seeing, and the responses it is yielding for them.
-:::
+> [!TIP]
+> An easy way to have OPA dump human-readable decision logs to the console is to add the `--log-format=text --log-level=error --set decision_logs.console=true` arguments to your `opa run -s` command. This is especially useful for checking the inputs OPA is seeing, and the responses it is yielding for them.
