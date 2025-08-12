@@ -20,7 +20,7 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: gradle/gradle-build-action@v3
       - uses: smorimoto/tune-github-hosted-runner-network@v1
       - name: Run Generation Workflow

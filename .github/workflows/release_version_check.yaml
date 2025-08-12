@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Tune GitHub-hosted runner network
         uses: smorimoto/tune-github-hosted-runner-network@v1
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Setup OPA
         uses: open-policy-agent/setup-opa@v2
         with:
